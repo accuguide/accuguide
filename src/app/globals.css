@@ -117,6 +117,9 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
+  }
+  h1 {
+    @apply text-2xl font-bold;
   }
 }

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { ModeToggle } from "@/components/mode-toggle";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "Access Finder",
@@ -14,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
         <ThemeProvider
           attribute="class"
@@ -22,7 +24,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="container mx-auto my-12">{children}</div>
+          <Header />
+          <div className="mx-4 my-8 min-h-[65vh] sm:min-h-[75vh] w-full">
+            {children}
+          </div>
+          <Footer />
           <div className="fixed bottom-4 right-4">
             <ModeToggle />
           </div>

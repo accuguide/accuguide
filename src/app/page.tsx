@@ -1,10 +1,7 @@
-import { redirect } from "next/navigation";
-import { getCurrentSession } from "@/lib/session";
-
 export default async function Page() {
-  const { user } = await getCurrentSession();
-  if (user === null) {
-    return redirect("/login");
-  }
-  return <h1>Hi, {user.name}!</h1>;
+  return (
+    <div className="flex flex-col items-center w-full">
+      <h1>Welcome to Access Finder</h1>
+    </div>
+  );
 }

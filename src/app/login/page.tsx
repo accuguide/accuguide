@@ -1,8 +1,11 @@
+import Login from "@/components/login";
+
 export default async function Page() {
   return (
-    <>
-      <h1>Sign in</h1>
-      <a href="/login/google">Sign in with Google</a>
-    </>
+    <div className="flex flex-col items-center">
+      <h1>Sign In</h1>
+      <br />
+      <Login>Sign In With Google</Login>
+    </div>
   );
 }
