@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"next dev\" \"docker compose -f docker-compose.yml up\" \"drizzle-kit studio\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "db:start": "docker compose -f docker-compose.yml up",
+    "db:studio": "drizzle-kit studio",
+    "db:push": "drizzle-kit push",
+    "db:stop": "docker compose -f docker-compose.yml down"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.9.0",
