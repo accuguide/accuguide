@@ -5,7 +5,6 @@ import {
   text,
   integer,
   timestamp,
-  json,
 } from "drizzle-orm/pg-core";
 
 import type { InferSelectModel } from "drizzle-orm";
@@ -34,23 +33,30 @@ export const sessionTable = pgTable("session", {
   }).notNull(),
 });
 
+export const typeTable = pgTable("type", {
+  type: typeEnum("type").notNull().primaryKey(),
+  indicators: indicatorEnum("indicators").array().notNull(),
+});
+
 export const entityTable = pgTable("entity", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  type: text("type").notNull(),
+  type: typeEnum("type")
+    .notNull()
+    .references(() => typeTable.type),
   description: text("description").notNull(),
-  lat: integer("lat").notNull(),
-  lon: integer("lon").notNull(),
-  city: text("city").notNull(),
-  state: text("state").notNull(),
-  country: text("country").notNull(),
-  zip: text("zip").notNull(),
-  street: text("street").notNull(),
-  number: integer("number").notNull(),
-  unit: text("unit").notNull(),
-  phone: text("phone").notNull(),
-  link: text("link").notNull(),
-  website: text("website").notNull(),
+  lat: integer("lat"),
+  lon: integer("lon"),
+  city: text("city"),
+  state: text("state"),
+  country: text("country"),
+  zip: text("zip"),
+  street: text("street"),
+  number: integer("number"),
+  unit: text("unit"),
+  phone: text("phone"),
+  link: text("link"),
+  website: text("website"),
   createdAt: timestamp("created_at", {
     withTimezone: true,
     mode: "date",
@@ -61,19 +67,20 @@ export const entityTable = pgTable("entity", {
   }).notNull(),
 });
 
-export const ReviewTable = pgTable("review", {
+export const reviewTable = pgTable("review", {
   id: serial("id").primaryKey(),
-  userId: serial("user_id")
+  userId: integer("user_id")
     .notNull()
     .references(() => userTable.id),
-  entityId: serial("entity_id")
+  entityId: integer("entity_id")
     .notNull()
     .references(() => entityTable.id),
   rating: integer("rating").notNull(),
-  indicators: json("indicators").$type<(typeof indicatorEnum)[]>().notNull(),
+  indicators: indicatorEnum("indicators").array().notNull(),
 });
 
 export type User = InferSelectModel<typeof userTable>;
 export type Session = InferSelectModel<typeof sessionTable>;
+export type Type = InferSelectModel<typeof typeTable>;
 export type Entity = InferSelectModel<typeof entityTable>;
-export type Review = InferSelectModel<typeof ReviewTable>;
+export type Review = InferSelectModel<typeof reviewTable>;
