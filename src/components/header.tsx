@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Login from "@/components/login";
 import { checkAuthDisplay } from "@/lib/auth";
 import Search from "./search";
+import Link from "next/link";
 
 async function AuthDisplay() {
   const isAuthenticated = await checkAuthDisplay();
@@ -21,7 +22,9 @@ async function AuthDisplay() {
 export default async function Header() {
   return (
     <header className="border-b px-8 py-4 flex items-center justify-between">
-      <p className="font-bold">Access Finder</p>
+      <Link href="/" className="font-bold">
+        Access Finder
+      </Link>
       <div className="flex gap-4">
         <Search size="half" />
         <AuthDisplay />
