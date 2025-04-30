@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Input } from "./ui/input";
+import { Input } from "@/components/ui/input";
 import { FormEvent, useState } from "react";
 
 export type SearchProps = {

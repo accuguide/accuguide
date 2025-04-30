@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { Type, typeTable } from "./schema";
+import { Type, typeTable } from "@/db/schema";
 
 const main = async () => {
   try {

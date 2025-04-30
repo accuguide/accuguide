@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import { ThemeProvider } from "next-themes";
+import "@/app/globals.css";
 import { ModeToggle } from "@/components/mode-toggle";
 import Header from "@/components/header";
 import Footer from "@/components/footer";

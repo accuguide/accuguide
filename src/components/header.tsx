@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Login from "@/components/login";
 import { checkAuthDisplay } from "@/lib/auth";
-import Search from "./search";
+import Search from "@/components/search";
 import Link from "next/link";
 import {
   DropdownMenu,
