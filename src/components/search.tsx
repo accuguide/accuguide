@@ -17,9 +17,13 @@ export default function Search({ size }: SearchProps) {
   }
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <form
+      onSubmit={(e) => handleSubmit(e)}
+      className={cn(
+        size === "half" ? "" : size === "full" ? "w-[50%]" : "w-[80%]",
+      )}
+    >
       <Input
-        className={cn(size === "half" ? "" : "w-full")}
         placeholder="Search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
