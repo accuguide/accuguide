@@ -9,6 +9,7 @@ import { decodeIdToken } from "arctic";
 
 import type { OAuth2Tokens } from "arctic";
 import { createUser, getUserFromGoogleId } from "@/lib/user";
+import { Claim } from "@/types";
 
 export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);
@@ -43,9 +44,11 @@ export async function GET(request: Request): Promise<Response> {
       status: 400,
     });
   }
-  const claims = decodeIdToken(tokens.idToken());
+  const claims = decodeIdToken(tokens.idToken()) as Claim;
   const googleUserId = claims.sub;
   const username = claims.name;
+  const picture = claims.picture;
+  const email = claims.email;
 
   // TODO: Replace this with your own DB query.
   const existingUser = await getUserFromGoogleId(googleUserId);
@@ -63,7 +66,7 @@ export async function GET(request: Request): Promise<Response> {
   }
 
   // TODO: Replace this with your own DB query.
-  const user = await createUser(googleUserId, username);
+  const user = await createUser(googleUserId, email, username, picture);
 
   const sessionToken = generateSessionToken();
   const session = await createSession(sessionToken, user.id);

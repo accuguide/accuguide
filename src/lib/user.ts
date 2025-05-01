@@ -2,10 +2,15 @@ import { db } from "@/db";
 import { userTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
-export async function createUser(googleId: string, name: string) {
+export async function createUser(
+  googleId: string,
+  email: string,
+  name: string,
+  picture: string,
+) {
   const [user] = await db
     .insert(userTable)
-    .values({ googleId, name })
+    .values({ googleId, email, name, picture })
     .returning()
     .execute();
 

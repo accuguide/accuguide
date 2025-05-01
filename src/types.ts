@@ -11,3 +11,10 @@ export type GoogleSearchResponse = {
   formatted_address: string;
   types: string[];
 };
+
+export type Claim = {
+  sub: string;
+  name: string;
+  picture: string;
+  email: string;
+};

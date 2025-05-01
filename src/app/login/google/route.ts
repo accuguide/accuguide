@@ -8,6 +8,7 @@ export async function GET(): Promise<Response> {
   const url = google.createAuthorizationURL(state, codeVerifier, [
     "openid",
     "profile",
+    "email",
   ]);
 
   const cookieStore = await cookies();

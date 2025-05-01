@@ -19,7 +19,9 @@ export const ratingEnum = pgEnum("rating_enum", ["0", "1", "2", "3", "4", "5"]);
 export const userTable = pgTable("user", {
   id: serial("id").primaryKey(),
   googleId: text("google_id").notNull(),
+  email: text("email").notNull(),
   name: text("name").notNull(),
+  picture: text("picture").notNull(),
 });
 
 export const sessionTable = pgTable("session", {

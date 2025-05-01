@@ -12,8 +12,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { logout } from "@/app/actions";
+import { getCurrentSession } from "@/lib/session";
 async function AuthDisplay() {
   const isAuthenticated = await checkAuthDisplay();
+  const session = await getCurrentSession();
+  const user = session?.user;
 
   if (!isAuthenticated) {
     return <Login>Login</Login>;
@@ -22,15 +25,17 @@ async function AuthDisplay() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarImage src={user?.picture} alt="@shadcn" />
+            <AvatarFallback>{user?.name.charAt(0)}</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
 
         <DropdownMenuContent className="mt-2 mr-8">
-          <DropdownMenuLabel>Jane Doe</DropdownMenuLabel>
+          <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Profile</DropdownMenuItem>
+          <Link href="/settings">
+            <DropdownMenuItem>Settings</DropdownMenuItem>
+          </Link>
           <DropdownMenuItem onClick={logout}>Log out</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
