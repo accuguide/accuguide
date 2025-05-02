@@ -15,8 +15,6 @@
     "db:stop": "docker compose -f docker-compose.yml down"
   },
   "dependencies": {
-    "@auth/drizzle-adapter": "^1.9.0",
-    "@googlemaps/js-api-loader": "^1.16.8",
     "@hookform/resolvers": "^5.0.1",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
@@ -33,7 +31,6 @@
     "clsx": "^2.1.1",
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.43.1",
-    "drizzle-seed": "^0.3.1",
     "geist": "^1.4.1",
     "lucide-react": "^0.503.0",
     "next": "15.3.1",
@@ -42,8 +39,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.1",
-    "tailwind-merge": "^3.2.0",
-    "zod": "^3.24.3"
+    "tailwind-merge": "^3.2.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
