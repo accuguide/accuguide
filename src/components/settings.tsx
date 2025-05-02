@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { updateUserName, updatePictureUrl } from "@/lib/user";
+import { checkAuthRedirect } from "@/lib/auth";
 
 export type SettingsProps = {
   user: {
@@ -14,7 +15,8 @@ export type SettingsProps = {
   } | null;
 };
 
-export default function Settings({ user }: SettingsProps) {
+export default async function Settings({ user }: SettingsProps) {
+  await checkAuthRedirect();
   const handleSubmit = async (formData: FormData) => {
     "use server";
     const username = formData.get("username") as string;

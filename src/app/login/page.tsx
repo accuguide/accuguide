@@ -1,9 +1,10 @@
 import Login from "@/components/login";
+import Title from "@/components/title";
 
 export default async function Page() {
   return (
-    <div className="flex flex-col items-center">
-      <h1>Sign In</h1>
+    <div>
+      <Title>Login</Title>
       <br />
       <Login>Sign In With Google</Login>
     </div>
