@@ -32,7 +32,7 @@ export default function Footer() {
           </div>
           <div>
             <p className="pb-2 font-bold">Legal</p>
-            <FooterLink href="/privacy">Privacy</FooterLink>
+            <FooterLink href="/legal/privacy">Privacy</FooterLink>
             <FooterLink href="/terms">Terms</FooterLink>
           </div>
         </div>
