@@ -15,7 +15,8 @@ export default function Search({ size }: SearchProps) {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    window.location.href = `/search?query=${query}`;
+    const encodedQuery = encodeURIComponent(query);
+    window.location.href = `/search?query=${encodedQuery}`;
   }
 
   return (
