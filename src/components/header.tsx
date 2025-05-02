@@ -25,7 +25,7 @@ async function AuthDisplay() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar>
-            <AvatarImage src={user?.picture} alt="@shadcn" />
+            <AvatarImage src={user?.picture} alt="your profile image" />
             <AvatarFallback>{user?.name.charAt(0)}</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>

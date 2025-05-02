@@ -34,3 +34,11 @@ export async function updateUserName(googleId: string, newName: string) {
     .where(eq(userTable.googleId, googleId))
     .execute();
 }
+
+export async function updatePictureUrl(googleId: string, newUrl: string) {
+  await db
+    .update(userTable)
+    .set({ picture: newUrl })
+    .where(eq(userTable.googleId, googleId))
+    .execute();
+}

@@ -1,7 +1,8 @@
+import { redirect } from "next/navigation";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import { updateUserName } from "@/lib/user";
+import { updateUserName, updatePictureUrl } from "@/lib/user";
 
 export type SettingsProps = {
   user: {
@@ -17,8 +18,12 @@ export default function Settings({ user }: SettingsProps) {
   const handleSubmit = async (formData: FormData) => {
     "use server";
     const username = formData.get("username") as string;
+    const pictureUrl = formData.get("pictureUrl") as string;
+
     if (user?.googleId) {
       await updateUserName(user.googleId, username);
+      await updatePictureUrl(user.googleId, pictureUrl);
+      redirect("/settings");
     }
   };
 
@@ -35,6 +40,18 @@ export default function Settings({ user }: SettingsProps) {
           defaultValue={user?.name || ""}
           className="mb-2"
         />
+
+        <Label htmlFor="pictureUrl" className="mb-2">
+          Profile Picture URL
+        </Label>
+        <Input
+          type="text"
+          id="pictureUrl"
+          name="pictureUrl"
+          defaultValue={user?.picture || ""}
+          className="mb-2"
+        />
+
         <Button type="submit">Save</Button>
       </form>
 
