@@ -1,10 +1,13 @@
+import Hero from "@/components/hero";
 import Search from "@/components/search";
+import Title from "@/components/title";
 
 export default async function Page() {
   return (
     <div className="flex flex-col items-center w-full">
-      <h1 className="mb-4">Welcome to Access Finder</h1>
+      <Title>Welcome to Access Finder</Title>
       <Search size="full" />
+      <Hero />
     </div>
   );
 }
