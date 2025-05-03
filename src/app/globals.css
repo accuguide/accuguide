@@ -123,7 +123,7 @@
     @apply text-2xl font-bold;
   }
   h2 {
-    @apply pb-2 font-bold;
+    @apply font-bold;
   }
   p {
     @apply text-sm text-muted-foreground;

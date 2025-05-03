@@ -1,20 +1,13 @@
 import {
   pgTable,
-  pgEnum,
   serial,
   text,
   integer,
   timestamp,
+  numeric,
 } from "drizzle-orm/pg-core";
 
 import type { InferSelectModel } from "drizzle-orm";
-
-export const typeEnum = pgEnum("type_enum", ["Restaurant", "Bar"]);
-export const indicatorEnum = pgEnum("indicator_enum", [
-  "Braille Menu",
-  "ADA Compliant Restroom",
-]);
-export const ratingEnum = pgEnum("rating_enum", ["0", "1", "2", "3", "4", "5"]);
 
 export const userTable = pgTable("user", {
   id: serial("id").primaryKey(),
@@ -36,37 +29,27 @@ export const sessionTable = pgTable("session", {
 });
 
 export const typeTable = pgTable("type", {
-  type: typeEnum("type").notNull().primaryKey(),
-  indicators: indicatorEnum("indicators").array().notNull(),
+  name: text("name").notNull().primaryKey(),
+  indicators: text("indicators").array().notNull(),
 });
 
 export const entityTable = pgTable("entity", {
-  id: serial("id").primaryKey(),
+  id: text("id").primaryKey(),
+  lat: numeric("lat").notNull(),
+  lon: numeric("lng").notNull(),
+  maps: text("maps").notNull(),
+  url: text("url"),
+  hours: text("hours").array(),
   name: text("name").notNull(),
-  type: typeEnum("type")
-    .notNull()
-    .references(() => typeTable.type),
-  description: text("description").notNull(),
-  lat: integer("lat"),
-  lon: integer("lon"),
-  city: text("city"),
-  state: text("state"),
+  type: text("type").notNull(),
+  description: text("description"),
+  utc: integer("utc"),
   country: text("country"),
   zip: text("zip"),
-  street: text("street"),
-  number: integer("number"),
-  unit: text("unit"),
-  phone: text("phone"),
-  link: text("link"),
-  website: text("website"),
-  createdAt: timestamp("created_at", {
-    withTimezone: true,
-    mode: "date",
-  }).notNull(),
-  updatedAt: timestamp("updated_at", {
-    withTimezone: true,
-    mode: "date",
-  }).notNull(),
+  state: text("state"),
+  city: text("city"),
+  address1: text("address1"),
+  address2: text("address2"),
 });
 
 export const reviewTable = pgTable("review", {
@@ -74,11 +57,11 @@ export const reviewTable = pgTable("review", {
   userId: integer("user_id")
     .notNull()
     .references(() => userTable.id),
-  entityId: integer("entity_id")
+  entityId: text("entity_id")
     .notNull()
     .references(() => entityTable.id),
   rating: integer("rating").notNull(),
-  indicators: indicatorEnum("indicators").array().notNull(),
+  indicators: text("indicators").array().notNull(),
 });
 
 export type User = InferSelectModel<typeof userTable>;

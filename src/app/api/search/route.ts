@@ -1,4 +1,4 @@
-import { GoogleSearchResponse, SearchDisplay } from "@/types";
+import { GoogleSearchResponse, SearchDisplayType } from "@/types";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -21,16 +21,15 @@ export async function GET(request: NextRequest) {
     }
 
     const googleResponse = await response.json();
-    const formattedGoogleResponse: SearchDisplay[] = googleResponse.results.map(
-      (place: GoogleSearchResponse) => ({
+    const formattedGoogleResponse: SearchDisplayType[] =
+      googleResponse.results.map((place: GoogleSearchResponse) => ({
         id: place.place_id,
         name: place.name,
         address: place.formatted_address,
         type: place.types[0],
-      }),
-    );
+      }));
 
-    const formattedDbResponse: SearchDisplay[] = [
+    const formattedDbResponse: SearchDisplayType[] = [
       {
         id: "1",
         name: "Sample Place 1",

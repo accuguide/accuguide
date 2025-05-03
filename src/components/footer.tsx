@@ -5,7 +5,12 @@ export default function Footer() {
     <footer className="border-t px-8 py-4 lg:px-24">
       <div className="flex justify-between">
         <div>
-          <h2>Access Finder</h2> <p>Discover accessibility near you</p>
+          <h2>Access Finder</h2>{" "}
+          <p>
+            Discover accessibility
+            <br />
+            near you
+          </p>
         </div>
 
         <div className="grid grid-cols-2 gap-4 text-sm sm:grid-cols-4 md:text-base md:gap-12 lg:gap-32">

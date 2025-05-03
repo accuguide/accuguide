@@ -6,14 +6,15 @@ const main = async () => {
     await db.delete(typeTable);
     const types: Type[] = [
       {
-        type: "Restaurant",
+        name: "Restaurant/Bar",
         indicators: ["Braille Menu", "ADA Compliant Restroom"],
       },
-      { type: "Bar", indicators: ["Braille Menu", "ADA Compliant Restroom"] },
     ];
     await db.insert(typeTable).values(types);
+    console.log("Database seeded, press Ctrl+C to exit");
   } catch (error) {
     console.error("Error seeding the database:", error);
+    throw new Error("Error seeding database");
   }
 };
 

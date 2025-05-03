@@ -1,4 +1,4 @@
-import Title from "@/components/title";
+import EntityDisplay from "@/components/entity-display";
 
 export default async function Page({
   params,
@@ -6,5 +6,5 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  return <Title>Business {id}</Title>;
+  return <EntityDisplay id={id} />;
 }

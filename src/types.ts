@@ -1,4 +1,4 @@
-export type SearchDisplay = {
+export type SearchDisplayType = {
   id: string;
   name: string;
   address: string;
