@@ -24,7 +24,7 @@ export default async function EntityDisplay({ id }: { id: string }) {
       </Link>
       <h2 className="mt-2">Hours</h2>
       <ul>{data?.hours?.map((hour, index) => <p key={index}>{hour}</p>)}</ul>
-      <p className="text-xs">({data?.utc} minutes from UTC)</p>
+      <p className="text-xs">(Timezone: {data?.utc / 60} hours from UTC)</p>
       <ReviewDisplay entity_id={id} />
     </div>
   );
