@@ -1,4 +1,7 @@
+import { db } from "@/db";
+import { entityTable } from "@/db/schema";
 import { GoogleSearchResponse, SearchDisplayType } from "@/types";
+import { sql } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -29,15 +32,27 @@ export async function GET(request: NextRequest) {
         type: place.types[0],
       }));
 
-    const formattedDbResponse: SearchDisplayType[] = [
-      {
-        id: "1",
-        name: "Sample Place 1",
-        address: "123 Sample St, Sample City, SC 12345",
-        type: "restaurant",
-      },
-    ];
+    const formattedQuery = query.replace(/\s+/g, " & ") + ":*";
+    const searchDbQuery = sql`(
+      setweight(to_tsvector('english', ${entityTable.name}), 'A') ||
+      setweight(to_tsvector('english', ${entityTable.city}), 'A') ||
+      setweight(to_tsvector('english', ${entityTable.description}), 'B')
+      @@ to_tsquery('english', ${formattedQuery})
+    )`;
+    const dbResponse = await db.select().from(entityTable).where(searchDbQuery);
 
+    const formattedDbResponse: SearchDisplayType[] = dbResponse.map(
+      (place) => ({
+        id: place.id,
+        name: place.name,
+        address: `${place.address1} ${place.address2 || ""}, ${place.city}, ${place.state}, ${place.zip}`,
+        type: place.displayType,
+      }),
+    );
+    const dbIds = new Set(formattedDbResponse.map((place) => place.id));
+    const filteredGoogleResponse = formattedGoogleResponse.filter(
+      (place) => !dbIds.has(place.id),
+    );
     const combinedResponse = [
       {
         loc: "database",
@@ -45,7 +60,7 @@ export async function GET(request: NextRequest) {
       },
       {
         loc: "google",
-        data: formattedGoogleResponse,
+        data: filteredGoogleResponse,
       },
     ];
     return NextResponse.json(combinedResponse, { status: 200 });

@@ -6,8 +6,12 @@ const main = async () => {
     await db.delete(typeTable);
     const types: Type[] = [
       {
-        name: "Restaurant/Bar",
+        name: "Restaurant",
         indicators: ["Braille Menu", "ADA Compliant Restroom"],
+      },
+      {
+        name: "Other",
+        indicators: ["Wheelchair Accessible"],
       },
     ];
     await db.insert(typeTable).values(types);

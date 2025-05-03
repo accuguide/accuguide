@@ -19,7 +19,7 @@ export default function EntityDisplay({ id }: { id: string }) {
   return (
     <div>
       <Title>{data?.name}</Title>
-      <h2>{data?.type}</h2>
+      <h2>{data?.displayType}</h2>
       <p>{data?.description}</p>
       <h2 className="mt-2">Address</h2>
       <p>{data?.address1}</p>

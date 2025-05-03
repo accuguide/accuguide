@@ -26,23 +26,29 @@ export async function GET(request: NextRequest) {
     }
 
     const googleResponse = await response.json();
+    let newType = "";
+    const typeFix = googleResponse.primaryTypeDisplayName?.text || "Other";
+    if (typeFix.includes("Restaurant")) newType = "Restaurant";
+    else newType = "Other";
+
     const formattedResponse: Entity = {
       id: googleResponse.id,
       lat: googleResponse.location.latitude,
       lon: googleResponse.location.longitude,
       maps: googleResponse.googleMapsUri,
-      url: googleResponse.websiteUri || null,
-      hours: googleResponse.regularOpeningHours?.weekdayDescriptions || null,
+      url: googleResponse.websiteUri || "",
+      hours: googleResponse.regularOpeningHours?.weekdayDescriptions || [],
       name: googleResponse.displayName.text,
-      type: googleResponse.primaryTypeDisplayName?.text || "other",
-      description: googleResponse.editorialSummary?.text || null,
+      type: newType,
+      displayType: typeFix,
+      description: googleResponse.editorialSummary?.text || "",
       utc: googleResponse.utcOffsetMinutes,
-      country: googleResponse.postalAddress.regionCode || null,
-      zip: googleResponse.postalAddress.postalCode || null,
-      state: googleResponse.postalAddress.administrativeArea || null,
-      city: googleResponse.postalAddress.locality || null,
-      address1: googleResponse.postalAddress.addressLines[0] || null,
-      address2: googleResponse.postalAddress.addressLines[1] || null,
+      country: googleResponse.postalAddress.regionCode || "",
+      zip: googleResponse.postalAddress.postalCode || "",
+      state: googleResponse.postalAddress.administrativeArea || "",
+      city: googleResponse.postalAddress.locality || "",
+      address1: googleResponse.postalAddress.addressLines[0] || "",
+      address2: googleResponse.postalAddress.addressLines[1] || "",
     };
 
     await db

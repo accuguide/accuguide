@@ -36,20 +36,23 @@ export const typeTable = pgTable("type", {
 export const entityTable = pgTable("entity", {
   id: text("id").primaryKey(),
   lat: numeric("lat").notNull(),
-  lon: numeric("lng").notNull(),
+  lon: numeric("lon").notNull(),
   maps: text("maps").notNull(),
-  url: text("url"),
-  hours: text("hours").array(),
+  url: text("url").notNull(),
+  hours: text("hours").array().notNull(),
   name: text("name").notNull(),
-  type: text("type").notNull(),
-  description: text("description"),
-  utc: integer("utc"),
-  country: text("country"),
-  zip: text("zip"),
-  state: text("state"),
-  city: text("city"),
-  address1: text("address1"),
-  address2: text("address2"),
+  type: text("type")
+    .references(() => typeTable.name)
+    .notNull(),
+  displayType: text("display_type").notNull(),
+  description: text("description").notNull(),
+  utc: integer("utc").notNull(),
+  country: text("country").notNull(),
+  zip: text("zip").notNull(),
+  state: text("state").notNull(),
+  city: text("city").notNull(),
+  address1: text("address1").notNull(),
+  address2: text("address2").notNull(),
 });
 
 export const reviewTable = pgTable("review", {

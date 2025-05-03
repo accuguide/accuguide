@@ -8,6 +8,7 @@ import Title from "@/components/title";
 
 export default function Page() {
   const [googleResponse, setGoogleResponse] = useState<SearchDisplayType[]>([]);
+  const [dbResponse, setDbResponse] = useState<SearchDisplayType[]>([]);
   const searchParams = useSearchParams();
   const query = searchParams.get("query");
 
@@ -21,8 +22,9 @@ export default function Page() {
           return response.json();
         })
         .then((data) => {
-          console.log("Search results:", data[1]);
+          console.log("Search results:", data);
           setGoogleResponse(data[1].data);
+          setDbResponse(data[0].data);
         })
         .catch(() => {
           console.error("There was a problem with the fetch operation");
@@ -34,6 +36,18 @@ export default function Page() {
     <div>
       <Title>Search</Title>
       <div className="grid md:grid-cols-2">
+        {dbResponse.map((place) => (
+          <SearchDisplay
+            key={place.id}
+            id={place.id}
+            name={place.name}
+            type={place.type}
+            address={place.address}
+          />
+        ))}
+      </div>
+      <div className="grid md:grid-cols-2">
+        <h2 className="text-lg">All results (not yet on our database)</h2>
         {googleResponse.map((place) => (
           <SearchDisplay
             key={place.id}
