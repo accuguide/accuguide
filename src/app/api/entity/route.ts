@@ -7,6 +7,18 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const id = searchParams.get("id") || "";
 
+  // Check if the data already exists in the database
+  const existingData = await db
+    .select()
+    .from(entityTable)
+    .where(eq(entityTable.id, id))
+    .execute();
+
+  if (existingData.length > 0) {
+    // If data exists, return it immediately
+    return NextResponse.json(existingData, { status: 200 });
+  }
+
   const apiKey = process.env.GOOGLE_MAPS_API_KEY;
   if (!apiKey) {
     return NextResponse.json({ error: "API key not found" }, { status: 500 });
@@ -49,6 +61,7 @@ export async function GET(request: NextRequest) {
       city: googleResponse.postalAddress.locality || "",
       address1: googleResponse.postalAddress.addressLines[0] || "",
       address2: googleResponse.postalAddress.addressLines[1] || "",
+      createdAt: new Date(),
     };
 
     await db

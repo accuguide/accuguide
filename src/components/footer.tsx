@@ -17,13 +17,13 @@ export default function Footer() {
           <div>
             <h2>Info</h2>
 
-            <FooterLink href="/info/about">About</FooterLink>
-            <FooterLink href="/info/faq">FAQ</FooterLink>
+            <FooterLink href="/about">About</FooterLink>
+            <FooterLink href="/sitemap.xml">Sitemap</FooterLink>
           </div>
           <div>
-            <h2>Socials</h2>
-            <p>Coming</p>
-            <p>Soon</p>
+            <h2>Help</h2>
+            <FooterLink href="/help/faq">FAQ</FooterLink>
+            <FooterLink href="/help/resources">Resources</FooterLink>
           </div>
           <div>
             <h2>Contact</h2>

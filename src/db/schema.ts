@@ -53,6 +53,12 @@ export const entityTable = pgTable("entity", {
   city: text("city").notNull(),
   address1: text("address1").notNull(),
   address2: text("address2").notNull(),
+  createdAt: timestamp("created_at", {
+    withTimezone: true,
+    mode: "date",
+  })
+    .notNull()
+    .defaultNow(),
 });
 
 export const reviewTable = pgTable("review", {

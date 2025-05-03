@@ -2,7 +2,6 @@
 
 import { Entity } from "@/db/schema";
 import { useEffect, useState } from "react";
-import Title from "./title";
 import Link from "next/link";
 
 export default function EntityDisplay({ id }: { id: string }) {
@@ -18,7 +17,6 @@ export default function EntityDisplay({ id }: { id: string }) {
 
   return (
     <div>
-      <Title>{data?.name}</Title>
       <h2>{data?.displayType}</h2>
       <p>{data?.description}</p>
       <h2 className="mt-2">Address</h2>

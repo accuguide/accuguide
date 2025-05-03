@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { entityTable } from "@/db/schema";
 import { GoogleSearchResponse, SearchDisplayType } from "@/types";
-import { sql } from "drizzle-orm";
+import { count, sql } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -33,22 +33,28 @@ export async function GET(request: NextRequest) {
       }));
 
     const formattedQuery = query.replace(/\s+/g, " & ") + ":*";
-    const searchDbQuery = sql`(
-      setweight(to_tsvector('english', ${entityTable.name}), 'A') ||
-      setweight(to_tsvector('english', ${entityTable.city}), 'A') ||
-      setweight(to_tsvector('english', ${entityTable.description}), 'B')
-      @@ to_tsquery('english', ${formattedQuery})
-    )`;
-    const dbResponse = await db.select().from(entityTable).where(searchDbQuery);
+    let formattedDbResponse: SearchDisplayType[] = [];
+    const dbCount = await db.select({ count: count() }).from(entityTable);
+    if (dbCount[0].count !== 0) {
+      const searchDbQuery = sql`(
+        setweight(to_tsvector('english', ${entityTable.name}), 'A') ||
+        setweight(to_tsvector('english', ${entityTable.city}), 'A') ||
+        setweight(to_tsvector('english', ${entityTable.description}), 'B')
+        @@ to_tsquery('english', ${formattedQuery})
+      )`;
+      const dbResponse = await db
+        .select()
+        .from(entityTable)
+        .where(searchDbQuery);
 
-    const formattedDbResponse: SearchDisplayType[] = dbResponse.map(
-      (place) => ({
+      formattedDbResponse = dbResponse.map((place) => ({
         id: place.id,
         name: place.name,
         address: `${place.address1} ${place.address2 || ""}, ${place.city}, ${place.state}, ${place.zip}`,
         type: place.displayType,
-      }),
-    );
+      }));
+    }
+
     const dbIds = new Set(formattedDbResponse.map((place) => place.id));
     const filteredGoogleResponse = formattedGoogleResponse.filter(
       (place) => !dbIds.has(place.id),

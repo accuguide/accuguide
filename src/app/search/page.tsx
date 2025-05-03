@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { SearchDisplayType } from "@/types";
 import SearchDisplay from "@/components/search-display";
-import Title from "@/components/title";
 
 export default function Page() {
   const [googleResponse, setGoogleResponse] = useState<SearchDisplayType[]>([]);
@@ -34,7 +33,6 @@ export default function Page() {
 
   return (
     <div>
-      <Title>Search</Title>
       <div className="grid md:grid-cols-2">
         {dbResponse.map((place) => (
           <SearchDisplay
@@ -46,8 +44,9 @@ export default function Page() {
           />
         ))}
       </div>
+      <h2 className="text-lg">All results (not yet on our database)</h2>
+
       <div className="grid md:grid-cols-2">
-        <h2 className="text-lg">All results (not yet on our database)</h2>
         {googleResponse.map((place) => (
           <SearchDisplay
             key={place.id}

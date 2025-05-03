@@ -7,8 +7,11 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "Access Finder",
-  description: "Description",
+  title: {
+    template: "%s | Access Finder",
+    default: "Access Finder",
+  },
+  description: "Discover accessibility near you",
 };
 
 export default function RootLayout({
