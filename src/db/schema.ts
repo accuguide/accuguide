@@ -70,7 +70,14 @@ export const reviewTable = pgTable("review", {
     .notNull()
     .references(() => entityTable.id),
   rating: integer("rating").notNull(),
+  comment: text("comment").notNull(),
   indicators: text("indicators").array().notNull(),
+  createdAt: timestamp("created_at", {
+    withTimezone: true,
+    mode: "date",
+  })
+    .notNull()
+    .defaultNow(),
 });
 
 export type User = InferSelectModel<typeof userTable>;
