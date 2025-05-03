@@ -17,11 +17,11 @@ export default function Footer() {
           <div>
             <h2>Info</h2>
 
-            <FooterLink href="/about">About</FooterLink>
-            <FooterLink href="/faq">FAQ</FooterLink>
+            <FooterLink href="/info/about">About</FooterLink>
+            <FooterLink href="/info/faq">FAQ</FooterLink>
           </div>
           <div>
-            <h2 className="pb-2 font-bold">Socials</h2>
+            <h2>Socials</h2>
             <p>Coming</p>
             <p>Soon</p>
           </div>
@@ -37,7 +37,7 @@ export default function Footer() {
           <div>
             <h2>Legal</h2>
             <FooterLink href="/legal/privacy">Privacy</FooterLink>
-            <FooterLink href="/terms">Terms</FooterLink>
+            <FooterLink href="/legal/terms">Terms</FooterLink>
           </div>
         </div>
       </div>
