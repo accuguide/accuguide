@@ -26,7 +26,7 @@ export default function ReviewWrite({ entity_id }: { entity_id: string }) {
   return (
     <form>
       <h2 className="mb-2">Write a Review</h2>
-      <p className="mt-2">Your rating: {rating} stars</p>
+      <p className="mb-2">Your rating: {rating} stars</p>
       {stars(rating)}
       <p className="mb-2">[indicators placeholder]</p>
       <Textarea

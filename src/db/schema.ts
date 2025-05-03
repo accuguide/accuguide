@@ -46,7 +46,7 @@ export const entityTable = pgTable("entity", {
     .notNull(),
   displayType: text("display_type").notNull(),
   description: text("description").notNull(),
-  utc: integer("utc").notNull(),
+  timeZone: text("time_zone").notNull(),
   country: text("country").notNull(),
   zip: text("zip").notNull(),
   state: text("state").notNull(),

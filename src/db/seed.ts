@@ -38,7 +38,7 @@ const main = async () => {
         type: "Restaurant",
         description:
           "Down-to-earth Japanese restaurant whipping up karaage, takoyaki & ramen, plus tea, beer & sake.",
-        utc: -420,
+        timeZone: "America/Los_Angeles",
         country: "US",
         zip: "95008-4330",
         state: "California",
@@ -67,7 +67,7 @@ const main = async () => {
         type: "Restaurant",
         description:
           "Japanese noodle chain outpost offering customizable ramen bowls and vibrant-colored broths.",
-        utc: -420,
+        timeZone: "America/Los_Angeles",
         country: "US",
         zip: "94301",
         state: "California",
@@ -96,7 +96,7 @@ const main = async () => {
         type: "Restaurant",
         description:
           "Compact Japanese noodle shop with a variety of ramen dishes from pork broth to spicy & vegetarian.",
-        utc: -420,
+        timeZone: "America/Los_Angeles",
         country: "US",
         zip: "95112-3202",
         state: "California",

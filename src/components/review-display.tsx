@@ -14,7 +14,7 @@ export default async function ReviewDisplay({
     .where(eq(reviewTable.entityId, entity_id));
   return (
     <div>
-      <h2 className="text-xl mb-2">Reviews</h2>
+      <h2 className="text-xl mt-4">Reviews</h2>
       <ReviewWrite entity_id={entity_id} />
       <div>
         {reviews.map((review) => (

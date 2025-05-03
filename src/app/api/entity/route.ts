@@ -54,7 +54,7 @@ export async function GET(request: NextRequest) {
       type: newType,
       displayType: typeFix,
       description: googleResponse.editorialSummary?.text || "",
-      utc: googleResponse.utcOffsetMinutes,
+      timeZone: googleResponse.timeZone?.id || "",
       country: googleResponse.postalAddress.regionCode || "",
       zip: googleResponse.postalAddress.postalCode || "",
       state: googleResponse.postalAddress.administrativeArea || "",
