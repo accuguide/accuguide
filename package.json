@@ -3,18 +3,21 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"next dev\" \"docker compose -f docker-compose.yml up\" \"drizzle-kit studio\"",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "db:start": "docker compose -f docker-compose.yml up",
+    "db:start": "docker compose up",
     "db:studio": "drizzle-kit studio",
     "db:push": "drizzle-kit push",
     "db:seed": "tsx src/db/seed.ts",
-    "db:stop": "docker compose -f docker-compose.yml down"
+    "db:stop": "docker compose down",
+    "db:remove": "docker compose down -v",
+    "s3:push": "tsx src/s3/index.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.802.0",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.3.1",
