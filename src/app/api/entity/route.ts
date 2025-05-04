@@ -40,8 +40,43 @@ export async function GET(request: NextRequest) {
     const googleResponse = await response.json();
     let newType = "";
     const typeFix = googleResponse.primaryTypeDisplayName?.text || "Other";
-    if (typeFix.includes("Restaurant")) newType = "Restaurant";
-    else newType = "Other";
+    switch (true) {
+      case typeFix.includes("Restaurant"):
+        newType = "Restaurant";
+        break;
+      case typeFix.includes("Movie"):
+        newType = "Cinema";
+        break;
+      case typeFix.includes("Cafe"):
+        newType = "Cafe";
+        break;
+      case typeFix.includes("Bar"):
+        newType = "Bar";
+        break;
+      case typeFix.includes("Store"):
+        newType = "Store";
+        break;
+      case typeFix.includes("Government Office"):
+        newType = "Government Office";
+        break;
+      case typeFix.includes("University"):
+        newType = "University";
+        break;
+      case typeFix.includes("School"):
+        newType = "School";
+        break;
+      case typeFix.includes("Hospital"):
+      case typeFix.includes("Health"):
+      case typeFix.includes("Pharmacy"):
+        newType = "Healthcare";
+        break;
+      case typeFix.includes("Stadium"):
+        newType = "Venue";
+        break;
+      default:
+        newType = "Other";
+        break;
+    }
 
     const formattedResponse: Entity = {
       id: googleResponse.id,

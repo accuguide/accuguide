@@ -12,6 +12,46 @@ const main = async () => {
         indicators: ["Braille Menu", "ADA Compliant Restroom"],
       },
       {
+        name: "Cinema",
+        indicators: ["Wheelchair Accessible", "Assistive Listening Devices"],
+      },
+      {
+        name: "Cafe",
+        indicators: ["Braille Menu", "ADA Compliant Restroom"],
+      },
+      {
+        name: "Bar",
+        indicators: [
+          "Braille Menu",
+          "Wheelchair Accessible",
+          "ADA Compliant Restroom",
+        ],
+      },
+      {
+        name: "Store",
+        indicators: ["Braille Menu", "ADA Compliant Restroom"],
+      },
+      {
+        name: "Government Office",
+        indicators: ["Wheelchair Accessible", "Elevator Access"],
+      },
+      {
+        name: "University",
+        indicators: ["Wheelchair Accessible", "Accessible Parking"],
+      },
+      {
+        name: "School",
+        indicators: ["Wheelchair Accessible", "Accessible Restrooms"],
+      },
+      {
+        name: "Healthcare",
+        indicators: ["Wheelchair Accessible", "Emergency Services"],
+      },
+      {
+        name: "Venue",
+        indicators: ["Wheelchair Accessible", "Assistive Listening Devices"],
+      },
+      {
         name: "Other",
         indicators: ["Wheelchair Accessible"],
       },
