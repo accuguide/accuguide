@@ -4,6 +4,15 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { updateUserName, updatePictureUrl } from "@/lib/user";
 import { checkAuthRedirect } from "@/lib/auth";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { ProfilePicturePreview } from "./profile-picture-preview";
 
 export type SettingsProps = {
   user: {
@@ -17,6 +26,7 @@ export type SettingsProps = {
 
 export default async function Settings({ user }: SettingsProps) {
   await checkAuthRedirect();
+
   const handleSubmit = async (formData: FormData) => {
     "use server";
     const username = formData.get("username") as string;
@@ -30,34 +40,68 @@ export default async function Settings({ user }: SettingsProps) {
   };
 
   return (
-    <div>
-      <form className="max-w-sm" action={handleSubmit}>
-        <Label htmlFor="username" className="mb-2">
-          Username
-        </Label>
-        <Input
-          type="text"
-          id="username"
-          name="username"
-          defaultValue={user?.name || ""}
-          className="mb-2"
-        />
+    <div className="mx-auto max-w-2xl py-8">
+      <Card>
+        <CardHeader>
+          <CardTitle>Profile Settings</CardTitle>
+          <CardDescription>
+            Update your profile information and customize your account
+          </CardDescription>
+        </CardHeader>
 
-        <Label htmlFor="pictureUrl" className="mb-2">
-          Profile Picture URL
-        </Label>
-        <Input
-          type="text"
-          id="pictureUrl"
-          name="pictureUrl"
-          defaultValue={user?.picture || ""}
-          className="mb-2"
-        />
+        <CardContent>
+          <form action={handleSubmit} className="space-y-6">
+            <div className="flex flex-col items-center space-y-4 sm:flex-row sm:items-start sm:space-x-6 sm:space-y-0">
+              <ProfilePicturePreview pictureUrl={user?.picture || ""} />
 
-        <Button type="submit">Save</Button>
-      </form>
+              <div className="w-full space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="pictureUrl">Profile Picture URL</Label>
+                  <Input
+                    type="text"
+                    id="pictureUrl"
+                    name="pictureUrl"
+                    defaultValue={user?.picture || ""}
+                    placeholder="https://example.com/your-image.jpg"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Enter a URL to an image for your profile picture
+                  </p>
+                </div>
 
-      <br />
+                <div className="space-y-2">
+                  <Label htmlFor="username">Username</Label>
+                  <Input
+                    type="text"
+                    id="username"
+                    name="username"
+                    defaultValue={user?.name || ""}
+                    placeholder="Your display name"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    type="email"
+                    id="email"
+                    value={user?.email || ""}
+                    disabled
+                    className="bg-muted"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Your email address is managed by your Google account
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <CardFooter className="flex justify-end px-0 pt-4">
+              <Button type="submit">Save Changes</Button>
+            </CardFooter>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 }
