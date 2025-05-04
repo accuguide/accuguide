@@ -125,7 +125,6 @@
   h2 {
     @apply font-bold mt-2;
   }
-
   p {
     @apply text-sm text-muted-foreground;
   }
