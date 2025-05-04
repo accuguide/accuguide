@@ -5,7 +5,7 @@ export default function Hero() {
         <h2>Discover Accessibility</h2>
         <p>
           Whether you&apos;re looking for wheelchair-friendly restaurants,
-          accessible public transport, or inclusive events, &apos;ve got you
+          accessible public transport, or inclusive events, we&apos;ve got you
           covered.
         </p>
       </div>
