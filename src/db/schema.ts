@@ -1,16 +1,44 @@
 import {
   pgTable,
-  serial,
   text,
   integer,
   timestamp,
   numeric,
+  uuid,
+  pgEnum,
 } from "drizzle-orm/pg-core";
 
 import type { InferSelectModel } from "drizzle-orm";
+import { z } from 'zod';
+
+export const TypeEnum = pgEnum("type_enum", [
+  "Restaurant",
+  "Cinema",
+  "Cafe",
+  "Bar",
+  "Store",
+  "Government Office",
+  "University",
+  "School",
+  "Healthcare",
+  "Venue",
+  "Other",
+]);
+
+export const IndicatorEnum = pgEnum("indicator_enum", [
+  "Braille Menu",
+  "Wheelchair Accessible",
+  "ADA Compliant Restroom",
+  "Assistive Listening Devices",
+  "Elevator Access",
+  "Accessible Parking",
+  "Accessible Restrooms",
+  "Accessible Entrance",
+  "Accessible Seating",
+]);
 
 export const userTable = pgTable("user", {
-  id: serial("id").primaryKey(),
+  id: uuid("id").primaryKey().defaultRandom(),
   googleId: text("google_id").notNull(),
   email: text("email").notNull(),
   name: text("name").notNull(),
@@ -19,7 +47,7 @@ export const userTable = pgTable("user", {
 
 export const sessionTable = pgTable("session", {
   id: text("id").primaryKey(),
-  userId: integer("user_id")
+  userId: uuid("user_id")
     .notNull()
     .references(() => userTable.id),
   expiresAt: timestamp("expires_at", {
@@ -29,21 +57,21 @@ export const sessionTable = pgTable("session", {
 });
 
 export const typeTable = pgTable("type", {
-  name: text("name").notNull().primaryKey(),
-  indicators: text("indicators").array().notNull(),
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: TypeEnum("name").notNull(),
+  indicator: text("indicator").notNull(),
 });
 
 export const entityTable = pgTable("entity", {
-  id: text("id").primaryKey(),
+  id: uuid("id").primaryKey().defaultRandom(),
+  googleId: text("google_id"),
   lat: numeric("lat").notNull(),
   lon: numeric("lon").notNull(),
   maps: text("maps").notNull(),
   url: text("url").notNull(),
   hours: text("hours").array().notNull(),
   name: text("name").notNull(),
-  type: text("type")
-    .references(() => typeTable.name)
-    .notNull(),
+  type: TypeEnum("type").notNull(),
   displayType: text("display_type").notNull(),
   description: text("description").notNull(),
   timeZone: text("time_zone").notNull(),
@@ -62,16 +90,15 @@ export const entityTable = pgTable("entity", {
 });
 
 export const reviewTable = pgTable("review", {
-  id: serial("id").primaryKey(),
-  userId: integer("user_id")
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id")
     .notNull()
     .references(() => userTable.id),
-  entityId: text("entity_id")
+  entityId: uuid("entity_id")
     .notNull()
     .references(() => entityTable.id),
   rating: integer("rating").notNull(),
   comment: text("comment").notNull(),
-  indicators: text("indicators").array().notNull(),
   createdAt: timestamp("created_at", {
     withTimezone: true,
     mode: "date",
@@ -79,6 +106,17 @@ export const reviewTable = pgTable("review", {
     .notNull()
     .defaultNow(),
 });
+
+export const reviewIndicatorTable = pgTable("review_indicator", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  reviewId: uuid("review_id")
+    .notNull()
+    .references(() => reviewTable.id),
+  indicator: IndicatorEnum("indicator").notNull(),
+})
+
+export const ZodTypeEnum = z.enum(TypeEnum.enumValues)
+export const ZodIndicatorEnum = z.enum(IndicatorEnum.enumValues)
 
 export type User = InferSelectModel<typeof userTable>;
 export type Session = InferSelectModel<typeof sessionTable>;
