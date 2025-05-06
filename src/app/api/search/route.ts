@@ -39,6 +39,7 @@ export async function GET(request: NextRequest) {
       const searchDbQuery = sql`(
         setweight(to_tsvector('english', ${entityTable.name}), 'A') ||
         setweight(to_tsvector('english', ${entityTable.city}), 'A') ||
+        setweight(to_tsvector('english', ${entityTable.displayType}), 'A') ||
         setweight(to_tsvector('english', ${entityTable.description}), 'B')
         @@ to_tsquery('english', ${formattedQuery})
       )`;
@@ -48,6 +49,7 @@ export async function GET(request: NextRequest) {
         .where(searchDbQuery);
 
       formattedDbResponse = dbResponse.map((place) => ({
+        id: place.id,
         googleId: place.googleId,
         name: place.name,
         address: `${place.address1} ${place.address2 || ""}, ${place.city}, ${place.state}, ${place.zip}`,

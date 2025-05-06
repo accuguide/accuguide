@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { SearchDisplayType } from "@/types";
+import { SearchDisplayProps } from "@/types";
 import SearchDisplay from "@/components/search-display";
 
 export default function Page() {
-  const [googleResponse, setGoogleResponse] = useState<SearchDisplayType[]>([]);
-  const [dbResponse, setDbResponse] = useState<SearchDisplayType[]>([]);
+  const [googleResponse, setGoogleResponse] = useState<SearchDisplayProps[]>(
+    [],
+  );
+  const [dbResponse, setDbResponse] = useState<SearchDisplayProps[]>([]);
   const searchParams = useSearchParams();
   const query = searchParams.get("query");
 
@@ -36,7 +38,9 @@ export default function Page() {
       <div className="grid md:grid-cols-2">
         {dbResponse.map((place) => (
           <SearchDisplay
+            displayType="db"
             key={place.googleId}
+            id={place.id}
             googleId={place.googleId}
             name={place.name}
             type={place.type}
@@ -49,6 +53,7 @@ export default function Page() {
       <div className="grid md:grid-cols-2">
         {googleResponse.map((place) => (
           <SearchDisplay
+            displayType="google"
             key={place.googleId}
             googleId={place.googleId}
             name={place.name}

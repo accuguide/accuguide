@@ -1,18 +1,24 @@
-import { SearchDisplayType } from "@/types";
+import { SearchDisplayProps } from "@/types";
 
 export default function SearchDisplay({
+  displayType,
+  id,
   googleId,
   name,
   address,
   type,
-}: SearchDisplayType) {
+}: SearchDisplayProps) {
   const [firstLine, ...rest] = address.split(", ");
   const capitalizedType = type
     .split("_") // Split the type by underscores
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
     .join(" "); // Join the words with spaces
   function handleClick() {
-    window.location.href = `/entity/${googleId}`;
+    if (displayType === "google") {
+      window.location.href = `/entity/${googleId}`;
+    } else {
+      window.location.href = `/entity/${id}`;
+    }
   }
 
   return (

@@ -3,22 +3,24 @@ import { Entity, entityTable, ZodTypeEnum } from "@/db/schema";
 import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { v4 as uuidv4 } from "uuid";
+import { validate as isUuid } from "uuid"; // Import UUID validation function
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const googleId = searchParams.get("googleId") || "";
+  if (isUuid(googleId)) {
+    const existingData = await db
+      .select()
+      .from(entityTable)
+      .where(eq(entityTable.id, googleId))
+      .execute();
 
-  // Check if the data already exists in the database
-  const existingData = await db
-    .select()
-    .from(entityTable)
-    .where(eq(entityTable.googleId, googleId))
-    .execute();
-
-  if (existingData.length > 0) {
-    // If data exists, return it immediately
-    return NextResponse.json(existingData, { status: 200 });
+    if (existingData.length > 0) {
+      // If data exists, return it immediately
+      return NextResponse.json(existingData, { status: 200 });
+    }
   }
+  // Check if the data already exists in the database
 
   const apiKey = process.env.GOOGLE_MAPS_API_KEY;
   if (!apiKey) {

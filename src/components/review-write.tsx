@@ -8,6 +8,10 @@ import { useState } from "react";
 export default function ReviewWrite({ entity_id }: { entity_id: string }) {
   const [rating, setRating] = useState(0);
 
+  function handleSubmit() {
+    console.log(entity_id);
+  }
+
   function stars(rating: number) {
     return (
       <div className="flex mb-2 w-24">
@@ -24,7 +28,7 @@ export default function ReviewWrite({ entity_id }: { entity_id: string }) {
   }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h2 className="mb-2">Write a Review</h2>
       <p className="mb-2">Your rating: {rating} stars</p>
       {stars(rating)}

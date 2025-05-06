@@ -18,3 +18,12 @@ export type Claim = {
   picture: string;
   email: string;
 };
+
+export type SearchDisplayProps = {
+  displayType: string;
+  id?: string;
+  googleId: string;
+  name: string;
+  address: string;
+  type: string;
+};
