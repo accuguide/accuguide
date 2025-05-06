@@ -1,7 +1,7 @@
 import { SearchDisplayType } from "@/types";
 
 export default function SearchDisplay({
-  id,
+  googleId,
   name,
   address,
   type,
@@ -12,7 +12,7 @@ export default function SearchDisplay({
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
     .join(" "); // Join the words with spaces
   function handleClick() {
-    window.location.href = `/entity/${id}`;
+    window.location.href = `/entity/${googleId}`;
   }
 
   return (

@@ -1,5 +1,5 @@
 export type SearchDisplayType = {
-  id: string;
+  googleId: string;
   name: string;
   address: string;
   type: string;

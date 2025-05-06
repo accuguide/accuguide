@@ -2,8 +2,14 @@ import { Entity } from "@/db/schema";
 import Link from "next/link";
 import ReviewDisplay from "./review-display";
 
-export default async function EntityDisplay({ id }: { id: string }) {
-  const res = await fetch(`http:/localhost:3000/api/entity?id=${id}`);
+export default async function EntityDisplay({
+  googleId,
+}: {
+  googleId: string;
+}) {
+  const res = await fetch(
+    `http:/localhost:3000/api/entity?googleId=${googleId}`,
+  );
   const rawData = await res.json();
   const data: Entity = rawData[0];
 
@@ -25,7 +31,7 @@ export default async function EntityDisplay({ id }: { id: string }) {
       <h2 className="mt-2">Hours</h2>
       <ul>{data?.hours?.map((hour, index) => <p key={index}>{hour}</p>)}</ul>
       <p className="text-xs">Timezone: {data?.timeZone}</p>
-      <ReviewDisplay entity_id={id} />
+      <ReviewDisplay entity_id={data.id} />
     </div>
   );
 }

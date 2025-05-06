@@ -9,7 +9,7 @@ import {
 } from "drizzle-orm/pg-core";
 
 import type { InferSelectModel } from "drizzle-orm";
-import { z } from 'zod';
+import { z } from "zod";
 
 export const TypeEnum = pgEnum("type_enum", [
   "Restaurant",
@@ -64,7 +64,7 @@ export const typeTable = pgTable("type", {
 
 export const entityTable = pgTable("entity", {
   id: uuid("id").primaryKey().defaultRandom(),
-  googleId: text("google_id"),
+  googleId: text("google_id").notNull().unique(),
   lat: numeric("lat").notNull(),
   lon: numeric("lon").notNull(),
   maps: text("maps").notNull(),
@@ -113,10 +113,10 @@ export const reviewIndicatorTable = pgTable("review_indicator", {
     .notNull()
     .references(() => reviewTable.id),
   indicator: IndicatorEnum("indicator").notNull(),
-})
+});
 
-export const ZodTypeEnum = z.enum(TypeEnum.enumValues)
-export const ZodIndicatorEnum = z.enum(IndicatorEnum.enumValues)
+export const ZodTypeEnum = z.enum(TypeEnum.enumValues);
+export const ZodIndicatorEnum = z.enum(IndicatorEnum.enumValues);
 
 export type User = InferSelectModel<typeof userTable>;
 export type Session = InferSelectModel<typeof sessionTable>;

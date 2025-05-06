@@ -36,8 +36,8 @@ export default function Page() {
       <div className="grid md:grid-cols-2">
         {dbResponse.map((place) => (
           <SearchDisplay
-            key={place.id}
-            id={place.id}
+            key={place.googleId}
+            googleId={place.googleId}
             name={place.name}
             type={place.type}
             address={place.address}
@@ -49,8 +49,8 @@ export default function Page() {
       <div className="grid md:grid-cols-2">
         {googleResponse.map((place) => (
           <SearchDisplay
-            key={place.id}
-            id={place.id}
+            key={place.googleId}
+            googleId={place.googleId}
             name={place.name}
             type={place.type}
             address={place.address}

@@ -1,17 +1,18 @@
 import { db } from "@/db";
-import { Entity, entityTable } from "@/db/schema";
+import { Entity, entityTable, ZodTypeEnum } from "@/db/schema";
 import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
+import { v4 as uuidv4 } from "uuid";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
-  const id = searchParams.get("id") || "";
+  const googleId = searchParams.get("googleId") || "";
 
   // Check if the data already exists in the database
   const existingData = await db
     .select()
     .from(entityTable)
-    .where(eq(entityTable.id, id))
+    .where(eq(entityTable.googleId, googleId))
     .execute();
 
   if (existingData.length > 0) {
@@ -25,7 +26,7 @@ export async function GET(request: NextRequest) {
   }
   const fields =
     "id,postalAddress,location,timeZone,googleMapsUri,websiteUri,regularOpeningHours,utcOffsetMinutes,displayName,primaryTypeDisplayName,editorialSummary";
-  const url = `https://places.googleapis.com/v1/places/${id}?fields=${fields}&key=${apiKey}`;
+  const url = `https://places.googleapis.com/v1/places/${googleId}?fields=${fields}&key=${apiKey}`;
   console.log(url);
   try {
     const response = await fetch(url);
@@ -38,48 +39,49 @@ export async function GET(request: NextRequest) {
     }
 
     const googleResponse = await response.json();
-    let newType = "";
+    let newType;
     const typeFix = googleResponse.primaryTypeDisplayName?.text || "Other";
     switch (true) {
       case typeFix.includes("Restaurant"):
-        newType = "Restaurant";
+        newType = ZodTypeEnum.Enum["Restaurant"];
         break;
       case typeFix.includes("Movie"):
-        newType = "Cinema";
+        newType = ZodTypeEnum.Enum["Cinema"];
         break;
       case typeFix.includes("Cafe"):
-        newType = "Cafe";
+        newType = ZodTypeEnum.Enum["Cafe"];
         break;
       case typeFix.includes("Bar"):
-        newType = "Bar";
+        newType = ZodTypeEnum.Enum["Bar"];
         break;
       case typeFix.includes("Store"):
-        newType = "Store";
+        newType = ZodTypeEnum.Enum["Store"];
         break;
       case typeFix.includes("Government Office"):
-        newType = "Government Office";
+        newType = ZodTypeEnum.Enum["Government Office"];
         break;
       case typeFix.includes("University"):
-        newType = "University";
+        newType = ZodTypeEnum.Enum["University"];
         break;
       case typeFix.includes("School"):
-        newType = "School";
+        newType = ZodTypeEnum.Enum["School"];
         break;
       case typeFix.includes("Hospital"):
       case typeFix.includes("Health"):
       case typeFix.includes("Pharmacy"):
-        newType = "Healthcare";
+        newType = ZodTypeEnum.Enum["Healthcare"];
         break;
       case typeFix.includes("Stadium"):
-        newType = "Venue";
+        newType = ZodTypeEnum.Enum["Venue"];
         break;
       default:
-        newType = "Other";
+        newType = ZodTypeEnum.Enum["Other"];
         break;
     }
 
     const formattedResponse: Entity = {
-      id: googleResponse.id,
+      googleId: googleResponse.id,
+      id: uuidv4(),
       lat: googleResponse.location.latitude,
       lon: googleResponse.location.longitude,
       maps: googleResponse.googleMapsUri,
@@ -106,7 +108,7 @@ export async function GET(request: NextRequest) {
     const data = await db
       .select()
       .from(entityTable)
-      .where(eq(entityTable.id, id))
+      .where(eq(entityTable.googleId, googleId))
       .execute();
     return NextResponse.json(data, { status: 200 });
   } catch (error) {

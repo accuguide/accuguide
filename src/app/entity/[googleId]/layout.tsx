@@ -4,12 +4,14 @@ import type { Metadata } from "next";
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: { googleId: string };
 }): Promise<Metadata> {
-  const { id } = await params;
+  const { googleId } = await params;
 
   // Fetch entity data from the API
-  const response = await fetch(`http://localhost:3000/api/entity?id=${id}`);
+  const response = await fetch(
+    `http://localhost:3000/api/entity?googleId=${googleId}`,
+  );
   if (!response.ok) {
     throw new Error("Failed to fetch entity data");
   }
@@ -27,12 +29,14 @@ export default async function SearchLayout({
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { id: string };
+  params: { googleId: string };
 }>) {
-  const { id } = await params;
+  const { googleId } = await params;
 
   // Fetch entity data from the API
-  const response = await fetch(`http://localhost:3000/api/entity?id=${id}`);
+  const response = await fetch(
+    `http://localhost:3000/api/entity?googleId=${googleId}`,
+  );
   if (!response.ok) {
     throw new Error("Failed to fetch entity data");
   }

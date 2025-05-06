@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
     const googleResponse = await response.json();
     const formattedGoogleResponse: SearchDisplayType[] =
       googleResponse.results.map((place: GoogleSearchResponse) => ({
-        id: place.place_id,
+        googleId: place.place_id,
         name: place.name,
         address: place.formatted_address,
         type: place.types[0],
@@ -48,16 +48,16 @@ export async function GET(request: NextRequest) {
         .where(searchDbQuery);
 
       formattedDbResponse = dbResponse.map((place) => ({
-        id: place.id,
+        googleId: place.googleId,
         name: place.name,
         address: `${place.address1} ${place.address2 || ""}, ${place.city}, ${place.state}, ${place.zip}`,
         type: place.displayType,
       }));
     }
 
-    const dbIds = new Set(formattedDbResponse.map((place) => place.id));
+    const dbIds = new Set(formattedDbResponse.map((place) => place.googleId));
     const filteredGoogleResponse = formattedGoogleResponse.filter(
-      (place) => !dbIds.has(place.id),
+      (place) => !dbIds.has(place.googleId),
     );
     const combinedResponse = [
       {
