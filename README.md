@@ -13,7 +13,7 @@ We are always looking for open source contributions! Check out our contribution 
 ### Prerequisites
 
 - [Docker](https://docs.docker.com/desktop/)
-- [Node.js](https://nodejs.org/en/download) (It is reccommended to use the LTS version)
+- [Node.js](https://nodejs.org/en/download) (It is recommended to use the LTS version)
 
 ### Code Setup
 
