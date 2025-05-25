@@ -15,7 +15,7 @@ We are always looking for open source contributions! Check out our contribution 
 - Docker
 - Node LTS Version
 
-## Code Setup
+### Code Setup
 
 1. `git clone https://github.com/accessfinder/accessfinder.git`
 2. `npm install`
