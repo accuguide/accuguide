@@ -5,8 +5,10 @@ import ReviewWrite from "./review-write";
 
 export default async function ReviewDisplay({
   entity_id,
+  entity_type,
 }: {
   entity_id: string;
+  entity_type: string;
 }) {
   const reviews = await db
     .select()
@@ -15,7 +17,7 @@ export default async function ReviewDisplay({
   return (
     <div>
       <h2 className="text-xl mt-4">Reviews</h2>
-      <ReviewWrite entity_id={entity_id} />
+      <ReviewWrite entity_id={entity_id} entity_type={entity_type} />
       <div>
         {reviews.map((review) => (
           <div key={review.id} className="border-b border-gray-200 py-2">

@@ -3,9 +3,15 @@
 import { StarIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function ReviewWrite({ entity_id }: { entity_id: string }) {
+export default function ReviewWrite({
+  entity_id,
+  entity_type,
+}: {
+  entity_id: string;
+  entity_type: string;
+}) {
   const [rating, setRating] = useState(0);
 
   function handleSubmit() {
@@ -27,8 +33,13 @@ export default function ReviewWrite({ entity_id }: { entity_id: string }) {
     );
   }
 
+  useEffect(() => {
+    // to do - fetch possible indicators for entity on current component load
+  }, []);
+
   return (
     <form onSubmit={handleSubmit}>
+      <p>Type: {entity_type}</p>
       <h2 className="mb-2">Write a Review</h2>
       <p className="mb-2">Your rating: {rating} stars</p>
       {stars(rating)}

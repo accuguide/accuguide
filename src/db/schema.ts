@@ -6,6 +6,7 @@ import {
   numeric,
   uuid,
   pgEnum,
+  boolean,
 } from "drizzle-orm/pg-core";
 
 import type { InferSelectModel } from "drizzle-orm";
@@ -113,6 +114,7 @@ export const reviewIndicatorTable = pgTable("review_indicator", {
     .notNull()
     .references(() => reviewTable.id),
   indicator: IndicatorEnum("indicator").notNull(),
+  exists: boolean("exists"),
 });
 
 export const ZodTypeEnum = z.enum(TypeEnum.enumValues);
