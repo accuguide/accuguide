@@ -28,5 +28,6 @@ We are always looking for open source contributions! Check out our contribution 
 1. `npm run db:start`
 2. `npm run db:push` (run this only on first setup or when database schema/seed changes are made)
 3. `npm run db:seed` (run this only on first setup or when you want to reset to the seed data)
-4. `npm run s3:push` (run this only on first setup or when you make changes to storage bucket schema)
+4. `npm run s3:push`
 5. `npm run dev`
+6. `npm run db:studio` (optional, only needed to visualize/directly edit database)

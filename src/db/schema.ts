@@ -59,7 +59,7 @@ export const sessionTable = pgTable("session", {
 export const typeTable = pgTable("type", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: TypeEnum("name").notNull(),
-  indicator: text("indicator").notNull(),
+  indicator: IndicatorEnum("indicator").notNull(),
 });
 
 export const entityTable = pgTable("entity", {
