@@ -1,5 +1,9 @@
 # Access Finder
 
+[![CodeQL](https://github.com/accessfinder/accessfinder/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/accessfinder/accessfinder/actions/workflows/github-code-scanning/codeql)
+[![ESLint](https://github.com/accessfinder/accessfinder/actions/workflows/eslint.yml/badge.svg)](https://github.com/accessfinder/accessfinder/actions/workflows/eslint.yml)
+[![Prettier](https://github.com/accessfinder/accessfinder/actions/workflows/prettier.yml/badge.svg)](https://github.com/accessfinder/accessfinder/actions/workflows/prettier.yml)
+
 ## About
 
 The source code for Access Finder's website. Access Finder is a platform designed by and for people with disabilities to be able to find and rate accessible places and services! In addition to basic features such as searching and rating entities, ML and AI will be utilized to analyze reviews, images, and entity info to give more information to the user. This project will likely see slow development as it is only developed by one person at the moment, but we hope to get more open source volunteers to help develop this platform.
@@ -31,3 +35,5 @@ We are always looking for open source contributions! Check out our contribution 
 4. `npm run s3:push`
 5. `npm run dev`
 6. `npm run db:studio` (optional, only needed to visualize/directly edit database)
+
+## Sponsors
