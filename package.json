@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
+    "check": "prettier --check .",
     "db:start": "docker compose up",
     "db:studio": "drizzle-kit studio",
     "db:push": "drizzle-kit push",
