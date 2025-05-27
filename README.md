@@ -41,4 +41,5 @@ We are always looking for open source contributions! Check out our contribution 
 Please considering sponsoring Access Finder to ensure continued development and ability to keep this project free and open source!
 
 ### Current Sponsors
+
 <img width="64" alt="logo-netlify-encapsulated-monochrome-darkmodealt" src="https://github.com/user-attachments/assets/6e57689c-3bf9-4378-a471-61d26910cc09" />

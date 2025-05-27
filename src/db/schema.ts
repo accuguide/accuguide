@@ -125,3 +125,4 @@ export type Session = InferSelectModel<typeof sessionTable>;
 export type Type = InferSelectModel<typeof typeTable>;
 export type Entity = InferSelectModel<typeof entityTable>;
 export type Review = InferSelectModel<typeof reviewTable>;
+export type ReviewIndicator = InferSelectModel<typeof reviewIndicatorTable>;
