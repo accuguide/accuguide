@@ -21,6 +21,11 @@ async function main() {
         name: ZodTypeEnum.Enum["Restaurant"],
         indicator: ZodIndicatorEnum.Enum["ADA Compliant Restroom"],
       },
+      {
+        id: uuidv4(),
+        name: ZodTypeEnum.Enum["Restaurant"],
+        indicator: ZodIndicatorEnum.Enum["Accessible Seating"],
+      },
     ];
     await db.insert(typeTable).values(typeTableSeed);
   } catch (error) {

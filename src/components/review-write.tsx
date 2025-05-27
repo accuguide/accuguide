@@ -83,17 +83,21 @@ export default function ReviewWrite({
                 <div className="flex gap-1">
                   <Button
                     size="sm"
-                    variant="outline"
-                    className="h-5 w-5 p-0"
                     title="Yes"
+                    className={`h-5 w-5 p-0 ${
+                      indicator.exists === true
+                        ? "bg-green-800"
+                        : "bg-green-100"
+                    }`}
                   >
                     <Check className="h-2.5 w-2.5" />
                   </Button>
 
                   <Button
                     size="sm"
-                    variant="outline"
-                    className="h-5 w-5 p-0"
+                    className={`h-5 w-5 p-0 ${
+                      indicator.exists === false ? "bg-red-800" : "bg-red-100"
+                    }`}
                     title="No"
                   >
                     <X className="h-2.5 w-2.5" />
@@ -101,8 +105,9 @@ export default function ReviewWrite({
 
                   <Button
                     size="sm"
-                    variant="outline"
-                    className="h-5 w-5 p-0"
+                    className={`h-5 w-5 p-0 ${
+                      indicator.exists === null ? "bg-neutral-400" : ""
+                    }`}
                     title="Clear"
                   >
                     <Minus className="h-2.5 w-2.5" />
