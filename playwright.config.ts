@@ -14,7 +14,7 @@ export default defineConfig({
 				outputFile: "./playwright/results/report.html",
 				coverage: {
 					lcov: true,
-					reports: ["codecov"],
+					reports: ["cobertura"],
 					entryFilter: (entry: { url: string }) =>
 						(entry.url.includes("next/static/chunks") ||
 							entry.url.includes("next/server/app")) &&
