@@ -26,7 +26,7 @@ jobs:
         path: playwright-report/
         retention-days: 30
     - name: Upload coverage reports to Codecov
-    uses: codecov/codecov-action@v5
-    with:
-      token: ${{ secrets.CODECOV_TOKEN }}
-      slug: accessfinder/accessfinder
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        slug: accessfinder/accessfinder
