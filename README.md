@@ -1,5 +1,6 @@
 # Access Finder
 
+[![Cypress](https://github.com/accessfinder/accessfinder/actions/workflows/cypress.yml/badge.svg)](https://github.com/accessfinder/accessfinder/actions/workflows/cypress.yml)
 [![CodeQL](https://github.com/accessfinder/accessfinder/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/accessfinder/accessfinder/actions/workflows/github-code-scanning/codeql)
 [![ESLint](https://github.com/accessfinder/accessfinder/actions/workflows/eslint.yml/badge.svg)](https://github.com/accessfinder/accessfinder/actions/workflows/eslint.yml)
 [![Prettier](https://github.com/accessfinder/accessfinder/actions/workflows/prettier.yml/badge.svg)](https://github.com/accessfinder/accessfinder/actions/workflows/prettier.yml)
