@@ -22,3 +22,17 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           start: npm run dev
+  component:
+    name: Component Tests
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm run dev
+          component: true
