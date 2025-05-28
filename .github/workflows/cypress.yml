@@ -9,7 +9,7 @@ on:
       - beta
 
 jobs:
-  E2E Tests:
+  Test:
     runs-on: ubuntu-24.04
     permissions:
       contents: read
