@@ -22,7 +22,17 @@ export default function SearchDisplay({
   }
 
   return (
-    <div className="mb-2 cursor-pointer" onClick={handleClick}>
+    <div
+      className="mb-2 cursor-pointer"
+      role="button"
+      tabIndex={0}
+      onClick={handleClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          handleClick();
+        }
+      }}
+    >
       <h2>{name}</h2>
       <p>{capitalizedType}</p>
       <p>

@@ -7,14 +7,24 @@ export async function createUser(
   email: string,
   name: string,
   picture: string,
+  admin: boolean,
 ) {
   const [user] = await db
     .insert(userTable)
-    .values({ googleId, email, name, picture })
+    .values({ googleId, email, name, picture, admin })
     .returning()
     .execute();
 
   return user;
+}
+
+export async function getAdminStatus(googleId: string) {
+  const [user] = await db
+    .select({ admin: userTable.admin })
+    .from(userTable)
+    .where(eq(userTable.googleId, googleId))
+    .execute();
+  return user ? user.admin : false;
 }
 
 export async function getUserFromGoogleId(googleId: string) {

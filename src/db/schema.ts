@@ -44,6 +44,7 @@ export const userTable = pgTable("user", {
   email: text("email").notNull(),
   name: text("name").notNull(),
   picture: text("picture").notNull(),
+  admin: boolean("admin").notNull(),
 });
 
 export const sessionTable = pgTable("session", {

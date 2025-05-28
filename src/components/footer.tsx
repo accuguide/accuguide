@@ -1,3 +1,4 @@
+import Link from "next/link";
 import FooterLink from "./footer-link";
 
 export default function Footer() {
@@ -45,7 +46,7 @@ export default function Footer() {
       <p className="text-xs text-left sm:text-center pt-4 pr-1">
         Copyright 2025 Access Finder
         <br />
-        This site is powered by Netlify
+        This site is powered by <Link href="https://netlify.com">Netlify</Link>
       </p>
     </footer>
   );

@@ -66,7 +66,11 @@ export async function GET(request: Request): Promise<Response> {
   }
 
   // TODO: Replace this with your own DB query.
-  const user = await createUser(googleUserId, email, username, picture);
+  let admin = false;
+  if (email === "naya.singhania@protonmail.com") {
+    admin = true;
+  }
+  const user = await createUser(googleUserId, email, username, picture, admin);
 
   const sessionToken = generateSessionToken();
   const session = await createSession(sessionToken, user.id);

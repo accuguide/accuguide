@@ -16,11 +16,12 @@ import { ProfilePicturePreview } from "./profile-picture-preview";
 
 export type SettingsProps = {
   user: {
-    id: number;
+    id: string;
     name: string;
     email: string;
     picture: string;
     googleId: string;
+    admin: boolean;
   } | null;
 };
 
