@@ -1,0 +1,21 @@
+name: E2E Tests
+
+on:
+  push:
+    branches:
+      - beta
+  pull_request:
+    branches:
+      - beta
+
+jobs:
+  Test:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
