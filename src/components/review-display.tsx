@@ -2,6 +2,7 @@ import { db } from "@/db";
 import { reviewTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import ReviewWrite from "./review-write";
+import { getUsernameFromId } from "@/lib/user";
 
 export default async function ReviewDisplay({
   entity_id,
@@ -20,8 +21,10 @@ export default async function ReviewDisplay({
       <ReviewWrite entity_id={entity_id} entity_type={entity_type} />
       <div>
         {reviews.map((review) => (
-          <div key={review.id} className="border-b border-gray-200 py-2">
-            <p className="text-sm font-semibold">{review.userId}</p>
+          <div key={review.id} className="border-b py-2 md:max-w-[50%]">
+            <p className="text-sm font-semibold">
+              {getUsernameFromId(review.userId)}
+            </p>
             <p className="text-sm">{review.rating}</p>
             <p className="text-sm">{review.comment}</p>
             <p className="text-xs text-gray-500">

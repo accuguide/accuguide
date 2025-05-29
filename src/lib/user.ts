@@ -37,6 +37,16 @@ export async function getUserFromGoogleId(googleId: string) {
   return user || null;
 }
 
+export async function getUsernameFromId(id: string) {
+  // Query the database to find a user with the matching ID
+  const [user] = await db
+    .select()
+    .from(userTable)
+    .where(eq(userTable.id, id))
+    .execute();
+  return user.name || null;
+}
+
 export async function updateUserName(googleId: string, newName: string) {
   await db
     .update(userTable)

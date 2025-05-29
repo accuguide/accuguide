@@ -92,7 +92,7 @@ export const entityTable = pgTable("entity", {
 });
 
 export const reviewTable = pgTable("review", {
-  id: uuid("id").primaryKey().defaultRandom(),
+  id: uuid("id").primaryKey(),
   userId: uuid("user_id")
     .notNull()
     .references(() => userTable.id),

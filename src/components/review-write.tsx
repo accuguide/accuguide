@@ -2,7 +2,7 @@
 
 import { StarIcon } from "lucide-react";
 import { Textarea } from "./ui/textarea";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState, useRef } from "react";
 import { ReviewIndicator } from "@/db/schema";
 import { v4 as uuidv4 } from "uuid";
 import { Card } from "@/components/ui/card";
@@ -18,11 +18,32 @@ export default function ReviewWrite({
   entity_type: string;
 }) {
   const [rating, setRating] = useState(0);
-  const review_id = uuidv4();
+  const review_id = useRef(uuidv4()).current;
   const [indicators, setIndicators] = useState<ReviewIndicator[]>([]);
+  const [reviewText, setReviewText] = useState("");
 
-  function handleSubmit() {
-    console.log(entity_id);
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    fetch("/api/review", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        entity_id,
+        review_id,
+        rating,
+        indicators,
+        reviewText,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("success", data);
+      })
+      .catch((error) => {
+        console.error("Error submitting review:", error);
+      });
   }
 
   function handleIndicatorChange(ind: ReviewIndicator, newVal: boolean | null) {
@@ -68,7 +89,7 @@ export default function ReviewWrite({
   }, []);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(e) => handleSubmit(e)}>
       {/* <p>Type: {entity_type}</p> */}
       <h2 className="mb-2">Write a Review</h2>
       <p className="mb-2">Your rating: {rating !== 0 ? rating : "-"} stars</p>
@@ -143,6 +164,8 @@ export default function ReviewWrite({
         </div>
       </div>
       <Textarea
+        value={reviewText}
+        onChange={(e) => setReviewText(e.target.value)}
         disabled={rating === 0}
         className="md:max-w-[50%] mb-2"
         placeholder="Write your review here..."
