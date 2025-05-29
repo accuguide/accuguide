@@ -29,12 +29,17 @@ export async function getAdminStatus(googleId: string) {
 
 export async function getUserFromGoogleId(googleId: string) {
   // Query the database to find a user with the matching Google ID
-  const [user] = await db
-    .select()
-    .from(userTable)
-    .where(eq(userTable.googleId, googleId))
-    .execute();
-  return user || null;
+  try {
+    const [user] = await db
+      .select()
+      .from(userTable)
+      .where(eq(userTable.googleId, googleId))
+      .execute();
+    return user || null;
+  } catch (error) {
+    console.error("Error fetching user from Google ID:", error);
+    return null;
+  }
 }
 
 export async function getUsernameFromId(id: string) {
