@@ -3,6 +3,7 @@ import { reviewTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import ReviewWrite from "./review-write";
 import { getUsernameFromId } from "@/lib/user";
+import { checkAuthDisplay } from "@/lib/auth";
 
 export default async function ReviewDisplay({
   entity_id,
@@ -11,6 +12,7 @@ export default async function ReviewDisplay({
   entity_id: string;
   entity_type: string;
 }) {
+  const isAuthenticated = await checkAuthDisplay();
   const reviews = await db
     .select()
     .from(reviewTable)
@@ -18,7 +20,7 @@ export default async function ReviewDisplay({
   return (
     <div>
       <h2 className="text-xl mt-4">Reviews</h2>
-      <ReviewWrite entity_id={entity_id} entity_type={entity_type} />
+      <ReviewWrite entity_id={entity_id} entity_type={entity_type} auth={isAuthenticated}/>
       <div>
         {reviews.map((review) => (
           <div key={review.id} className="border-b py-2 md:max-w-[50%]">
