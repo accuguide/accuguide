@@ -1,32 +1,38 @@
-import { db } from "@/db";
-import { reviewIndicatorTable, reviewTable } from "@/db/schema";
-import { eq, inArray } from "drizzle-orm";
+import { Card } from "./ui/card";
+import { Button } from "./ui/button";
+import { Check, StarIcon, X } from "lucide-react";
 import ReviewWrite from "./review-write";
 import { getUsernameFromId } from "@/lib/user";
 import { checkAuthDisplay } from "@/lib/auth";
-import { Check, StarIcon, X } from "lucide-react";
-import { Card } from "./ui/card";
-import { Button } from "./ui/button";
+
+interface Review {
+  id: string;
+  userId: string;
+  entityId: string;
+  rating: number;
+  comment: string;
+  createdAt: Date | string;
+}
+
+interface Indicator {
+  id: string;
+  reviewId: string;
+  indicator: string;
+  exists: boolean | null;
+}
 
 export default async function ReviewDisplay({
   entity_id,
   entity_type,
+  reviews,
+  indicators,
 }: {
   entity_id: string;
   entity_type: string;
+  reviews: Review[];
+  indicators: Indicator[];
 }) {
   const isAuthenticated = await checkAuthDisplay();
-  const reviews = await db
-    .select()
-    .from(reviewTable)
-    .where(eq(reviewTable.entityId, entity_id));
-
-  const reviewIds = reviews.map((review) => review.id);
-
-  const indicators = await db
-    .select()
-    .from(reviewIndicatorTable)
-    .where(inArray(reviewIndicatorTable.reviewId, reviewIds));
 
   function stars(rating: number) {
     return (
@@ -35,7 +41,7 @@ export default async function ReviewDisplay({
           <StarIcon
             key={star}
             className={` w-4 ${star <= rating ? "text-yellow-500" : ""}`}
-            fill={star <= rating ? "currentColor" : "none"} // Add fill color
+            fill={star <= rating ? "currentColor" : "none"}
           />
         ))}
       </div>
