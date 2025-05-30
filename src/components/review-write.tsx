@@ -109,7 +109,7 @@ export default function ReviewWrite({
             Your rating: {rating !== 0 ? rating : "-"} stars
           </p>
           {stars(rating)}
-          <div className="text-sm md:max-w-[50%]">
+          <div className="text-sm">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-0 border-0 rounded-lg overflow-hidden mb-2">
               {indicators.map((indicator, index) => (
                 <Card
@@ -182,7 +182,7 @@ export default function ReviewWrite({
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}
             disabled={rating === 0}
-            className="md:max-w-[50%] mb-2"
+            className="mb-2"
             placeholder="Write your review here..."
           ></Textarea>
           <Button disabled={rating === 0}>Submit</Button>
