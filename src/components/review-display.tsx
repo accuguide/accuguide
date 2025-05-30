@@ -20,7 +20,11 @@ export default async function ReviewDisplay({
   return (
     <div>
       <h2 className="text-xl mt-4">Reviews</h2>
-      <ReviewWrite entity_id={entity_id} entity_type={entity_type} auth={isAuthenticated}/>
+      <ReviewWrite
+        entity_id={entity_id}
+        entity_type={entity_type}
+        auth={isAuthenticated}
+      />
       <div>
         {reviews.map((review) => (
           <div key={review.id} className="border-b py-2 md:max-w-[50%]">

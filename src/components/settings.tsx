@@ -13,25 +13,23 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ProfilePicturePreview } from "./profile-picture-preview";
+import { uploadProfilePicture } from "@/s3/functions";
+import { getCurrentSession } from "@/lib/session";
 
-export type SettingsProps = {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    picture: string;
-    googleId: string;
-    admin: boolean;
-  } | null;
-};
-
-export default async function Settings({ user }: SettingsProps) {
+export default async function Settings() {
   await checkAuthRedirect();
+  const session = await getCurrentSession();
+  const user = session?.user;
 
   const handleSubmit = async (formData: FormData) => {
     "use server";
     const username = formData.get("username") as string;
-    const pictureUrl = formData.get("pictureUrl") as string;
+    let pictureUrl = formData.get("pictureUrl") as string;
+
+    const file = formData.get("pictureFile") as File | null;
+    if (file && file.size > 0) {
+      pictureUrl = await uploadProfilePicture(file);
+    }
 
     if (user?.googleId) {
       await updateUserName(user.googleId, username);
@@ -57,16 +55,15 @@ export default async function Settings({ user }: SettingsProps) {
 
               <div className="w-full space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="pictureUrl">Profile Picture URL</Label>
+                  <Label htmlFor="pictureUrl">Profile Picture</Label>
                   <Input
-                    type="text"
-                    id="pictureUrl"
-                    name="pictureUrl"
-                    defaultValue={user?.picture || ""}
-                    placeholder="https://example.com/your-image.jpg"
+                    type="file"
+                    id="pictureFile"
+                    name="pictureFile"
+                    accept="image/*"
                   />
                   <p className="text-xs text-muted-foreground">
-                    Enter a URL to an image for your profile picture
+                    Upload a new image to use as your profile picture
                   </p>
                 </div>
 
