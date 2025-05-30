@@ -52,6 +52,16 @@ export async function getUsernameFromId(id: string) {
   return user.name || null;
 }
 
+export async function getProfileImageFromId(id: string) {
+  // Query the database to find a user with the matching ID
+  const [user] = await db
+    .select({ picture: userTable.picture })
+    .from(userTable)
+    .where(eq(userTable.id, id))
+    .execute();
+  return user ? user.picture : null;
+}
+
 export async function updateUserName(googleId: string, newName: string) {
   await db
     .update(userTable)

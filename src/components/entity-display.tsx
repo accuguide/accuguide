@@ -67,13 +67,17 @@ export default async function EntityDisplay({
       <Link href={data?.url || " "}>
         <p className="underline">{data?.url}</p>
       </Link>
-      <h2 className="mt-2">Hours</h2>
-      <ul>
-        {data?.hours?.map((hour: string, index: number) => (
-          <p key={index}>{hour}</p>
-        ))}
-      </ul>
-      <p className="text-xs mt-1">Timezone: {data?.timeZone}</p>
+      {data?.hours.length > 0 && (
+        <>
+          <h2 className="mt-2">Hours</h2>
+          <ul>
+            {data?.hours?.map((hour: string, index: number) => (
+              <p key={index}>{hour}</p>
+            ))}
+          </ul>
+          <p className="text-xs mt-1">Timezone: {data?.timeZone}</p>{" "}
+        </>
+      )}
       <ReviewDisplay
         entity_id={data.id}
         entity_type={data?.type}

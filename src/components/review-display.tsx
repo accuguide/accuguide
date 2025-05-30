@@ -2,8 +2,9 @@ import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Check, StarIcon, X } from "lucide-react";
 import ReviewWrite from "./review-write";
-import { getUsernameFromId } from "@/lib/user";
+import { getProfileImageFromId, getUsernameFromId } from "@/lib/user";
 import { checkAuthDisplay } from "@/lib/auth";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 interface Review {
   id: string;
@@ -47,6 +48,15 @@ export default async function ReviewDisplay({
       </div>
     );
   }
+
+  const profileImageMap = new Map(
+    await Promise.all(
+      reviews.map(async (review) => {
+        const src = await getProfileImageFromId(review.userId);
+        return [review.userId, src] as [string, string | null];
+      }),
+    ),
+  );
   return (
     <div className="md:max-w-[50%]">
       <h2 className="text-xl my-4">Reviews</h2>
@@ -57,12 +67,26 @@ export default async function ReviewDisplay({
       />
       <div className="mt-2">
         {reviews.map((review) => (
-          <div key={review.id} className="border-b py-2">
-            <p className="text-sm font-semibold mb-1">
-              {getUsernameFromId(review.userId)}
-            </p>
+          <div
+            key={review.id}
+            className="border-b py-2 border-neutral-300 dark:border-neutral-500"
+          >
+            <div className="flex items-center gap-2 mb-1">
+              <Avatar>
+                <AvatarImage
+                  src={profileImageMap.get(review.userId)}
+                  alt="your profile image"
+                />
+                <AvatarFallback>
+                  {getUsernameFromId(review.userId)}
+                </AvatarFallback>
+              </Avatar>
+              <p className="text-sm font-semibold">
+                {getUsernameFromId(review.userId)}
+              </p>
+            </div>
             <div className="text-sm">{stars(review.rating)}</div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-0 border-0 rounded-lg overflow-hidden">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-1 rounded-lg overflow-hidden">
               {indicators
                 .filter(
                   (indicator) =>
@@ -71,7 +95,7 @@ export default async function ReviewDisplay({
                 )
                 .map((indicator) => (
                   <div key={indicator.id}>
-                    <Card className="rounded-none border-0 px-2 py-1.5 ">
+                    <Card className="rounded-lg border-1 px-2 py-1.5 h-full border-neutral-300 dark:border-neutral-500">
                       <div className="flex items-center justify-between h-full">
                         <div className="text-xs leading-tight flex-1">
                           {indicator.indicator}{" "}

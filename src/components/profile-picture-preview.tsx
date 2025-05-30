@@ -12,7 +12,7 @@ export function ProfilePicturePreview({
   return (
     <Avatar className="w-24 h-24">
       <AvatarImage src={pictureUrl} alt="your profile image" />
-      <AvatarFallback>null</AvatarFallback>
+      <AvatarFallback>No image</AvatarFallback>
     </Avatar>
   );
 }

@@ -61,6 +61,7 @@ export default async function Settings() {
                     id="pictureFile"
                     name="pictureFile"
                     accept="image/*"
+                    className="border-neutral-300 dark:border-neutral-500"
                   />
                   <p className="text-xs text-muted-foreground">
                     Upload a new image to use as your profile picture
@@ -75,6 +76,7 @@ export default async function Settings() {
                     name="username"
                     defaultValue={user?.name || ""}
                     placeholder="Your display name"
+                    className="border-neutral-300 dark:border-neutral-500"
                   />
                 </div>
 
@@ -85,7 +87,7 @@ export default async function Settings() {
                     id="email"
                     value={user?.email || ""}
                     disabled
-                    className="bg-muted"
+                    className="border-neutral-300 dark:border-neutral-500"
                   />
                   <p className="text-xs text-muted-foreground">
                     Your email address is managed by your Google account

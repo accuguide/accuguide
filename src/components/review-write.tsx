@@ -110,15 +110,11 @@ export default function ReviewWrite({
           </p>
           {stars(rating)}
           <div className="text-sm">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-0 border-0 rounded-lg overflow-hidden mb-2">
-              {indicators.map((indicator, index) => (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-1 border-0 rounded-lg overflow-hidden mb-2">
+              {indicators.map((indicator) => (
                 <Card
                   key={indicator.id}
-                  className={`
-              rounded-none border-0 px-2 py-1.5 
-              ${index % 3 !== 2 ? "border-r" : ""} 
-              ${Math.floor(index / 3) !== Math.floor((indicators.length - 1) / 3) ? "border-b" : ""}
-            `}
+                  className="rounded-lg border-1 px-2 py-1.5 h-full border-neutral-300 dark:border-neutral-500"
                 >
                   <div className="flex items-center justify-between h-full">
                     <div className="text-xs leading-tight flex-1">
@@ -182,7 +178,7 @@ export default function ReviewWrite({
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}
             disabled={rating === 0}
-            className="mb-2"
+            className="mb-2 border-neutral-300 dark:border-neutral-500"
             placeholder="Write your review here..."
           ></Textarea>
           <Button disabled={rating === 0}>Submit</Button>
