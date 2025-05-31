@@ -1,4 +1,4 @@
-name: Next.js
+name: Build
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - beta
 
 jobs:
-  Build:
+  Check:
     runs-on: ubuntu-latest
     permissions:
       contents: read
