@@ -16,7 +16,7 @@ export const s3Client = new S3Client({
 const bucketName = "pfps";
 
 // Create the bucket
-const createBucket = async () => {
+export const createBucket = async () => {
   try {
     const command = new CreateBucketCommand({ Bucket: bucketName });
     const data = await s3Client.send(command);
@@ -25,5 +25,3 @@ const createBucket = async () => {
     console.error("Error creating bucket:", err);
   }
 };
-
-createBucket();

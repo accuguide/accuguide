@@ -4,13 +4,14 @@ import { createSitemapUrlSet } from "@/lib/sitemap";
 export const dynamic = "force-dynamic";
 export async function GET() {
   const urls = [
-    "",
+    "/",
     "/about",
     "/help/faq",
     "/help/resources",
     "/legal/privacy",
     "/legal/terms",
     "/login",
+    "/login/google",
     "/search",
   ];
 
