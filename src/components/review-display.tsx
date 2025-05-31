@@ -49,6 +49,10 @@ export default async function ReviewDisplay({
     );
   }
 
+  const sortedReviews = [...reviews].sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  );
+
   const profileImageMap = new Map(
     await Promise.all(
       reviews.map(async (review) => {
@@ -57,8 +61,9 @@ export default async function ReviewDisplay({
       }),
     ),
   );
+
   return (
-    <div className="md:max-w-[50%]">
+    <div>
       <h2 className="text-xl my-4">Reviews</h2>
       <ReviewWrite
         entity_id={entity_id}
@@ -66,7 +71,7 @@ export default async function ReviewDisplay({
         auth={isAuthenticated}
       />
       <div className="mt-2">
-        {reviews.map((review) => (
+        {sortedReviews.map((review) => (
           <div
             key={review.id}
             className="border-b py-2 border-neutral-300 dark:border-neutral-500"
@@ -74,7 +79,7 @@ export default async function ReviewDisplay({
             <div className="flex items-center gap-2 mb-1">
               <Avatar>
                 <AvatarImage
-                  src={profileImageMap.get(review.userId)}
+                  src={profileImageMap.get(review.userId) ?? undefined}
                   alt="your profile image"
                 />
                 <AvatarFallback>
@@ -101,7 +106,7 @@ export default async function ReviewDisplay({
                           {indicator.indicator}{" "}
                         </div>
                         <div className="flex gap-1">
-                          {!indicator.exists && (
+                          {indicator.exists && (
                             <Button
                               type="button"
                               size="sm"
@@ -111,7 +116,7 @@ export default async function ReviewDisplay({
                               <Check className="h-2.5 w-2.5 text-black" />
                             </Button>
                           )}
-                          {indicator.exists && (
+                          {!indicator.exists && (
                             <Button
                               type="button"
                               size="sm"

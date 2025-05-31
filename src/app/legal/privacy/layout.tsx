@@ -11,5 +11,9 @@ export default function SearchLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <LayoutDisplay title="Privacy Policy">{children}</LayoutDisplay>;
+  return (
+    <LayoutDisplay title="Privacy Policy" className="md:max-w-[50%]">
+      {children}
+    </LayoutDisplay>
+  );
 }

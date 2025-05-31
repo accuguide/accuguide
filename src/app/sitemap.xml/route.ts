@@ -1,7 +1,8 @@
 import { db } from "@/db";
 import { entityTable } from "@/db/schema";
-
-export default async function sitemap() {
+import { createSitemapUrlSet } from "@/lib/sitemap";
+export const dynamic = "force-dynamic";
+export async function GET() {
   const urls = [
     "",
     "/about",
@@ -12,7 +13,6 @@ export default async function sitemap() {
     "/login",
     "/search",
   ];
-  const lastModifiedDate = new Date("2025-05-03").toISOString();
 
   const entities = await db
     .select({
@@ -23,17 +23,24 @@ export default async function sitemap() {
 
   const entityUrls = entities.map((entity) => {
     return {
-      url: `https://accessfinder.org/entity/${entity.id}`,
-      lastModified: entity.createdAt.toISOString(),
+      slug: `/entity/${entity.id}`,
+      lastmod: entity.createdAt.toISOString(),
     };
   });
 
   const staticUrls = urls.map((url) => {
     return {
-      url: `https://accessfinder.org${url}`,
-      lastModified: lastModifiedDate,
+      slug: url,
+      lastmod: new Date().toISOString(),
     };
   });
 
-  return [...staticUrls, ...entityUrls];
+  const allUrls = [...staticUrls, ...entityUrls];
+  const sitemap = createSitemapUrlSet(allUrls);
+
+  return new Response(sitemap, {
+    headers: {
+      "Content-Type": "text/xml",
+    },
+  });
 }

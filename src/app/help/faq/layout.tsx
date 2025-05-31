@@ -12,6 +12,11 @@ export default function SearchLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <LayoutDisplay title="Frequently Asked Questions">{children}</LayoutDisplay>
+    <LayoutDisplay
+      title="Frequently Asked Questions"
+      className="md:max-w-[50%]"
+    >
+      {children}
+    </LayoutDisplay>
   );
 }

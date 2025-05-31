@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { SearchDisplayProps } from "@/types";
 import SearchDisplay from "@/components/search-display";
 
-export default function Page() {
+function SearchResults() {
   const [googleResponse, setGoogleResponse] = useState<SearchDisplayProps[]>(
     [],
   );
@@ -49,7 +49,6 @@ export default function Page() {
         ))}
       </div>
       <h2 className="text-lg">All results (not yet on our database)</h2>
-
       <div className="grid md:grid-cols-2">
         {googleResponse.map((place) => (
           <SearchDisplay
@@ -63,5 +62,13 @@ export default function Page() {
         ))}
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense>
+      <SearchResults />
+    </Suspense>
   );
 }

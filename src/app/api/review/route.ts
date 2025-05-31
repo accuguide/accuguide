@@ -16,7 +16,7 @@ export async function POST(request: Request) {
   await db
     .insert(reviewTable)
     .values({
-      userId: user.id,
+      userId: user?.id || "",
       entityId: res.entity_id,
       id: res.review_id,
       rating: res.rating,

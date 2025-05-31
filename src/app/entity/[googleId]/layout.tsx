@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export async function generateMetadata({
   params,
 }: {
-  params: { googleId: string };
+  params: Promise<{ googleId: string }>;
 }): Promise<Metadata> {
   const { googleId } = await params;
 
@@ -29,7 +29,7 @@ export default async function SearchLayout({
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { googleId: string };
+  params: Promise<{ googleId: string }>;
 }>) {
   const { googleId } = await params;
 
@@ -42,5 +42,9 @@ export default async function SearchLayout({
   }
   const entity = await response.json();
 
-  return <LayoutDisplay title={entity[0].name}>{children}</LayoutDisplay>;
+  return (
+    <LayoutDisplay title={entity[0].name} className="md:max-w-[50%]">
+      {children}
+    </LayoutDisplay>
+  );
 }

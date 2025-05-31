@@ -1,14 +1,17 @@
+import { cn } from "@/lib/utils";
 import Title from "./title";
 
 export default function LayoutDisplay({
   title,
   children,
+  className,
 }: Readonly<{
   title: string;
   children: React.ReactNode;
+  className?: string;
 }>) {
   return (
-    <div className="md:max-w-[50%]">
+    <div className={cn(className)}>
       <Title>{title}</Title>
       {children}
     </div>
