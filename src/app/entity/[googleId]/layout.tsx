@@ -10,7 +10,7 @@ export async function generateMetadata({
 
   // Fetch entity data from the API
   const response = await fetch(
-    `http://localhost:3000/api/entity?googleId=${googleId}`,
+    `${process.env.URL}/api/entity/?googleId=${googleId}`,
   );
   if (!response.ok) {
     throw new Error("Failed to fetch entity data");
@@ -35,7 +35,7 @@ export default async function SearchLayout({
 
   // Fetch entity data from the API
   const response = await fetch(
-    `http://localhost:3000/api/entity?googleId=${googleId}`,
+    `${process.env.URL}/api/entity/?googleId=${googleId}`,
   );
   if (!response.ok) {
     throw new Error("Failed to fetch entity data");

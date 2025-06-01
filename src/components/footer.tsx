@@ -28,13 +28,13 @@ export default function Footer() {
           <div>
             <h2>Info</h2>
 
-            <FooterLink href="/about">About</FooterLink>
+            <FooterLink href="/about/">About</FooterLink>
             <FooterLink href="/sitemap.xml">Sitemap</FooterLink>
           </div>
           <div>
             <h2>Help</h2>
-            <FooterLink href="/help/faq">FAQ</FooterLink>
-            <FooterLink href="/help/resources">Resources</FooterLink>
+            <FooterLink href="/help/faq/">FAQ</FooterLink>
+            <FooterLink href="/help/resources/">Resources</FooterLink>
           </div>
           <div>
             <h2>Contact</h2>
@@ -47,8 +47,8 @@ export default function Footer() {
           </div>
           <div>
             <h2>Legal</h2>
-            <FooterLink href="/legal/privacy">Privacy</FooterLink>
-            <FooterLink href="/legal/terms">Terms</FooterLink>
+            <FooterLink href="/legal/privacy/">Privacy</FooterLink>
+            <FooterLink href="/legal/terms/">Terms</FooterLink>
           </div>
         </div>
       </div>

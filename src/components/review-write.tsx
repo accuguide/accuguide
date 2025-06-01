@@ -27,7 +27,7 @@ export default function ReviewWrite({
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    fetch("/api/review", {
+    fetch("/api/review/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export default function ReviewWrite({
   }
 
   useEffect(() => {
-    fetch("/api/indicator?type=" + entity_type)
+    fetch("/api/indicator/?type=" + entity_type)
       .then((response) => response.json())
       .then((data) => {
         for (const indicator of data) {
@@ -98,7 +98,7 @@ export default function ReviewWrite({
       {!auth && (
         <p>
           Please{" "}
-          <Link className="underline" href="/login/google">
+          <Link className="underline" href="/login/google/">
             sign in
           </Link>{" "}
           to add a review

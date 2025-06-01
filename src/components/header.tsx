@@ -16,7 +16,7 @@ export default async function Header() {
       <div className="flex gap-4">
         <Search size="half" />
         {user?.admin && (
-          <Link href="/admin">
+          <Link href="/admin/">
             <Button>Admin Dashboard</Button>
           </Link>
         )}

@@ -11,7 +11,7 @@ export default async function EntityDisplay({
   googleId: string;
 }) {
   const res = await fetch(
-    `http:/localhost:3000/api/entity?googleId=${googleId}`,
+    `${process.env.URL}/api/entity/?googleId=${googleId}`,
   );
   const rawData = await res.json();
   const data: Entity = rawData[0];
@@ -33,7 +33,7 @@ export default async function EntityDisplay({
 
   // Call AI overview API with entity, reviews, and indicators
   const overviewRes = await fetch(
-    "http://localhost:3000/api/entity/groq/overview/",
+    `${process.env.URL}/api/entity/groq/overview/`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },

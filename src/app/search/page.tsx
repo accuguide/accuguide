@@ -15,7 +15,7 @@ function SearchResults() {
 
   useEffect(() => {
     if (query) {
-      fetch(`/api/search?query=${query}`)
+      fetch(`/api/search/?query=${query}`)
         .then((response) => {
           if (!response.ok) {
             console.log("Network request failed", response.status);

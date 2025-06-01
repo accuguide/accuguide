@@ -33,7 +33,7 @@ export default async function HeaderUser() {
         <DropdownMenuContent className="mt-2 mr-8">
           <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <Link href="/settings">
+          <Link href="/settings/">
             <DropdownMenuItem>Settings</DropdownMenuItem>
           </Link>
           <DropdownMenuItem onClick={logout}>Log out</DropdownMenuItem>

@@ -7,7 +7,7 @@ export default function Login({
   children: React.ReactNode;
 }>) {
   return (
-    <Link href="/login/google">
+    <Link href="/login/google/">
       <Button>{children}</Button>
     </Link>
   );

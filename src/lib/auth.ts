@@ -5,7 +5,7 @@ import { getCurrentSession } from "@/lib/session";
 export const google = new Google(
   process.env.GOOGLE_CLIENT_ID || "default-client-id",
   process.env.GOOGLE_CLIENT_SECRET || "default-client-secret",
-  "http://localhost:3000/login/google/callback",
+  `${process.env.URL}/login/google/callback`,
 );
 
 export async function checkAuthRedirect() {
