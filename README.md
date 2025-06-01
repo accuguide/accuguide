@@ -1,4 +1,4 @@
-# Access Finder
+# Accuguide
 
 [![Cypress](https://github.com/accessfinder/accessfinder/actions/workflows/cypress.yml/badge.svg)](https://github.com/accessfinder/accessfinder/actions/workflows/cypress.yml)
 [![CodeQL](https://github.com/accessfinder/accessfinder/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/accessfinder/accessfinder/actions/workflows/github-code-scanning/codeql)
@@ -8,7 +8,7 @@
 
 ## About
 
-The source code for Access Finder's website. Access Finder is a platform designed by and for people with disabilities to be able to find and rate accessible places and services! In addition to basic features such as searching and rating entities, ML and AI will be utilized to analyze reviews, images, and entity info to give more information to the user. This project will likely see slow development as it is only developed by one person at the moment, but we hope to get more open source volunteers to help develop this platform.
+The source code for Accuguide's website. Accuguide is a platform designed by and for people with disabilities to be able to find and rate accessible places and services! In addition to basic features such as searching and rating entities, ML and AI will be utilized to analyze reviews, images, and entity info to give more information to the user. This project will likely see slow development as it is only developed by one person at the moment, but we hope to get more open source volunteers to help develop this platform.
 
 ## Contributing
 
@@ -40,7 +40,7 @@ We are always looking for open source contributions! Check out our contribution 
 
 ## Sponsors
 
-Please considering sponsoring Access Finder to ensure continued development and ability to keep this project free and open source!
+Please considering sponsoring Accuguide to ensure continued development and ability to keep this project free and open source!
 
 ### Current Sponsors
 
