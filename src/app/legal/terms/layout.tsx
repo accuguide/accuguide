@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Terms",
-  description: "Access Finder's Terms of Service",
+  description: "Accuguide's Terms of Service",
 };
 
 export default function SearchLayout({

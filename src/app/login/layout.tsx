@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Log In",
-  description:
-    "Log in to Access Finder to write reviews and save your favorites",
+  description: "Log in to Accuguide to write reviews and save your favorites",
 };
 
 export default function SearchLayout({

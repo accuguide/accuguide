@@ -20,7 +20,7 @@ export async function generateMetadata({
   // Set the title dynamically based on the entity name
   return {
     title: entity[0]?.name || "Entity",
-    description: `Information about ${entity[0]?.name || "[entity]"} on Access Finder`,
+    description: `Information about ${entity[0]?.name || "[entity]"} on Accuguide`,
   };
 }
 

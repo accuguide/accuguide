@@ -11,7 +11,7 @@ export default async function Header() {
   return (
     <header className="border-b px-8 py-4 flex items-center justify-between">
       <Link href="/" className="font-bold">
-        Access Finder
+        Accuguide
       </Link>
       <div className="flex gap-4">
         <Search size="half" />

@@ -15,7 +15,7 @@ export default function Footer() {
             className="mr-4 w-[54px] h-[54px] mt-4 rounded-lg"
           />
           <div>
-            <h2>Access Finder</h2>{" "}
+            <h2>Accuguide</h2>{" "}
             <p>
               Discover accessibility
               <br />
@@ -54,7 +54,7 @@ export default function Footer() {
       </div>
 
       <p className="text-xs text-left sm:text-center pt-4 pr-1">
-        Copyright 2025 Access Finder
+        Copyright 2025 Accuguide
         <br />
         This site is powered by <Link href="https://netlify.com">Netlify</Link>
       </p>

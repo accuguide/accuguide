@@ -1,10 +1,10 @@
 # Accuguide
 
-[![Cypress](https://github.com/accessfinder/accessfinder/actions/workflows/cypress.yml/badge.svg)](https://github.com/accessfinder/accessfinder/actions/workflows/cypress.yml)
-[![CodeQL](https://github.com/accessfinder/accessfinder/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/accessfinder/accessfinder/actions/workflows/github-code-scanning/codeql)
-[![Next](https://github.com/accessfinder/accessfinder/actions/workflows/next.yml/badge.svg)](https://github.com/accessfinder/accessfinder/actions/workflows/next.yml)
-[![ESLint](https://github.com/accessfinder/accessfinder/actions/workflows/eslint.yml/badge.svg)](https://github.com/accessfinder/accessfinder/actions/workflows/eslint.yml)
-[![Prettier](https://github.com/accessfinder/accessfinder/actions/workflows/prettier.yml/badge.svg)](https://github.com/accessfinder/accessfinder/actions/workflows/prettier.yml)
+[![Cypress](https://github.com/accuguide/accuguide/actions/workflows/cypress.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/cypress.yml)
+[![CodeQL](https://github.com/accuguide/accuguide/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/github-code-scanning/codeql)
+[![Next](https://github.com/accuguide/accuguide/actions/workflows/next.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/next.yml)
+[![ESLint](https://github.com/accuguide/accuguide/actions/workflows/eslint.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/eslint.yml)
+[![Prettier](https://github.com/accuguide/accuguide/actions/workflows/prettier.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/prettier.yml)
 
 ## About
 
@@ -12,7 +12,7 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 
 ## Contributing
 
-We are always looking for open source contributions! Check out our contribution guidelines [here](https://github.com/accessfinder/.github/blob/main/CONTRIBUTING.md) for more information!
+We are always looking for open source contributions! Check out our contribution guidelines [here](https://github.com/accuguide/.github/blob/main/CONTRIBUTING.md) for more information!
 
 ## Setup
 
@@ -23,7 +23,7 @@ We are always looking for open source contributions! Check out our contribution 
 
 ### Code Setup
 
-1. `git clone https://github.com/accessfinder/accessfinder.git`
+1. `git clone https://github.com/accuguide/accuguide.git`
 2. `npm install`
 3. `cp .env.example .env`
 4. Register a free Google Maps API key in Google Cloud (create a project for the key if you don't have one yet). Please ensure to limit quotas to ensure you stay within free limits (e.g. 10 requests/minute, 100 requests/day). Put this key into the `.env` file created in the last step.

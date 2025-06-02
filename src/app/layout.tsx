@@ -8,8 +8,8 @@ import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Access Finder",
-    default: "Access Finder",
+    template: "%s | Accuguide",
+    default: "Accuguide",
   },
   description: "Discover accessibility near you",
 };

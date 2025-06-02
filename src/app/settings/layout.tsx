@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Settings",
-  description: "User account settings in Access Finder",
+  description: "User account settings in Accuguide",
 };
 
 export default function SearchLayout({

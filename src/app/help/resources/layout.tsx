@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Resources",
   description:
-    "A list of accessibility and disability resources compiled by Access Finder",
+    "A list of accessibility and disability resources compiled by Accuguide",
 };
 
 export default function SearchLayout({

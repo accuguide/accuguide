@@ -5,14 +5,14 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   const urls = [
     "/",
-    "/about",
-    "/help/faq",
-    "/help/resources",
-    "/legal/privacy",
-    "/legal/terms",
-    "/login",
-    "/login/google",
-    "/search",
+    "/about/",
+    "/help/faq/",
+    "/help/resources/",
+    "/legal/privacy/",
+    "/legal/terms/",
+    "/login/",
+    "/login/google/",
+    "/search/",
   ];
 
   const entities = await db
@@ -24,7 +24,7 @@ export async function GET() {
 
   const entityUrls = entities.map((entity) => {
     return {
-      slug: `/entity/${entity.id}`,
+      slug: `/entity/${entity.id}/`,
       lastmod: entity.createdAt.toISOString(),
     };
   });

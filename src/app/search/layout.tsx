@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Search",
-  description: "Search for places on Access Finder",
+  description: "Search for places on Accuguide",
 };
 
 export default function SearchLayout({
