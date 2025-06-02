@@ -2,7 +2,7 @@ import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { s3Client } from "@/s3";
 import { randomUUID } from "crypto";
 
-const BUCKET = "pfps";
+const BUCKET = "profile-images";
 
 export async function uploadProfilePicture(file: File): Promise<string> {
   const arrayBuffer = await file.arrayBuffer();
@@ -18,8 +18,20 @@ export async function uploadProfilePicture(file: File): Promise<string> {
       ACL: "public-read", // Make public, or use signed URLs
     }),
   );
+  return key;
+}
 
-  // Construct the public URL (adjust if using a different endpoint)
-  const url = `${process.env.AWS_S3_URL}/${BUCKET}/${key}`;
-  return url;
+export async function getSignedUrlForKey(
+  key: string,
+  expiresInSeconds = 3600,
+): Promise<string> {
+  const { getSignedUrl } = await import("@aws-sdk/s3-request-presigner");
+  const { GetObjectCommand } = await import("@aws-sdk/client-s3");
+
+  const command = new GetObjectCommand({
+    Bucket: BUCKET,
+    Key: key,
+  });
+
+  return getSignedUrl(s3Client, command, { expiresIn: expiresInSeconds });
 }
