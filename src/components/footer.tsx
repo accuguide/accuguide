@@ -38,9 +38,7 @@ export default function Footer() {
           </div>
           <div>
             <h2>Contact</h2>
-            <FooterLink href="mailto:support@accuguide.org">
-              Email
-            </FooterLink>
+            <FooterLink href="mailto:support@accuguide.org">Email</FooterLink>
             <FooterLink href="https://github.com/accuguide/accuguide">
               Github
             </FooterLink>
