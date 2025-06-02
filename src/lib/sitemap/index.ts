@@ -2,7 +2,7 @@
  * Update this with the domain of your site
  */
 const Config = {
-  domain: "https://accessfinder.org",
+  domain: "https://accuguide.org",
 };
 
 export interface Page {

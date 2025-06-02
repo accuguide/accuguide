@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/admin/", "/api/", "/settings/", "/login/google/callback/"],
     },
-    sitemap: "https://accessfinder.org/sitemap.xml",
+    sitemap: "https://accuguide.org/sitemap.xml",
   };
 }

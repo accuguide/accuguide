@@ -38,10 +38,10 @@ export default function Footer() {
           </div>
           <div>
             <h2>Contact</h2>
-            <FooterLink href="mailto:support@accessfinder.org">
+            <FooterLink href="mailto:support@accuguide.org">
               Email
             </FooterLink>
-            <FooterLink href="https://github.com/accessfinder/accessfinder">
+            <FooterLink href="https://github.com/accuguide/accuguide">
               Github
             </FooterLink>
           </div>
