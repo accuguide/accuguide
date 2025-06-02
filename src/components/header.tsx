@@ -17,7 +17,7 @@ export default async function Header() {
         <Search size="half" />
         {user?.admin && (
           <Link href="/admin/">
-            <Button>Admin Dashboard</Button>
+            <Button>Admin</Button>
           </Link>
         )}
         <HeaderUser />
