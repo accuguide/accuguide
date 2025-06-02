@@ -6,7 +6,10 @@ const BUCKET = "profile-images";
 
 export async function uploadProfilePicture(file: File): Promise<string> {
   try {
-    console.debug("[uploadProfilePicture] Starting upload for file:", file.name);
+    console.debug(
+      "[uploadProfilePicture] Starting upload for file:",
+      file.name,
+    );
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
     const key = `${randomUUID()}-${file.name}`;
@@ -19,7 +22,10 @@ export async function uploadProfilePicture(file: File): Promise<string> {
         ContentType: file.type,
       }),
     );
-    console.debug("[uploadProfilePicture] Successfully uploaded file with key:", key);
+    console.debug(
+      "[uploadProfilePicture] Successfully uploaded file with key:",
+      key,
+    );
     return key;
   } catch (error) {
     console.error("[uploadProfilePicture] Error uploading file:", error);
@@ -41,7 +47,9 @@ export async function getSignedUrlForKey(
       Key: key,
     });
 
-    const url = await getSignedUrl(s3Client, command, { expiresIn: expiresInSeconds });
+    const url = await getSignedUrl(s3Client, command, {
+      expiresIn: expiresInSeconds,
+    });
     console.debug("[getSignedUrlForKey] Signed URL generated:", url);
     return url;
   } catch (error) {
