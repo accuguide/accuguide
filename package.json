@@ -16,7 +16,6 @@
     "db:start": "docker compose up",
     "db:studio": "drizzle-kit studio",
     "db:push": "drizzle-kit push",
-    "db:seed": "tsx src/db/seed.ts",
     "db:stop": "docker compose down",
     "db:remove": "docker compose down -v",
     "s3:push": "tsx src/s3/push.ts",

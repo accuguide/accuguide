@@ -5,38 +5,10 @@ import {
   timestamp,
   numeric,
   uuid,
-  pgEnum,
   boolean,
 } from "drizzle-orm/pg-core";
 
 import type { InferSelectModel } from "drizzle-orm";
-import { z } from "zod";
-
-export const TypeEnum = pgEnum("type_enum", [
-  "Restaurant",
-  "Cinema",
-  "Cafe",
-  "Bar",
-  "Store",
-  "Government Office",
-  "University",
-  "School",
-  "Healthcare",
-  "Venue",
-  "Other",
-]);
-
-export const IndicatorEnum = pgEnum("indicator_enum", [
-  "Braille Menu",
-  "Wheelchair Accessible",
-  "ADA Compliant Restroom",
-  "Assistive Listening Devices",
-  "Elevator Access",
-  "Accessible Parking",
-  "Accessible Restrooms",
-  "Accessible Entrance",
-  "Accessible Seating",
-]);
 
 export const userTable = pgTable("user", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -59,9 +31,21 @@ export const sessionTable = pgTable("session", {
 });
 
 export const typeTable = pgTable("type", {
+  type: text("type").primaryKey(),
+});
+
+export const indicatorTable = pgTable("indicator", {
+  indicator: text("indicator").primaryKey(),
+});
+
+export const typeIndicatorTable = pgTable("type_indicator", {
   id: uuid("id").primaryKey().defaultRandom(),
-  name: TypeEnum("name").notNull(),
-  indicator: IndicatorEnum("indicator").notNull(),
+  type: text("type")
+    .notNull()
+    .references(() => typeTable.type),
+  indicator: text("indicator")
+    .notNull()
+    .references(() => indicatorTable.indicator),
 });
 
 export const entityTable = pgTable("entity", {
@@ -73,7 +57,9 @@ export const entityTable = pgTable("entity", {
   url: text("url").notNull(),
   hours: text("hours").array().notNull(),
   name: text("name").notNull(),
-  type: TypeEnum("type").notNull(),
+  type: text("type")
+    .notNull()
+    .references(() => typeTable.type),
   displayType: text("display_type").notNull(),
   description: text("description").notNull(),
   timeZone: text("time_zone").notNull(),
@@ -114,12 +100,11 @@ export const reviewIndicatorTable = pgTable("review_indicator", {
   reviewId: uuid("review_id")
     .notNull()
     .references(() => reviewTable.id),
-  indicator: IndicatorEnum("indicator").notNull(),
+  indicator: text("indicator")
+    .notNull()
+    .references(() => indicatorTable.indicator),
   exists: boolean("exists"),
 });
-
-export const ZodTypeEnum = z.enum(TypeEnum.enumValues);
-export const ZodIndicatorEnum = z.enum(IndicatorEnum.enumValues);
 
 export type User = InferSelectModel<typeof userTable>;
 export type Session = InferSelectModel<typeof sessionTable>;
