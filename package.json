@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:beta": "cp src/app/beta.robots.ts src/app/robots.ts && next build",
     "start": "next start",
     "lint": "next lint",
     "test:e2e": "cypress run",
