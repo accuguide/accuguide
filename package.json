@@ -18,10 +18,11 @@
     "db:seed": "tsx src/db/seed.ts",
     "db:stop": "docker compose down",
     "db:remove": "docker compose down -v",
-    "s3:push": "tsx src/s3/index.ts"
+    "s3:push": "tsx src/s3/push.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.820.0",
+    "@aws-sdk/s3-request-presigner": "^3.821.0",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.3.3",

@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ProfilePicturePreview } from "./profile-picture-preview";
-import { uploadProfilePicture } from "@/s3/functions";
+import { getSignedUrlForKey, uploadProfilePicture } from "@/s3/functions";
 import { getCurrentSession } from "@/lib/session";
 
 export default async function Settings() {
@@ -51,7 +51,9 @@ export default async function Settings() {
         <CardContent>
           <form action={handleSubmit} className="space-y-6">
             <div className="flex flex-col items-center space-y-4 sm:flex-row sm:items-start sm:space-x-6 sm:space-y-0">
-              <ProfilePicturePreview pictureUrl={user?.picture || ""} />
+              <ProfilePicturePreview
+                pictureUrl={await getSignedUrlForKey(user?.picture || "")}
+              />
 
               <div className="w-full space-y-4">
                 <div className="space-y-2">

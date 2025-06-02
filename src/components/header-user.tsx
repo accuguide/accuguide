@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { logout } from "@/app/actions";
 import { getCurrentSession } from "@/lib/session";
+import { getSignedUrlForKey } from "@/s3/functions";
 
 export default async function HeaderUser() {
   const isAuthenticated = await checkAuthDisplay();
@@ -25,7 +26,10 @@ export default async function HeaderUser() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar>
-            <AvatarImage src={user?.picture} alt="your profile image" />
+            <AvatarImage
+              src={await getSignedUrlForKey(user?.picture || "")}
+              alt="your profile image"
+            />
             <AvatarFallback>{user?.name.charAt(0)}</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>

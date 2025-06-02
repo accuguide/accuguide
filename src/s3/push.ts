@@ -1,7 +1,7 @@
 import { CreateBucketCommand } from "@aws-sdk/client-s3";
 import { s3Client } from ".";
 
-const bucketName = "pfps";
+const bucketName = "profile-images";
 
 const createBucket = async () => {
   try {
