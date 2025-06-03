@@ -12,7 +12,7 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 
 ## Contributing
 
-We are always looking for open source contributions! Check out our contribution guidelines [here](https://github.com/accuguide/.github/blob/main/CONTRIBUTING.md) for more information!
+We are always looking for open source contributions! Check out our contribution guidelines [here](https://github.com/accuguide/.github/blob/main/CONTRIBUTING.md) for more information! Once you are familiar with our guidelines, you can check out our issues to see what needs to be added, fixed, or changed. If you are a new contributor on Github we reccomend you try and tackle issues labeled "good first issue".
 
 ## Setup
 
