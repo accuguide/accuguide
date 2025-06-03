@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { Entity, entityTable, ZodTypeEnum } from "@/db/schema";
+import { Entity, entityTable } from "@/db/schema";
 import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { v4 as uuidv4 } from "uuid";
@@ -41,43 +41,43 @@ export async function GET(request: NextRequest) {
     }
 
     const googleResponse = await response.json();
-    let newType;
+    let newType: string;
     const typeFix = googleResponse.primaryTypeDisplayName?.text || "Other";
     switch (true) {
       case typeFix.includes("Restaurant"):
-        newType = ZodTypeEnum.Enum["Restaurant"];
+        newType = "Restaurant";
         break;
       case typeFix.includes("Movie"):
-        newType = ZodTypeEnum.Enum["Cinema"];
+        newType = "Cinema";
         break;
       case typeFix.includes("Cafe"):
-        newType = ZodTypeEnum.Enum["Cafe"];
+        newType = "Cafe";
         break;
       case typeFix.includes("Bar"):
-        newType = ZodTypeEnum.Enum["Bar"];
+        newType = "Bar";
         break;
       case typeFix.includes("Store"):
-        newType = ZodTypeEnum.Enum["Store"];
+        newType = "Store";
         break;
       case typeFix.includes("Government Office"):
-        newType = ZodTypeEnum.Enum["Government Office"];
+        newType = "Government Office";
         break;
       case typeFix.includes("University"):
-        newType = ZodTypeEnum.Enum["University"];
+        newType = "University";
         break;
       case typeFix.includes("School"):
-        newType = ZodTypeEnum.Enum["School"];
+        newType = "School";
         break;
       case typeFix.includes("Hospital"):
       case typeFix.includes("Health"):
       case typeFix.includes("Pharmacy"):
-        newType = ZodTypeEnum.Enum["Healthcare"];
+        newType = "Healthcare";
         break;
       case typeFix.includes("Stadium"):
-        newType = ZodTypeEnum.Enum["Venue"];
+        newType = "Venue";
         break;
       default:
-        newType = ZodTypeEnum.Enum["Other"];
+        newType = "Other";
         break;
     }
 
@@ -91,7 +91,7 @@ export async function GET(request: NextRequest) {
       hours: googleResponse.regularOpeningHours?.weekdayDescriptions || [],
       name: googleResponse.displayName.text,
       type: newType,
-      displayType: typeFix,
+      displayType: googleResponse.primaryTypeDisplayName?.text || "Other",
       description: googleResponse.editorialSummary?.text || "",
       timeZone: googleResponse.timeZone?.id || "",
       country: googleResponse.postalAddress.regionCode || "",
