@@ -1,5 +1,5 @@
 {
-  "id": "3170ca36-ae5a-4cc3-bcd4-81bf658654da",
+  "id": "03f2f267-cc23-444a-9a71-7935e9e46444",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -59,8 +59,7 @@
         },
         "type": {
           "name": "type",
-          "type": "type_enum",
-          "typeSchema": "public",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -127,7 +126,17 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "entity_type_type_type_fk": {
+          "name": "entity_type_type_type_fk",
+          "tableFrom": "entity",
+          "tableTo": "type",
+          "columnsFrom": ["type"],
+          "columnsTo": ["type"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "entity_google_id_unique": {
@@ -136,6 +145,25 @@
           "columns": ["google_id"]
         }
       },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.indicator": {
+      "name": "indicator",
+      "schema": "",
+      "columns": {
+        "indicator": {
+          "name": "indicator",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
@@ -159,8 +187,7 @@
         },
         "indicator": {
           "name": "indicator",
-          "type": "indicator_enum",
-          "typeSchema": "public",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -179,6 +206,15 @@
           "tableTo": "review",
           "columnsFrom": ["review_id"],
           "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "review_indicator_indicator_indicator_indicator_fk": {
+          "name": "review_indicator_indicator_indicator_indicator_fk",
+          "tableFrom": "review_indicator",
+          "tableTo": "indicator",
+          "columnsFrom": ["indicator"],
+          "columnsTo": ["indicator"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -299,8 +335,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.type": {
-      "name": "type",
+    "public.type_indicator": {
+      "name": "type_indicator",
       "schema": "",
       "columns": {
         "id": {
@@ -310,18 +346,54 @@
           "notNull": true,
           "default": "gen_random_uuid()"
         },
-        "name": {
-          "name": "name",
-          "type": "type_enum",
-          "typeSchema": "public",
+        "type": {
+          "name": "type",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "indicator": {
           "name": "indicator",
-          "type": "indicator_enum",
-          "typeSchema": "public",
+          "type": "text",
           "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "type_indicator_type_type_type_fk": {
+          "name": "type_indicator_type_type_type_fk",
+          "tableFrom": "type_indicator",
+          "tableTo": "type",
+          "columnsFrom": ["type"],
+          "columnsTo": ["type"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "type_indicator_indicator_indicator_indicator_fk": {
+          "name": "type_indicator_indicator_indicator_indicator_fk",
+          "tableFrom": "type_indicator",
+          "tableTo": "indicator",
+          "columnsFrom": ["indicator"],
+          "columnsTo": ["indicator"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.type": {
+      "name": "type",
+      "schema": "",
+      "columns": {
+        "type": {
+          "name": "type",
+          "type": "text",
+          "primaryKey": true,
           "notNull": true
         }
       },
@@ -384,40 +456,7 @@
       "isRLSEnabled": false
     }
   },
-  "enums": {
-    "public.indicator_enum": {
-      "name": "indicator_enum",
-      "schema": "public",
-      "values": [
-        "Braille Menu",
-        "Wheelchair Accessible",
-        "ADA Compliant Restroom",
-        "Assistive Listening Devices",
-        "Elevator Access",
-        "Accessible Parking",
-        "Accessible Restrooms",
-        "Accessible Entrance",
-        "Accessible Seating"
-      ]
-    },
-    "public.type_enum": {
-      "name": "type_enum",
-      "schema": "public",
-      "values": [
-        "Restaurant",
-        "Cinema",
-        "Cafe",
-        "Bar",
-        "Store",
-        "Government Office",
-        "University",
-        "School",
-        "Healthcare",
-        "Venue",
-        "Other"
-      ]
-    }
-  },
+  "enums": {},
   "schemas": {},
   "sequences": {},
   "roles": {},

@@ -16,7 +16,6 @@
     "db:start": "docker compose up",
     "db:studio": "drizzle-kit studio",
     "db:push": "drizzle-kit push",
-    "db:seed": "tsx src/db/seed.ts",
     "db:stop": "docker compose down",
     "db:remove": "docker compose down -v",
     "s3:push": "tsx src/s3/push.ts",
@@ -54,8 +53,7 @@
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.56.4",
     "tailwind-merge": "^3.3.0",
-    "uuid": "^11.1.0",
-    "zod": "^3.25.42"
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
