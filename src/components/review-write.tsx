@@ -41,8 +41,7 @@ export default function ReviewWrite({
       }),
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log("success", data);
+      .then(() => {
         window.location.reload();
       })
       .catch((error) => {
@@ -88,7 +87,6 @@ export default function ReviewWrite({
             },
           ]);
         }
-        console.log(data);
       });
   }, []);
 
@@ -115,7 +113,12 @@ export default function ReviewWrite({
               {indicators.map((indicator) => (
                 <Card
                   key={indicator.id}
-                  className="rounded-lg border-1 px-2 py-1.5 h-full border-neutral-300 dark:border-neutral-500"
+                  className={cn(
+                    "px-2 py-1.5 h-full",
+                    rating === 0
+                      ? "border-neutral-400 dark:border-neutral-600"
+                      : "",
+                  )}
                 >
                   <div className="flex items-center justify-between h-full">
                     <div className="text-xs leading-tight flex-1">
@@ -133,7 +136,7 @@ export default function ReviewWrite({
                           "h-5 w-5 p-0",
                           indicator.exists === true
                             ? "bg-green-500 dark:bg-green-800"
-                            : "bg-green-100",
+                            : "bg-green-200 dark:bg-green-200",
                         )}
                       >
                         <Check className="h-2.5 w-2.5 text-black" />
@@ -147,7 +150,7 @@ export default function ReviewWrite({
                           "h-5 w-5 p-0",
                           indicator.exists === false
                             ? "bg-red-500 dark:bg-red-800"
-                            : "bg-red-100",
+                            : "bg-red-200 dark:bg-red-200",
                         )}
                         title="No"
                         onClick={() => handleIndicatorChange(indicator, false)}
@@ -161,13 +164,13 @@ export default function ReviewWrite({
                         size="sm"
                         className={`h-5 w-5 p-0 ${
                           indicator.exists === null
-                            ? "bg-neutral-400"
-                            : "bg-neutral-100"
+                            ? "bg-neutral-900 dark:bg-neutral-400"
+                            : "bg-neutral-500 dark:bg-neutral-100"
                         }`}
                         title="Clear"
                         onClick={() => handleIndicatorChange(indicator, null)}
                       >
-                        <Minus className="h-2.5 w-2.5 text-black" />
+                        <Minus className="h-2.5 w-2.5 text-white dark:text-black" />
                       </Button>
                     </div>
                   </div>
@@ -179,7 +182,7 @@ export default function ReviewWrite({
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}
             disabled={rating === 0}
-            className="mb-2 border-neutral-300 dark:border-neutral-500"
+            className="mb-2"
             placeholder="Write your review here..."
           ></Textarea>
           <Button disabled={rating === 0}>Submit</Button>

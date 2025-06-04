@@ -36,10 +36,7 @@ export default function Search({ size }: SearchProps) {
             }
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className={cn(
-              "border-neutral-300 dark:border-neutral-500 bg-transparent",
-              size !== "half" && "text-center",
-            )}
+            className={cn("", size !== "half" && "text-center")}
           />
         </form>
       )}

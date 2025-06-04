@@ -114,18 +114,24 @@
 
 @layer base {
   * {
-    @apply border-neutral-300 dark:border-neutral-500 outline-ring/50;
+    @apply border-neutral-600 dark:border-neutral-400;
   }
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 overflow-x-hidden;
   }
   h1 {
     @apply text-2xl font-bold;
   }
   h2 {
-    @apply font-bold mt-2;
+    @apply text-lg font-bold my-2;
+  }
+  h3 {
+    @apply font-bold;
   }
   p {
-    @apply text-sm text-muted-foreground;
+    @apply text-sm text-neutral-600 dark:text-neutral-400 mb-1;
+  }
+  li {
+    @apply text-sm text-neutral-600 dark:text-neutral-400 mb-1;
   }
 }
