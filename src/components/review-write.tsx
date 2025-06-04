@@ -92,7 +92,7 @@ export default function ReviewWrite({
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
-      <h2 className="mb-2">Write a Review</h2>
+      <h3 className="mb-2">Write a Review</h3>
       {!auth && (
         <p>
           Please{" "}
