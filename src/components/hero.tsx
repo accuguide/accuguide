@@ -19,7 +19,7 @@ export default function Hero() {
       icon: Megaphone,
       title: "Take Action",
       description:
-        "Advocate for better accessibility in your area. Start initiatives, support local efforts, and empower change through community-driven solutions.",
+        "Advocate for better accessibility in your area. Start initiatives, support local efforts, and empower change through community-driven solutions!",
     },
   ];
 
