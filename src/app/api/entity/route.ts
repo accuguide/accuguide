@@ -29,11 +29,9 @@ export async function GET(request: NextRequest) {
   const fields =
     "id,postalAddress,location,timeZone,googleMapsUri,websiteUri,regularOpeningHours,utcOffsetMinutes,displayName,primaryTypeDisplayName,editorialSummary";
   const url = `https://places.googleapis.com/v1/places/${googleId}?fields=${fields}&key=${apiKey}`;
-  console.log(url);
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      console.log(response);
       return NextResponse.json(
         { error: "Failed to fetch data from Google Places API" },
         { status: response.status },

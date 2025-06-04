@@ -34,7 +34,7 @@ export default async function HeaderUser() {
           </Avatar>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent className="mt-2 mr-8">
+        <DropdownMenuContent className="mt-2 mr-8 border-2">
           <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <Link href="/settings/">

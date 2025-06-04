@@ -29,7 +29,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <div className="mx-8 my-8 min-h-[65vh] sm:min-h-[75vh]">
+          <div className="m-4 md:m-8 min-h-[65vh] sm:min-h-[75vh]">
             {children}
           </div>
           <Footer />

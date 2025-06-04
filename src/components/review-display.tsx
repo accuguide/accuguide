@@ -71,10 +71,10 @@ export default async function ReviewDisplay({
         auth={isAuthenticated}
       />
       <div className="mt-2">
-        {sortedReviews.map((review) => (
+        {sortedReviews.map(async (review) => (
           <div
             key={review.id}
-            className="border-b py-2 border-neutral-300 dark:border-neutral-500"
+            className="py-2 border-neutral-600 dark:border-neutral-400 border-b-2"
           >
             <div className="flex items-center gap-2 mb-1">
               <Avatar>
@@ -83,7 +83,7 @@ export default async function ReviewDisplay({
                   alt="your profile image"
                 />
                 <AvatarFallback>
-                  {getUsernameFromId(review.userId)}
+                  {(await getUsernameFromId(review.userId))?.charAt(0) ?? "?"}
                 </AvatarFallback>
               </Avatar>
               <p className="text-sm font-semibold">
@@ -91,7 +91,7 @@ export default async function ReviewDisplay({
               </p>
             </div>
             <div className="text-sm">{stars(review.rating)}</div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-1 rounded-lg overflow-hidden">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-1 rounded-lg overflow-hidden my-2">
               {indicators
                 .filter(
                   (indicator) =>
@@ -100,7 +100,7 @@ export default async function ReviewDisplay({
                 )
                 .map((indicator) => (
                   <div key={indicator.id}>
-                    <Card className="rounded-lg border-1 px-2 py-1.5 h-full border-neutral-300 dark:border-neutral-500">
+                    <Card className="px-2 py-1.5 h-full">
                       <div className="flex items-center justify-between h-full">
                         <div className="text-xs leading-tight flex-1">
                           {indicator.indicator}{" "}
@@ -134,7 +134,7 @@ export default async function ReviewDisplay({
             </div>
 
             <p className="text-sm my-1">{review.comment}</p>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs mt-2">
               {new Date(review.createdAt).toLocaleDateString()}
             </p>
           </div>
