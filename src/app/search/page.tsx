@@ -31,6 +31,8 @@ function SearchResults() {
 
   return (
     <div>
+      <h2 className="mt-2 my-4">Results</h2>
+
       <div className="grid md:grid-cols-2 lg:grid-cols-3">
         {dbResponse.map((place) => (
           <SearchDisplay

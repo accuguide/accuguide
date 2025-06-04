@@ -71,7 +71,7 @@ export default async function ReviewDisplay({
         auth={isAuthenticated}
       />
       <div className="mt-2">
-        {sortedReviews.map((review) => (
+        {sortedReviews.map(async (review) => (
           <div
             key={review.id}
             className="py-2 border-neutral-600 dark:border-neutral-400 border-b-2"
@@ -83,7 +83,7 @@ export default async function ReviewDisplay({
                   alt="your profile image"
                 />
                 <AvatarFallback>
-                  {getUsernameFromId(review.userId)}
+                  {(await getUsernameFromId(review.userId))?.charAt(0) ?? "?"}
                 </AvatarFallback>
               </Avatar>
               <p className="text-sm font-semibold">

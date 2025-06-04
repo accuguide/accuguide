@@ -39,7 +39,7 @@ export default async function Settings() {
   };
 
   return (
-    <div className="mx-auto max-w-2xl py-8">
+    <div className="max-w-2xl mt-4 md:mt-8">
       <Card>
         <CardHeader>
           <CardTitle>Profile Settings</CardTitle>

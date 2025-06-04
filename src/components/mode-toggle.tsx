@@ -18,7 +18,7 @@ export function ModeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon" className="border-2">
+        <Button variant="outline" size="icon">
           <Sun className="h-[1.2rem] w-[1.2rem] text-neutral-900" />
           <Moon className="absolute h-[1.2rem] w-[1.2rem] text-neutral-100" />
           <span className="sr-only">Toggle theme</span>

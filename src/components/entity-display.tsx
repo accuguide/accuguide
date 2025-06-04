@@ -61,7 +61,12 @@ export default async function EntityDisplay({
       <p>
         {data?.address1}
         <br />
-        {data?.address2 ? `${data?.address2}<br />` : ""}
+        {data?.address2 && (
+          <>
+            {data?.address2}
+            <br />
+          </>
+        )}
         {data?.city}, {data?.state} {data?.zip}
         <br />
         {data?.country}

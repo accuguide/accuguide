@@ -25,13 +25,17 @@ export default function Search({ size }: SearchProps) {
         <form
           onSubmit={(e) => handleSubmit(e)}
           className={cn(
-            size === "half" ? "" : size === "full" ? "w-[50%]" : "w-[80%]",
+            size === "half"
+              ? "pl-4"
+              : size === "full"
+                ? "w-[90%] md:w-[50%]"
+                : "w-[80%]",
           )}
         >
           <Input
             placeholder={
               size !== "half"
-                ? "Search for businesses, services, schools, or other places"
+                ? "Search for businesses, schools, or other places"
                 : "Search"
             }
             value={query}

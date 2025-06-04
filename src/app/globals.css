@@ -114,7 +114,7 @@
 
 @layer base {
   * {
-    @apply border-neutral-600 dark:border-neutral-400;
+    @apply border-neutral-600 dark:border-neutral-400 focus:ring focus:ring-neutral-400 dark:focus:ring-neutral-600;
   }
   body {
     @apply bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 overflow-x-hidden;
