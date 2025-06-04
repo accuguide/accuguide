@@ -3,7 +3,11 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Terms",
-  description: "Accuguide's Terms of Service",
+  description:
+    "Accuguide's Terms of Service explain the rules and guidelines for using Accuguide",
+  alternates: {
+    canonical: "/legal/terms/",
+  },
 };
 
 export default function SearchLayout({

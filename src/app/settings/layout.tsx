@@ -4,6 +4,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Settings",
   description: "User account settings in Accuguide",
+  alternates: {
+    canonical: "/settings/",
+  },
 };
 
 export default function SearchLayout({

@@ -3,7 +3,11 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Privacy",
-  description: "Accuguide's Privacy Policy",
+  description:
+    "Accuguide's Privacy Policy explains how Accuguide handles your data",
+  alternates: {
+    canonical: "/legal/privacy/",
+  },
 };
 
 export default function SearchLayout({

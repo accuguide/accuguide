@@ -20,7 +20,11 @@ export async function generateMetadata({
   // Set the title dynamically based on the entity name
   return {
     title: entity[0]?.name || "Entity",
-    description: `Information about ${entity[0]?.name || "[entity]"} on Accuguide`,
+    description: `Business and accessibility information about ${entity[0]?.name || "[entity]"} - a ${entity[0]?.displayType || "[displayType]"} in ${entity[0]?.city || "[city]"}, on Accuguide`,
+
+    alternates: {
+      canonical: `/entity/${entity[0].id}/`,
+    },
   };
 }
 
