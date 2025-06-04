@@ -11,7 +11,13 @@ export const metadata: Metadata = {
     template: "%s | Accuguide",
     default: "Accuguide",
   },
-  description: "Discover accessibility near you",
+  authors: [{ name: "Accuguide Team" }],
+  metadataBase: new URL("https://accuguide.com/"),
+  alternates: {
+    canonical: ".",
+  },
+  description:
+    "Accuguide helps you discover accessible places and services near you. Find detailed accessibility information, reviews, and resources to make your daily life easier. Empowering everyone to navigate the world with confidence.",
 };
 
 export default function RootLayout({
