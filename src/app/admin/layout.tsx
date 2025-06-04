@@ -4,16 +4,16 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Resources",
   description:
-    "A list of various accessibility and disability resources compiled by Accuguide",
+    "Accuguide's Admin Dashboard for managing reviews, users, and content",
   alternates: {
-    canonical: "/help/resources/",
+    canonical: "/admin/",
   },
 };
 
-export default function SearchLayout({
+export default function AdminLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <LayoutDisplay title="Resources">{children}</LayoutDisplay>;
+  return <LayoutDisplay title="Admin Dashboard">{children}</LayoutDisplay>;
 }

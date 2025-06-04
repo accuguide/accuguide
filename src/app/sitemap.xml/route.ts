@@ -11,7 +11,6 @@ export async function GET() {
     "/legal/privacy/",
     "/legal/terms/",
     "/login/",
-    "/login/google/",
     "/search/",
   ];
 
