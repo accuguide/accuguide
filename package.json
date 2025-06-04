@@ -1,6 +1,6 @@
 {
   "name": "accuguide",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -25,8 +25,8 @@
     "ver:tag": "tsx tag.ts"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.820.0",
-    "@aws-sdk/s3-request-presigner": "^3.821.0",
+    "@aws-sdk/client-s3": "^3.823.0",
+    "@aws-sdk/s3-request-presigner": "^3.823.0",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.3.3",
@@ -47,7 +47,6 @@
     "lucide-react": "^0.511.0",
     "next": "15.3.3",
     "next-themes": "^0.4.6",
-    "node-jq": "^6.0.1",
     "pg": "^8.16.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -63,7 +62,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "concurrently": "^9.1.2",
-    "cypress": "^14.4.0",
+    "cypress": "^14.4.1",
     "drizzle-kit": "^0.31.1",
     "eslint": "^9",
     "eslint-config-next": "15.3.3",

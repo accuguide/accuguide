@@ -17,13 +17,9 @@ function SearchResults() {
     if (query) {
       fetch(`/api/search/?query=${query}`)
         .then((response) => {
-          if (!response.ok) {
-            console.log("Network request failed", response.status);
-          }
           return response.json();
         })
         .then((data) => {
-          console.log("Search results:", data);
           setGoogleResponse(data[1].data);
           setDbResponse(data[0].data);
         })
@@ -35,7 +31,9 @@ function SearchResults() {
 
   return (
     <div>
-      <div className="grid md:grid-cols-2">
+      <h2 className="mt-2 my-4">Results</h2>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-3">
         {dbResponse.map((place) => (
           <SearchDisplay
             displayType="db"
@@ -48,8 +46,8 @@ function SearchResults() {
           />
         ))}
       </div>
-      <h2 className="text-lg">All results (not yet on our database)</h2>
-      <div className="grid md:grid-cols-2">
+      <h2 className="mt-2 my-4">All Google Results</h2>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3">
         {googleResponse.map((place) => (
           <SearchDisplay
             displayType="google"

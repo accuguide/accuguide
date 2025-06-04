@@ -33,7 +33,7 @@ export default function SearchDisplay({
         }
       }}
     >
-      <h2>{name}</h2>
+      <h3>{name}</h3>
       <p>{capitalizedType}</p>
       <p>
         {firstLine}

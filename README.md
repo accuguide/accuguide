@@ -12,7 +12,7 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 
 ## Contributing
 
-We are always looking for open source contributions! Check out our contribution guidelines [here](https://github.com/accuguide/.github/blob/main/CONTRIBUTING.md) for more information!
+We are always looking for open source contributions! Check out our contribution guidelines [here](https://github.com/accuguide/.github/blob/main/CONTRIBUTING.md) for more information! Once you are familiar with our guidelines, you can check out our issues to see what needs to be added, fixed, or changed. If you are a new contributor on Github we reccomend you try and tackle issues labeled "good first issue".
 
 ## Setup
 
@@ -28,6 +28,7 @@ We are always looking for open source contributions! Check out our contribution 
 3. `cp .env.example .env`
 4. Register a free Google Maps API key in Google Cloud (create a project for the key if you don't have one yet). Please ensure to limit quotas to ensure you stay within free limits (e.g. 10 requests/minute, 100 requests/day). Put this key into the `.env` file created in the last step.
 5. In your Google Cloud project, setup the OAuth consent screen and client. For Authorized Javascript origins, put `http://localhost:3000`, and for Authorized redirect URIs put `http://localhost:3000/login/google/callback`. On the client page, you will find the Client ID and Client secret. Add both these values to your `.env` file.
+6. Register a free Groq AI API key and add it to the appropriate field in your `.env` file
 
 ### Running The Code
 
