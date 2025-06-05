@@ -11,8 +11,8 @@ export default function CustomLink({
   underline?: boolean;
 }>) {
   return (
-    <Link href={href}>
-      <p className={cn(underline ? "underline" : "")}>{children}</p>
+    <Link href={href} className={cn(underline ? "underline" : "")}>
+      {children}
     </Link>
   );
 }

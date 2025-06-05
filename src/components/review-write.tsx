@@ -96,7 +96,7 @@ export default function ReviewWrite({
       {!auth && (
         <p>
           Please{" "}
-          <Link className="underline" href="/login/google/">
+          <Link className="underline" href="/sign-in/">
             sign in
           </Link>{" "}
           to add a review

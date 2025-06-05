@@ -131,6 +131,9 @@
   p {
     @apply text-sm text-neutral-600 dark:text-neutral-400 mb-1;
   }
+  a {
+    @apply text-sm text-neutral-600 dark:text-neutral-400;
+  }
   li {
     @apply text-sm text-neutral-600 dark:text-neutral-400 mb-1;
   }
