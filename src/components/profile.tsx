@@ -39,7 +39,6 @@ export default function Profile() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (values.username) await changeName(values.username);
-    console.log(values.image);
     if (values.image) {
       const formData = new FormData();
       formData.append("image", values.image);

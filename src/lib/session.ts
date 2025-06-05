@@ -7,3 +7,11 @@ export async function getServerUser() {
   });
   return session?.user;
 }
+
+export async function checkAuth() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  return session ? true : false;
+}

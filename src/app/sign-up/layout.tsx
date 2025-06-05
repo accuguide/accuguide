@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Sign up for an Accuguide account to write reviews and manage your account",
   alternates: {
-    canonical: "/signup/",
+    canonical: "/sign-up/",
   },
 };
 

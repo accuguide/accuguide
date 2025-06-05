@@ -32,7 +32,6 @@ export default function SignupForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     signUpWithEmail(values.email, values.password, values.username);
   }
 

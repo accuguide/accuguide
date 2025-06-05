@@ -60,7 +60,9 @@ export const entityTable = pgTable("entity", {
 
 export const reviewTable = pgTable("review", {
   id: uuid("id").primaryKey(),
-  userId: text("user_id").notNull().references(() => user.id),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id),
   entityId: uuid("entity_id")
     .notNull()
     .references(() => entityTable.id),

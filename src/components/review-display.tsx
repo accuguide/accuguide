@@ -2,9 +2,8 @@ import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Check, StarIcon, X } from "lucide-react";
 import ReviewWrite from "./review-write";
-import { getProfileImageFromId, getUsernameFromId } from "@/lib/user";
-import { checkAuthDisplay } from "@/lib/auth";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { checkAuth } from "@/lib/session";
 
 interface Review {
   id: string;
@@ -33,8 +32,6 @@ export default async function ReviewDisplay({
   reviews: Review[];
   indicators: Indicator[];
 }) {
-  const isAuthenticated = await checkAuthDisplay();
-
   function stars(rating: number) {
     return (
       <div className="flex mb-2 w-24">
@@ -53,14 +50,7 @@ export default async function ReviewDisplay({
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   );
 
-  const profileImageMap = new Map(
-    await Promise.all(
-      reviews.map(async (review) => {
-        const src = await getProfileImageFromId(review.userId);
-        return [review.userId, src] as [string, string | null];
-      }),
-    ),
-  );
+  const authenticated = await checkAuth();
 
   return (
     <div>
@@ -68,7 +58,7 @@ export default async function ReviewDisplay({
       <ReviewWrite
         entity_id={entity_id}
         entity_type={entity_type}
-        auth={isAuthenticated}
+        auth={authenticated}
       />
       <div className="mt-2">
         {sortedReviews.map(async (review) => (
@@ -78,17 +68,10 @@ export default async function ReviewDisplay({
           >
             <div className="flex items-center gap-2 mb-1">
               <Avatar>
-                <AvatarImage
-                  src={profileImageMap.get(review.userId) ?? undefined}
-                  alt="your profile image"
-                />
-                <AvatarFallback>
-                  {(await getUsernameFromId(review.userId))?.charAt(0) ?? "?"}
-                </AvatarFallback>
+                <AvatarImage src={undefined} alt="your profile image" />
+                <AvatarFallback>{"hello"}</AvatarFallback>
               </Avatar>
-              <p className="text-sm font-semibold">
-                {getUsernameFromId(review.userId)}
-              </p>
+              <p className="text-sm font-semibold">{"username"}</p>
             </div>
             <div className="text-sm">{stars(review.rating)}</div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-1 rounded-lg overflow-hidden my-2">
