@@ -9,6 +9,7 @@ import {
 } from "drizzle-orm/pg-core";
 
 import type { InferSelectModel } from "drizzle-orm";
+import { user } from "./auth-schema";
 
 export const typeTable = pgTable("type", {
   type: text("type").primaryKey(),
@@ -59,7 +60,7 @@ export const entityTable = pgTable("entity", {
 
 export const reviewTable = pgTable("review", {
   id: uuid("id").primaryKey(),
-  userId: uuid("user_id").notNull(), //add user ref here
+  userId: text("user_id").notNull().references(() => user.id),
   entityId: uuid("entity_id")
     .notNull()
     .references(() => entityTable.id),

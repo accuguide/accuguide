@@ -13,27 +13,26 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { signUpWithEmail } from "@/lib/sign-up";
+import { signInWithEmail } from "@/lib/sign-in";
+import CustomLink from "./custom-link";
 
 const formSchema = z.object({
   email: z.string(),
   password: z.string(),
-  username: z.string(),
 });
 
-export default function SignupForm() {
+export default function SigninForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
       password: "",
-      username: "",
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-    signUpWithEmail(values.email, values.password, values.username);
+    signInWithEmail(values.email, values.password);
   }
 
   return (
@@ -65,20 +64,14 @@ export default function SignupForm() {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="Username" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Sign Up</Button>
+        <Button type="submit">Sign In</Button>
+        <p>
+          Don&apos;t have an account?{" "}
+          <CustomLink href="/sign-up/" underline>
+            Sign up
+          </CustomLink>{" "}
+          instead
+        </p>
       </form>
     </Form>
   );

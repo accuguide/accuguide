@@ -3,7 +3,7 @@ import { ThemeProvider } from "next-themes";
 import { GeistSans } from "geist/font/sans";
 import "@/app/globals.css";
 import { ModeToggle } from "@/components/mode-toggle";
-// import Header from "@/components/header";
+import Header from "@/components/header";
 // import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
@@ -34,7 +34,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* <Header /> */}
+          <Header />
           <div className="m-4 md:m-8 min-h-[65vh] sm:min-h-[75vh]">
             {children}
           </div>

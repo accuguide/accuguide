@@ -6,7 +6,7 @@ export async function signUpWithEmail(
   name: string,
   image?: string,
 ) {
-  const { data, error } = await authClient.signUp.email(
+  await authClient.signUp.email(
     {
       email, // user email address
       password, // user password -> min 8 characters by default
@@ -15,10 +15,10 @@ export async function signUpWithEmail(
       callbackURL: "/profile/", // A URL to redirect to after the user verifies their email (optional)
     },
     {
-      onRequest: (ctx) => {
+      onRequest: () => {
         //show loading
       },
-      onSuccess: (ctx) => {
+      onSuccess: () => {
         //redirect to the dashboard or sign in page
         window.location.href = "/profile/";
       },
