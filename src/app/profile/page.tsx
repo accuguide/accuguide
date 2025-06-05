@@ -1,8 +1,8 @@
-import Settings from "@/components/settings";
+import Profile from "@/components/profile";
 export default async function Page() {
   return (
     <div>
-      <Settings />
+      <Profile />
     </div>
   );
 }

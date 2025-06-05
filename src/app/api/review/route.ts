@@ -4,13 +4,10 @@ import {
   reviewIndicatorTable,
   reviewTable,
 } from "@/db/schema";
-import { getCurrentSession } from "@/lib/session";
-import { getUserFromGoogleId } from "@/lib/user";
+import { getServerUser } from "@/lib/session";
 
 export async function POST(request: Request) {
-  const session = await getCurrentSession();
-
-  const user = await getUserFromGoogleId(session.user?.googleId || "");
+  const user = await getServerUser();
   const res = await request.json();
   const indicators: ReviewIndicator[] = res.indicators;
   await db

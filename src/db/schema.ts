@@ -9,26 +9,7 @@ import {
 } from "drizzle-orm/pg-core";
 
 import type { InferSelectModel } from "drizzle-orm";
-
-export const userTable = pgTable("user", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  googleId: text("google_id").notNull(),
-  email: text("email").notNull(),
-  name: text("name").notNull(),
-  picture: text("picture").notNull(),
-  admin: boolean("admin").notNull(),
-});
-
-export const sessionTable = pgTable("session", {
-  id: text("id").primaryKey(),
-  userId: uuid("user_id")
-    .notNull()
-    .references(() => userTable.id),
-  expiresAt: timestamp("expires_at", {
-    withTimezone: true,
-    mode: "date",
-  }).notNull(),
-});
+import { user } from "./auth-schema";
 
 export const typeTable = pgTable("type", {
   type: text("type").primaryKey(),
@@ -42,10 +23,16 @@ export const typeIndicatorTable = pgTable("type_indicator", {
   id: uuid("id").primaryKey().defaultRandom(),
   type: text("type")
     .notNull()
-    .references(() => typeTable.type),
+    .references(() => typeTable.type, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
   indicator: text("indicator")
     .notNull()
-    .references(() => indicatorTable.indicator),
+    .references(() => indicatorTable.indicator, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
 });
 
 export const entityTable = pgTable("entity", {
@@ -59,7 +46,10 @@ export const entityTable = pgTable("entity", {
   name: text("name").notNull(),
   type: text("type")
     .notNull()
-    .references(() => typeTable.type),
+    .references(() => typeTable.type, {
+      onDelete: "set null",
+      onUpdate: "cascade",
+    }),
   displayType: text("display_type").notNull(),
   description: text("description").notNull(),
   timeZone: text("time_zone").notNull(),
@@ -79,12 +69,15 @@ export const entityTable = pgTable("entity", {
 
 export const reviewTable = pgTable("review", {
   id: uuid("id").primaryKey(),
-  userId: uuid("user_id")
+  userId: text("user_id")
     .notNull()
-    .references(() => userTable.id),
+    .references(() => user.id, { onDelete: "cascade", onUpdate: "cascade" }),
   entityId: uuid("entity_id")
     .notNull()
-    .references(() => entityTable.id),
+    .references(() => entityTable.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
   rating: integer("rating").notNull(),
   comment: text("comment").notNull(),
   createdAt: timestamp("created_at", {
@@ -99,15 +92,19 @@ export const reviewIndicatorTable = pgTable("review_indicator", {
   id: uuid("id").primaryKey().defaultRandom(),
   reviewId: uuid("review_id")
     .notNull()
-    .references(() => reviewTable.id),
+    .references(() => reviewTable.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
   indicator: text("indicator")
     .notNull()
-    .references(() => indicatorTable.indicator),
+    .references(() => indicatorTable.indicator, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
   exists: boolean("exists"),
 });
 
-export type User = InferSelectModel<typeof userTable>;
-export type Session = InferSelectModel<typeof sessionTable>;
 export type Type = InferSelectModel<typeof typeTable>;
 export type Entity = InferSelectModel<typeof entityTable>;
 export type Review = InferSelectModel<typeof reviewTable>;

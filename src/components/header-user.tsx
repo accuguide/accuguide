@@ -1,6 +1,4 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Login from "@/components/login";
-import { checkAuthDisplay } from "@/lib/auth";
 import Link from "next/link";
 import {
   DropdownMenu,
@@ -10,39 +8,47 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { logout } from "@/app/actions";
-import { getCurrentSession } from "@/lib/session";
 import { getSignedUrlForKey } from "@/s3/functions";
+import { getServerUser } from "@/lib/session";
+import { Button } from "./ui/button";
 
 export default async function HeaderUser() {
-  const isAuthenticated = await checkAuthDisplay();
-  const session = await getCurrentSession();
-  const user = session?.user;
-
-  if (!isAuthenticated) {
-    return <Login>Login</Login>;
-  } else {
+  const user = await getServerUser();
+  if (!user) {
     return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Avatar>
-            <AvatarImage
-              src={await getSignedUrlForKey(user?.picture || "")}
-              alt="your profile image"
-            />
-            <AvatarFallback>{user?.name.charAt(0)}</AvatarFallback>
-          </Avatar>
-        </DropdownMenuTrigger>
-
-        <DropdownMenuContent className="mt-2 mr-8 border-2">
-          <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <Link href="/settings/">
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-          </Link>
-          <DropdownMenuItem onClick={logout}>Log out</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <Link href="/sign-in/">
+        <Button>Sign In</Button>
+      </Link>
     );
   }
+  const imageUrl = user?.image
+    ? await getSignedUrlForKey(user.image)
+    : undefined;
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Avatar>
+          <AvatarImage src={imageUrl} alt="your profile image" />
+          <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
+        </Avatar>
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent className="mt-2 mr-8 border-2">
+        <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <Link
+          href="/profile/"
+          className="text-neutral-900 dark:text-neutral-100"
+        >
+          <DropdownMenuItem>Profile</DropdownMenuItem>
+        </Link>
+        <Link
+          href="/sign-out/"
+          className="text-neutral-900 dark:text-neutral-100"
+        >
+          <DropdownMenuItem>Sign Out</DropdownMenuItem>
+        </Link>{" "}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
 }

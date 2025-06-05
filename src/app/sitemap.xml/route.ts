@@ -10,8 +10,9 @@ export async function GET() {
     "/help/resources/",
     "/legal/privacy/",
     "/legal/terms/",
-    "/login/",
     "/search/",
+    "/sign-in/",
+    "/sign-up/",
   ];
 
   const entities = await db

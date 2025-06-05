@@ -2,14 +2,14 @@ import LayoutDisplay from "@/components/layout-display";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Settings",
-  description: "User account settings in Accuguide",
+  title: "Profile",
+  description: "User profile settings in Accuguide",
   alternates: {
-    canonical: "/settings/",
+    canonical: "/profile/",
   },
 };
 
-export default function SearchLayout({
+export default function ProfileLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
