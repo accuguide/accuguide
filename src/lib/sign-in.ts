@@ -27,3 +27,11 @@ export async function signInWithEmail(email: string, password: string) {
   );
   return { data, error };
 }
+
+export async function signInWithGoogle() {
+  const { data, error } = await authClient.signIn.social({
+    provider: "google",
+    callbackURL: "/profile/",
+  });
+  return { data, error };
+}

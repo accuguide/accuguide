@@ -4,6 +4,8 @@ import { Check, StarIcon, X } from "lucide-react";
 import ReviewWrite from "./review-write";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { checkAuth } from "@/lib/session";
+import { getUserInfosByIds } from "@/lib/get-usernames";
+import { getSignedUrlForKey } from "@/s3/functions";
 
 interface Review {
   id: string;
@@ -52,26 +54,48 @@ export default async function ReviewDisplay({
 
   const authenticated = await checkAuth();
 
+  // Get all unique userIds from reviews
+  const userIds = Array.from(new Set(reviews.map((r) => r.userId)));
+  const userInfoMap = await getUserInfosByIds(userIds);
+
+  // Preload signed URLs for all user images
+  const userImageUrls: Record<string, string | undefined> = {};
+  await Promise.all(
+    userIds.map(async (id) => {
+      const imageKey = userInfoMap[id]?.image;
+      if (imageKey) {
+        userImageUrls[id] = await getSignedUrlForKey(imageKey);
+      }
+    }),
+  );
+
   return (
     <div>
       <h2 className="text-xl my-4">Reviews</h2>
       <ReviewWrite
         entity_id={entity_id}
         entity_type={entity_type}
-        auth={authenticated}
+        auth={authenticated ? true : false}
       />
       <div className="mt-2">
-        {sortedReviews.map(async (review) => (
+        {sortedReviews.map((review) => (
           <div
             key={review.id}
             className="py-2 border-neutral-600 dark:border-neutral-400 border-b-2"
           >
             <div className="flex items-center gap-2 mb-1">
               <Avatar>
-                <AvatarImage src={undefined} alt="your profile image" />
-                <AvatarFallback>{"hello"}</AvatarFallback>
+                <AvatarImage
+                  src={userImageUrls[review.userId]}
+                  alt="user profile image"
+                />
+                <AvatarFallback>
+                  {userInfoMap[review.userId]?.name?.charAt(0) || "?"}
+                </AvatarFallback>
               </Avatar>
-              <p className="text-sm font-semibold">{"username"}</p>
+              <p className="text-sm font-semibold">
+                {userInfoMap[review.userId]?.name || "Unknown"}
+              </p>
             </div>
             <div className="text-sm">{stars(review.rating)}</div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-1 rounded-lg overflow-hidden my-2">

@@ -10,16 +10,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { getSignedUrlForKey } from "@/s3/functions";
 import { getServerUser } from "@/lib/session";
+import { Button } from "./ui/button";
 
 export default async function HeaderUser() {
   const user = await getServerUser();
   if (!user) {
     return (
-      <Link
-        href="/sign-in/"
-        className="px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition"
-      >
-        Sign In
+      <Link href="/sign-in/">
+        <Button>Sign In</Button>
       </Link>
     );
   }
@@ -38,10 +36,16 @@ export default async function HeaderUser() {
       <DropdownMenuContent className="mt-2 mr-8 border-2">
         <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href="/profile/">
+        <Link
+          href="/profile/"
+          className="text-neutral-900 dark:text-neutral-100"
+        >
           <DropdownMenuItem>Profile</DropdownMenuItem>
         </Link>
-        <Link href="/sign-out/">
+        <Link
+          href="/sign-out/"
+          className="text-neutral-900 dark:text-neutral-100"
+        >
           <DropdownMenuItem>Sign Out</DropdownMenuItem>
         </Link>{" "}
       </DropdownMenuContent>

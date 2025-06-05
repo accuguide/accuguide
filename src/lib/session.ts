@@ -13,5 +13,5 @@ export async function checkAuth() {
     headers: await headers(),
   });
 
-  return session ? true : false;
+  return session ? session : false;
 }

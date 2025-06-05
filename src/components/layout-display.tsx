@@ -6,13 +6,13 @@ export default function LayoutDisplay({
   children,
   className,
 }: Readonly<{
-  title: string;
+  title?: string;
   children: React.ReactNode;
   className?: string;
 }>) {
   return (
     <div className={cn(className)}>
-      <Title>{title}</Title>
+      {title && <Title>{title}</Title>}
       {children}
     </div>
   );

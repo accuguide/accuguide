@@ -5,7 +5,10 @@ import HeaderUser from "./header-user";
 export default async function Header() {
   return (
     <header className="border-b-2 px-4 md:px-8 py-4 flex items-center justify-between">
-      <Link href="/" className="font-bold">
+      <Link
+        href="/"
+        className="font-bold text-base text-neutral-900 dark:text-neutral-100"
+      >
         Accuguide
       </Link>
       <div className="flex gap-4">

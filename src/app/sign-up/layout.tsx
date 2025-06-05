@@ -15,5 +15,5 @@ export default function SearchLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <LayoutDisplay title="Sign Up">{children}</LayoutDisplay>;
+  return <LayoutDisplay>{children}</LayoutDisplay>;
 }
