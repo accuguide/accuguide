@@ -1,24 +1,32 @@
-import { Google } from "arctic";
-import { redirect } from "next/navigation";
-import { getCurrentSession } from "@/lib/session";
+import { betterAuth } from "better-auth";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { db } from "@/db"; // your drizzle instance
+import { nextCookies } from "better-auth/next-js";
+import * as schema from "@/db/auth-schema"; // Import your schema object
 
-export const google = new Google(
-  process.env.GOOGLE_CLIENT_ID || "default-client-id",
-  process.env.GOOGLE_CLIENT_SECRET || "default-client-secret",
-  `${process.env.URL}/login/google/callback`,
-);
-
-export async function checkAuthRedirect() {
-  const { user } = await getCurrentSession();
-  if (user === null) {
-    return redirect("/login");
-  }
-}
-
-export async function checkAuthDisplay() {
-  const { user } = await getCurrentSession();
-  if (user === null) {
-    return false;
-  }
-  return true;
-}
+export const auth = betterAuth({
+  plugins: [nextCookies()],
+  user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        required: true,
+        defaultValue: "user",
+        input: false,
+      },
+    },
+  },
+  database: drizzleAdapter(db, {
+    provider: "pg", // or "mysql", "sqlite"
+    schema: schema,
+  }),
+  emailAndPassword: {
+    enabled: true,
+  },
+  socialProviders: {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    },
+  },
+});

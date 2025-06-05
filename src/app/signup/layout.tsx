@@ -1,0 +1,19 @@
+import LayoutDisplay from "@/components/layout-display";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sign UP",
+  description:
+    "Sign up for an Accuguide account to write reviews and manage your account",
+  alternates: {
+    canonical: "/signup/",
+  },
+};
+
+export default function SearchLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return <LayoutDisplay title="Sign Up">{children}</LayoutDisplay>;
+}

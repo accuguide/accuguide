@@ -10,26 +10,6 @@ import {
 
 import type { InferSelectModel } from "drizzle-orm";
 
-export const userTable = pgTable("user", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  googleId: text("google_id").notNull(),
-  email: text("email").notNull(),
-  name: text("name").notNull(),
-  picture: text("picture").notNull(),
-  admin: boolean("admin").notNull(),
-});
-
-export const sessionTable = pgTable("session", {
-  id: text("id").primaryKey(),
-  userId: uuid("user_id")
-    .notNull()
-    .references(() => userTable.id),
-  expiresAt: timestamp("expires_at", {
-    withTimezone: true,
-    mode: "date",
-  }).notNull(),
-});
-
 export const typeTable = pgTable("type", {
   type: text("type").primaryKey(),
 });
@@ -79,9 +59,7 @@ export const entityTable = pgTable("entity", {
 
 export const reviewTable = pgTable("review", {
   id: uuid("id").primaryKey(),
-  userId: uuid("user_id")
-    .notNull()
-    .references(() => userTable.id),
+  userId: uuid("user_id").notNull(), //add user ref here
   entityId: uuid("entity_id")
     .notNull()
     .references(() => entityTable.id),
@@ -106,8 +84,6 @@ export const reviewIndicatorTable = pgTable("review_indicator", {
   exists: boolean("exists"),
 });
 
-export type User = InferSelectModel<typeof userTable>;
-export type Session = InferSelectModel<typeof sessionTable>;
 export type Type = InferSelectModel<typeof typeTable>;
 export type Entity = InferSelectModel<typeof entityTable>;
 export type Review = InferSelectModel<typeof reviewTable>;
