@@ -40,38 +40,39 @@ export async function GET(request: NextRequest) {
 
     const googleResponse = await response.json();
     let newType: string;
-    const typeFix = googleResponse.primaryTypeDisplayName?.text || "Other";
+    const typeFix =
+      googleResponse.primaryTypeDisplayName?.text.toLowerCase() || "other";
     switch (true) {
-      case typeFix.includes("Restaurant"):
+      case typeFix.includes("restaurant"):
         newType = "Restaurant";
         break;
-      case typeFix.includes("Movie"):
+      case typeFix.includes("movie"):
         newType = "Cinema";
         break;
-      case typeFix.includes("Cafe"):
+      case typeFix.includes("cafe"):
         newType = "Cafe";
         break;
-      case typeFix.includes("Bar"):
+      case typeFix.includes("bar"):
         newType = "Bar";
         break;
-      case typeFix.includes("Store"):
+      case typeFix.includes("store"):
         newType = "Store";
         break;
-      case typeFix.includes("Government Office"):
+      case typeFix.includes("government office"):
         newType = "Government Office";
         break;
-      case typeFix.includes("University"):
+      case typeFix.includes("university"):
         newType = "University";
         break;
-      case typeFix.includes("School"):
+      case typeFix.includes("school"):
         newType = "School";
         break;
-      case typeFix.includes("Hospital"):
-      case typeFix.includes("Health"):
-      case typeFix.includes("Pharmacy"):
+      case typeFix.includes("hospital"):
+      case typeFix.includes("health"):
+      case typeFix.includes("pharmacy"):
         newType = "Healthcare";
         break;
-      case typeFix.includes("Stadium"):
+      case typeFix.includes("stadium"):
         newType = "Venue";
         break;
       default:

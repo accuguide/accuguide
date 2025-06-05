@@ -1,5 +1,5 @@
 {
-  "id": "d8f4e867-277f-416f-a4ee-a315637d7ebd",
+  "id": "d220f075-03f3-4457-a25a-99252215e928",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -133,8 +133,8 @@
           "tableTo": "type",
           "columnsFrom": ["type"],
           "columnsTo": ["type"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onDelete": "set null",
+          "onUpdate": "cascade"
         }
       },
       "compositePrimaryKeys": {},
@@ -206,8 +206,8 @@
           "tableTo": "review",
           "columnsFrom": ["review_id"],
           "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
         },
         "review_indicator_indicator_indicator_indicator_fk": {
           "name": "review_indicator_indicator_indicator_indicator_fk",
@@ -215,8 +215,8 @@
           "tableTo": "indicator",
           "columnsFrom": ["indicator"],
           "columnsTo": ["indicator"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
         }
       },
       "compositePrimaryKeys": {},
@@ -275,8 +275,8 @@
           "tableTo": "user",
           "columnsFrom": ["user_id"],
           "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
         },
         "review_entity_id_entity_id_fk": {
           "name": "review_entity_id_entity_id_fk",
@@ -284,8 +284,8 @@
           "tableTo": "entity",
           "columnsFrom": ["entity_id"],
           "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
         }
       },
       "compositePrimaryKeys": {},
@@ -326,8 +326,8 @@
           "tableTo": "type",
           "columnsFrom": ["type"],
           "columnsTo": ["type"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
         },
         "type_indicator_indicator_indicator_indicator_fk": {
           "name": "type_indicator_indicator_indicator_indicator_fk",
@@ -335,8 +335,8 @@
           "tableTo": "indicator",
           "columnsFrom": ["indicator"],
           "columnsTo": ["indicator"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
         }
       },
       "compositePrimaryKeys": {},

@@ -23,10 +23,16 @@ export const typeIndicatorTable = pgTable("type_indicator", {
   id: uuid("id").primaryKey().defaultRandom(),
   type: text("type")
     .notNull()
-    .references(() => typeTable.type),
+    .references(() => typeTable.type, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
   indicator: text("indicator")
     .notNull()
-    .references(() => indicatorTable.indicator),
+    .references(() => indicatorTable.indicator, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
 });
 
 export const entityTable = pgTable("entity", {
@@ -40,7 +46,10 @@ export const entityTable = pgTable("entity", {
   name: text("name").notNull(),
   type: text("type")
     .notNull()
-    .references(() => typeTable.type),
+    .references(() => typeTable.type, {
+      onDelete: "set null",
+      onUpdate: "cascade",
+    }),
   displayType: text("display_type").notNull(),
   description: text("description").notNull(),
   timeZone: text("time_zone").notNull(),
@@ -62,10 +71,13 @@ export const reviewTable = pgTable("review", {
   id: uuid("id").primaryKey(),
   userId: text("user_id")
     .notNull()
-    .references(() => user.id),
+    .references(() => user.id, { onDelete: "cascade", onUpdate: "cascade" }),
   entityId: uuid("entity_id")
     .notNull()
-    .references(() => entityTable.id),
+    .references(() => entityTable.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
   rating: integer("rating").notNull(),
   comment: text("comment").notNull(),
   createdAt: timestamp("created_at", {
@@ -80,10 +92,16 @@ export const reviewIndicatorTable = pgTable("review_indicator", {
   id: uuid("id").primaryKey().defaultRandom(),
   reviewId: uuid("review_id")
     .notNull()
-    .references(() => reviewTable.id),
+    .references(() => reviewTable.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
   indicator: text("indicator")
     .notNull()
-    .references(() => indicatorTable.indicator),
+    .references(() => indicatorTable.indicator, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
   exists: boolean("exists"),
 });
 
