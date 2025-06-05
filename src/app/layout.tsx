@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     default: "Accuguide",
   },
   authors: [{ name: "Accuguide Team" }],
-  metadataBase: new URL("https://accuguide.com/"),
+  metadataBase: new URL("https://accuguide.org/"),
   alternates: {
     canonical: ".",
   },
