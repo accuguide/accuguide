@@ -15,6 +15,8 @@ try {
   if (!version) throw new Error("No version found in package.json");
             const tag = `v${version}`;
 
+            
+
   // Create git tag
   execSync(`git tag ${tag}`, { stdio: "inherit" });
 
