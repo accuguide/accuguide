@@ -9,15 +9,22 @@ on:
       - beta
 
 jobs:
-  Check:
+  Format:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pull-requests: read
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Install dependencies
         run: npm install
       - name: Check code formatting
-        run: npm run check
+        run: npm run format
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: Formatted code with Prettier
+        
+    
