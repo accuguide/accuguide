@@ -11,9 +11,7 @@ on:
 jobs:
   Format:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
+    permissions: write-all
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
