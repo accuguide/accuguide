@@ -23,5 +23,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@b863ae1933cb653a53c021fe36dbb774e1fb9403
         with:
           commit_message: Formatted code with Prettier
-          commit_user_email: actions@github.com
-          commit_author: Author <actions@github.com>
+          commit_author: Author <41898282+github-actions[bot]@users.noreply.github.com>
