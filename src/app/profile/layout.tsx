@@ -14,5 +14,5 @@ export default function ProfileLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <LayoutDisplay title="Settings">{children}</LayoutDisplay>;
+  return <LayoutDisplay>{children}</LayoutDisplay>;
 }
