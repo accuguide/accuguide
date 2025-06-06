@@ -10,16 +10,16 @@ try {
   execSync("git pull", { stdio: "inherit" });
 
   // Read version from package.json
-  const pkg = JSON.parse(readFileSync("package.json", "utf8"));
-  const version = pkg.version;
+        const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+    const version = pkg.version;
   if (!version) throw new Error("No version found in package.json");
-  const tag = `v${version}`;
+            const tag = `v${version}`;
 
   // Create git tag
   execSync(`git tag ${tag}`, { stdio: "inherit" });
 
   // Push tag to remote
-  execSync(`git push origin ${tag}`, { stdio: "inherit" });
+      execSync(`git push origin ${tag}`, { stdio: "inherit" });
 
   console.log(`Tag ${tag} created and pushed to origin.
   `);

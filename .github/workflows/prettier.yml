@@ -1,6 +1,7 @@
 name: Prettier
 
 on:
+  workflow_dispatch: # Allow manual trigger
   push:
     branches:
       - beta
@@ -20,7 +21,6 @@ jobs:
       - name: Format code
         run: npm run format
       - name: Commit changes
-        uses: devops-infra/action-commit-push@master
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           commit_message: Formatted code with Prettier
