@@ -5,24 +5,20 @@ export default function CustomLink({
   children,
   href,
   underline = false,
-  newTab = false, 
+  newTab = false,
 }: Readonly<{
   children: React.ReactNode;
   href: string;
   underline?: boolean;
   newTab?: boolean;
 }>) {
-  return newTab ? (
-    <a
+  return (
+    <Link
       href={href}
       className={cn(underline ? "underline" : "")}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={newTab ? "_blank" : undefined}
+      rel={newTab ? "noopener noreferrer" : undefined}
     >
-      {children}
-    </a>
-  ) : (
-    <Link href={href} className={cn(underline ? "underline" : "")}>
       {children}
     </Link>
   );

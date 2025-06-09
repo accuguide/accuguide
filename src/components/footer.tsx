@@ -46,8 +46,8 @@ export default function Footer() {
             </CustomLink>
             <br />
 
-            <CustomLink href="https://github.com/accuguide" newTab>
-              Accuguide
+            <CustomLink href="https://bsky.app/profile/accuguide.org" newTab>
+              Bluesky
             </CustomLink>
           </div>
           <div>
