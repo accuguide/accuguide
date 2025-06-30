@@ -22,6 +22,17 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
+    sendResetPassword: async ({ user, url }) => {
+      const apiUrl = process.env.EMAIL_API_URL;
+      const apiKey = process.env.EMAIL_API_KEY;
+      const params = new URLSearchParams({
+        api_key: apiKey ?? "",
+        type: "reset",
+        recipient: user.email,
+        link: url,
+      });
+      await fetch(`${apiUrl}/mail?${params.toString()}`);
+    },
   },
   socialProviders: {
     google: {
