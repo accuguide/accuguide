@@ -29,7 +29,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.823.0",
     "@aws-sdk/s3-request-presigner": "^3.823.0",
-    "@hookform/resolvers": "^5.0.1",
+    "@hookform/resolvers": "^5.1.1",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.3.3",
