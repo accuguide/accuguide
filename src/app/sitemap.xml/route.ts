@@ -12,6 +12,7 @@ export async function GET() {
     "/legal/terms/",
     "/search/",
     "/sign-in/",
+    "/sign-in/password/forgot/",
     "/sign-up/",
   ];
 

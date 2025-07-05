@@ -41,8 +41,8 @@ export default function Footer() {
             <CustomLink href="mailto:support@accuguide.org">Email</CustomLink>
             <br />
 
-            <CustomLink href="https://github.com/accuguide/accuguide">
-              Github
+            <CustomLink href="https://instagram.com/accuguideorg" newTab>
+              Instagram
             </CustomLink>
             <br />
 

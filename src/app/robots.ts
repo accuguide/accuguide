@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/profile/", "/sign-out/"],
+      disallow: ["/api/", "/profile/", "/sign-in/password/reset", "/sign-out/"],
     },
     sitemap: "https://accuguide.org/sitemap.xml",
   };
