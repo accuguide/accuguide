@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         "/admin/",
         "/api/",
         "/profile/",
-        "/sign-in/password/reset",
+        "/sign-in/password/reset/",
         "/sign-out/",
       ],
     },
