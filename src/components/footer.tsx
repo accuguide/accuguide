@@ -27,7 +27,7 @@ export default function Footer() {
 
             <CustomLink href="/about/">About</CustomLink>
             <br />
-            <CustomLink href="/sitemap.xml">Sitemap</CustomLink>
+            <CustomLink href="/donate/">Donate</CustomLink>
           </div>
           <div>
             <h3 className="mb-1">Help</h3>
@@ -41,8 +41,13 @@ export default function Footer() {
             <CustomLink href="mailto:support@accuguide.org">Email</CustomLink>
             <br />
 
-            <CustomLink href="https://github.com/accuguide/accuguide">
-              Github
+            <CustomLink href="https://instagram.com/accuguideorg" newTab>
+              Instagram
+            </CustomLink>
+            <br />
+
+            <CustomLink href="https://bsky.app/profile/accuguide.org" newTab>
+              Bluesky
             </CustomLink>
           </div>
           <div>
@@ -58,7 +63,10 @@ export default function Footer() {
       <p className="text-xs text-left sm:text-center pt-4 pr-1">
         Copyright 2025 Accuguide
         <br />
-        This site is powered by <Link href="https://netlify.com">Netlify</Link>
+        This site is powered by{" "}
+        <Link href="https://netlify.com" className="text-xs">
+          Netlify
+        </Link>
       </p>
     </footer>
   );

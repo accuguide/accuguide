@@ -20,4 +20,6 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Attempt build
+        env:
+          BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
         run: npm run build

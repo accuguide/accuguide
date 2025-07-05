@@ -99,7 +99,7 @@ export default function SigninForm() {
                       <div className="flex items-center">
                         <FormLabel htmlFor="password">Password</FormLabel>
                         <a
-                          href="/forgot-password" // Update to your actual forgot password route
+                          href="/sign-in/password/forgot" // Update to your actual forgot password route
                           className="ml-auto text-sm underline-offset-4 hover:underline"
                         >
                           Forgot your password?

@@ -21,7 +21,8 @@ try {
   // Push tag to remote
   execSync(`git push origin ${tag}`, { stdio: "inherit" });
 
-  console.log(`Tag ${tag} created and pushed to origin.`);
+  console.log(`Tag ${tag} created and pushed to origin.
+  `);
 } catch (err) {
   if (err instanceof Error) {
     console.error("Error:", err.message);

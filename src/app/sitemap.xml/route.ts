@@ -6,12 +6,14 @@ export async function GET() {
   const urls = [
     "/",
     "/about/",
+    "/donate/",
     "/help/faq/",
     "/help/resources/",
     "/legal/privacy/",
     "/legal/terms/",
     "/search/",
     "/sign-in/",
+    "/sign-in/password/forgot/",
     "/sign-up/",
   ];
 
