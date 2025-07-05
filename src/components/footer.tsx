@@ -63,7 +63,10 @@ export default function Footer() {
       <p className="text-xs text-left sm:text-center pt-4 pr-1">
         Copyright 2025 Accuguide
         <br />
-        This site is powered by <Link href="https://netlify.com">Netlify</Link>
+        This site is powered by{" "}
+        <Link href="https://netlify.com" className="text-xs">
+          Netlify
+        </Link>
       </p>
     </footer>
   );
