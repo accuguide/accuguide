@@ -27,7 +27,7 @@ export default function Footer() {
 
             <CustomLink href="/about/">About</CustomLink>
             <br />
-            <CustomLink href="/sitemap.xml">Sitemap</CustomLink>
+            <CustomLink href="/donate/">Donate</CustomLink>
           </div>
           <div>
             <h3 className="mb-1">Help</h3>
