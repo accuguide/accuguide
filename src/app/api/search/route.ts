@@ -7,12 +7,20 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const query = searchParams.get("query") || "";
+  const latitude = searchParams.get("latitude");
+  const longitude = searchParams.get("longitude");
   const apiKey = process.env.GOOGLE_MAPS_API_KEY;
   if (!apiKey) {
     return NextResponse.json({ error: "API key not found" }, { status: 500 });
   }
 
-  const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&key=${apiKey}`;
+  // Build URL with optional location parameters
+  let url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${apiKey}`;
+
+  // Only add location and radius if both latitude and longitude are provided
+  if (latitude && longitude) {
+    url += `&location=${latitude},${longitude}&radius=5000`;
+  }
 
   try {
     const response = await fetch(url);
@@ -39,8 +47,11 @@ export async function GET(request: NextRequest) {
       const searchDbQuery = sql`(
         setweight(to_tsvector('english', ${entityTable.name}), 'A') ||
         setweight(to_tsvector('english', ${entityTable.city}), 'A') ||
+        setweight(to_tsvector('english', ${entityTable.state || ""}), 'A') ||
         setweight(to_tsvector('english', ${entityTable.displayType}), 'A') ||
-        setweight(to_tsvector('english', ${entityTable.description}), 'B')
+        setweight(to_tsvector('english', ${entityTable.type}), 'B') ||
+        setweight(to_tsvector('english', ${entityTable.description || ""}), 'B')
+
         @@ to_tsquery('english', ${formattedQuery})
       )`;
       const dbResponse = await db
