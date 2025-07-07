@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
 
   // Only add location and radius if both latitude and longitude are provided
   if (latitude && longitude) {
-    url += `&location=${latitude},${longitude}&radius=5000`;
+    url += `&location=${encodeURIComponent(latitude)},${encodeURIComponent(longitude)}&radius=5000`;
   }
 
   try {
