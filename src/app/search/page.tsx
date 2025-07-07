@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Cookies from "js-cookie";
 import { SearchDisplayProps } from "@/types";
 import SearchDisplay from "@/components/search-display";
 
@@ -15,7 +16,16 @@ function SearchResults() {
 
   useEffect(() => {
     if (query) {
-      fetch(`/api/search/?query=${query}`)
+      // Get latitude and longitude from cookies
+      const latitude = Cookies.get("latitude");
+      const longitude = Cookies.get("longitude");
+
+      // Build query parameters
+      const params = new URLSearchParams({ query });
+      if (latitude) params.append("latitude", latitude);
+      if (longitude) params.append("longitude", longitude);
+
+      fetch(`/api/search/?${params.toString()}`)
         .then((response) => {
           return response.json();
         })
