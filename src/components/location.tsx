@@ -11,8 +11,14 @@ export default function Location() {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
 
-          Cookies.set("latitude", latitude.toString(), { expires: 30 });
-          Cookies.set("longitude", longitude.toString(), { expires: 30 });
+          Cookies.set("latitude", latitude.toString(), {
+            expires: 30,
+            secure: true,
+          });
+          Cookies.set("longitude", longitude.toString(), {
+            expires: 30,
+            secure: true,
+          });
         },
         (error) => {
           console.error("Error getting location: ", error);
