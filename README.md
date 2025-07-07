@@ -17,6 +17,11 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 - Llama 3.3 70b Versatile LLM
 - Better Auth
 
+### Code Quality
+- Cypress
+- Prettier
+- ESLint
+
 ### Features
 - Ability to search millions of locations based on full text search and the Google Maps API
 - Ability to write text based reviews and specify existent or nonexistence accessibility features
