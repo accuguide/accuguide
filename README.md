@@ -10,6 +10,9 @@
 
 The source code for Accuguide's website. Accuguide is a platform designed by and for people with disabilities to be able to find and rate accessible places and services! In addition to basic features such as searching and rating entities, ML and AI will be utilized to analyze reviews, images, and entity info to give more information to the user. This project will likely see slow development as it is only developed by one person at the moment, but we hope to get more open source volunteers to help develop this platform.
 
+## Tech Stack
+Accuguide uses Next.js for both the front end and back end, as well as a Postgres database for storing application and user data. We use the Google Maps API to help users find new places, as well as Llama's newest LLM model via Groq, allowing summaries of places to be generated for each entity. 
+
 ## Contributing
 
 We are always looking for open source contributions! Check out our contribution guidelines [here](https://github.com/accuguide/.github/blob/main/CONTRIBUTING.md) for more information! Once you are familiar with our guidelines, you can check out our issues to see what needs to be added, fixed, or changed. If you are a new contributor on Github we reccomend you try and tackle issues labeled "good first issue".
