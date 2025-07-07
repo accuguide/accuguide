@@ -16,6 +16,7 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 - Google Maps API
 - Llama 3.3 70b Versatile LLM
 - Better Auth
+- Tailwind CSS
 
 ### Code Quality
 - Cypress
