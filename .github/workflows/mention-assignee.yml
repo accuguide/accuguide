@@ -6,9 +6,7 @@ on:
 
 jobs:
   mention-assignee:
-    permissions:
-      issues: write
-      comments: write
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Comment mentioning assignee
