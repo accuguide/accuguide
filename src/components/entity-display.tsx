@@ -4,6 +4,7 @@ import { eq, inArray } from "drizzle-orm";
 import { Entity } from "@/db/schema";
 import ReviewDisplay from "./review-display";
 import CustomLink from "./custom-link";
+import { Button } from "./ui/button";
 
 export default async function EntityDisplay({
   googleId,
@@ -73,12 +74,12 @@ export default async function EntityDisplay({
       </p>
       {data?.address1 && data?.city && data?.country && (
         <a
-          href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${data.address1}${data.address2 ? ' ' + data.address2 : ''}, ${data.city}, ${data.state ? data.state + ' ' : ''}${data.zip ? data.zip + ' ' : ''}${data.country}`)}`}
+          href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${data.address1}${data.address2 ? " " + data.address2 : ""}, ${data.city}, ${data.state ? data.state + " " : ""}${data.zip ? data.zip + " " : ""}${data.country}`)}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+          className="inline-block py-2"
         >
-          Get Directions
+          <Button variant="secondary">Get Directions</Button>
         </a>
       )}
       <h2>Website</h2>

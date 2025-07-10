@@ -11,6 +11,7 @@
 The source code for Accuguide's website. Accuguide is a platform designed by and for people with disabilities to be able to find and rate accessible places and services! In addition to basic features such as searching and rating entities, ML and AI will be utilized to analyze reviews, images, and entity info to give more information to the user. This project will likely see slow development as it is only developed by one person at the moment, but we hope to get more open source volunteers to help develop this platform.
 
 ### Tech Stack
+
 - Next.js
 - Postgres
 - Google Maps API
@@ -19,11 +20,13 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 - Tailwind CSS
 
 ### Code Quality
+
 - Cypress
 - Prettier
 - ESLint
 
 ### Features
+
 - Ability to search millions of locations based on full text search and the Google Maps API
 - Ability to view place info such as address, website, hours, etc
 - Ability to write text based reviews and specify existent or nonexistence accessibility features
