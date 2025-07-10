@@ -8,8 +8,8 @@ import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Accuguide",
-    default: "Accuguide",
+    template: "%s | Accuguide - Discover accessibility",
+    default: "Accuguide - Discover accessible places and services",
   },
   authors: [{ name: "Accuguide Team" }],
   metadataBase: new URL("https://accuguide.org/"),
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     canonical: ".",
   },
   description:
-    "Accuguide helps you discover accessible places and services near you. Find detailed accessibility information, reviews, and resources to make your daily life easier. Empowering everyone to navigate the world with confidence.",
+    "Accuguide helps you discover accessible places and services near you. Find detailed accessibility information, reviews, and resources to make your daily life easier.",
 };
 
 export default function RootLayout({
