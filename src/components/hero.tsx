@@ -5,21 +5,21 @@ export default function Hero() {
   const cardData = [
     {
       icon: Compass,
-      title: "Discover Accessibility",
+      title: "Find Accessible Places",
       description:
-        "Whether you're looking for wheelchair-accessible restaurants, accessible transportation, sensory-friendly spaces, or more, we've got you covered!",
+        "Whether you're looking for wheelchair-accessible seating, accessible transportation, sensory-friendly spaces, contactless ordering, or more, we can help you find what you need!",
     },
     {
       icon: Star,
       title: "Rate Businesses",
       description:
-        "Rate your accessibility experiences and help the disabled community make informed choices. Your feedback is valuable!",
+        "Rate your accessibility experiences and help the disabled community make information decisions about where to go. The  more places you rate, the more that Accuguide helps everyone!",
     },
     {
       icon: Megaphone,
       title: "Take Action",
       description:
-        "Advocate for better accessibility in your area. Start initiatives, support local efforts, and empower change through community-driven solutions!",
+        "Advocate for better accessibility and inclusion in your area. Start initiatives, support local efforts, and empower change through community-driven solutions!",
     },
   ];
 
