@@ -41,6 +41,10 @@ export default function Footer() {
             <br />
 
             <CustomLink href="/help/resources/">Resources</CustomLink>
+            <br />
+                        <CustomLink href="https://forms.gle/KvF2MpNiqq4frrtm8" newTab>
+              Feedback
+            </CustomLink>
           </div>
           <div>
             <h2 className="mb-1 text-base">Contact</h2>
