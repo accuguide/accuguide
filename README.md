@@ -14,10 +14,11 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 
 - Next.js
 - Postgres
-- Google Maps API
+- GCP Maps API
 - Llama 3.3 70b Versatile LLM
 - Better Auth
 - Tailwind CSS
+- AWS S3
 
 ### Code Quality
 
