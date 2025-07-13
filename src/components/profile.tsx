@@ -21,6 +21,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { changeName } from "@/lib/user";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   username: z.string().optional(),
@@ -35,6 +36,19 @@ export default function Profile() {
       image: null,
     },
   });
+
+  useEffect(() => {
+    fetch("/api/user", {
+      method: 'GET'
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      form.reset({
+        username: data.user?.name ?? "",
+        image: null,
+      });
+    })
+  }, []);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (values.username) await changeName(values.username);
