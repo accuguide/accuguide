@@ -35,6 +35,7 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 - Ability for users to authenticate and create a public profile for posting reviews
 
 ### Beta Access
+
 - You can access the open beta at https://beta.accuguide.org (if you already have an account on the production site, use that same account to log in to the beta site)
 - The beta includes features and improvements that have not yet been formally released to the production site
 
