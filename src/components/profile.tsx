@@ -39,15 +39,15 @@ export default function Profile() {
 
   useEffect(() => {
     fetch("/api/user", {
-      method: 'GET'
+      method: "GET",
     })
-    .then((response) => response.json())
-    .then((data) => {
-      form.reset({
-        username: data.user?.name ?? "",
-        image: null,
+      .then((response) => response.json())
+      .then((data) => {
+        form.reset({
+          username: data.user?.name ?? "",
+          image: null,
+        });
       });
-    })
   }, []);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
