@@ -59,7 +59,7 @@ export default function ReviewWrite({
 
   function stars(rating: number) {
     return (
-      <div className="flex mb-2 w-24">
+      <div className="flex mb-1 w-24">
         {[1, 2, 3, 4, 5].map((star) => (
           <StarIcon
             key={star}
@@ -92,7 +92,6 @@ export default function ReviewWrite({
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
-      <h3 className="mb-2">Write a Review</h3>
       {!auth && (
         <p>
           Please{" "}
@@ -104,7 +103,7 @@ export default function ReviewWrite({
       )}
       {auth && (
         <>
-          <p className="mb-2">
+          <p className="mb-1 mt-4">
             Your rating: {rating !== 0 ? rating : "-"} stars
           </p>
           {stars(rating)}
@@ -116,7 +115,7 @@ export default function ReviewWrite({
                   className={cn(
                     "px-2 py-1.5 h-full",
                     rating === 0
-                      ? "border-neutral-400 dark:border-neutral-600"
+                      ? "border-slate-400 dark:border-slate-600"
                       : "",
                   )}
                 >

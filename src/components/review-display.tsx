@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { checkAuth } from "@/lib/session";
 import { getUserInfosByIds } from "@/lib/get-usernames";
 import { getSignedUrlForKey } from "@/s3/functions";
+import { cn } from "@/lib/utils";
 
 interface Review {
   id: string;
@@ -36,7 +37,7 @@ export default async function ReviewDisplay({
 }) {
   function stars(rating: number) {
     return (
-      <div className="flex mb-2 w-24">
+      <div className="flex my-1 w-24">
         {[1, 2, 3, 4, 5].map((star) => (
           <StarIcon
             key={star}
@@ -71,19 +72,19 @@ export default async function ReviewDisplay({
 
   return (
     <div>
-      <h2 className="text-xl my-4">Reviews</h2>
+      <h2>Reviews</h2>
       <ReviewWrite
         entity_id={entity_id}
         entity_type={entity_type}
         auth={authenticated ? true : false}
       />
-      <div className="mt-2">
+      <div className="mt-4">
         {sortedReviews.map((review) => (
           <div
             key={review.id}
-            className="py-2 border-neutral-600 dark:border-neutral-400 border-b-2"
+            className="py-2 border-slate-600 dark:border-slate-400 border-b-2"
           >
-            <div className="flex items-center gap-2 mb-1">
+            <div className="flex items-center gap-2">
               <Avatar>
                 <AvatarImage
                   src={userImageUrls[review.userId]}
@@ -98,7 +99,12 @@ export default async function ReviewDisplay({
               </p>
             </div>
             <div className="text-sm">{stars(review.rating)}</div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-1 rounded-lg overflow-hidden my-2">
+            <div
+              className={cn(
+                "grid grid-cols-2 md:grid-cols-4 gap-1 rounded-lg overflow-hidden",
+                indicators.length !== 0 ? "mb-2" : "",
+              )}
+            >
               {indicators
                 .filter(
                   (indicator) =>
@@ -140,7 +146,7 @@ export default async function ReviewDisplay({
                 ))}
             </div>
 
-            <p className="text-sm my-1">{review.comment}</p>
+            <p className="text-sm">{review.comment}</p>
             <p className="text-xs mt-2">
               {new Date(review.createdAt).toLocaleDateString()}
             </p>

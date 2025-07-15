@@ -1,6 +1,7 @@
 import Link from "next/link";
 import CustomLink from "./custom-link";
 import Image from "next/image";
+import FooterLink from "./footer-link";
 
 export default function Footer() {
   return (
@@ -10,67 +11,65 @@ export default function Footer() {
           <Image
             src="/images/logo.png"
             alt="Disability pride logo"
-            width={54}
-            height={54}
-            className="mr-4 w-[54px] h-[54px] mt-3 rounded-lg"
+            width={64}
+            height={64}
+            className="w-[64px] h-[64px] rounded-lg mr-4 mt-2"
           />
           <CustomLink href="/">
             <div>
-              <h2 className="mb-1 text-base dark:text-white text-black">
-                Accuguide
-              </h2>
-              <p className="mb-0">Discover</p>
-              <p>Accessibility</p>
+              <p className="footer-heading text-lg">Accuguide</p>
+              <p className="font-semibold">Discover</p>
+              <p className="font-semibold">Accessibility</p>
             </div>
           </CustomLink>
         </div>
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:text-base md:gap-12 lg:gap-32">
           <div>
-            <h2 className="mb-1 text-base">Info</h2>
+            <p className="footer-heading">Info</p>
 
-            <CustomLink href="/about/">About</CustomLink>
+            <FooterLink href="/about/">About</FooterLink>
             <br />
-            <CustomLink href="/donate/">Donate</CustomLink>
+            <FooterLink href="/donate/">Donate</FooterLink>
             <br />
-            <CustomLink href="/sitemap.xml">Sitemap</CustomLink>
+            <FooterLink href="/sitemap.xml">Sitemap</FooterLink>
           </div>
           <div>
-            <h2 className="mb-1 text-base">Help</h2>
-            <CustomLink href="/help/faq/">FAQ</CustomLink>
+            <p className="footer-heading">Help</p>
+            <FooterLink href="/help/faq/">FAQ</FooterLink>
             <br />
 
-            <CustomLink href="/help/resources/">Resources</CustomLink>
+            <FooterLink href="/help/resources/">Resources</FooterLink>
             <br />
-            <CustomLink href="https://forms.gle/KvF2MpNiqq4frrtm8" newTab>
+            <FooterLink href="https://forms.gle/KvF2MpNiqq4frrtm8">
               Feedback
-            </CustomLink>
+            </FooterLink>
           </div>
           <div>
-            <h2 className="mb-1 text-base">Contact</h2>
-            <CustomLink href="mailto:support@accuguide.org">Email</CustomLink>
+            <p className="footer-heading">Contact</p>
+            <FooterLink href="mailto:support@accuguide.org">Email</FooterLink>
             <br />
 
-            <CustomLink href="https://instagram.com/accuguideorg" newTab>
+            <FooterLink href="https://instagram.com/accuguideorg">
               Instagram
-            </CustomLink>
+            </FooterLink>
             <br />
 
-            <CustomLink href="https://bsky.app/profile/accuguide.org" newTab>
+            <FooterLink href="https://bsky.app/profile/accuguide.org">
               Bluesky
-            </CustomLink>
+            </FooterLink>
           </div>
           <div>
-            <h2 className="mb-1 text-base">Legal</h2>
-            <CustomLink href="/legal/privacy/">Privacy</CustomLink>
+            <p className="footer-heading">Legal</p>
+            <FooterLink href="/legal/privacy/">Privacy</FooterLink>
             <br />
 
-            <CustomLink href="/legal/terms/">Terms</CustomLink>
+            <FooterLink href="/legal/terms/">Terms</FooterLink>
           </div>
         </div>
       </div>
 
-      <p className="text-xs text-left sm:text-center pt-4 pr-1">
+      <p className="text-xs text-left sm:text-center pt-4">
         Copyright 2025 Accuguide
         <br />
         This site is powered by{" "}
