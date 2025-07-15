@@ -89,11 +89,7 @@ export default function Profile() {
                           <FormItem>
                             <FormLabel>Username</FormLabel>
                             <FormControl>
-                              <Input
-                                placeholder="Username"
-                                className="bg-green-500"
-                                {...field}
-                              />
+                              <Input placeholder="Username" {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>

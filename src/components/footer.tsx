@@ -18,8 +18,8 @@ export default function Footer() {
           <CustomLink href="/">
             <div>
               <p className="footer-heading text-lg">Accuguide</p>
-              <p>Discover</p>
-              <p>Accessibility</p>
+              <p className="font-semibold">Discover</p>
+              <p className="font-semibold">Accessibility</p>
             </div>
           </CustomLink>
         </div>
