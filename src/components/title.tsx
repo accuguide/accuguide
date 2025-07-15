@@ -3,5 +3,5 @@ export default function Title({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <h1 className="mb-4">{children}</h1>;
+  return <h1>{children}</h1>;
 }

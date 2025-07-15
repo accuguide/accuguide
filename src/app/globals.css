@@ -114,27 +114,27 @@
 
 @layer base {
   * {
-    @apply border-neutral-600 dark:border-neutral-400 focus:ring focus:ring-neutral-400 dark:focus:ring-neutral-600;
+    @apply border-slate-600 dark:border-slate-400 focus:ring focus:ring-slate-500;
   }
   body {
-    @apply bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 overflow-x-hidden;
+    @apply bg-gradient-to-br from-slate-50 via-slate-100 to-slate-300 dark:from-slate-900 dark:via-slate-900 dark:to-slate-700;
   }
   h1 {
-    @apply text-2xl font-bold;
+    @apply text-4xl font-bold mb-4 bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 dark:from-slate-100 dark:via-blue-200 dark:to-slate-100 bg-clip-text text-transparent leading-tight;
   }
   h2 {
-    @apply text-lg font-bold my-2;
+    @apply mt-4 text-xl font-bold;
   }
   h3 {
     @apply font-bold;
   }
   p {
-    @apply text-sm text-neutral-600 dark:text-neutral-400 mb-1;
+    @apply text-base text-slate-600 dark:text-slate-300;
   }
-  a {
-    @apply text-sm text-neutral-600 dark:text-neutral-400;
+  .footer-heading {
+    @apply mb-1 font-bold;
   }
-  li {
-    @apply text-sm text-neutral-600 dark:text-neutral-400 mb-1;
+  .input-div {
+    @apply bg-slate-50 dark:bg-slate-950;
   }
 }

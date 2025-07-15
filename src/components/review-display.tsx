@@ -71,7 +71,7 @@ export default async function ReviewDisplay({
 
   return (
     <div>
-      <h2 className="text-xl my-4">Reviews</h2>
+      <h2 className="text-xl">Reviews</h2>
       <ReviewWrite
         entity_id={entity_id}
         entity_type={entity_type}

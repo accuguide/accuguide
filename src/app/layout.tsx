@@ -35,9 +35,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <div className="m-4 md:m-8 min-h-[65vh] sm:min-h-[75vh]">
-            {children}
-          </div>
+          <div className="min-h-[80vh] my-8 mx-4 md:mx-12">{children}</div>
           <Footer />
           <div className="fixed bottom-4 right-4">
             <ModeToggle />
