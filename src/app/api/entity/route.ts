@@ -1,5 +1,5 @@
-import { db } from "@/db";
-import { Entity, entityTable } from "@/db/schema";
+import { db } from "@/lib/db";
+import { Entity, entityTable } from "@/lib/db/schema";
 import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { v4 as uuidv4 } from "uuid";

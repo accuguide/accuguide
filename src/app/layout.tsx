@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { GeistSans } from "geist/font/sans";
 import "@/app/globals.css";
-import { ModeToggle } from "@/components/mode-toggle";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import { ModeToggle } from "@/components/theme/mode-toggle";
+import Header from "@/components/header/header";
+import Footer from "@/components/footer/footer";
 
 export const metadata: Metadata = {
   title: {

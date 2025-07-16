@@ -1,11 +1,11 @@
-import { Card } from "./ui/card";
-import { Button } from "./ui/button";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Check, StarIcon, X } from "lucide-react";
 import ReviewWrite from "./review-write";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { checkAuth } from "@/lib/session";
-import { getUserInfosByIds } from "@/lib/get-usernames";
-import { getSignedUrlForKey } from "@/s3/functions";
+import { getUserInfosByIds } from "@/lib/user-info";
+import { getSignedUrlForKey } from "@/lib/s3/functions";
 import { cn } from "@/lib/utils";
 
 interface Review {

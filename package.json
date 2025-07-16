@@ -20,7 +20,7 @@
     "db:remove": "docker compose down -v",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "s3:push": "tsx src/s3/push.ts",
+    "s3:push": "tsx src/lib/s3/push.ts",
     "ver:patch": "tsx version.ts patch",
     "ver:minor": "tsx version.ts minor",
     "ver:major": "tsx version.ts major",

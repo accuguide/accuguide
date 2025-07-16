@@ -1,9 +1,9 @@
 "use client";
 
 import { StarIcon } from "lucide-react";
-import { Textarea } from "./ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
 import { FormEvent, useEffect, useState, useRef } from "react";
-import { ReviewIndicator } from "@/db/schema";
+import { ReviewIndicator } from "@/lib/db/schema";
 import { v4 as uuidv4 } from "uuid";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";

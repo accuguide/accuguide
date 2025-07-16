@@ -1,6 +1,6 @@
-import { db } from "@/db";
-import { entityTable } from "@/db/schema";
-import { GoogleSearchResponse, SearchDisplayType } from "@/types";
+import { db } from "@/lib/db";
+import { entityTable } from "@/lib/db/schema";
+import { GoogleSearchResponse, SearchDisplayType } from "@/lib/types";
 import { count, sql } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 

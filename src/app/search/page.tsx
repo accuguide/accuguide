@@ -3,8 +3,8 @@
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Cookies from "js-cookie";
-import { SearchDisplayProps } from "@/types";
-import SearchDisplay from "@/components/search-display";
+import { SearchDisplayProps } from "@/lib/types";
+import SearchDisplay from "@/components/search/search-display";
 
 function SearchResults() {
   const [googleResponse, setGoogleResponse] = useState<SearchDisplayProps[]>(

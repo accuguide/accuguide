@@ -1,6 +1,6 @@
-import Hero from "@/components/hero";
-import LandingTitle from "@/components/landing-title";
-import Search from "@/components/search";
+import Hero from "@/components/landing/hero";
+import LandingTitle from "@/components/landing/landing-title";
+import Search from "@/components/search/search";
 
 export default async function Page() {
   return (

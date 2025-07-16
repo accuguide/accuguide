@@ -1,4 +1,4 @@
-import Profile from "@/components/profile";
+import Profile from "@/components/forms/profile";
 export default async function Page() {
   return (
     <div>

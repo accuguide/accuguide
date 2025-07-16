@@ -1,5 +1,4 @@
 import Link from "next/link";
-import CustomLink from "./custom-link";
 import Image from "next/image";
 import FooterLink from "./footer-link";
 
@@ -15,13 +14,13 @@ export default function Footer() {
             height={64}
             className="w-[64px] h-[64px] rounded-lg mr-4 mt-2"
           />
-          <CustomLink href="/">
+          <FooterLink href="/">
             <div>
               <p className="footer-heading text-lg">Accuguide</p>
               <p className="font-semibold">Discover</p>
               <p className="font-semibold">Accessibility</p>
             </div>
-          </CustomLink>
+          </FooterLink>
         </div>
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:text-base md:gap-12 lg:gap-32">

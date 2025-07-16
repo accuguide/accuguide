@@ -1,5 +1,5 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "@/s3";
+import { s3Client } from "@/lib/s3";
 import { randomUUID } from "crypto";
 
 const BUCKET = "profile-images";

@@ -1,8 +1,7 @@
-import { db } from "@/db";
-import { user } from "@/db/auth-schema";
+import { db } from "@/lib/db";
+import { user } from "@/lib/db/auth-schema";
 import { inArray } from "drizzle-orm";
 
-// Now returns a map of userId -> { name, image }
 export async function getUserInfosByIds(
   userIds: string[],
 ): Promise<Record<string, { name: string; image?: string | null }>> {

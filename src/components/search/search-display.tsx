@@ -1,4 +1,4 @@
-import { SearchDisplayProps } from "@/types";
+import { SearchDisplayProps } from "@/lib/types";
 
 export default function SearchDisplay({
   displayType,

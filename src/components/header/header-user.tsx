@@ -8,9 +8,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { getSignedUrlForKey } from "@/s3/functions";
+import { getSignedUrlForKey } from "@/lib/s3/functions";
 import { getServerUser } from "@/lib/session";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 
 export default async function HeaderUser() {
   const user = await getServerUser();

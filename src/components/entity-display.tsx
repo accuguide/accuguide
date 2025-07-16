@@ -1,8 +1,8 @@
-import { db } from "@/db";
-import { reviewIndicatorTable, reviewTable } from "@/db/schema";
+import { db } from "@/lib/db";
+import { reviewIndicatorTable, reviewTable } from "@/lib/db/schema";
 import { eq, inArray } from "drizzle-orm";
-import { Entity } from "@/db/schema";
-import ReviewDisplay from "./review-display";
+import { Entity } from "@/lib/db/schema";
+import ReviewDisplay from "@/components/reviews/review-display";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
