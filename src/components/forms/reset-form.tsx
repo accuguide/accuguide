@@ -18,7 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useSearchParams } from "next/navigation";
-import FormContainer from "@/components/form-container";
+import FormContainer from "@/components/forms/form-container";
 import Link from "next/link";
 
 const formSchema = z.object({

@@ -12,13 +12,15 @@ export default function Footer() {
             alt="Disability pride logo"
             width={64}
             height={64}
-            className="w-[64px] h-[64px] rounded-lg mr-4 mt-2"
+            className="w-[54px] h-[54px] md:w-[64px] md:h-[64px] rounded-lg mr-2 md:mr-4 mt-2"
           />
           <FooterLink href="/">
             <div>
-              <p className="footer-heading text-lg">Accuguide</p>
-              <p className="font-semibold">Discover</p>
-              <p className="font-semibold">Accessibility</p>
+              <p className="footer-heading text-base md:text-lg">Accuguide</p>
+              <p className="font-semibold text-sm md:text-base">Discover</p>
+              <p className="font-semibold text-sm md:text-base">
+                Accessibility
+              </p>
             </div>
           </FooterLink>
         </div>
@@ -27,9 +29,9 @@ export default function Footer() {
           <div>
             <p className="footer-heading">Info</p>
 
-            <FooterLink href="/about/">About</FooterLink>
+            <FooterLink href="/info/about/">About</FooterLink>
             <br />
-            <FooterLink href="/donate/">Donate</FooterLink>
+            <FooterLink href="/info/donate/">Donate</FooterLink>
             <br />
             <FooterLink href="/sitemap.xml">Sitemap</FooterLink>
           </div>

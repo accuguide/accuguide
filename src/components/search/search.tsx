@@ -60,10 +60,7 @@ export default function Search({ size }: SearchProps) {
                 className="m-2 flex-1 border-0 bg-transparent text-lg placeholder:text-slate-600 dark:placeholder:text-slate-400 dark:text-slate-100 py-4"
                 aria-label="Search for accessible places"
               />
-              <Button
-                type="submit"
-                className="w-[20%] md:w-[20%] mr-2 my-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
-              >
+              <Button type="submit" variant="secondary" className="mr-2 my-2">
                 Search
               </Button>
             </div>
