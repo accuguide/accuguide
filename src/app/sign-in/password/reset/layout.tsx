@@ -2,17 +2,17 @@ import LayoutDisplay from "@/components/layout/layout-display";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Search",
-  description: "Search for accessible places and services on Accuguide",
+  title: "Reset Password",
+  description: "Reset your password in Accuguide",
   alternates: {
-    canonical: "/search/",
+    canonical: "/sign-in/password/reset/",
   },
 };
 
-export default function SearchLayout({
+export default function ResetPasswordLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <LayoutDisplay title="Search">{children}</LayoutDisplay>;
+  return <LayoutDisplay>{children}</LayoutDisplay>;
 }

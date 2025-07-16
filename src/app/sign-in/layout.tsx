@@ -1,4 +1,4 @@
-import LayoutDisplay from "@/components/layout-display";
+import LayoutDisplay from "@/components/layout/layout-display";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

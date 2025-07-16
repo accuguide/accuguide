@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { signInWithEmail, signInWithGoogle } from "@/lib/auth-client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import FormContainer from "./form-container";
-import LegalAgreement from "@/components/legal-agreement";
+import LegalAgreement from "@/components/forms/legal-agreement";
 import Link from "next/link";
 
 const formSchema = z.object({
