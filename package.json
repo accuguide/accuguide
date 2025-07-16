@@ -1,6 +1,6 @@
 {
   "name": "accuguide",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -20,7 +20,7 @@
     "db:remove": "docker compose down -v",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "s3:push": "tsx src/s3/push.ts",
+    "s3:push": "tsx src/lib/s3/push.ts",
     "ver:patch": "tsx version.ts patch",
     "ver:minor": "tsx version.ts minor",
     "ver:major": "tsx version.ts major",
@@ -47,6 +47,7 @@
     "drizzle-orm": "^0.44.1",
     "geist": "^1.4.2",
     "groq-sdk": "^0.23.0",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.525.0",
     "next": "15.3.3",
     "next-themes": "^0.4.6",
@@ -61,6 +62,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^24",
     "@types/pg": "^8.15.2",
     "@types/react": "^19",

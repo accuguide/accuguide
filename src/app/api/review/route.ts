@@ -1,9 +1,9 @@
-import { db } from "@/db";
+import { db } from "@/lib/db";
 import {
   ReviewIndicator,
   reviewIndicatorTable,
   reviewTable,
-} from "@/db/schema";
+} from "@/lib/db/schema";
 import { getServerUser } from "@/lib/session";
 
 export async function POST(request: Request) {

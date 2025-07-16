@@ -1,5 +1,5 @@
-import { db } from "@/db";
-import { typeIndicatorTable } from "@/db/schema";
+import { db } from "@/lib/db";
+import { typeIndicatorTable } from "@/lib/db/schema";
 import { NextRequest } from "next/server";
 import { eq } from "drizzle-orm";
 

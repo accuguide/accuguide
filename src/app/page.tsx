@@ -1,13 +1,15 @@
-import Hero from "@/components/hero";
-import Search from "@/components/search";
-import Title from "@/components/title";
+import Hero from "@/components/landing/hero";
+import LandingTitle from "@/components/landing/landing-title";
+import Search from "@/components/search/search";
 
 export default async function Page() {
   return (
-    <div className="flex flex-col items-center w-full">
-      <Title>Welcome to Accuguide</Title>
-      <Search size="full" />
-      <Hero />
+    <div className="flex flex-col items-center">
+      <div>
+        <LandingTitle />
+        <Search size="full" />
+        <Hero />
+      </div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { auth } from "@/lib/auth";
-import { uploadProfilePicture } from "@/s3/functions";
+import { uploadProfilePicture } from "@/lib/s3/functions";
 
 export async function POST(request: Request) {
   const formData = await request.formData();

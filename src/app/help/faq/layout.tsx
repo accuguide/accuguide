@@ -1,4 +1,4 @@
-import LayoutDisplay from "@/components/layout-display";
+import LayoutDisplay from "@/components/layout/layout-display";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -15,11 +15,6 @@ export default function SearchLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <LayoutDisplay
-      title="Frequently Asked Questions"
-      className="md:max-w-[50%]"
-    >
-      {children}
-    </LayoutDisplay>
+    <LayoutDisplay title="Frequently Asked Questions">{children}</LayoutDisplay>
   );
 }

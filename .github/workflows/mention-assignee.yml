@@ -6,9 +6,7 @@ on:
 
 jobs:
   mention-assignee:
-    permissions:
-      issues: write
-      comments: write
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Comment mentioning assignee
@@ -19,7 +17,7 @@ jobs:
             const issue_number = context.payload.issue.number;
             const repo = context.repo.repo;
             const owner = context.repo.owner;
-            const comment = `Hey @${assignee}, you have just been assigned to this issue! Please leave a comment if you run into any problems with working on this issue. Please also consider starring this repository so others can find it more easily`;
+            const comment = `Hey @${assignee}, you have just been assigned to this issue! Please leave a comment if you run into any problems while working on this issue. Please also consider starring this repository so other potential contributors can find it more easily.`;
             await github.rest.issues.createComment({
               owner,
               repo,

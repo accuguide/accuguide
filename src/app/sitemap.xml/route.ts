@@ -1,14 +1,14 @@
-import { db } from "@/db";
-import { entityTable } from "@/db/schema";
+import { db } from "@/lib/db";
+import { entityTable } from "@/lib/db/schema";
 import { createSitemapUrlSet } from "@/lib/sitemap";
 export const dynamic = "force-dynamic";
 export async function GET() {
   const urls = [
     "/",
-    "/about/",
-    "/donate/",
     "/help/faq/",
     "/help/resources/",
+    "/info/about/",
+    "/info/donate/",
     "/legal/privacy/",
     "/legal/terms/",
     "/search/",
