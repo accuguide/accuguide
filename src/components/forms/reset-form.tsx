@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useSearchParams } from "next/navigation";
 import FormContainer from "@/components/forms/form-container";
@@ -25,7 +25,7 @@ const formSchema = z.object({
   password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
-export default function ResetForm() {
+function ResetFormContent() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -117,5 +117,26 @@ export default function ResetForm() {
         </CardContent>
       </Card>
     </FormContainer>
+  );
+}
+
+export default function ResetForm() {
+  return (
+    <Suspense
+      fallback={
+        <FormContainer>
+          <Card>
+            <CardHeader className="text-center">
+              <CardTitle className="text-xl">Reset your password</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center">Loading...</div>
+            </CardContent>
+          </Card>
+        </FormContainer>
+      }
+    >
+      <ResetFormContent />
+    </Suspense>
   );
 }
