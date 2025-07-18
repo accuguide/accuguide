@@ -3,3 +3,6 @@
 
 [context.branch-deploy]
   command = "npm run build:beta"
+
+[context.deploy-preview]
+  command = "npm run build:beta"
