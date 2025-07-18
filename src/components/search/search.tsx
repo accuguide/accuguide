@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { type FormEvent, useState } from "react";
 import { usePathname } from "next/navigation";
 import { SearchIcon } from "lucide-react";
+import getLocation from "./location";
 
 export type SearchProps = {
   size: "half" | "full" | "page";
@@ -14,9 +15,10 @@ export default function Search({ size }: SearchProps) {
   const [query, setQuery] = useState("");
   const pathname = usePathname();
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const encodedQuery = encodeURIComponent(query);
+    await getLocation();
     window.location.href = `/search?query=${encodedQuery}`;
   }
 
