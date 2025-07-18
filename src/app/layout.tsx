@@ -30,6 +30,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={GeistSans.className}>
+        <Script
+          defer
+          src="https://analytics.accuguide.org/script.js"
+          data-website-id="587ba00d-bdd9-45cf-aab6-bc204b2356af"
+        ></Script>
+
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
