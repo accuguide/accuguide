@@ -99,8 +99,12 @@ export default async function EntityDisplay({
           <ul>
             {data?.hours?.map((hour: string, index: number) => (
               <li key={index} className="flex">
-                <p className="font-semibold">{hour.split(": ")[0]}</p>{" "}
-                <p>: {hour.split(": ")[1]}</p>
+                <p className="font-semibold text-right">
+                  {hour.split(": ")[0]}
+                </p>{" "}
+                <p className="text-sm mt-1 md:text-base md:mt-0">
+                  : {hour.split(": ")[1]}
+                </p>
               </li>
             ))}
           </ul>
