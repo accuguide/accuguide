@@ -10,7 +10,7 @@ try {
   execSync("git pull", { stdio: "inherit" });
 
   // Read version from package.json
-  const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+  const pkg = JSON.parse(readFileSync("../package.json", "utf8"));
   const version = pkg.version;
   if (!version) throw new Error("No version found in package.json");
   const tag = `v${version}`;
