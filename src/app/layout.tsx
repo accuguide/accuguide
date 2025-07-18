@@ -5,6 +5,8 @@ import "@/app/globals.css";
 import { ModeToggle } from "@/components/theme/mode-toggle";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
