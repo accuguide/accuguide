@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 
-const layoutPath = join(process.cwd(), "src/app/layout.tsx");
+const layoutPath = join(process.cwd(), "../src/app/layout.tsx");
 let content = readFileSync(layoutPath, "utf-8");
 
 // Check if analytics script exists

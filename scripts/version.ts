@@ -3,7 +3,7 @@
 import fs from "fs";
 import path from "path";
 
-const packageJsonPath = path.resolve(__dirname, "package.json");
+const packageJsonPath = path.resolve(__dirname, "../package.json");
 
 function bumpVersion(
   version: string,
