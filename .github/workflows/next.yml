@@ -22,4 +22,4 @@ jobs:
       - name: Attempt build
         env:
           BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
-        run: npm run build
+        run: npm run build:prod

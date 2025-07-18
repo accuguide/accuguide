@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build:prod": "tsx analytics.ts && next build && tsx remove-analytics.ts && prettier --write src/app/layout.tsx",
     "build:beta": "cp src/app/beta.robots.ts src/app/robots.ts && next build",
     "start": "next start",
     "lint": "next lint",
