@@ -15,6 +15,12 @@ export default function SearchLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <LayoutDisplay title="Frequently Asked Questions">{children}</LayoutDisplay>
+    <LayoutDisplay
+      title="Frequently Asked Questions"
+      subtitle="Here you can find answers to some of the most common questions about Accuguide. Please reach out to us via email if you have any other questions or need further assistance."
+      halfWidth
+    >
+      {children}
+    </LayoutDisplay>
   );
 }

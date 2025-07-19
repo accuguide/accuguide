@@ -15,5 +15,12 @@ export default function SearchLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <LayoutDisplay title="Donate">{children}</LayoutDisplay>;
+  return (
+    <LayoutDisplay
+      title="Donate"
+      subtitle="Please consider donating to Accuguide to ensure that we can continue to keep Accuguide running for free and be able to pay for the services required to run this platform."
+    >
+      {children}
+    </LayoutDisplay>
+  );
 }

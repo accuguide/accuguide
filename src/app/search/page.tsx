@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { SearchDisplayProps } from "@/lib/types";
 import SearchDisplay from "@/components/search/search-display";
 import SearchSkeleton from "@/components/skeletons/search-skeleton";
+import Location from "@/components/search/location";
 
 function SearchResults() {
   const [googleResponse, setGoogleResponse] = useState<SearchDisplayProps[]>(
@@ -90,6 +91,7 @@ export default function Page() {
   return (
     <Suspense>
       <SearchResults />
+      <Location />
     </Suspense>
   );
 }
