@@ -8,7 +8,10 @@ export default function FooterLink({
   children: React.ReactNode;
 }) {
   return (
-    <Link href={href} className="text-sm text-slate-600 dark:text-slate-300">
+    <Link
+      href={href}
+      className="text-sm text-slate-600 dark:text-slate-300 hover:underline hover:opacity-75 transition-opacity duration-200"
+    >
       {children}
     </Link>
   );
