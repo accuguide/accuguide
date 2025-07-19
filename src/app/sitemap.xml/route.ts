@@ -9,6 +9,7 @@ export async function GET() {
     "/help/resources/",
     "/info/about/",
     "/info/donate/",
+    "/legal/disclaimers/",
     "/legal/privacy/",
     "/legal/terms/",
     "/search/",

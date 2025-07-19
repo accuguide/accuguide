@@ -1,6 +1,5 @@
-import { Compass, Star, Megaphone, ArrowRight } from "lucide-react";
+import { Compass, Star, Megaphone } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 
 export default function Hero() {
   const cardData = [
@@ -69,16 +68,9 @@ export default function Hero() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="relative">
-                  <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                  <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
                     {description}
                   </p>
-                  <Button
-                    variant="ghost"
-                    className="group/btn p-0 h-auto font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-transparent dark:hover:bg-transparent"
-                  >
-                    Learn more
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                  </Button>
                 </CardContent>
               </Card>
             ),

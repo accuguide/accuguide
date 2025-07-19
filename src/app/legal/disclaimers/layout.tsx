@@ -2,10 +2,11 @@ import LayoutDisplay from "@/components/layout/layout-display";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Search",
-  description: "Search for accessible places and services on Accuguide",
+  title: "Disclaimers",
+  description:
+    "Accuguide's Disclaimers explains Accuguide's limitations and responsibilities",
   alternates: {
-    canonical: "/search/",
+    canonical: "/legal/disclaimers/",
   },
 };
 
@@ -15,10 +16,7 @@ export default function SearchLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <LayoutDisplay
-      title="Search"
-      subtitle="Location access may be granted to show more relevant results"
-    >
+    <LayoutDisplay title="Disclaimers" className="md:max-w-[50%]">
       {children}
     </LayoutDisplay>
   );

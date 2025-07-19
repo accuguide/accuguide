@@ -64,8 +64,9 @@ export default function Footer() {
             <p className="footer-heading">Legal</p>
             <FooterLink href="/legal/privacy/">Privacy</FooterLink>
             <br />
-
             <FooterLink href="/legal/terms/">Terms</FooterLink>
+            <br />
+            <FooterLink href="/legal/disclaimers/">Disclaimers</FooterLink>
           </div>
         </div>
       </div>

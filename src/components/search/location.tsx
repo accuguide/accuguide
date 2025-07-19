@@ -1,7 +1,10 @@
-import Cookies from "js-cookie";
+"use client";
 
-export default async function getLocation(): Promise<void> {
-  return new Promise((resolve) => {
+import Cookies from "js-cookie";
+import { useEffect } from "react";
+
+export default function Location() {
+  function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -16,17 +19,25 @@ export default async function getLocation(): Promise<void> {
             expires: 30,
             secure: true,
           });
-          resolve();
+          window.location.reload();
         },
         (error) => {
           console.error("Error getting location: ", error);
           // Even if location fails, we still resolve to allow the search to continue
-          resolve();
         },
       );
     } else {
-      // If geolocation is not supported, resolve immediately
-      resolve();
     }
-  });
+  }
+
+  useEffect(() => {
+    // Only request location if we don't already have it stored
+    const hasLatitude = Cookies.get("latitude");
+    const hasLongitude = Cookies.get("longitude");
+
+    if (!hasLatitude || !hasLongitude) {
+      getLocation();
+    }
+  }, []);
+  return <div></div>;
 }
