@@ -5,6 +5,8 @@
 [![Next](https://github.com/accuguide/accuguide/actions/workflows/next.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/next.yml)
 [![ESLint](https://github.com/accuguide/accuguide/actions/workflows/eslint.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/eslint.yml)
 [![Prettier](https://github.com/accuguide/accuguide/actions/workflows/prettier.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/prettier.yml)
+<br />
+[![Netlify Status](https://api.netlify.com/api/v1/badges/378e5089-548b-429f-b1ad-507f6bae73e4/deploy-status)](https://app.netlify.com/projects/accuguide/deploys)
 
 ## About
 
