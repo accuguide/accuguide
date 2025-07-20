@@ -38,8 +38,17 @@ export default async function HeaderUser() {
       <DropdownMenuContent className="mt-2 mr-8 border-2">
         <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href="/profile/" className="text-slate-900 dark:text-slate-100">
+        <Link
+          href="/settings/profile/"
+          className="text-slate-900 dark:text-slate-100"
+        >
           <DropdownMenuItem>Profile</DropdownMenuItem>
+        </Link>
+        <Link
+          href="/settings/account/"
+          className="text-slate-900 dark:text-slate-100"
+        >
+          <DropdownMenuItem>Account</DropdownMenuItem>
         </Link>
         <Link href="/sign-out/" className="text-slate-900 dark:text-slate-100">
           <DropdownMenuItem>Sign Out</DropdownMenuItem>
