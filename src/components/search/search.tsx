@@ -28,7 +28,11 @@ export default function Search({ size }: SearchProps) {
   if (size === "half") {
     return (
       <form onSubmit={handleSubmit} className="relative max-w-md">
+        <label htmlFor="search" className="sr-only">
+          Search places
+        </label>
         <Input
+          id="search"
           placeholder="Search places..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -53,7 +57,12 @@ export default function Search({ size }: SearchProps) {
                   aria-hidden="true"
                 />
               </div>
+              <label htmlFor="search" className="sr-only">
+                Search places
+              </label>
+
               <Input
+                id="search"
                 placeholder="Search for businesses, schools, or other places..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
