@@ -24,3 +24,5 @@ jobs:
         with:
           commit_message: Formatted code with Prettier [skip ci]
           commit_author: Author <41898282+github-actions[bot]@users.noreply.github.com>
+          branch: ${{ github.head_ref || github.ref_name }} # supports both push and PR
+          create_branch: true
