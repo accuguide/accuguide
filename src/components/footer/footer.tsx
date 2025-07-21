@@ -33,7 +33,7 @@ export default function Footer() {
             <br />
             <FooterLink href="/info/donate/">Donate</FooterLink>
             <br />
-            <FooterLink href="/sitemap.xml">Sitemap</FooterLink>
+            <FooterLink href="https://blog.accuguide.org">Blog</FooterLink>
           </div>
           <div>
             <p className="footer-heading">Help</p>
