@@ -19,8 +19,7 @@ export default function Error({
       <ErrorCard
         title="Something went wrong"
         description="Please try again, and contact us if this issue persists."
-        link="/contact"
-        linkText="Contact Support"
+        link={{ href: "/contact", label: "Contact Support" }}
       />
     </div>
   );
