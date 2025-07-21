@@ -1,7 +1,8 @@
 "use client";
 
-import Title from "@/components/layout/title";
 import { useEffect } from "react";
+import ErrorCard from "@/components/card/ErrorCard";
+import Title from "@/components/layout/title";
 
 export default function Error({
   error,
@@ -13,9 +14,14 @@ export default function Error({
   }, [error]);
 
   return (
-    <div>
+    <div className="mt-8 max-w-xl">
       <Title>An error occurred</Title>
-      <p>Please try again, and contact us if this issue persists</p>
+      <ErrorCard
+        title="Something went wrong"
+        description="Please try again, and contact us if this issue persists."
+        link="/contact"
+        linkText="Contact Support"
+      />
     </div>
   );
 }
