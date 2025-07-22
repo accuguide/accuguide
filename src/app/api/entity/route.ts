@@ -83,24 +83,25 @@ export async function GET(request: NextRequest) {
     const formattedResponse: Entity = {
       googleId: googleResponse.id,
       id: uuidv4(),
-      lat: googleResponse.location.latitude,
-      lon: googleResponse.location.longitude,
+      lat: googleResponse.location?.latitude,
+      lon: googleResponse.location?.longitude,
       maps: googleResponse.googleMapsUri,
       url: googleResponse.websiteUri || "",
       hours: googleResponse.regularOpeningHours?.weekdayDescriptions || [],
-      name: googleResponse.displayName.text,
+      name: googleResponse.displayName?.text,
       type: newType,
       displayType: googleResponse.primaryTypeDisplayName?.text || "Other",
       description: googleResponse.editorialSummary?.text || "",
       timeZone: googleResponse.timeZone?.id || "",
-      country: googleResponse.postalAddress.regionCode || "",
+      country: googleResponse.postalAddress?.regionCode || "",
       zip: googleResponse.postalAddress.postalCode || "",
-      state: googleResponse.postalAddress.administrativeArea || "",
-      city: googleResponse.postalAddress.locality || "",
-      address1: googleResponse.postalAddress.addressLines[0] || "",
-      address2: googleResponse.postalAddress.addressLines[1] || "",
+      state: googleResponse.postalAddress?.administrativeArea || "",
+      city: googleResponse.postalAddress?.locality || "",
+      address1: googleResponse.postalAddress?.addressLines?.[0] || "",
+      address2: googleResponse.postalAddress?.addressLines?.[1] || "",
       createdAt: new Date(),
     };
+    console.log("Formatted Response:", formattedResponse);
 
     await db
       .insert(entityTable)
@@ -113,6 +114,7 @@ export async function GET(request: NextRequest) {
       .execute();
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
+    console.error("Error occurred while processing request:", error);
     return NextResponse.json(
       { error: "An unexpected error occurred", details: error },
       { status: 500 },

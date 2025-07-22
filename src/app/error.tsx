@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import ErrorCard from "@/components/card/ErrorCard";
+import ErrorCard from "@/components/card/error-card";
 import Title from "@/components/layout/title";
 
 export default function Error({
