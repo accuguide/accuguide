@@ -76,17 +76,13 @@ export default function ReviewWrite({
     fetch("/api/indicator/?type=" + entity_type)
       .then((response) => response.json())
       .then((data) => {
-        for (const indicator of data) {
-          setIndicators((prev) => [
-            ...prev,
-            {
-              id: uuidv4(),
-              reviewId: review_id,
-              indicator: indicator.indicator,
-              exists: null,
-            },
-          ]);
-        }
+        const newIndicators = data.map((indicator: { indicator: string }) => ({
+          id: uuidv4(),
+          reviewId: review_id,
+          indicator: indicator.indicator,
+          exists: null,
+        }));
+        setIndicators(newIndicators);
       });
   }, []);
 

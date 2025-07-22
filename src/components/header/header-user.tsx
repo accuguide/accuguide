@@ -27,25 +27,30 @@ export default async function HeaderUser() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar>
-          <AvatarImage src={imageUrl} alt="your profile image" />
-          <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
-        </Avatar>
+        <button className="rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-1">
+          <Avatar>
+            <AvatarImage src={imageUrl} alt="your profile image" />
+            <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
+          </Avatar>
+        </button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="mt-2 mr-8 border-2">
         <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link
-          href="/profile/"
-          className="text-neutral-900 dark:text-neutral-100"
+          href="/settings/profile/"
+          className="text-slate-900 dark:text-slate-100"
         >
           <DropdownMenuItem>Profile</DropdownMenuItem>
         </Link>
         <Link
-          href="/sign-out/"
-          className="text-neutral-900 dark:text-neutral-100"
+          href="/settings/account/"
+          className="text-slate-900 dark:text-slate-100"
         >
+          <DropdownMenuItem>Account</DropdownMenuItem>
+        </Link>
+        <Link href="/sign-out/" className="text-slate-900 dark:text-slate-100">
           <DropdownMenuItem>Sign Out</DropdownMenuItem>
         </Link>{" "}
       </DropdownMenuContent>

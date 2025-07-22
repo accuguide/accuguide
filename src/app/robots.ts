@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
       disallow: [
         "/admin/",
         "/api/",
-        "/profile/",
+        "/settings/",
         "/sign-in/password/reset/",
         "/sign-out/",
       ],

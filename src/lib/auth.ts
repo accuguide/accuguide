@@ -7,6 +7,9 @@ import * as schema from "@/lib/db/auth-schema"; // Import your schema object
 export const auth = betterAuth({
   plugins: [nextCookies()],
   user: {
+    changeEmail: {
+      enabled: true,
+    },
     additionalFields: {
       role: {
         type: "string",

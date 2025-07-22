@@ -2,10 +2,28 @@ import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({});
 
+export async function changePassword(
+  currentPassword: string,
+  newPassword: string,
+) {
+  await authClient.changePassword({
+    newPassword,
+    currentPassword,
+    revokeOtherSessions: true,
+  });
+}
+
+export async function changeEmail(email: string) {
+  await authClient.changeEmail({
+    newEmail: email,
+    callbackURL: "/settings/account/",
+  });
+}
+
 export async function requestPassWordReset(email: string) {
   await authClient.requestPasswordReset({
     email: email,
-    redirectTo: "/sign-in/password/reset",
+    redirectTo: "/sign-in/password/reset/",
   });
 }
 
@@ -14,7 +32,7 @@ export async function signInWithEmail(email: string, password: string) {
     {
       email,
       password,
-      callbackURL: "/profile/",
+      callbackURL: "/settings/profile/",
       rememberMe: false,
     },
     {},
@@ -25,7 +43,7 @@ export async function signInWithEmail(email: string, password: string) {
 export async function signInWithGoogle() {
   const { data, error } = await authClient.signIn.social({
     provider: "google",
-    callbackURL: "/profile/",
+    callbackURL: "/settings/profile/",
   });
   return { data, error };
 }
