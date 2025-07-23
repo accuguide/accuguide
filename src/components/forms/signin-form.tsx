@@ -18,9 +18,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import FormContainer from "./form-container";
 import LegalAgreement from "@/components/forms/legal-agreement";
 import Link from "next/link";
+import { toast } from "sonner";
 
 const formSchema = z.object({
-  email: z.string(),
+  email: z.string().email("Please enter a valid email"),
   password: z.string(),
 });
 
@@ -33,8 +34,14 @@ export default function SigninForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    signInWithEmail(values.email, values.password);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const { error } = await signInWithEmail(values.email, values.password);
+
+    if (error != null) {
+      toast.error("There was an error logging you in", {
+        description: `${error.message}`,
+      });
+    }
   }
 
   return (
