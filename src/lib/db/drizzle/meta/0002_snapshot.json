@@ -1,9 +1,57 @@
 {
-  "id": "7d6eba07-758a-4bbf-af48-3b58c259c30c",
-  "prevId": "d220f075-03f3-4457-a25a-99252215e928",
+  "id": "663db1d9-fc1b-41e9-844e-f0ca690d3da0",
+  "prevId": "1d3fb052-3ed6-4fdf-b713-d0a8492dde83",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.email": {
+      "name": "email",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "subscribed": {
+          "name": "subscribed",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "email_email_unique": {
+          "name": "email_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.entity": {
       "name": "entity",
       "schema": "",
@@ -131,8 +179,12 @@
           "name": "entity_type_type_type_fk",
           "tableFrom": "entity",
           "tableTo": "type",
-          "columnsFrom": ["type"],
-          "columnsTo": ["type"],
+          "columnsFrom": [
+            "type"
+          ],
+          "columnsTo": [
+            "type"
+          ],
           "onDelete": "set null",
           "onUpdate": "cascade"
         }
@@ -142,7 +194,9 @@
         "entity_google_id_unique": {
           "name": "entity_google_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["google_id"]
+          "columns": [
+            "google_id"
+          ]
         }
       },
       "policies": {},
@@ -204,8 +258,12 @@
           "name": "review_indicator_review_id_review_id_fk",
           "tableFrom": "review_indicator",
           "tableTo": "review",
-          "columnsFrom": ["review_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "review_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -213,8 +271,12 @@
           "name": "review_indicator_indicator_indicator_indicator_fk",
           "tableFrom": "review_indicator",
           "tableTo": "indicator",
-          "columnsFrom": ["indicator"],
-          "columnsTo": ["indicator"],
+          "columnsFrom": [
+            "indicator"
+          ],
+          "columnsTo": [
+            "indicator"
+          ],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -273,8 +335,12 @@
           "name": "review_user_id_user_id_fk",
           "tableFrom": "review",
           "tableTo": "user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -282,8 +348,12 @@
           "name": "review_entity_id_entity_id_fk",
           "tableFrom": "review",
           "tableTo": "entity",
-          "columnsFrom": ["entity_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "entity_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -324,8 +394,12 @@
           "name": "type_indicator_type_type_type_fk",
           "tableFrom": "type_indicator",
           "tableTo": "type",
-          "columnsFrom": ["type"],
-          "columnsTo": ["type"],
+          "columnsFrom": [
+            "type"
+          ],
+          "columnsTo": [
+            "type"
+          ],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -333,8 +407,12 @@
           "name": "type_indicator_indicator_indicator_indicator_fk",
           "tableFrom": "type_indicator",
           "tableTo": "indicator",
-          "columnsFrom": ["indicator"],
-          "columnsTo": ["indicator"],
+          "columnsFrom": [
+            "indicator"
+          ],
+          "columnsTo": [
+            "indicator"
+          ],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -382,8 +460,12 @@
           "name": "type_mapping_type_type_type_fk",
           "tableFrom": "type_mapping",
           "tableTo": "type",
-          "columnsFrom": ["type"],
-          "columnsTo": ["type"],
+          "columnsFrom": [
+            "type"
+          ],
+          "columnsTo": [
+            "type"
+          ],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -502,8 +584,12 @@
           "name": "account_user_id_user_id_fk",
           "tableFrom": "account",
           "tableTo": "user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -573,8 +659,12 @@
           "name": "session_user_id_user_id_fk",
           "tableFrom": "session",
           "tableTo": "user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -584,7 +674,9 @@
         "session_token_unique": {
           "name": "session_token_unique",
           "nullsNotDistinct": false,
-          "columns": ["token"]
+          "columns": [
+            "token"
+          ]
         }
       },
       "policies": {},
@@ -652,7 +744,9 @@
         "user_email_unique": {
           "name": "user_email_unique",
           "nullsNotDistinct": false,
-          "columns": ["email"]
+          "columns": [
+            "email"
+          ]
         }
       },
       "policies": {},
