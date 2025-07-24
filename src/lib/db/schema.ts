@@ -117,6 +117,18 @@ export const reviewIndicatorTable = pgTable("review_indicator", {
   exists: boolean("exists"),
 });
 
+export const emailTable = pgTable("email", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  email: text("email").notNull().unique(),
+  subscribed: boolean("subscribed").notNull().default(true),
+  createdAt: timestamp("created_at", {
+    withTimezone: true,
+    mode: "date",
+  })
+    .notNull()
+    .defaultNow(),
+});
+
 export type Type = InferSelectModel<typeof typeTable>;
 export type TypeMapping = InferSelectModel<typeof typeMappingTable>;
 export type Entity = InferSelectModel<typeof entityTable>;
