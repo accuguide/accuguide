@@ -40,8 +40,8 @@ const main = async () => {
     ];
     const emails = [{ email: "name@example.com", subscribed: true }];
     const indicators = [
-      { indicator: "Wheelchair Accessible Seating" },
-      { indicator: "Wheelchair Accessible Parking" },
+      { indicator: "ADA Parking" },
+      { indicator: "Contactless Ordering" },
       { indicator: "Disability Office" },
     ];
     const types = [{ type: "Restaurant" }, { type: "School" }];
@@ -52,7 +52,8 @@ const main = async () => {
     ];
 
     const typeIndicators = [
-      { type: "Restaurant", indicator: "Wheelchair Accessible Seating" },
+      { type: "Restaurant", indicator: "ADA Parking" },
+      { type: "Restaurant", indicator: "Contactless Ordering" },
       { type: "School", indicator: "Disability Office" },
     ];
 
@@ -95,7 +96,7 @@ const main = async () => {
         entityId: "2028b04a-8849-44b9-ae68-c9fd826d94be",
         rating: 4,
         comment:
-          "Ramen Nagi has great food and while it is a tight space, the staff are helpful and their location has accessible seating and an automatic door at the entrance",
+          "Ramen Nagi has great food and while it is a tight space, the staff are helpful and their location has accessible seating and an automatic door at the entrance. They don't have any sensory friendly spaces or contactless ordering, but they have accessible bathrooms",
       },
     ];
 
@@ -103,13 +104,13 @@ const main = async () => {
       {
         id: "1051bd5f-42cd-4719-88d7-7683137acef5",
         reviewId: "0156e608-f6a0-4283-bbbf-9d25555d69c9",
-        indicator: "Wheelchair Accessible Seating",
+        indicator: "ADA Parking",
         exists: true,
       },
       {
         id: "1051bd5f-42cd-4719-88d7-7683137acef7",
         reviewId: "0156e608-f6a0-4283-bbbf-9d25555d69c9",
-        indicator: "Wheelchair Accessible Parking",
+        indicator: "Contactless Ordering",
         exists: false,
       },
     ];
