@@ -57,6 +57,9 @@ We are always looking for open source contributions! Check out our contribution 
 1. `git clone https://github.com/accuguide/accuguide.git`
 2. `npm install`
 3. `cp .env.example .env`
+
+#### Optional (but reccommended) steps
+
 4. Register a free Google Maps API key in Google Cloud (create a project for the key if you don't have one yet). Please ensure to limit quotas to ensure you stay within free limits (e.g. 10 requests/minute, 100 requests/day). Put this key into the `.env` file created in the last step. This step is only required if you need search to function when developing locally.
 5. In your Google Cloud project, setup the OAuth consent screen and client. For Authorized Javascript origins, put `http://localhost:3000`, and for Authorized redirect URIs put `http://localhost:3000/login/google/callback`. On the client page, you will find the Client ID and Client secret. Add both these values to your `.env` file. This step is only required if you need Google OAuth to work when developing locally.
 6. Register a free Groq AI API key and add it to the appropriate field in your `.env` file. This step is only required if you need place AI summaries to work when developing locally.
