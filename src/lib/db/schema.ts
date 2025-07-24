@@ -35,6 +35,18 @@ export const typeIndicatorTable = pgTable("type_indicator", {
     }),
 });
 
+export const typeMappingTable = pgTable("type_mapping", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  type: text("type")
+    .notNull()
+    .references(() => typeTable.type, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
+  pattern: text("pattern").notNull(), // The string pattern to match against
+  priority: integer("priority").notNull().default(0), // For ordering matches (higher priority first)
+});
+
 export const entityTable = pgTable("entity", {
   id: uuid("id").primaryKey().defaultRandom(),
   googleId: text("google_id").notNull().unique(),
@@ -106,6 +118,7 @@ export const reviewIndicatorTable = pgTable("review_indicator", {
 });
 
 export type Type = InferSelectModel<typeof typeTable>;
+export type TypeMapping = InferSelectModel<typeof typeMappingTable>;
 export type Entity = InferSelectModel<typeof entityTable>;
 export type Review = InferSelectModel<typeof reviewTable>;
 export type ReviewIndicator = InferSelectModel<typeof reviewIndicatorTable>;
