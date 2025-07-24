@@ -65,6 +65,7 @@ export async function signUpWithEmail(
     {
       onRequest: () => {
         //show loading
+        fetch("/api/emails?email=" + email);
       },
       onSuccess: () => {
         //redirect to the dashboard or sign in page

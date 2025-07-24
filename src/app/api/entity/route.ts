@@ -1,9 +1,31 @@
 import { db } from "@/lib/db";
-import { Entity, entityTable } from "@/lib/db/schema";
+import { Entity, entityTable, typeMappingTable } from "@/lib/db/schema";
 import { NextRequest, NextResponse } from "next/server";
-import { eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 import { v4 as uuidv4 } from "uuid";
 import { validate as isUuid } from "uuid"; // Import UUID validation function
+
+async function getTypeFromMapping(primaryTypeText: string): Promise<string> {
+  const lowercaseType = primaryTypeText.toLowerCase();
+
+  // Get all type mappings ordered by priority (highest first)
+  const mappings = await db
+    .select()
+    .from(typeMappingTable)
+    .orderBy(desc(typeMappingTable.priority));
+
+  // Find the first matching pattern
+  for (const mapping of mappings) {
+    console.log(mapping.pattern, lowercaseType, mapping.type);
+    if (lowercaseType.includes(mapping.pattern.toLowerCase())) {
+      console.log("Matched Type:", mapping.type);
+      return mapping.type;
+    }
+  }
+
+  // Default fallback
+  return "Other";
+}
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -39,46 +61,10 @@ export async function GET(request: NextRequest) {
     }
 
     const googleResponse = await response.json();
-    let newType: string;
-    const typeFix =
-      googleResponse.primaryTypeDisplayName?.text.toLowerCase() || "other";
-    switch (true) {
-      case typeFix.includes("restaurant"):
-        newType = "Restaurant";
-        break;
-      case typeFix.includes("movie"):
-        newType = "Cinema";
-        break;
-      case typeFix.includes("cafe"):
-        newType = "Cafe";
-        break;
-      case typeFix.includes("bar"):
-        newType = "Bar";
-        break;
-      case typeFix.includes("store"):
-        newType = "Store";
-        break;
-      case typeFix.includes("government office"):
-        newType = "Government Office";
-        break;
-      case typeFix.includes("university"):
-        newType = "University";
-        break;
-      case typeFix.includes("school"):
-        newType = "School";
-        break;
-      case typeFix.includes("hospital"):
-      case typeFix.includes("health"):
-      case typeFix.includes("pharmacy"):
-        newType = "Healthcare";
-        break;
-      case typeFix.includes("stadium"):
-        newType = "Venue";
-        break;
-      default:
-        newType = "Other";
-        break;
-    }
+    const typeFix = googleResponse.primaryTypeDisplayName?.text || "other";
+
+    // Use dynamic type mapping from database
+    const newType = await getTypeFromMapping(typeFix);
 
     const formattedResponse: Entity = {
       googleId: googleResponse.id,
