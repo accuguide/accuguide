@@ -60,15 +60,16 @@ export async function signUpWithEmail(
       password, // user password -> min 8 characters by default
       name, // user display name
       image, // User image URL (optional)
-      callbackURL: "/profile/", // A URL to redirect to after the user verifies their email (optional)
+      callbackURL: "/settings/profile/", // A URL to redirect to after the user verifies their email (optional)
     },
     {
       onRequest: () => {
         //show loading
+        fetch("/api/emails?email=" + email);
       },
       onSuccess: () => {
         //redirect to the dashboard or sign in page
-        window.location.href = "/profile/";
+        window.location.href = "/settings/profile/";
       },
       onError: (ctx) => {
         // display the error message
