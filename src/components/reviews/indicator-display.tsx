@@ -51,7 +51,7 @@ export default function IndicatorDisplay({
                   <Button
                     type="button"
                     size="sm"
-                    title="Yes"
+                    title="No"
                     className="h-5 w-5 p-0 bg-green-500 dark:bg-green-800"
                   >
                     <Check className="h-2.5 w-2.5 text-black" />
