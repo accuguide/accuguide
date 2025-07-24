@@ -21,7 +21,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import FormContainer from "./form-container";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
 
@@ -29,7 +29,7 @@ const formSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
 });
 
-export default function UnsubscribeForm() {
+function UnsubscribeFormContent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const searchParams = useSearchParams();
@@ -136,5 +136,32 @@ export default function UnsubscribeForm() {
         </CardContent>
       </Card>
     </FormContainer>
+  );
+}
+
+export default function UnsubscribeForm() {
+  return (
+    <Suspense
+      fallback={
+        <FormContainer>
+          <Card>
+            <CardHeader className="text-center">
+              <CardTitle className="text-xl">
+                Unsubscribe from Accuguide
+              </CardTitle>
+              <CardDescription>
+                Enter your email address to unsubscribe from all Accuguide
+                emails
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center">Loading...</div>
+            </CardContent>
+          </Card>
+        </FormContainer>
+      }
+    >
+      <UnsubscribeFormContent />
+    </Suspense>
   );
 }
