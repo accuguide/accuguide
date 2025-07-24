@@ -50,7 +50,13 @@ export default async function EntityDisplay({
     },
   );
   const overviewJson = await overviewRes.json();
-  const parsedResponse = JSON.parse(overviewJson.message);
+  let parsedResponse;
+  try {
+    parsedResponse = JSON.parse(overviewJson.message);
+  } catch (error) {
+    console.error("Failed to parse overviewJson.message:", error);
+    parsedResponse = { overview: "", indicators: [] }; // Fallback value
+  }
   overview = parsedResponse.overview;
   const entityIndicators = parsedResponse.indicators.map(
     (indicator: { indicator: string; exists: boolean }) => ({
