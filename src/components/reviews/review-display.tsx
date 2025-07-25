@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { checkAuth } from "@/lib/session";
 import { getUserInfosByIds } from "@/lib/user-info";
 import { getSignedUrlForKey } from "@/lib/s3/functions";
+import { cn } from "@/lib/utils";
 
 interface Review {
   id: string;
@@ -27,11 +28,13 @@ export default async function ReviewDisplay({
   entity_type,
   reviews,
   indicators,
+  write = true,
 }: {
   entity_id: string;
   entity_type: string;
   reviews: Review[];
   indicators: Indicator[];
+  write?: boolean;
 }) {
   function stars(rating: number) {
     return (
@@ -70,32 +73,36 @@ export default async function ReviewDisplay({
 
   return (
     <div>
-      <h2>Reviews</h2>
-      <ReviewWrite
-        entity_id={entity_id}
-        entity_type={entity_type}
-        auth={authenticated ? true : false}
-      />
-      <div className="mt-4">
+      {write && <h2>Reviews</h2>}
+      {write && (
+        <ReviewWrite
+          entity_id={entity_id}
+          entity_type={entity_type}
+          auth={authenticated ? true : false}
+        />
+      )}
+      <div className={cn(write ? "mt-4" : "")}>
         {sortedReviews.map((review) => (
           <div
             key={review.id}
             className="py-2 border-slate-600 dark:border-slate-400 border-b-2"
           >
-            <div className="flex items-center gap-2">
-              <Avatar>
-                <AvatarImage
-                  src={userImageUrls[review.userId]}
-                  alt="user profile image"
-                />
-                <AvatarFallback>
-                  {userInfoMap[review.userId]?.name?.charAt(0) || "?"}
-                </AvatarFallback>
-              </Avatar>
-              <p className="text-sm font-semibold">
-                {userInfoMap[review.userId]?.name || "Unknown"}
-              </p>
-            </div>
+            {write && (
+              <div className="flex items-center gap-2">
+                <Avatar>
+                  <AvatarImage
+                    src={userImageUrls[review.userId]}
+                    alt="user profile image"
+                  />
+                  <AvatarFallback>
+                    {userInfoMap[review.userId]?.name?.charAt(0) || "?"}
+                  </AvatarFallback>
+                </Avatar>
+                <p className="text-sm font-semibold">
+                  {userInfoMap[review.userId]?.name || "Unknown"}
+                </p>
+              </div>
+            )}
             <div className="text-sm">{stars(review.rating)}</div>
             <IndicatorDisplay indicators={indicators} reviewId={review.id} />
             <p className="text-sm">{review.comment}</p>

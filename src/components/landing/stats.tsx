@@ -10,13 +10,13 @@ export default async function Stats() {
   const stats = [
     {
       value: places,
-      label: "Places",
+      label: "Places Catalogued",
       icon: MapPin,
       color: "text-blue-600",
     },
     {
       value: reviews,
-      label: "Reviews",
+      label: "Reviews Written",
       icon: Star,
       color: "text-pink-500",
     },
@@ -29,7 +29,7 @@ export default async function Stats() {
   ];
 
   return (
-    <section className="pt-8 px-4 sm:px-6 lg:px-8">
+    <section className="pt-4 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-8">
           {stats.map((stat) => {
@@ -50,9 +50,9 @@ export default async function Stats() {
                     <CountUpNumber value={stat.value} />
                     {stat.value >= 1000 && <span className="text-2xl">+</span>}
                   </p>
-                  <h3 className="text-xl font-semibold text-slate-600 dark:text-slate-300">
+                  <p className="text-xl font-semibold text-slate-600 dark:text-slate-300">
                     {stat.label}
-                  </h3>
+                  </p>
                 </div>
               </div>
             );

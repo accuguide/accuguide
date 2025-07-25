@@ -35,7 +35,7 @@ export default function Hero() {
   return (
     <section className="w-full">
       <div className="max-w-6xl">
-        <div className="text-center mt-12">
+        <div className="text-center mt-6">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100">
             How Accuguide Works
           </h2>
