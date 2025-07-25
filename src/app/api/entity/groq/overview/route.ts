@@ -17,7 +17,7 @@ export async function POST(request: Request) {
         {
           role: "user",
 
-          content: `Generate a concise overview (up to 5 sentences) of the business entity based on the provided information and reviews: ${JSON.stringify(body)}. Focus on accessibility features and other key details from the data. After the overview, provide a JSON list of accessibility indicators with their presence status. The response should be in the following format: { "overview": "The overview of the business entity", "indicators": [{"indicator": "indicator1", "exists": true}, {"indicator": "indicator2", "exists": false}] }. Ensure the list includes only indicators explicitly mentioned in the data.`,
+          content: `Generate a concise overview (up to 5 sentences) of the business entity based on the provided information and reviews: ${JSON.stringify(body)}. Focus on accessibility features and other key details from the data. After the overview, provide a JSON list of accessibility indicators with their presence status. The response should be in the following format: { "overview": "The overview of the business entity", "indicators": [{"indicator": "indicator1", "exists": true}, {"indicator": "indicator2", "exists": false}] }. Ensure the list includes only indicators explicitly mentioned in the data. Just provide the JSON response without any additional text.`,
         },
       ],
 
