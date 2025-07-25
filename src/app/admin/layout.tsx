@@ -15,5 +15,7 @@ export default function SearchLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <LayoutDisplay title="Admin">{children}</LayoutDisplay>;
+  return (
+    <LayoutDisplay title="Administrator Dashboard">{children}</LayoutDisplay>
+  );
 }
