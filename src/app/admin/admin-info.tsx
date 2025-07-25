@@ -10,6 +10,7 @@ interface AdminInfoProps {
   typeMappings: { id: string; type: string; pattern: string }[];
   typeIndicators: { id: string; type: string; indicator: string }[];
   typeSubmit: (value: string) => void;
+  indicatorSubmit: (value: string) => void;
 }
 
 export default function AdminInfo({
@@ -19,14 +20,24 @@ export default function AdminInfo({
   typeMappings,
   typeIndicators,
   typeSubmit,
+  indicatorSubmit,
 }: AdminInfoProps) {
   const [newType, setNewType] = useState("");
+  const [newIndicator, setNewIndicator] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (newType.trim()) {
       typeSubmit(newType.trim());
       setNewType("");
+    }
+  };
+
+  const handleIndicatorSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newIndicator.trim()) {
+      indicatorSubmit(newIndicator.trim());
+      setNewIndicator("");
     }
   };
 
@@ -59,6 +70,14 @@ export default function AdminInfo({
         ))}
       </ul>
       <h2>Indicators</h2>
+      <form onSubmit={handleIndicatorSubmit}>
+        <Input
+          placeholder="Add a new indicator"
+          className="md:max-w-xs my-1"
+          value={newIndicator}
+          onChange={(e) => setNewIndicator(e.target.value)}
+        />
+      </form>
       <ul>
         {indicators.map((indicator) => (
           <li key={indicator.indicator}>

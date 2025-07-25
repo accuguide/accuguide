@@ -1,12 +1,12 @@
 import { db } from "@/lib/db";
-import ReviewDisplay from "./reviews/review-display";
+import ReviewDisplay from "@/components/reviews/review-display";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "@/components/ui/card";
 import { reviewTable } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { getServerUser } from "@/lib/session";

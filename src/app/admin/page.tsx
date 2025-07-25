@@ -36,6 +36,12 @@ export default async function Page() {
     revalidatePath("/admin");
   }
 
+  async function indicatorSubmit(indicator: string) {
+    "use server";
+    await db.insert(indicatorTable).values({ indicator: indicator });
+    revalidatePath("/admin");
+  }
+
   return (
     <div>
       <AdminInfo
@@ -45,6 +51,7 @@ export default async function Page() {
         typeMappings={typeMappings}
         typeIndicators={typeIndicators}
         typeSubmit={typeSubmit}
+        indicatorSubmit={indicatorSubmit}
       />
     </div>
   );
