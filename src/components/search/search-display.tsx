@@ -1,4 +1,5 @@
 import { SearchDisplayProps } from "@/lib/types";
+import Link from "next/link";
 
 export default function SearchDisplay({
   displayType,
@@ -13,25 +14,14 @@ export default function SearchDisplay({
     .split("_") // Split the type by underscores
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
     .join(" "); // Join the words with spaces
-  function handleClick() {
-    if (displayType === "google") {
-      window.location.href = `/entity/${googleId}`;
-    } else {
-      window.location.href = `/entity/${id}`;
-    }
-  }
+
+  const href =
+    displayType === "google" ? `/entity/${googleId}` : `/entity/${id}`;
 
   return (
-    <div
-      className="mb-2 cursor-pointer"
-      role="button"
-      tabIndex={0}
-      onClick={handleClick}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          handleClick();
-        }
-      }}
+    <Link
+      href={href}
+      className="mb-2 cursor-pointer block hover:opacity-80 transition-opacity"
     >
       <h3>{name}</h3>
       <p>{capitalizedType}</p>
@@ -40,6 +30,6 @@ export default function SearchDisplay({
         <br />
         {rest.join(", ")}
       </p>{" "}
-    </div>
+    </Link>
   );
 }

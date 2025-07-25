@@ -16,9 +16,7 @@ async function getTypeFromMapping(primaryTypeText: string): Promise<string> {
 
   // Find the first matching pattern
   for (const mapping of mappings) {
-    console.log(mapping.pattern, lowercaseType, mapping.type);
     if (lowercaseType.includes(mapping.pattern.toLowerCase())) {
-      console.log("Matched Type:", mapping.type);
       return mapping.type;
     }
   }
@@ -80,14 +78,13 @@ export async function GET(request: NextRequest) {
       description: googleResponse.editorialSummary?.text || "",
       timeZone: googleResponse.timeZone?.id || "",
       country: googleResponse.postalAddress?.regionCode || "",
-      zip: googleResponse.postalAddress.postalCode || "",
+      zip: googleResponse.postalAddress?.postalCode || "",
       state: googleResponse.postalAddress?.administrativeArea || "",
       city: googleResponse.postalAddress?.locality || "",
       address1: googleResponse.postalAddress?.addressLines?.[0] || "",
       address2: googleResponse.postalAddress?.addressLines?.[1] || "",
       createdAt: new Date(),
     };
-    console.log("Formatted Response:", formattedResponse);
 
     await db
       .insert(entityTable)

@@ -44,11 +44,17 @@ const main = async () => {
       { indicator: "Contactless Ordering" },
       { indicator: "Disability Office" },
     ];
-    const types = [{ type: "Restaurant" }, { type: "School" }];
+    const types = [
+      { type: "Restaurant" },
+      { type: "School" },
+      { type: "University" },
+      { type: "Other" },
+    ];
     const typeMappings = [
       { type: "Restaurant", pattern: "Restaurant" },
       { type: "Restaurant", pattern: "Bakery" },
       { type: "School", pattern: "School" },
+      { type: "University", pattern: "University" },
     ];
 
     const typeIndicators = [

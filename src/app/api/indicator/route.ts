@@ -14,7 +14,6 @@ export async function GET(request: NextRequest) {
 
   if (type === "Other") {
     return_indicators = await db.select().from(indicatorTable);
-    console.log("Fetching all indicators for type 'Other'");
   } else {
     return_indicators = await db
       .select()
@@ -22,6 +21,5 @@ export async function GET(request: NextRequest) {
       .where(eq(typeIndicatorTable.type, type))
       .orderBy(typeIndicatorTable.indicator);
   }
-  console.log(return_indicators);
   return Response.json(return_indicators);
 }
