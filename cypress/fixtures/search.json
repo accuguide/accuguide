@@ -1,0 +1,15 @@
+[
+  {
+    "loc": "database",
+    "data": [
+      {
+        "id": "place_001",
+        "googleId": "ChIJ9f8f8f8f8f8f8f8f8f8f8f8f8f8f",
+        "name": "Sunrise Medical Center",
+        "address": "123 Main Street , Springfield, IL, 62701",
+        "type": "Hospital"
+      }
+    ]
+  },
+  { "loc": "google", "data": [] }
+]

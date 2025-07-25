@@ -5,6 +5,8 @@ import { Entity } from "@/lib/db/schema";
 import ReviewDisplay from "@/components/reviews/review-display";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import IndicatorDisplay from "./reviews/indicator-display";
+import { v4 as uuidv4 } from "uuid";
 
 export default async function EntityDisplay({
   googleId,
@@ -48,13 +50,33 @@ export default async function EntityDisplay({
     },
   );
   const overviewJson = await overviewRes.json();
-  overview = overviewJson.message || overviewJson;
-
+  let parsedResponse;
+  try {
+    parsedResponse = JSON.parse(overviewJson.message);
+  } catch (error) {
+    console.error("Failed to parse overviewJson.message:", error);
+    parsedResponse = { overview: "", indicators: [] }; // Fallback value
+  }
+  overview = parsedResponse.overview;
+  const entityIndicators = parsedResponse.indicators.map(
+    (indicator: { indicator: string; exists: boolean }) => ({
+      id: uuidv4(),
+      reviewId: "",
+      indicator: indicator.indicator,
+      exists: indicator.exists,
+    }),
+  );
+  entityIndicators.sort((a: { exists: boolean }, b: { exists: boolean }) => {
+    if (a.exists < b.exists) return 1;
+    if (a.exists > b.exists) return -1;
+    return 0;
+  });
   return (
     <div>
       <p>{data?.displayType}</p>
       <h2>Overview</h2>
-      <p>{overview}</p>
+      <p className="mb-2">{overview}</p>
+      <IndicatorDisplay indicators={entityIndicators} />
       <p
         className="text-xs mt-1
       "

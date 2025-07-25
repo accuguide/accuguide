@@ -36,7 +36,6 @@ function SearchResults() {
         .then((data) => {
           setGoogleResponse(data[1].data);
           setDbResponse(data[0].data);
-          console.log(data);
         })
         .catch(() => {
           console.error("There was a problem with the fetch operation");

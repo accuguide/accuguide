@@ -1,7 +1,6 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Check, StarIcon, X } from "lucide-react";
+import { StarIcon } from "lucide-react";
 import ReviewWrite from "./review-write";
+import IndicatorDisplay from "./indicator-display";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { checkAuth } from "@/lib/session";
 import { getUserInfosByIds } from "@/lib/user-info";
@@ -29,11 +28,13 @@ export default async function ReviewDisplay({
   entity_type,
   reviews,
   indicators,
+  write = true,
 }: {
   entity_id: string;
   entity_type: string;
   reviews: Review[];
   indicators: Indicator[];
+  write?: boolean;
 }) {
   function stars(rating: number) {
     return (
@@ -72,80 +73,38 @@ export default async function ReviewDisplay({
 
   return (
     <div>
-      <h2>Reviews</h2>
-      <ReviewWrite
-        entity_id={entity_id}
-        entity_type={entity_type}
-        auth={authenticated ? true : false}
-      />
-      <div className="mt-4">
+      {write && <h2>Reviews</h2>}
+      {write && (
+        <ReviewWrite
+          entity_id={entity_id}
+          entity_type={entity_type}
+          auth={authenticated ? true : false}
+        />
+      )}
+      <div className={cn(write ? "mt-4" : "")}>
         {sortedReviews.map((review) => (
           <div
             key={review.id}
             className="py-2 border-slate-600 dark:border-slate-400 border-b-2"
           >
-            <div className="flex items-center gap-2">
-              <Avatar>
-                <AvatarImage
-                  src={userImageUrls[review.userId]}
-                  alt="user profile image"
-                />
-                <AvatarFallback>
-                  {userInfoMap[review.userId]?.name?.charAt(0) || "?"}
-                </AvatarFallback>
-              </Avatar>
-              <p className="text-sm font-semibold">
-                {userInfoMap[review.userId]?.name || "Unknown"}
-              </p>
-            </div>
+            {write && (
+              <div className="flex items-center gap-2">
+                <Avatar>
+                  <AvatarImage
+                    src={userImageUrls[review.userId]}
+                    alt="user profile image"
+                  />
+                  <AvatarFallback>
+                    {userInfoMap[review.userId]?.name?.charAt(0) || "?"}
+                  </AvatarFallback>
+                </Avatar>
+                <p className="text-sm font-semibold">
+                  {userInfoMap[review.userId]?.name || "Unknown"}
+                </p>
+              </div>
+            )}
             <div className="text-sm">{stars(review.rating)}</div>
-            <div
-              className={cn(
-                "grid grid-cols-2 md:grid-cols-4 gap-1 rounded-lg overflow-hidden",
-                indicators.length !== 0 ? "mb-2" : "",
-              )}
-            >
-              {indicators
-                .filter(
-                  (indicator) =>
-                    indicator.reviewId === review.id &&
-                    indicator.exists !== null,
-                )
-                .map((indicator) => (
-                  <div key={indicator.id}>
-                    <Card className="px-2 py-1.5 h-full">
-                      <div className="flex items-center justify-between h-full">
-                        <div className="text-xs leading-tight flex-1">
-                          {indicator.indicator}{" "}
-                        </div>
-                        <div className="flex gap-1">
-                          {indicator.exists && (
-                            <Button
-                              type="button"
-                              size="sm"
-                              title="No"
-                              className="h-5 w-5 p-0 bg-green-500 dark:bg-green-800"
-                            >
-                              <Check className="h-2.5 w-2.5 text-black" />
-                            </Button>
-                          )}
-                          {!indicator.exists && (
-                            <Button
-                              type="button"
-                              size="sm"
-                              title="Yes"
-                              className="h-5 w-5 p-0 bg-red-500 dark:bg-red-800"
-                            >
-                              <X className="h-2.5 w-2.5 text-black" />
-                            </Button>
-                          )}
-                        </div>
-                      </div>
-                    </Card>
-                  </div>
-                ))}
-            </div>
-
+            <IndicatorDisplay indicators={indicators} reviewId={review.id} />
             <p className="text-sm">{review.comment}</p>
             <p className="text-xs mt-2">
               {new Date(review.createdAt).toLocaleDateString()}
