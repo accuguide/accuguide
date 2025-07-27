@@ -27,7 +27,7 @@ export default async function HeaderUser() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-1">
+        <button className="rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-1 hover:opacity-80 cursor-pointer">
           <Avatar>
             <AvatarImage src={imageUrl} alt="your profile image" />
             <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>

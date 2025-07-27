@@ -27,8 +27,8 @@ export default function Search({ size }: SearchProps) {
   // Header/Half size styling
   if (size === "half") {
     return (
-      <form onSubmit={handleSubmit} className="relative max-w-md">
-        <label htmlFor="search" className="sr-only">
+      <form onSubmit={handleSubmit} className="relative md:max-w-md max-w-full">
+        <label htmlFor="search" className="sr-only ">
           Search places
         </label>
         <Input

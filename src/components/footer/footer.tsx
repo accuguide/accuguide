@@ -12,7 +12,7 @@ export default function Footer() {
             alt="Disability pride logo"
             width={64}
             height={64}
-            className="w-[54px] h-[54px] md:w-[64px] md:h-[64px] rounded-lg mr-2 md:mr-4 mt-2"
+            className="w-[54px] h-[54px] md:w-[64px] md:h-[64px] rounded-lg mr-2 md:mr-4 mt-2 hidden md:block"
           />
           <FooterLink href="/">
             <div>
@@ -71,11 +71,11 @@ export default function Footer() {
         </div>
       </div>
 
-      <p className="text-xs text-left sm:text-center pt-4">
+      <p className="text-[10px] sm:text-xs text-left sm:text-center pt-4 mt-[-50px] sm:mt-0">
         Copyright 2025 Accuguide
         <br />
         This site is powered by{" "}
-        <Link href="https://netlify.com" className="text-xs">
+        <Link href="https://netlify.com" className="text-[10px] sm:text-xs">
           Netlify
         </Link>
       </p>
