@@ -142,7 +142,10 @@ export const emailTable = pgTable("email", {
 });
 
 export type Type = InferSelectModel<typeof typeTable>;
+export type Indicator = InferSelectModel<typeof indicatorTable>;
+export type Category = InferSelectModel<typeof categoryTable>;
 export type TypeMapping = InferSelectModel<typeof typeMappingTable>;
+export type TypeIndicator = InferSelectModel<typeof typeIndicatorTable>;
 export type Entity = InferSelectModel<typeof entityTable>;
 export type Review = InferSelectModel<typeof reviewTable>;
 export type ReviewIndicator = InferSelectModel<typeof reviewIndicatorTable>;

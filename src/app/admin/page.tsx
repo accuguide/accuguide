@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import {
+  categoryTable,
   indicatorTable,
   typeIndicatorTable,
   typeMappingTable,
@@ -12,6 +13,7 @@ import AdminInfo from "./admin-info";
 export default async function Page() {
   const types = await db.select().from(typeTable);
   const indicators = await db.select().from(indicatorTable);
+  const categories = await db.select().from(categoryTable);
   const typeMappings = await db.select().from(typeMappingTable);
   const typeIndicators = await db.select().from(typeIndicatorTable);
   const links = [
@@ -36,9 +38,17 @@ export default async function Page() {
     revalidatePath("/admin");
   }
 
-  async function indicatorSubmit(indicator: string) {
+  async function indicatorSubmit(
+    indicator: string,
+    description: string,
+    category: string,
+  ) {
     "use server";
-    await db.insert(indicatorTable).values({ indicator: indicator });
+    await db.insert(indicatorTable).values({
+      indicator: indicator,
+      description: description,
+      category: category,
+    });
     revalidatePath("/admin");
   }
 
@@ -48,6 +58,7 @@ export default async function Page() {
         links={links}
         types={types}
         indicators={indicators}
+        categories={categories}
         typeMappings={typeMappings}
         typeIndicators={typeIndicators}
         typeSubmit={typeSubmit}

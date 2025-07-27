@@ -10,12 +10,23 @@ export async function GET(request: NextRequest) {
     return Response.json({ error: "Missing type parameter" }, { status: 400 });
   }
 
-  const dbType = db.select().from(typeTable).where(eq(typeTable.type, type));
-  const bathroom_indicators = await db
-    .select()
-    .from(indicatorTable)
-    .where(eq(indicatorTable.category, "Bathroom"));
   let return_indicators;
+  let bathroom_indicators: {
+    indicator: string;
+    description: string;
+    category: string;
+  }[] = [];
+
+  const dbType = await db
+    .select()
+    .from(typeTable)
+    .where(eq(typeTable.type, type));
+  if (dbType[0].physical) {
+    bathroom_indicators = await db
+      .select()
+      .from(indicatorTable)
+      .where(eq(indicatorTable.category, "Bathroom"));
+  }
 
   if (type === "Other") {
     return_indicators = await db.select().from(indicatorTable);
