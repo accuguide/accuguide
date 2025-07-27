@@ -118,7 +118,11 @@ export default function ReviewWrite({
             Your rating: {rating !== 0 ? rating : "-"} stars
           </p>
           {stars(rating)}
-          <Accordion type="multiple" className="w-full text-sm" defaultValue={["General", "Bathroom"]}>
+          <Accordion
+            type="multiple"
+            className="w-full text-sm"
+            defaultValue={["General", "Bathroom"]}
+          >
             {Object.entries(
               indicators.reduce(
                 (acc, indicator) => {
