@@ -28,7 +28,6 @@
     "ver:tag": "tsx scripts/tag.ts"
   },
   "dependencies": {
-    "critters": "^0.0.7",
     "@aws-sdk/client-s3": "^3.823.0",
     "@aws-sdk/s3-request-presigner": "^3.823.0",
     "@hookform/resolvers": "^5.1.1",
@@ -37,6 +36,7 @@
     "@next/mdx": "^15.3.4",
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
+    "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-dropdown-menu": "^2.1.15",
     "@radix-ui/react-label": "^2.1.7",
@@ -45,6 +45,7 @@
     "better-auth": "^1.2.12",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "critters": "^0.0.7",
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.44.1",
     "geist": "^1.4.2",

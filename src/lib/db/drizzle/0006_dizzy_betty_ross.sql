@@ -1,0 +1,1 @@
+ALTER TABLE "indicator" ADD CONSTRAINT "indicator_category_category_category_fk" FOREIGN KEY ("category") REFERENCES "public"."category"("category") ON DELETE no action ON UPDATE cascade;

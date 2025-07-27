@@ -13,10 +13,22 @@ import { user } from "./auth-schema";
 
 export const typeTable = pgTable("type", {
   type: text("type").primaryKey(),
+  physical: boolean("physical").notNull().default(true),
 });
 
 export const indicatorTable = pgTable("indicator", {
   indicator: text("indicator").primaryKey(),
+  description: text("description").notNull().default(""),
+  category: text("category")
+    .notNull()
+    .default("")
+    .references(() => categoryTable.category, {
+      onUpdate: "cascade",
+    }),
+});
+
+export const categoryTable = pgTable("category", {
+  category: text("category").primaryKey().default("").unique(),
 });
 
 export const typeIndicatorTable = pgTable("type_indicator", {

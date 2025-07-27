@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { account, session, user, verification } from "@/lib/db/auth-schema";
 import {
+  categoryTable,
   emailTable,
   entityTable,
   indicatorTable,
@@ -26,6 +27,7 @@ const main = async () => {
     await db.delete(typeMappingTable);
     await db.delete(typeTable);
     await db.delete(indicatorTable);
+    await db.delete(categoryTable);
     await db.delete(emailTable);
     await db.delete(user);
     console.log("Database cleared.");
@@ -39,15 +41,30 @@ const main = async () => {
       },
     ];
     const emails = [{ email: "name@example.com", subscribed: true }];
+    const categories = [
+      { category: "" },
+      { category: "General" },
+      { category: "Bathroom" },
+    ];
     const indicators = [
-      { indicator: "ADA Parking" },
-      { indicator: "Contactless Ordering" },
-      { indicator: "Disability Office" },
+      {
+        indicator: "ADA Parking",
+        description: "Accessible parking spaces",
+        category: "General",
+        physical: true,
+      },
+      {
+        indicator: "Automatic Sink",
+        description: "Automatic sinks in bathrooms",
+        category: "Bathroom",
+        physical: true,
+      },
     ];
     const types = [
       { type: "Restaurant" },
       { type: "School" },
       { type: "University" },
+      { type: "Bathroom" },
       { type: "Other" },
     ];
     const typeMappings = [
@@ -59,8 +76,7 @@ const main = async () => {
 
     const typeIndicators = [
       { type: "Restaurant", indicator: "ADA Parking" },
-      { type: "Restaurant", indicator: "Contactless Ordering" },
-      { type: "School", indicator: "Disability Office" },
+      { type: "Bathroom", indicator: "Automatic Sink" },
     ];
 
     const entities = [
@@ -116,7 +132,7 @@ const main = async () => {
       {
         id: "1051bd5f-42cd-4719-88d7-7683137acef7",
         reviewId: "0156e608-f6a0-4283-bbbf-9d25555d69c9",
-        indicator: "Contactless Ordering",
+        indicator: "Automatic Sink",
         exists: false,
       },
     ];
@@ -135,6 +151,7 @@ const main = async () => {
 
     await db.insert(user).values(users);
     await db.insert(emailTable).values(emails);
+    await db.insert(categoryTable).values(categories);
     await db.insert(indicatorTable).values(indicators);
     await db.insert(typeTable).values(types);
     await db.insert(typeMappingTable).values(typeMappings);
