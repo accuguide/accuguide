@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:all": "mprocs",
     "build:prod": "tsx scripts/analytics.ts && next build && tsx scripts/remove-analytics.ts && prettier --write src/app/layout.tsx",
     "build:beta": "cp src/app/beta.robots.ts src/app/robots.ts && next build",
     "build": "next build",
@@ -26,6 +27,7 @@
     "ver:patch": "tsx scripts/version.ts patch",
     "ver:minor": "tsx scripts/version.ts minor",
     "ver:major": "tsx scripts/version.ts major",
+    "stop": "mprocs stop",
     "ver:tag": "tsx scripts/tag.ts"
   },
   "dependencies": {
@@ -81,6 +83,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
     "eslint-config-prettier": "^10.1.5",
+    "mprocs": "^0.7.3",
     "prettier": "3.5.3",
     "tailwindcss": "^4",
     "tsx": "^4.19.4",
