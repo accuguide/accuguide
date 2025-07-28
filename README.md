@@ -1,12 +1,12 @@
 # Accuguide
 
-[![Cypress](https://github.com/accuguide/accuguide/actions/workflows/cypress.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/cypress.yml)
-[![CodeQL](https://github.com/accuguide/accuguide/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/github-code-scanning/codeql)
-[![Next](https://github.com/accuguide/accuguide/actions/workflows/next.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/next.yml)
-[![Biome Format](https://github.com/accuguide/accuguide/actions/workflows/biome-format.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/biome-format.yml)
-[![Biome Lint](https://github.com/accuguide/accuguide/actions/workflows/biome-lint.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/biome-lint.yml)
-<br />
-[![Netlify Status](https://api.netlify.com/api/v1/badges/378e5089-548b-429f-b1ad-507f6bae73e4/deploy-status)](https://app.netlify.com/projects/accuguide/deploys)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/biome-format.yml?logo=github&label=Format)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/biome-lint.yml?logo=github&label=Lint)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/cypress.yml?logo=github&label=Tests)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/github-code-scanning%2Fcodeql?logo=github&label=CodeQL)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/build.yml?logo=github&label=Build)
+![Netlify](https://img.shields.io/netlify/378e5089-548b-429f-b1ad-507f6bae73e4?logo=netlify&label=Deploy)
+
 
 ## About
 
@@ -21,12 +21,12 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 - Better Auth
 - Tailwind CSS
 - AWS S3
+- Cypress Tests
 
 ### Code Quality
 
-- Cypress
-- Prettier
-- ESLint
+- CodeQL
+- Biome
 
 ### Features
 

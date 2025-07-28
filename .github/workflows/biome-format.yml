@@ -1,4 +1,4 @@
-name: Biome Format
+name: Biome
 
 on:
   push:

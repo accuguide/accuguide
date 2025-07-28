@@ -1,4 +1,4 @@
-name: Biome Lint
+name: Biome
 
 on:
   push:
