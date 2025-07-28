@@ -1,18 +1,18 @@
-import type { MetadataRoute } from "next";
+import type { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
-      userAgent: "*",
-      allow: "/",
+      userAgent: '*',
+      allow: '/',
       disallow: [
-        "/admin/",
-        "/api/",
-        "/settings/",
-        "/sign-in/password/reset/",
-        "/sign-out/",
+        '/admin/',
+        '/api/',
+        '/settings/',
+        '/sign-in/password/reset/',
+        '/sign-out/',
       ],
     },
-    sitemap: "https://accuguide.org/sitemap.xml",
-  };
+    sitemap: 'https://accuguide.org/sitemap.xml',
+  }
 }

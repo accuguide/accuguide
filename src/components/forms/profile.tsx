@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -11,56 +11,56 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { changeName } from "@/lib/auth-client";
-import { useEffect } from "react";
+} from '@/components/ui/card'
+import { changeName } from '@/lib/auth-client'
+import { useEffect } from 'react'
 
 const formSchema = z.object({
   username: z.string().optional(),
   image: z.any(),
-});
+})
 
 export default function Profile() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      username: '',
       image: null,
     },
-  });
+  })
 
   useEffect(() => {
-    fetch("/api/user", {
-      method: "GET",
+    fetch('/api/user', {
+      method: 'GET',
     })
       .then((response) => response.json())
       .then((data) => {
         form.reset({
-          username: data.user?.name ?? "",
+          username: data.user?.name ?? '',
           image: null,
-        });
-      });
-  }, []);
+        })
+      })
+  }, [])
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (values.username) await changeName(values.username);
+    if (values.username) await changeName(values.username)
     if (values.image) {
-      const formData = new FormData();
-      formData.append("image", values.image);
-      await fetch("/api/profile", {
-        method: "POST",
+      const formData = new FormData()
+      formData.append('image', values.image)
+      await fetch('/api/profile', {
+        method: 'POST',
         body: formData,
-      });
+      })
     }
-    window.location.reload();
+    window.location.reload()
   }
 
   return (
@@ -117,5 +117,5 @@ export default function Profile() {
         </Form>
       </CardContent>
     </Card>
-  );
+  )
 }

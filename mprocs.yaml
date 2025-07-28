@@ -8,3 +8,7 @@ procs:
       send-keys: ["<C-c>"]
   drizzle studio:
     shell: npm run db:studio
+  shell:
+    shell: zsh
+    stop:
+      send-keys: ["<C-d>"]

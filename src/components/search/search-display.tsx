@@ -1,5 +1,5 @@
-import { SearchDisplayProps } from "@/lib/types";
-import Link from "next/link";
+import { SearchDisplayProps } from '@/lib/types'
+import Link from 'next/link'
 
 export default function SearchDisplay({
   displayType,
@@ -9,14 +9,14 @@ export default function SearchDisplay({
   address,
   type,
 }: SearchDisplayProps) {
-  const [firstLine, ...rest] = address.split(", ");
+  const [firstLine, ...rest] = address.split(', ')
   const capitalizedType = type
-    .split("_") // Split the type by underscores
+    .split('_') // Split the type by underscores
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
-    .join(" "); // Join the words with spaces
+    .join(' ') // Join the words with spaces
 
   const href =
-    displayType === "google" ? `/entity/${googleId}` : `/entity/${id}`;
+    displayType === 'google' ? `/entity/${googleId}` : `/entity/${id}`
 
   return (
     <Link
@@ -28,8 +28,8 @@ export default function SearchDisplay({
       <p>
         {firstLine}
         <br />
-        {rest.join(", ")}
-      </p>{" "}
+        {rest.join(', ')}
+      </p>{' '}
     </Link>
-  );
+  )
 }

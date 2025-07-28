@@ -1,6 +1,6 @@
-import Link from "next/link";
-import Image from "next/image";
-import FooterLink from "./footer-link";
+import Link from 'next/link'
+import Image from 'next/image'
+import FooterLink from './footer-link'
 
 export default function Footer() {
   return (
@@ -74,7 +74,7 @@ export default function Footer() {
       <p className="text-[10px] sm:text-xs text-left sm:text-center pt-4 mt-[-50px] sm:mt-0">
         Copyright 2025 Accuguide
         <br />
-        This site is powered by{" "}
+        This site is powered by{' '}
         <Link
           href="https://netlify.com"
           className="text-[10px] sm:text-xs hover:underline hover:opacity-75"
@@ -83,5 +83,5 @@ export default function Footer() {
         </Link>
       </p>
     </footer>
-  );
+  )
 }

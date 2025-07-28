@@ -2,12 +2,12 @@ export default function LandingTitle() {
   return (
     <div className="text-center">
       <h1 className="md:text-6xl">
-        Discover accessibility with{" "}
+        Discover accessibility with{' '}
         <span
           className="bg-clip-text text-transparent"
           style={{
             backgroundImage:
-              "linear-gradient(to right, #ef4444, #facc15, #ffffff, #3b82f6, #22c55e)",
+              'linear-gradient(to right, #ef4444, #facc15, #ffffff, #3b82f6, #22c55e)',
           }}
         >
           Accuguide
@@ -19,5 +19,5 @@ export default function LandingTitle() {
         searching for places or services like restaurants, schools, or airlines!
       </p>
     </div>
-  );
+  )
 }

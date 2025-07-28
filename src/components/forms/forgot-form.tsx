@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -11,42 +11,42 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useState } from "react";
-import { requestPassWordReset } from "@/lib/auth-client";
-import FormContainer from "@/components/forms/form-container";
-import Link from "next/link";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { useState } from 'react'
+import { requestPassWordReset } from '@/lib/auth-client'
+import FormContainer from '@/components/forms/form-container'
+import Link from 'next/link'
 
 const formSchema = z.object({
   email: z.string().email(),
-});
+})
 
 export default function ForgotForm() {
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: { email: "" },
-  });
+    defaultValues: { email: '' },
+  })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setError(null);
+    setError(null)
     try {
-      await requestPassWordReset(values.email);
-      setSubmitted(true);
+      await requestPassWordReset(values.email)
+      setSubmitted(true)
     } catch (e: unknown) {
-      let message = "Something went wrong. Please try again.";
+      let message = 'Something went wrong. Please try again.'
       if (
-        typeof e === "object" &&
+        typeof e === 'object' &&
         e &&
-        "message" in e &&
-        typeof (e as { message?: unknown }).message === "string"
+        'message' in e &&
+        typeof (e as { message?: unknown }).message === 'string'
       ) {
-        message = (e as { message: string }).message;
+        message = (e as { message: string }).message
       }
-      setError(message);
+      setError(message)
     }
   }
 
@@ -107,5 +107,5 @@ export default function ForgotForm() {
         </CardContent>
       </Card>
     </FormContainer>
-  );
+  )
 }

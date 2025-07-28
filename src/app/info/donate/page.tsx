@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui/card";
+import { Card } from '@/components/ui/card'
 
 /* eslint-disable @next/next/no-sync-scripts */
 export default function Page() {
@@ -22,5 +22,5 @@ export default function Page() {
       <h2>Current/Past Donors</h2>
       <p>No sponsors yet. Be the first one!</p>
     </div>
-  );
+  )
 }

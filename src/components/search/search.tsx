@@ -1,35 +1,35 @@
-"use client";
+'use client'
 
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { type FormEvent, useState } from "react";
-import { usePathname } from "next/navigation";
-import { SearchIcon } from "lucide-react";
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { type FormEvent, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { SearchIcon } from 'lucide-react'
 
 export type SearchProps = {
-  size: "half" | "full" | "page";
-};
+  size: 'half' | 'full' | 'page'
+}
 
 export default function Search({ size }: SearchProps) {
-  const [query, setQuery] = useState("");
-  const pathname = usePathname();
+  const [query, setQuery] = useState('')
+  const pathname = usePathname()
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const encodedQuery = encodeURIComponent(query);
-    window.location.href = `/search?query=${encodedQuery}`;
+    e.preventDefault()
+    const encodedQuery = encodeURIComponent(query)
+    window.location.href = `/search?query=${encodedQuery}`
   }
 
-  if (pathname === "/" && size === "half") {
+  if (pathname === '/' && size === 'half') {
     return (
       <div className="w-[50vw]">
         <span></span>
       </div>
-    );
+    )
   }
 
   // Header/Half size styling
-  if (size === "half") {
+  if (size === 'half') {
     return (
       <form onSubmit={handleSubmit} className="relative md:max-w-md max-w-full">
         <label htmlFor="search" className="sr-only ">
@@ -44,7 +44,7 @@ export default function Search({ size }: SearchProps) {
           aria-label="Search for accessible places"
         />
       </form>
-    );
+    )
   }
 
   // Full and page size styling (existing)
@@ -81,5 +81,5 @@ export default function Search({ size }: SearchProps) {
         </div>
       </form>
     </div>
-  );
+  )
 }

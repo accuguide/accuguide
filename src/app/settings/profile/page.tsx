@@ -1,5 +1,5 @@
-import Profile from "@/components/forms/profile";
-import ProfileReview from "@/components/reviews/profile-reviews";
+import Profile from '@/components/forms/profile'
+import ProfileReview from '@/components/reviews/profile-reviews'
 export default async function Page() {
   return (
     <div className="md:flex justify-center gap-2">
@@ -10,5 +10,5 @@ export default async function Page() {
         <ProfileReview />
       </div>
     </div>
-  );
+  )
 }

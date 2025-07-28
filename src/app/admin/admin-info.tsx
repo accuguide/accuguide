@@ -1,37 +1,37 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import { useState } from 'react'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Button } from '@/components/ui/button'
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from '@/components/ui/command'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/popover'
+import { Check, ChevronsUpDown } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 interface AdminInfoProps {
-  links: { label: string; href: string }[];
-  types: { type: string }[];
-  indicators: { indicator: string; description: string; category: string }[];
-  categories: { category: string }[];
-  typeMappings: { id: string; type: string; pattern: string }[];
-  typeIndicators: { id: string; type: string; indicator: string }[];
-  typeSubmit: (value: string) => void;
+  links: { label: string; href: string }[]
+  types: { type: string }[]
+  indicators: { indicator: string; description: string; category: string }[]
+  categories: { category: string }[]
+  typeMappings: { id: string; type: string; pattern: string }[]
+  typeIndicators: { id: string; type: string; indicator: string }[]
+  typeSubmit: (value: string) => void
   indicatorSubmit: (
     indicator: string,
     description: string,
     category: string,
-  ) => void;
+  ) => void
 }
 
 export default function AdminInfo({
@@ -44,33 +44,33 @@ export default function AdminInfo({
   typeSubmit,
   indicatorSubmit,
 }: AdminInfoProps) {
-  const [newType, setNewType] = useState("");
-  const [newIndicator, setNewIndicator] = useState("");
-  const [newDescription, setNewDescription] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [categoryOpen, setCategoryOpen] = useState(false);
+  const [newType, setNewType] = useState('')
+  const [newIndicator, setNewIndicator] = useState('')
+  const [newDescription, setNewDescription] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [categoryOpen, setCategoryOpen] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     if (newType.trim()) {
-      typeSubmit(newType.trim());
-      setNewType("");
+      typeSubmit(newType.trim())
+      setNewType('')
     }
-  };
+  }
 
   const handleIndicatorSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     if (newIndicator.trim() && selectedCategory) {
       indicatorSubmit(
         newIndicator.trim(),
         newDescription.trim(),
         selectedCategory,
-      );
-      setNewIndicator("");
-      setNewDescription("");
-      setSelectedCategory("");
+      )
+      setNewIndicator('')
+      setNewDescription('')
+      setSelectedCategory('')
     }
-  };
+  }
 
   return (
     <div>
@@ -135,7 +135,7 @@ export default function AdminInfo({
                   ? categories.find(
                       (category) => category.category === selectedCategory,
                     )?.category
-                  : "Select category..."}
+                  : 'Select category...'}
                 <ChevronsUpDown className="opacity-50" />
               </Button>
             </PopoverTrigger>
@@ -151,19 +151,19 @@ export default function AdminInfo({
                         onSelect={(currentValue) => {
                           setSelectedCategory(
                             currentValue === selectedCategory
-                              ? ""
+                              ? ''
                               : currentValue,
-                          );
-                          setCategoryOpen(false);
+                          )
+                          setCategoryOpen(false)
                         }}
                       >
                         {category.category}
                         <Check
                           className={cn(
-                            "ml-auto",
+                            'ml-auto',
                             selectedCategory === category.category
-                              ? "opacity-100"
-                              : "opacity-0",
+                              ? 'opacity-100'
+                              : 'opacity-0',
                           )}
                         />
                       </CommandItem>
@@ -208,5 +208,5 @@ export default function AdminInfo({
         ))}
       </ul>
     </div>
-  );
+  )
 }

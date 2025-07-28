@@ -1,7 +1,7 @@
-import Search from "@/components/search/search";
-import Link from "next/link";
-import HeaderUser from "./header-user";
-import Image from "next/image";
+import Search from '@/components/search/search'
+import Link from 'next/link'
+import HeaderUser from './header-user'
+import Image from 'next/image'
 
 export default async function Header() {
   return (
@@ -11,7 +11,7 @@ export default async function Header() {
       </Link>
       <div className="flex gap-6 md:gap-4 ">
         <div className="hover:opacity-50">
-          {" "}
+          {' '}
           <Link href="/" className="font-bold md:hidden">
             <Image
               src="/images/logo.png"
@@ -27,5 +27,5 @@ export default async function Header() {
         <HeaderUser />
       </div>
     </header>
-  );
+  )
 }

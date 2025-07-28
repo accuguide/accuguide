@@ -1,11 +1,11 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 export default function FooterLink({
   href,
   children,
 }: {
-  href: string;
-  children: React.ReactNode;
+  href: string
+  children: React.ReactNode
 }) {
   return (
     <Link
@@ -14,5 +14,5 @@ export default function FooterLink({
     >
       {children}
     </Link>
-  );
+  )
 }

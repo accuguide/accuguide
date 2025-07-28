@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -11,33 +11,33 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { signUpWithEmail } from "@/lib/auth-client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { signInWithGoogle } from "@/lib/auth-client";
-import FormContainer from "./form-container";
-import LegalAgreement from "@/components/forms/legal-agreement";
-import Link from "next/link";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { signUpWithEmail } from '@/lib/auth-client'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { signInWithGoogle } from '@/lib/auth-client'
+import FormContainer from './form-container'
+import LegalAgreement from '@/components/forms/legal-agreement'
+import Link from 'next/link'
 
 const formSchema = z.object({
   email: z.string(),
   password: z.string(),
   username: z.string(),
-});
+})
 
 export default function SignupForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      password: "",
-      username: "",
+      email: '',
+      password: '',
+      username: '',
     },
-  });
+  })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    signUpWithEmail(values.email, values.password, values.username);
+    signUpWithEmail(values.email, values.password, values.username)
   }
 
   return (
@@ -131,7 +131,7 @@ export default function SignupForm() {
                 </Button>
               </div>
               <div className="text-center text-sm text-neutral-600 dark:text-neutral-400">
-                Already have an account?{" "}
+                Already have an account?{' '}
                 <Link href="/sign-in/" className="underline">
                   Sign in
                 </Link>
@@ -142,5 +142,5 @@ export default function SignupForm() {
       </Card>
       <LegalAgreement />
     </FormContainer>
-  );
+  )
 }

@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -11,68 +11,68 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
   CardDescription,
-} from "@/components/ui/card";
-import FormContainer from "./form-container";
-import { useState, useEffect, Suspense } from "react";
-import { toast } from "sonner";
-import { useSearchParams } from "next/navigation";
+} from '@/components/ui/card'
+import FormContainer from './form-container'
+import { useState, useEffect, Suspense } from 'react'
+import { toast } from 'sonner'
+import { useSearchParams } from 'next/navigation'
 
 const formSchema = z.object({
-  email: z.string().email("Please enter a valid email address"),
-});
+  email: z.string().email('Please enter a valid email address'),
+})
 
 function UnsubscribeFormContent() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const searchParams = useSearchParams();
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const searchParams = useSearchParams()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
+      email: '',
     },
-  });
+  })
 
   useEffect(() => {
-    const emailParam = searchParams.get("email");
+    const emailParam = searchParams.get('email')
     if (emailParam) {
-      form.setValue("email", emailParam);
+      form.setValue('email', emailParam)
     }
-  }, [searchParams, form]);
+  }, [searchParams, form])
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsSubmitting(true);
+    setIsSubmitting(true)
 
     try {
-      const response = await fetch("/api/emails/unsubscribe", {
-        method: "POST",
+      const response = await fetch('/api/emails/unsubscribe', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email: values.email }),
-      });
+      })
 
       if (!response.ok) {
-        throw new Error("Failed to unsubscribe - this email is not subscribed");
+        throw new Error('Failed to unsubscribe - this email is not subscribed')
       }
 
-      setIsSuccess(true);
-      toast.success("Successfully unsubscribed from Accuguide emails");
+      setIsSuccess(true)
+      toast.success('Successfully unsubscribed from Accuguide emails')
     } catch (error) {
       toast.error(error instanceof Error ? error.message : String(error), {
         description:
-          "Please try again or contact support if the problem persists.",
-      });
+          'Please try again or contact support if the problem persists.',
+      })
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
   }
 
@@ -94,7 +94,7 @@ function UnsubscribeFormContent() {
           </CardContent>
         </Card>
       </FormContainer>
-    );
+    )
   }
 
   return (
@@ -129,14 +129,14 @@ function UnsubscribeFormContent() {
                 />
               </div>
               <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? "Unsubscribing..." : "Unsubscribe"}
+                {isSubmitting ? 'Unsubscribing...' : 'Unsubscribe'}
               </Button>
             </form>
           </Form>
         </CardContent>
       </Card>
     </FormContainer>
-  );
+  )
 }
 
 export default function UnsubscribeForm() {
@@ -163,5 +163,5 @@ export default function UnsubscribeForm() {
     >
       <UnsubscribeFormContent />
     </Suspense>
-  );
+  )
 }

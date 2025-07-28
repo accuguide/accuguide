@@ -1,46 +1,46 @@
-import { db } from "@/lib/db";
-import { reviewIndicatorTable, reviewTable } from "@/lib/db/schema";
-import { eq, inArray } from "drizzle-orm";
-import { Entity } from "@/lib/db/schema";
-import ReviewDisplay from "@/components/reviews/review-display";
-import { Button } from "./ui/button";
-import Link from "next/link";
-import IndicatorDisplay from "./reviews/indicator-display";
-import { v4 as uuidv4 } from "uuid";
+import { db } from '@/lib/db'
+import { reviewIndicatorTable, reviewTable } from '@/lib/db/schema'
+import { eq, inArray } from 'drizzle-orm'
+import { Entity } from '@/lib/db/schema'
+import ReviewDisplay from '@/components/reviews/review-display'
+import { Button } from './ui/button'
+import Link from 'next/link'
+import IndicatorDisplay from './reviews/indicator-display'
+import { v4 as uuidv4 } from 'uuid'
 
 export default async function EntityDisplay({
   googleId,
 }: {
-  googleId: string;
+  googleId: string
 }) {
   const res = await fetch(
     `${process.env.BASE_URL}/api/entity/?googleId=${googleId}`,
-  );
-  const rawData = await res.json();
-  const data: Entity = rawData[0];
-  const given = data.description || "";
-  let overview = "";
+  )
+  const rawData = await res.json()
+  const data: Entity = rawData[0]
+  const given = data.description || ''
+  let overview = ''
   // Fetch reviews and indicators for this entity
   const reviews = await db
     .select()
     .from(reviewTable)
-    .where(eq(reviewTable.entityId, data.id));
+    .where(eq(reviewTable.entityId, data.id))
 
-  const reviewIds = reviews.map((review) => review.id);
+  const reviewIds = reviews.map((review) => review.id)
 
   const indicators = reviewIds.length
     ? await db
         .select()
         .from(reviewIndicatorTable)
         .where(inArray(reviewIndicatorTable.reviewId, reviewIds))
-    : [];
+    : []
 
   // Call AI overview API with entity, reviews, and indicators
   const overviewRes = await fetch(
     `${process.env.BASE_URL}/api/entity/groq/overview/`,
     {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         entity: data,
         reviews: reviews,
@@ -48,29 +48,29 @@ export default async function EntityDisplay({
         given: given,
       }),
     },
-  );
-  const overviewJson = await overviewRes.json();
-  let parsedResponse;
+  )
+  const overviewJson = await overviewRes.json()
+  let parsedResponse
   try {
-    parsedResponse = JSON.parse(overviewJson.message);
+    parsedResponse = JSON.parse(overviewJson.message)
   } catch (error) {
-    console.error("Failed to parse overviewJson.message:", error);
-    parsedResponse = { overview: "", indicators: [] }; // Fallback value
+    console.error('Failed to parse overviewJson.message:', error)
+    parsedResponse = { overview: '', indicators: [] } // Fallback value
   }
-  overview = parsedResponse.overview;
+  overview = parsedResponse.overview
   const entityIndicators = parsedResponse.indicators.map(
     (indicator: { indicator: string; exists: boolean }) => ({
       id: uuidv4(),
-      reviewId: "",
+      reviewId: '',
       indicator: indicator.indicator,
       exists: indicator.exists,
     }),
-  );
+  )
   entityIndicators.sort((a: { exists: boolean }, b: { exists: boolean }) => {
-    if (a.exists < b.exists) return 1;
-    if (a.exists > b.exists) return -1;
-    return 0;
-  });
+    if (a.exists < b.exists) return 1
+    if (a.exists > b.exists) return -1
+    return 0
+  })
   return (
     <div>
       <p>{data?.displayType}</p>
@@ -99,7 +99,7 @@ export default async function EntityDisplay({
       </p>
       {data?.address1 && data?.city && data?.country && (
         <a
-          href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${data.address1}${data.address2 ? " " + data.address2 : ""}, ${data.city}, ${data.state ? data.state + " " : ""}${data.zip ? data.zip + " " : ""}${data.country}`)}`}
+          href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${data.address1}${data.address2 ? ' ' + data.address2 : ''}, ${data.city}, ${data.state ? data.state + ' ' : ''}${data.zip ? data.zip + ' ' : ''}${data.country}`)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block py-2"
@@ -109,7 +109,7 @@ export default async function EntityDisplay({
       )}
       <h2 className="mt-4">Website</h2>
       <Link
-        href={data?.url || " "}
+        href={data?.url || ' '}
         className="text-slate-600 dark:text-slate-300 underline"
       >
         {data?.url}
@@ -122,24 +122,24 @@ export default async function EntityDisplay({
             {data?.hours?.map((hour: string, index: number) => (
               <li key={index} className="flex">
                 <p className="font-semibold text-right">
-                  {hour.split(": ")[0]}
-                </p>{" "}
+                  {hour.split(': ')[0]}
+                </p>{' '}
                 <p className="text-sm mt-1 md:text-base md:mt-0">
-                  : {hour.split(": ")[1]}
+                  : {hour.split(': ')[1]}
                 </p>
               </li>
             ))}
           </ul>
           <p className="text-xs mt-1">
-            Timezone:{" "}
+            Timezone:{' '}
             {data?.timeZone
-              ? data.timeZone.split("_").map((part, idx) => (
+              ? data.timeZone.split('_').map((part, idx) => (
                   <span key={idx}>
                     {part}
-                    {idx < data.timeZone.split("_").length - 1 ? " " : null}
+                    {idx < data.timeZone.split('_').length - 1 ? ' ' : null}
                   </span>
                 ))
-              : ""}
+              : ''}
           </p>
         </>
       )}
@@ -150,5 +150,5 @@ export default async function EntityDisplay({
         indicators={indicators}
       />
     </div>
-  );
+  )
 }

@@ -1,47 +1,47 @@
-"use client";
+'use client'
 
-import { StarIcon } from "lucide-react";
-import { Textarea } from "@/components/ui/textarea";
-import { FormEvent, useEffect, useState, useRef } from "react";
-import { ReviewIndicator as DBReviewIndicator } from "@/lib/db/schema";
+import { StarIcon } from 'lucide-react'
+import { Textarea } from '@/components/ui/textarea'
+import { FormEvent, useEffect, useState, useRef } from 'react'
+import { ReviewIndicator as DBReviewIndicator } from '@/lib/db/schema'
 
 // Extend ReviewIndicator to include 'category'
 type ReviewIndicator = DBReviewIndicator & {
-  category: string;
-};
-import { v4 as uuidv4 } from "uuid";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Check, X, Minus } from "lucide-react";
-import { cn } from "@/lib/utils"; // Adjust the path if needed
-import Link from "next/link";
+  category: string
+}
+import { v4 as uuidv4 } from 'uuid'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Check, X, Minus } from 'lucide-react'
+import { cn } from '@/lib/utils' // Adjust the path if needed
+import Link from 'next/link'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from '@/components/ui/accordion'
 
 export default function ReviewWrite({
   entity_id,
   entity_type,
   auth,
 }: {
-  entity_id: string;
-  entity_type: string;
-  auth: boolean;
+  entity_id: string
+  entity_type: string
+  auth: boolean
 }) {
-  const [rating, setRating] = useState(0);
-  const review_id = useRef(uuidv4()).current;
-  const [indicators, setIndicators] = useState<ReviewIndicator[]>([]);
-  const [reviewText, setReviewText] = useState("");
+  const [rating, setRating] = useState(0)
+  const review_id = useRef(uuidv4()).current
+  const [indicators, setIndicators] = useState<ReviewIndicator[]>([])
+  const [reviewText, setReviewText] = useState('')
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    fetch("/api/review/", {
-      method: "POST",
+    e.preventDefault()
+    fetch('/api/review/', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         entity_id,
@@ -53,11 +53,11 @@ export default function ReviewWrite({
     })
       .then((response) => response.json())
       .then(() => {
-        window.location.reload();
+        window.location.reload()
       })
       .catch((error) => {
-        console.error("Error submitting review:", error);
-      });
+        console.error('Error submitting review:', error)
+      })
   }
 
   function handleIndicatorChange(ind: ReviewIndicator, newVal: boolean | null) {
@@ -65,7 +65,7 @@ export default function ReviewWrite({
       prev.map((indicator) =>
         indicator.id === ind.id ? { ...indicator, exists: newVal } : indicator,
       ),
-    );
+    )
   }
 
   function stars(rating: number) {
@@ -74,17 +74,17 @@ export default function ReviewWrite({
         {[1, 2, 3, 4, 5].map((star) => (
           <StarIcon
             key={star}
-            className={`cursor-pointer ${star <= rating ? "text-yellow-500" : ""}`}
-            fill={star <= rating ? "currentColor" : "none"} // Add fill color
+            className={`cursor-pointer ${star <= rating ? 'text-yellow-500' : ''}`}
+            fill={star <= rating ? 'currentColor' : 'none'} // Add fill color
             onClick={() => setRating(star)}
           />
         ))}
       </div>
-    );
+    )
   }
 
   useEffect(() => {
-    fetch("/api/indicator/?type=" + entity_type)
+    fetch('/api/indicator/?type=' + entity_type)
       .then((response) => response.json())
       .then((data) => {
         const newIndicators = data.map(
@@ -95,42 +95,42 @@ export default function ReviewWrite({
             category: indicator.category,
             exists: null,
           }),
-        );
-        console.log("Fetched indicators:", newIndicators);
-        setIndicators(newIndicators);
-      });
-  }, []);
+        )
+        console.log('Fetched indicators:', newIndicators)
+        setIndicators(newIndicators)
+      })
+  }, [])
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
       {!auth && (
         <p>
-          Please{" "}
+          Please{' '}
           <Link className="underline" href="/sign-in/">
             sign in
-          </Link>{" "}
+          </Link>{' '}
           to add a review
         </p>
       )}
       {auth && (
         <>
           <p className="mb-1 mt-4">
-            Your rating: {rating !== 0 ? rating : "-"} stars
+            Your rating: {rating !== 0 ? rating : '-'} stars
           </p>
           {stars(rating)}
           <Accordion
             type="multiple"
             className="w-full text-sm"
-            defaultValue={["General", "Bathroom"]}
+            defaultValue={['General', 'Bathroom']}
           >
             {Object.entries(
               indicators.reduce(
                 (acc, indicator) => {
                   if (!acc[indicator.category]) {
-                    acc[indicator.category] = [];
+                    acc[indicator.category] = []
                   }
-                  acc[indicator.category].push(indicator);
-                  return acc;
+                  acc[indicator.category].push(indicator)
+                  return acc
                 },
                 {} as Record<string, typeof indicators>,
               ),
@@ -145,10 +145,10 @@ export default function ReviewWrite({
                       <Card
                         key={indicator.id}
                         className={cn(
-                          "px-2 py-1.5 h-full",
+                          'px-2 py-1.5 h-full',
                           rating === 0
-                            ? "border-slate-400 dark:border-slate-600"
-                            : "",
+                            ? 'border-slate-400 dark:border-slate-600'
+                            : '',
                         )}
                       >
                         <div className="flex items-center justify-between h-full">
@@ -166,10 +166,10 @@ export default function ReviewWrite({
                                 handleIndicatorChange(indicator, true)
                               }
                               className={cn(
-                                "h-5 w-5 p-0",
+                                'h-5 w-5 p-0',
                                 indicator.exists === true
-                                  ? "bg-green-500 dark:bg-green-800"
-                                  : "bg-green-200 dark:bg-green-200",
+                                  ? 'bg-green-500 dark:bg-green-800'
+                                  : 'bg-green-200 dark:bg-green-200',
                               )}
                             >
                               <Check className="h-2.5 w-2.5 text-black" />
@@ -180,10 +180,10 @@ export default function ReviewWrite({
                               type="button"
                               size="sm"
                               className={cn(
-                                "h-5 w-5 p-0",
+                                'h-5 w-5 p-0',
                                 indicator.exists === false
-                                  ? "bg-red-500 dark:bg-red-800"
-                                  : "bg-red-200 dark:bg-red-200",
+                                  ? 'bg-red-500 dark:bg-red-800'
+                                  : 'bg-red-200 dark:bg-red-200',
                               )}
                               title="No"
                               onClick={() =>
@@ -199,8 +199,8 @@ export default function ReviewWrite({
                               size="sm"
                               className={`h-5 w-5 p-0 ${
                                 indicator.exists === null
-                                  ? "bg-neutral-900 dark:bg-neutral-400"
-                                  : "bg-neutral-500 dark:bg-neutral-100"
+                                  ? 'bg-neutral-900 dark:bg-neutral-400'
+                                  : 'bg-neutral-500 dark:bg-neutral-100'
                               }`}
                               title="Clear"
                               onClick={() =>
@@ -229,5 +229,5 @@ export default function ReviewWrite({
         </>
       )}
     </form>
-  );
+  )
 }

@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import Link from 'next/link'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,23 +7,23 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { getSignedUrlForKey } from "@/lib/s3/functions";
-import { getServerUser } from "@/lib/session";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/dropdown-menu'
+import { getSignedUrlForKey } from '@/lib/s3/functions'
+import { getServerUser } from '@/lib/session'
+import { Button } from '@/components/ui/button'
 
 export default async function HeaderUser() {
-  const user = await getServerUser();
+  const user = await getServerUser()
   if (!user) {
     return (
       <Link href="/sign-in/">
         <Button>Sign In</Button>
       </Link>
-    );
+    )
   }
   const imageUrl = user?.image
     ? await getSignedUrlForKey(user.image)
-    : undefined;
+    : undefined
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -52,8 +52,8 @@ export default async function HeaderUser() {
         </Link>
         <Link href="/sign-out/" className="text-slate-900 dark:text-slate-100">
           <DropdownMenuItem>Sign Out</DropdownMenuItem>
-        </Link>{" "}
+        </Link>{' '}
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }

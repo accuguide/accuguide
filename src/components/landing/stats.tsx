@@ -1,39 +1,39 @@
-import { MapPin, Star, Shield } from "lucide-react";
-import CountUpNumber from "./count-up-number";
-import { db } from "@/lib/db";
-import { entityTable, indicatorTable, reviewTable } from "@/lib/db/schema";
+import { MapPin, Star, Shield } from 'lucide-react'
+import CountUpNumber from './count-up-number'
+import { db } from '@/lib/db'
+import { entityTable, indicatorTable, reviewTable } from '@/lib/db/schema'
 
 export default async function Stats() {
-  const places = await db.$count(entityTable);
-  const indicators = await db.$count(indicatorTable);
-  const reviews = await db.$count(reviewTable);
+  const places = await db.$count(entityTable)
+  const indicators = await db.$count(indicatorTable)
+  const reviews = await db.$count(reviewTable)
   const stats = [
     {
       value: places,
-      label: "Places Catalogued",
+      label: 'Places Catalogued',
       icon: MapPin,
-      color: "text-blue-600",
+      color: 'text-blue-600',
     },
     {
       value: reviews,
-      label: "Reviews Written",
+      label: 'Reviews Written',
       icon: Star,
-      color: "text-pink-500",
+      color: 'text-pink-500',
     },
     {
       value: indicators,
-      label: "Accessibility Indicators",
+      label: 'Accessibility Indicators',
       icon: Shield,
-      color: "text-green-600",
+      color: 'text-green-600',
     },
-  ];
+  ]
 
   return (
     <section className="pt-2 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-8">
           {stats.map((stat) => {
-            const IconComponent = stat.icon;
+            const IconComponent = stat.icon
             return (
               <div
                 key={stat.label}
@@ -56,13 +56,13 @@ export default async function Stats() {
                   </p>
                 </div>
               </div>
-            );
+            )
           })}
         </div>
       </div>
     </section>
-  );
+  )
 }
 
-export const dynamic = "force-static";
-export const revalidate = 86400;
+export const dynamic = 'force-static'
+export const revalidate = 86400

@@ -1,20 +1,20 @@
-import Link from "next/link";
-import React from "react";
+import Link from 'next/link'
+import React from 'react'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from '../ui/card'
 
 interface ErrorCardProps {
-  title: string;
-  description: string;
+  title: string
+  description: string
   link?: {
-    href: string;
-    label: string;
-  };
+    href: string
+    label: string
+  }
 }
 
 const ErrorCard: React.FC<ErrorCardProps> = ({ title, description, link }) => {
@@ -32,7 +32,7 @@ const ErrorCard: React.FC<ErrorCardProps> = ({ title, description, link }) => {
         )}
       </CardContent>
     </Card>
-  );
-};
+  )
+}
 
-export default ErrorCard;
+export default ErrorCard

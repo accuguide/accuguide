@@ -1,31 +1,31 @@
-import type { Metadata } from "next";
-import { ThemeProvider } from "next-themes";
-import { GeistSans } from "geist/font/sans";
-import "@/app/globals.css";
-import { ModeToggle } from "@/components/theme/mode-toggle";
-import Header from "@/components/header/header";
-import Footer from "@/components/footer/footer";
+import type { Metadata } from 'next'
+import { ThemeProvider } from 'next-themes'
+import { GeistSans } from 'geist/font/sans'
+import '@/app/globals.css'
+import { ModeToggle } from '@/components/theme/mode-toggle'
+import Header from '@/components/header/header'
+import Footer from '@/components/footer/footer'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import Script from "next/script";
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Accuguide - Discover accessibility",
-    default: "Accuguide - Discover accessible places and services",
+    template: '%s | Accuguide - Discover accessibility',
+    default: 'Accuguide - Discover accessible places and services',
   },
-  authors: [{ name: "Accuguide Team" }],
-  metadataBase: new URL("https://accuguide.org/"),
+  authors: [{ name: 'Accuguide Team' }],
+  metadataBase: new URL('https://accuguide.org/'),
   alternates: {
-    canonical: ".",
+    canonical: '.',
   },
   description:
-    "Accuguide helps you discover accessible places and services near you. Find detailed accessibility information, reviews, and resources to make your daily life easier.",
-};
+    'Accuguide helps you discover accessible places and services near you. Find detailed accessibility information, reviews, and resources to make your daily life easier.',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -47,5 +47,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

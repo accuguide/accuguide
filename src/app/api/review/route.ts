@@ -1,29 +1,29 @@
-import { db } from "@/lib/db";
+import { db } from '@/lib/db'
 import {
   ReviewIndicator,
   reviewIndicatorTable,
   reviewTable,
-} from "@/lib/db/schema";
-import { getServerUser } from "@/lib/session";
+} from '@/lib/db/schema'
+import { getServerUser } from '@/lib/session'
 
 export async function POST(request: Request) {
-  const user = await getServerUser();
-  const res = await request.json();
-  const indicators: ReviewIndicator[] = res.indicators;
+  const user = await getServerUser()
+  const res = await request.json()
+  const indicators: ReviewIndicator[] = res.indicators
   await db
     .insert(reviewTable)
     .values({
-      userId: user?.id || "",
+      userId: user?.id || '',
       entityId: res.entity_id,
       id: res.review_id,
       rating: res.rating,
       comment: res.reviewText,
     })
     .then(() => {
-      return db.insert(reviewIndicatorTable).values(indicators);
-    });
+      return db.insert(reviewIndicatorTable).values(indicators)
+    })
   return Response.json({
-    message: "Review submitted successfully",
+    message: 'Review submitted successfully',
     data: {
       entity_id: res.entity_id,
       review_id: res.review_id,
@@ -31,5 +31,5 @@ export async function POST(request: Request) {
       indicators: res.indicators,
       reviewText: res.reviewText,
     },
-  });
+  })
 }
