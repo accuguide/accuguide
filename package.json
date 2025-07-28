@@ -15,7 +15,6 @@
     "test:e2e": "cypress run",
     "test:component": "cypress run --component",
     "test:open": "cypress open",
-
     "db:start": "docker compose up",
     "db:studio": "drizzle-kit studio",
     "db:push": "drizzle-kit push",
