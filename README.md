@@ -3,7 +3,8 @@
 [![Cypress](https://github.com/accuguide/accuguide/actions/workflows/cypress.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/cypress.yml)
 [![CodeQL](https://github.com/accuguide/accuguide/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/github-code-scanning/codeql)
 [![Next](https://github.com/accuguide/accuguide/actions/workflows/next.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/next.yml)
-[![Biome](https://github.com/accuguide/accuguide/actions/workflows/biome.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/biome.yml)
+[![Biome Format](https://github.com/accuguide/accuguide/actions/workflows/biome-format.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/biome-format.yml)
+[![Biome Lint](https://github.com/accuguide/accuguide/actions/workflows/biome-lint.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/biome-lint.yml)
 <br />
 [![Netlify Status](https://api.netlify.com/api/v1/badges/378e5089-548b-429f-b1ad-507f6bae73e4/deploy-status)](https://app.netlify.com/projects/accuguide/deploys)
 
