@@ -17,7 +17,7 @@ export default function SearchLayout({
   return (
     <LayoutDisplay
       title="Search"
-      subtitle="Location access may be granted to show more relevant results"
+      subtitle="Choose a place to find accessibility info or rate its accessibility"
     >
       {children}
     </LayoutDisplay>

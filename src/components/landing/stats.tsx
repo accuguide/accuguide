@@ -29,7 +29,7 @@ export default async function Stats() {
   ];
 
   return (
-    <section className="pt-4 px-4 sm:px-6 lg:px-8">
+    <section className="pt-2 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-8">
           {stats.map((stat) => {
@@ -45,12 +45,13 @@ export default async function Stats() {
                   <IconComponent className="w-8 h-8" />
                 </div>
 
-                <div className="space-y-2">
-                  <p className={`text-4xl font-bold ${stat.color} sm:text-5xl`}>
+                <div className="flex gap-4 items-center sm:block sm:space-y-2">
+                  <p
+                    className={`text-3xl font-bold ${stat.color} sm:text-4xl mt-[-0.15rem]`}
+                  >
                     <CountUpNumber value={stat.value} />
-                    {stat.value >= 1000 && <span className="text-2xl">+</span>}
                   </p>
-                  <p className="text-xl font-semibold text-slate-600 dark:text-slate-300">
+                  <p className="text-lg font-semibold text-slate-600 dark:text-slate-300">
                     {stat.label}
                   </p>
                 </div>

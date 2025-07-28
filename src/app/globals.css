@@ -120,7 +120,7 @@
     @apply bg-gradient-to-br from-slate-100 via-slate-100 to-slate-300 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800;
   }
   h1 {
-    @apply text-4xl font-bold mb-4 bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 dark:from-slate-100 dark:via-blue-200 dark:to-slate-100 bg-clip-text text-transparent leading-tight;
+    @apply text-3xl font-bold mb-4 bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 dark:from-slate-100 dark:via-blue-200 dark:to-slate-100 bg-clip-text text-transparent leading-tight;
   }
   h2 {
     @apply mt-4 text-xl font-bold;

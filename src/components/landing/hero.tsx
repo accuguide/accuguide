@@ -35,11 +35,11 @@ export default function Hero() {
   return (
     <section className="w-full">
       <div className="max-w-6xl">
-        <div className="text-center mt-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100">
+        <div className="text-center">
+          <h2 className="text-2xl md:text-4xl font-bold text-slate-900 dark:text-slate-100">
             How Accuguide Works
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-8 mt-2">
+          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-4 mt-2">
             Join our community-driven platform to discover, rate, and advocate
             for accessible spaces everywhere.
           </p>
@@ -67,7 +67,7 @@ export default function Hero() {
                     {title}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="relative">
+                <CardContent className="relative mt-[-1rem]">
                   <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
                     {description}
                   </p>

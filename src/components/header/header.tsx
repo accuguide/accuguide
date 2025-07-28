@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default async function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-slate-100 dark:bg-slate-900 border-b-2 px-4 md:px-8 py-4 flex items-center text-center justify-center sm:justify-between">
+    <header className="sticky top-0 z-50 bg-slate-100 dark:bg-slate-900 border-b-2 px-4 md:px-12 py-4 flex items-center text-center justify-center sm:justify-between">
       <Link href="/" className="font-bold hidden sm:block">
         Accuguide
       </Link>
@@ -16,9 +16,9 @@ export default async function Header() {
             <Image
               src="/images/logo.png"
               alt="Accuguide Logo"
-              width={32}
-              height={32}
-              className="block sm:hidden rounded-lg mt-[2px]"
+              width={40}
+              height={40}
+              className="block sm:hidden rounded-lg "
             />
           </Link>
         </div>

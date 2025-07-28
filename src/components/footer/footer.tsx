@@ -4,7 +4,7 @@ import FooterLink from "./footer-link";
 
 export default function Footer() {
   return (
-    <footer className="border-t-2 px-8 py-4 lg:px-24">
+    <footer className="border-t-2 px-4 py-4 lg:px-12">
       <div className="flex justify-between">
         <div className="flex">
           <Image
@@ -75,7 +75,10 @@ export default function Footer() {
         Copyright 2025 Accuguide
         <br />
         This site is powered by{" "}
-        <Link href="https://netlify.com" className="text-[10px] sm:text-xs">
+        <Link
+          href="https://netlify.com"
+          className="text-[10px] sm:text-xs hover:underline hover:opacity-75"
+        >
           Netlify
         </Link>
       </p>

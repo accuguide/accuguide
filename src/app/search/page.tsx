@@ -48,11 +48,15 @@ function SearchResults() {
 
   return (
     <div>
+      <p className="text-xs sm:text-sm mt-[-1rem] mb-4">
+        Location access may be granted to show more relevant results
+      </p>
+
       {isLoading ? (
         <SearchSkeleton />
       ) : (
         <>
-          <h2 className="mt-2 my-4">Results</h2>
+          <h2 className="mt-2 my-4">Catalogued Results</h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3">
             {dbResponse.map((place) => (
@@ -67,7 +71,7 @@ function SearchResults() {
               />
             ))}
           </div>
-          <h2 className="mt-2 my-4">All Google Results</h2>
+          <h2 className="mt-2 my-4">All Results</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3">
             {googleResponse.map((place) => (
               <SearchDisplay

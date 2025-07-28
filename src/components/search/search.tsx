@@ -21,7 +21,11 @@ export default function Search({ size }: SearchProps) {
   }
 
   if (pathname === "/" && size === "half") {
-    return null;
+    return (
+      <div className="w-[50vw]">
+        <span></span>
+      </div>
+    );
   }
 
   // Header/Half size styling
@@ -63,7 +67,7 @@ export default function Search({ size }: SearchProps) {
 
               <Input
                 id="search"
-                placeholder="Search for businesses, schools, or other places..."
+                placeholder="Search for places or services..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 className="m-2 flex-1 border-0 bg-transparent text-lg placeholder:text-slate-600 dark:placeholder:text-slate-400 dark:text-slate-100 py-4"
