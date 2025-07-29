@@ -1,5 +1,6 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import Link from 'next/link'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,7 +11,6 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { getSignedUrlForKey } from '@/lib/s3/functions'
 import { getServerUser } from '@/lib/session'
-import { Button } from '@/components/ui/button'
 
 export default async function HeaderUser() {
   const user = await getServerUser()
@@ -27,7 +27,7 @@ export default async function HeaderUser() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-1 hover:opacity-80 cursor-pointer">
+        <button className="cursor-pointer rounded-lg hover:opacity-80 focus:ring-2 focus:ring-slate-500 focus:ring-offset-1 focus:outline-none">
           <Avatar>
             <AvatarImage src={imageUrl} alt="your profile image" />
             <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>

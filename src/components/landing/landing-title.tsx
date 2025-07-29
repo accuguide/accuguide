@@ -13,7 +13,7 @@ export default function LandingTitle() {
           Accuguide
         </span>
       </h1>
-      <p className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-6 sm:mb-10">
+      <p className="mx-auto mb-6 max-w-2xl text-lg leading-relaxed sm:mb-10 md:text-xl">
         Accuguide makes it easy to find accessible places, review accessibility
         features, and share your experiences with the community. Start by
         searching for places or services like restaurants, schools, or airlines!

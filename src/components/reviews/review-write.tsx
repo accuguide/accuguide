@@ -1,26 +1,25 @@
 'use client'
 
-import { StarIcon } from 'lucide-react'
-import { Textarea } from '@/components/ui/textarea'
-import { FormEvent, useEffect, useState, useRef } from 'react'
-import { ReviewIndicator as DBReviewIndicator } from '@/lib/db/schema'
-
-// Extend ReviewIndicator to include 'category'
-type ReviewIndicator = DBReviewIndicator & {
-  category: string
-}
-import { v4 as uuidv4 } from 'uuid'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Check, X, Minus } from 'lucide-react'
-import { cn } from '@/lib/utils' // Adjust the path if needed
+import { Check, Minus, StarIcon, X } from 'lucide-react'
 import Link from 'next/link'
+import { FormEvent, useEffect, useRef, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { Textarea } from '@/components/ui/textarea'
+import { ReviewIndicator as DBReviewIndicator } from '@/lib/db/schema'
+import { cn } from '@/lib/utils' // Adjust the path if needed
+
+// Extend ReviewIndicator to include 'category'
+type ReviewIndicator = DBReviewIndicator & {
+  category: string
+}
 
 export default function ReviewWrite({
   entity_id,
@@ -70,7 +69,7 @@ export default function ReviewWrite({
 
   function stars(rating: number) {
     return (
-      <div className="flex mb-1 w-24">
+      <div className="mb-1 flex w-24">
         {[1, 2, 3, 4, 5].map((star) => (
           <StarIcon
             key={star}
@@ -114,7 +113,7 @@ export default function ReviewWrite({
       )}
       {auth && (
         <>
-          <p className="mb-1 mt-4">
+          <p className="mt-4 mb-1">
             Your rating: {rating !== 0 ? rating : '-'} stars
           </p>
           {stars(rating)}
@@ -136,23 +135,23 @@ export default function ReviewWrite({
               ),
             ).map(([category, categoryIndicators]) => (
               <AccordionItem key={category} value={category}>
-                <AccordionTrigger className="text-sm font-semibold text-gray-700 dark:text-gray-300 focus:ring-0 hover:bg-slate-400 dark:hover:bg-slate-500 p-1 my-1">
+                <AccordionTrigger className="my-1 p-1 text-sm font-semibold text-gray-700 hover:bg-slate-400 focus:ring-0 dark:text-gray-300 dark:hover:bg-slate-500">
                   {category}
                 </AccordionTrigger>
                 <AccordionContent>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-1 border-0 rounded-lg overflow-hidden mb-0">
+                  <div className="mb-0 grid grid-cols-2 gap-1 overflow-hidden rounded-lg border-0 md:grid-cols-3">
                     {categoryIndicators.map((indicator) => (
                       <Card
                         key={indicator.id}
                         className={cn(
-                          'px-2 py-1.5 h-full',
+                          'h-full px-2 py-1.5',
                           rating === 0
                             ? 'border-slate-400 dark:border-slate-600'
                             : '',
                         )}
                       >
-                        <div className="flex items-center justify-between h-full">
-                          <div className="text-xs leading-tight flex-1">
+                        <div className="flex h-full items-center justify-between">
+                          <div className="flex-1 text-xs leading-tight">
                             {indicator.indicator}
                           </div>
 
@@ -222,7 +221,7 @@ export default function ReviewWrite({
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}
             disabled={rating === 0}
-            className="mb-2 mt-1 border-slate-800 dark:border-slate-200"
+            className="mt-1 mb-2 border-slate-800 dark:border-slate-200"
             placeholder="Write your review here..."
           ></Textarea>
           <Button disabled={rating === 0}>Submit</Button>

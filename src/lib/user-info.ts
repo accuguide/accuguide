@@ -1,6 +1,6 @@
+import { inArray } from 'drizzle-orm'
 import { db } from '@/lib/db'
 import { user } from '@/lib/db/auth-schema'
-import { inArray } from 'drizzle-orm'
 
 export async function getUserInfosByIds(
   userIds: string[],

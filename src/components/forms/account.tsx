@@ -1,9 +1,17 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -13,16 +21,8 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { useEffect, useState } from 'react'
-import FormContainer from './form-container'
 import { changeEmail, changePassword } from '@/lib/auth-client'
+import FormContainer from './form-container'
 
 const formSchema = z.object({
   email: z.string().email('Please enter a valid email address').optional(),

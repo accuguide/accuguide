@@ -1,5 +1,5 @@
-import LayoutDisplay from '@/components/layout/layout-display'
 import type { Metadata } from 'next'
+import LayoutDisplay from '@/components/layout/layout-display'
 
 export const metadata: Metadata = {
   title: 'Sign Out',

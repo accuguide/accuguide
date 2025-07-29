@@ -1,9 +1,12 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import LegalAgreement from '@/components/forms/legal-agreement'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -13,12 +16,8 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { signUpWithEmail } from '@/lib/auth-client'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { signInWithGoogle } from '@/lib/auth-client'
+import { signInWithGoogle, signUpWithEmail } from '@/lib/auth-client'
 import FormContainer from './form-container'
-import LegalAgreement from '@/components/forms/legal-agreement'
-import Link from 'next/link'
 
 const formSchema = z.object({
   email: z.string(),

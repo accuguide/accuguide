@@ -1,10 +1,10 @@
 'use client'
 
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { type FormEvent, useState } from 'react'
-import { usePathname } from 'next/navigation'
 import { SearchIcon } from 'lucide-react'
+import { usePathname } from 'next/navigation'
+import { type FormEvent, useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
 export type SearchProps = {
   size: 'half' | 'full' | 'page'
@@ -31,8 +31,8 @@ export default function Search({ size }: SearchProps) {
   // Header/Half size styling
   if (size === 'half') {
     return (
-      <form onSubmit={handleSubmit} className="relative md:max-w-md max-w-full">
-        <label htmlFor="search" className="sr-only ">
+      <form onSubmit={handleSubmit} className="relative max-w-full md:max-w-md">
+        <label htmlFor="search" className="sr-only">
           Search places
         </label>
         <Input
@@ -49,13 +49,13 @@ export default function Search({ size }: SearchProps) {
 
   // Full and page size styling (existing)
   return (
-    <div className="w-full flex justify-center">
+    <div className="flex w-full justify-center">
       <form onSubmit={handleSubmit} className="relative w-full max-w-2xl">
-        <div className="relative group mb-4">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
-          <div className="relative bg-white dark:bg-black rounded-2xl shadow-xl border-2 border-slate-200 dark:border-slate-400 overflow-hidden">
+        <div className="group relative mb-4">
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 opacity-25 blur transition duration-300 group-hover:opacity-40"></div>
+          <div className="relative overflow-hidden rounded-2xl border-2 border-slate-200 bg-white shadow-xl dark:border-slate-400 dark:bg-black">
             <div className="flex items-center">
-              <div className="pl-6 pr-1 py-4 hidden sm:block">
+              <div className="hidden py-4 pr-1 pl-6 sm:block">
                 <SearchIcon
                   className="h-5 w-5 text-slate-400 dark:text-slate-500"
                   aria-hidden="true"
@@ -70,10 +70,10 @@ export default function Search({ size }: SearchProps) {
                 placeholder="Search for places or services..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="m-2 flex-1 border-0 bg-transparent text-lg placeholder:text-slate-600 dark:placeholder:text-slate-400 dark:text-slate-100 py-4"
+                className="m-2 flex-1 border-0 bg-transparent py-4 text-lg placeholder:text-slate-600 dark:text-slate-100 dark:placeholder:text-slate-400"
                 aria-label="Search for accessible places"
               />
-              <Button type="submit" variant="secondary" className="mr-2 my-2">
+              <Button type="submit" variant="secondary" className="my-2 mr-2">
                 Search
               </Button>
             </div>

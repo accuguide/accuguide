@@ -19,14 +19,14 @@ interface ErrorCardProps {
 
 const ErrorCard: React.FC<ErrorCardProps> = ({ title, description, link }) => {
   return (
-    <Card className="bg-red-500/25 border-red-600 dark:border-red-800 shadow-md">
+    <Card className="border-red-600 bg-red-500/25 shadow-md dark:border-red-800">
       <CardHeader className="mb-[-20px]">
         <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent>
         <CardDescription>{description}</CardDescription>
         {link && (
-          <Link href={link.href} className=" text-sm hover:underline">
+          <Link href={link.href} className="text-sm hover:underline">
             {link.label}
           </Link>
         )}

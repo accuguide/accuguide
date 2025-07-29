@@ -1,5 +1,5 @@
-import { SearchDisplayProps } from '@/lib/types'
 import Link from 'next/link'
+import { SearchDisplayProps } from '@/lib/types'
 
 export default function SearchDisplay({
   displayType,
@@ -21,7 +21,7 @@ export default function SearchDisplay({
   return (
     <Link
       href={href}
-      className="mb-2 cursor-pointer block hover:opacity-80 transition-opacity"
+      className="mb-2 block cursor-pointer transition-opacity hover:opacity-80"
     >
       <h3>{name}</h3>
       <p>{capitalizedType}</p>

@@ -1,9 +1,19 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useSearchParams } from 'next/navigation'
+import { Suspense, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -13,17 +23,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from '@/components/ui/card'
 import FormContainer from './form-container'
-import { useState, useEffect, Suspense } from 'react'
-import { toast } from 'sonner'
-import { useSearchParams } from 'next/navigation'
 
 const formSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -87,7 +87,7 @@ function UnsubscribeFormContent() {
             </CardDescription>
           </CardHeader>
           <CardContent className="text-center">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               We&apos;re sorry to see you go. If you change your mind, you can
               always sign up again.
             </p>

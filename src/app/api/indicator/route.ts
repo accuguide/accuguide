@@ -1,7 +1,7 @@
+import { eq, inArray } from 'drizzle-orm'
+import { NextRequest } from 'next/server'
 import { db } from '@/lib/db'
 import { indicatorTable, typeIndicatorTable, typeTable } from '@/lib/db/schema'
-import { NextRequest } from 'next/server'
-import { eq, inArray } from 'drizzle-orm'
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams

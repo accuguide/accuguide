@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import { db } from '@/lib/db'
 import {
   categoryTable,
@@ -7,7 +8,6 @@ import {
   typeTable,
 } from '@/lib/db/schema'
 import { getServerUser } from '@/lib/session'
-import { revalidatePath } from 'next/cache'
 import AdminInfo from './admin-info'
 
 export default async function Page() {

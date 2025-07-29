@@ -1,11 +1,11 @@
 import { StarIcon } from 'lucide-react'
-import ReviewWrite from './review-write'
-import IndicatorDisplay from './indicator-display'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { getSignedUrlForKey } from '@/lib/s3/functions'
 import { checkAuth } from '@/lib/session'
 import { getUserInfosByIds } from '@/lib/user-info'
-import { getSignedUrlForKey } from '@/lib/s3/functions'
 import { cn } from '@/lib/utils'
+import IndicatorDisplay from './indicator-display'
+import ReviewWrite from './review-write'
 
 interface Review {
   id: string
@@ -38,11 +38,11 @@ export default async function ReviewDisplay({
 }) {
   function stars(rating: number) {
     return (
-      <div className="flex my-1 w-24">
+      <div className="my-1 flex w-24">
         {[1, 2, 3, 4, 5].map((star) => (
           <StarIcon
             key={star}
-            className={` w-4 ${star <= rating ? 'text-yellow-500' : ''}`}
+            className={`w-4 ${star <= rating ? 'text-yellow-500' : ''}`}
             fill={star <= rating ? 'currentColor' : 'none'}
           />
         ))}
@@ -85,7 +85,7 @@ export default async function ReviewDisplay({
         {sortedReviews.map((review) => (
           <div
             key={review.id}
-            className="py-2 border-slate-600 dark:border-slate-400 border-b-2"
+            className="border-b-2 border-slate-600 py-2 dark:border-slate-400"
           >
             {write && (
               <div className="flex items-center gap-2">
@@ -106,7 +106,7 @@ export default async function ReviewDisplay({
             <div className="text-sm">{stars(review.rating)}</div>
             <IndicatorDisplay indicators={indicators} reviewId={review.id} />
             <p className="text-sm">{review.comment}</p>
-            <p className="text-xs mt-2">
+            <p className="mt-2 text-xs">
               {new Date(review.createdAt).toLocaleDateString()}
             </p>
           </div>

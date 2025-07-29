@@ -1,4 +1,4 @@
-import { Compass, Star, Megaphone } from 'lucide-react'
+import { Compass, Megaphone, Star } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 export default function Hero() {
@@ -36,39 +36,39 @@ export default function Hero() {
     <section className="w-full">
       <div className="max-w-6xl">
         <div className="text-center">
-          <h2 className="text-2xl md:text-4xl font-bold text-slate-900 dark:text-slate-100">
+          <h2 className="text-2xl font-bold text-slate-900 md:text-4xl dark:text-slate-100">
             How Accuguide Works
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-4 mt-2">
+          <p className="mx-auto mt-2 mb-4 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
             Join our community-driven platform to discover, rate, and advocate
             for accessible spaces everywhere.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid gap-8 md:grid-cols-3">
           {cardData.map(
             ({ icon: Icon, title, description, gradient, bgGradient }) => (
               <Card
                 key={title}
-                className="group relative overflow-hidden border-0 shadow-lg hover:shadow-2xl dark:shadow-slate-900/50 dark:hover:shadow-slate-900/70 transition-all duration-300 transform hover:-translate-y-2 bg-white dark:bg-slate-800"
+                className="group relative transform overflow-hidden border-0 bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl dark:bg-slate-800 dark:shadow-slate-900/50 dark:hover:shadow-slate-900/70"
               >
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${bgGradient} opacity-50`}
                 ></div>
                 <CardHeader className="relative">
-                  <div className="flex items-center gap-3 mb-4">
+                  <div className="mb-4 flex items-center gap-3">
                     <div
-                      className={`p-3 rounded-xl bg-gradient-to-r ${gradient} shadow-lg`}
+                      className={`rounded-xl bg-gradient-to-r p-3 ${gradient} shadow-lg`}
                     >
                       <Icon className="h-6 w-6 text-white" aria-hidden="true" />
                     </div>
                   </div>
-                  <CardTitle className="text-xl font-bold text-slate-900 dark:text-slate-100 group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">
+                  <CardTitle className="text-xl font-bold text-slate-900 transition-colors group-hover:text-slate-700 dark:text-slate-100 dark:group-hover:text-slate-300">
                     {title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="relative mt-[-1rem]">
-                  <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <p className="leading-relaxed text-slate-600 dark:text-slate-300">
                     {description}
                   </p>
                 </CardContent>

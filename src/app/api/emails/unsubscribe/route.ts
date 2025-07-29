@@ -1,7 +1,7 @@
+import { eq } from 'drizzle-orm'
+import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { emailTable } from '@/lib/db/schema'
-import { NextRequest, NextResponse } from 'next/server'
-import { eq } from 'drizzle-orm'
 
 export async function POST(request: NextRequest) {
   try {

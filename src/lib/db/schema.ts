@@ -1,14 +1,13 @@
+import type { InferSelectModel } from 'drizzle-orm'
 import {
+  boolean,
+  integer,
+  numeric,
   pgTable,
   text,
-  integer,
   timestamp,
-  numeric,
   uuid,
-  boolean,
 } from 'drizzle-orm/pg-core'
-
-import type { InferSelectModel } from 'drizzle-orm'
 import { user } from './auth-schema'
 
 export const typeTable = pgTable('type', {

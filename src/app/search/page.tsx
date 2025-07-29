@@ -1,12 +1,12 @@
 'use client'
 
-import { Suspense, useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
 import Cookies from 'js-cookie'
-import { SearchDisplayProps } from '@/lib/types'
+import { useSearchParams } from 'next/navigation'
+import { Suspense, useEffect, useState } from 'react'
+import Location from '@/components/search/location'
 import SearchDisplay from '@/components/search/search-display'
 import SearchSkeleton from '@/components/skeletons/search-skeleton'
-import Location from '@/components/search/location'
+import { SearchDisplayProps } from '@/lib/types'
 
 function SearchResults() {
   const [googleResponse, setGoogleResponse] = useState<SearchDisplayProps[]>([])
@@ -46,7 +46,7 @@ function SearchResults() {
 
   return (
     <div>
-      <p className="text-xs sm:text-sm mt-[-1rem] mb-4">
+      <p className="mt-[-1rem] mb-4 text-xs sm:text-sm">
         Location access may be granted to show more relevant results
       </p>
 
@@ -54,7 +54,7 @@ function SearchResults() {
         <SearchSkeleton />
       ) : (
         <>
-          <h2 className="mt-2 my-4">Catalogued Results</h2>
+          <h2 className="my-4 mt-2">Catalogued Results</h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3">
             {dbResponse.map((place) => (
@@ -69,7 +69,7 @@ function SearchResults() {
               />
             ))}
           </div>
-          <h2 className="mt-2 my-4">All Results</h2>
+          <h2 className="my-4 mt-2">All Results</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3">
             {googleResponse.map((place) => (
               <SearchDisplay

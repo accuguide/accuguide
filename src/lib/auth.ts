@@ -1,7 +1,7 @@
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
-import { db } from '@/lib/db' // your drizzle instance
 import { nextCookies } from 'better-auth/next-js'
+import { db } from '@/lib/db' // your drizzle instance
 import * as schema from '@/lib/db/auth-schema' // Import your schema object
 
 export const auth = betterAuth({

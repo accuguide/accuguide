@@ -1,9 +1,8 @@
+import { desc, eq } from 'drizzle-orm'
+import { NextRequest, NextResponse } from 'next/server'
+import { validate as isUuid, v4 as uuidv4 } from 'uuid'
 import { db } from '@/lib/db'
 import { Entity, entityTable, typeMappingTable } from '@/lib/db/schema'
-import { NextRequest, NextResponse } from 'next/server'
-import { eq, desc } from 'drizzle-orm'
-import { v4 as uuidv4 } from 'uuid'
-import { validate as isUuid } from 'uuid' // Import UUID validation function
 
 async function getTypeFromMapping(primaryTypeText: string): Promise<string> {
   const lowercaseType = primaryTypeText.toLowerCase()

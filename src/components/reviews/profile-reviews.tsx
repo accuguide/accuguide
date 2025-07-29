@@ -1,4 +1,4 @@
-import { db } from '@/lib/db'
+import { eq } from 'drizzle-orm'
 import ReviewDisplay from '@/components/reviews/review-display'
 import {
   Card,
@@ -7,8 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { db } from '@/lib/db'
 import { reviewTable } from '@/lib/db/schema'
-import { eq } from 'drizzle-orm'
 import { getServerUser } from '@/lib/session'
 
 export default async function ProfileReview() {

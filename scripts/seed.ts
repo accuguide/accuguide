@@ -1,3 +1,4 @@
+import { exit } from 'process'
 import { db } from '@/lib/db'
 import { account, session, user, verification } from '@/lib/db/auth-schema'
 import {
@@ -11,7 +12,6 @@ import {
   typeMappingTable,
   typeTable,
 } from '@/lib/db/schema'
-import { exit } from 'process'
 
 const main = async () => {
   try {

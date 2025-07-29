@@ -1,12 +1,11 @@
+import '@/app/globals.css'
+import { GeistSans } from 'geist/font/sans'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
-import { GeistSans } from 'geist/font/sans'
-import '@/app/globals.css'
-import { ModeToggle } from '@/components/theme/mode-toggle'
-import Header from '@/components/header/header'
 import Footer from '@/components/footer/footer'
+import Header from '@/components/header/header'
+import { ModeToggle } from '@/components/theme/mode-toggle'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: {
@@ -37,11 +36,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <div className="min-h-[80vh] my-4 md:my-8 mx-4 md:mx-12">
+          <div className="mx-4 my-4 min-h-[80vh] md:mx-12 md:my-8">
             {children}
           </div>
           <Footer />
-          <div className="fixed bottom-4 right-4">
+          <div className="fixed right-4 bottom-4">
             <ModeToggle />
           </div>
         </ThemeProvider>

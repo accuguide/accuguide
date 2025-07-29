@@ -1,8 +1,7 @@
 'use client'
 
+import { Check, ChevronsUpDown } from 'lucide-react'
 import { useState } from 'react'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import {
   Command,
@@ -11,12 +10,13 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command'
+import { Input } from '@/components/ui/input'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { Check, ChevronsUpDown } from 'lucide-react'
+import { Textarea } from '@/components/ui/textarea'
 import { cn } from '@/lib/utils'
 
 interface AdminInfoProps {
@@ -88,7 +88,7 @@ export default function AdminInfo({
       <form onSubmit={handleSubmit}>
         <Input
           placeholder="Add a new type"
-          className="md:max-w-xs my-1"
+          className="my-1 md:max-w-xs"
           value={newType}
           onChange={(e) => setNewType(e.target.value)}
         />
@@ -112,13 +112,13 @@ export default function AdminInfo({
       <form onSubmit={handleIndicatorSubmit}>
         <Input
           placeholder="Add a new indicator"
-          className="md:max-w-xs my-1"
+          className="my-1 md:max-w-xs"
           value={newIndicator}
           onChange={(e) => setNewIndicator(e.target.value)}
         />
         <Textarea
           placeholder="Add description (optional)"
-          className="md:max-w-xs my-1"
+          className="my-1 md:max-w-xs"
           value={newDescription}
           onChange={(e) => setNewDescription(e.target.value)}
         />
@@ -129,7 +129,7 @@ export default function AdminInfo({
                 variant="outline"
                 role="combobox"
                 aria-expanded={categoryOpen}
-                className="md:max-w-xs w-full justify-between"
+                className="w-full justify-between md:max-w-xs"
               >
                 {selectedCategory
                   ? categories.find(
@@ -139,7 +139,7 @@ export default function AdminInfo({
                 <ChevronsUpDown className="opacity-50" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="md:max-w-xs w-full p-0">
+            <PopoverContent className="w-full p-0 md:max-w-xs">
               <Command>
                 <CommandList>
                   <CommandEmpty>No category found.</CommandEmpty>
@@ -182,7 +182,7 @@ export default function AdminInfo({
               {indicator.indicator} - {indicator.category}
             </p>
             {indicator.description && (
-              <p className="text-sm mb-2">{indicator.description}</p>
+              <p className="mb-2 text-sm">{indicator.description}</p>
             )}
           </li>
         ))}

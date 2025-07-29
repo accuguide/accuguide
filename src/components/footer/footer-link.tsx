@@ -10,7 +10,7 @@ export default function FooterLink({
   return (
     <Link
       href={href}
-      className="text-sm text-slate-600 dark:text-slate-300 hover:underline hover:opacity-75 transition-opacity duration-50"
+      className="text-sm text-slate-600 transition-opacity duration-50 hover:underline hover:opacity-75 dark:text-slate-300"
     >
       {children}
     </Link>

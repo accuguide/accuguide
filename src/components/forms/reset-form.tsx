@@ -1,10 +1,14 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { Suspense, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import FormContainer from '@/components/forms/form-container'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -14,12 +18,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { useState, Suspense } from 'react'
 import { authClient } from '@/lib/auth-client'
-import { useSearchParams } from 'next/navigation'
-import FormContainer from '@/components/forms/form-container'
-import Link from 'next/link'
 
 const formSchema = z.object({
   password: z.string().min(8, 'Password must be at least 8 characters'),
@@ -99,7 +98,7 @@ function ResetFormContent() {
                   />
                 </div>
                 {error && (
-                  <div className="text-red-600 dark:text-red-400 text-sm text-center">
+                  <div className="text-center text-sm text-red-600 dark:text-red-400">
                     {error}
                   </div>
                 )}
@@ -109,7 +108,7 @@ function ResetFormContent() {
               </form>
             </Form>
           )}
-          <div className="text-center text-sm text-neutral-600 dark:text-neutral-400 mt-4">
+          <div className="mt-4 text-center text-sm text-neutral-600 dark:text-neutral-400">
             <Link href="/sign-in/" className="underline">
               Back to sign in
             </Link>

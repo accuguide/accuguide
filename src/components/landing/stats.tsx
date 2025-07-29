@@ -1,7 +1,7 @@
-import { MapPin, Star, Shield } from 'lucide-react'
-import CountUpNumber from './count-up-number'
+import { MapPin, Shield, Star } from 'lucide-react'
 import { db } from '@/lib/db'
 import { entityTable, indicatorTable, reviewTable } from '@/lib/db/schema'
+import CountUpNumber from './count-up-number'
 
 export default async function Stats() {
   const places = await db.$count(entityTable)
@@ -30,24 +30,24 @@ export default async function Stats() {
 
   return (
     <section className="pt-2 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-8">
           {stats.map((stat) => {
             const IconComponent = stat.icon
             return (
               <div
                 key={stat.label}
-                className={`relative overflow-hidden rounded-2xl  p-2 md:p-8 text-center transition-all duration-300 hover:shadow-lg hover:scale-105`}
+                className={`relative overflow-hidden rounded-2xl p-2 text-center transition-all duration-300 hover:scale-105 hover:shadow-lg md:p-8`}
               >
                 <div
-                  className={`hidden md:inline-flex items-center justify-center w-16 h-16 rounded-full ${stat.color} bg-white shadow-sm mb-6`}
+                  className={`hidden h-16 w-16 items-center justify-center rounded-full md:inline-flex ${stat.color} mb-6 bg-white shadow-sm`}
                 >
-                  <IconComponent className="w-8 h-8" />
+                  <IconComponent className="h-8 w-8" />
                 </div>
 
-                <div className="flex gap-4 items-center sm:block sm:space-y-2">
+                <div className="flex items-center gap-4 sm:block sm:space-y-2">
                   <p
-                    className={`text-3xl font-bold ${stat.color} sm:text-4xl mt-[-0.15rem]`}
+                    className={`text-3xl font-bold ${stat.color} mt-[-0.15rem] sm:text-4xl`}
                   >
                     <CountUpNumber value={stat.value} />
                   </p>
