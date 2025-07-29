@@ -40,4 +40,4 @@ jobs:
         env:
           BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
           NEXT_TELEMETRY_DISABLED: 1
-        run: npm run build:prod
+        run: npm run build

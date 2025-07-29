@@ -41,7 +41,6 @@ if (match) {
   content = content.replace(bodyTagRegex, replacement)
 
   writeFileSync(layoutPath, content, 'utf-8')
-  console.log('Script import and analytics script added to layout.tsx')
 } else {
   console.error('Could not find body tag in layout.tsx')
 }

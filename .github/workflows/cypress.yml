@@ -16,8 +16,13 @@ jobs:
       contents: read
       pull-requests: read
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
       - name: Cypress run
         uses: cypress-io/github-action@be1bab96b388bbd9ce3887e397d373c8557e15af #v6.9.2
         with:
@@ -29,8 +34,13 @@ jobs:
       contents: read
       pull-requests: read
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
       - name: Cypress run
         uses: cypress-io/github-action@be1bab96b388bbd9ce3887e397d373c8557e15af #v6.9.2
         with:
