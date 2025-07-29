@@ -5,7 +5,6 @@ import { ThemeProvider } from 'next-themes'
 import Footer from '@/components/footer/footer'
 import Header from '@/components/header/header'
 import { ModeToggle } from '@/components/theme/mode-toggle'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 
 export const metadata: Metadata = {
   title: {

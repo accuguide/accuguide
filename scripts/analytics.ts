@@ -18,6 +18,19 @@ if (content.includes('analytics.accuguide.org/script.js')) {
   process.exit(1)
 }
 
+// Add Script import if it doesn't exist
+if (!content.includes("import Script from 'next/script'")) {
+  // Find the last import statement and add the Script import after it
+  const importRegex = /(import.*from.*['"].*['"])/g
+  const imports = content.match(importRegex)
+
+  if (imports && imports.length > 0) {
+    const lastImport = imports[imports.length - 1]
+    const scriptImport = "import Script from 'next/script'"
+    content = content.replace(lastImport, lastImport + '\n' + scriptImport)
+  }
+}
+
 // Find the opening body tag and add the script after it
 const bodyTagRegex = /(<body[^>]*>)/
 const match = content.match(bodyTagRegex)
@@ -28,7 +41,7 @@ if (match) {
   content = content.replace(bodyTagRegex, replacement)
 
   writeFileSync(layoutPath, content, 'utf-8')
-  console.log('Analytics script added to layout.tsx')
+  console.log('Script import and analytics script added to layout.tsx')
 } else {
   console.error('Could not find body tag in layout.tsx')
 }

@@ -16,5 +16,11 @@ const analyticsScriptRegex =
 
 content = content.replace(analyticsScriptRegex, '')
 
+// Remove Script import if no other Script components are used
+if (!content.includes('<Script')) {
+  const scriptImportRegex = /import Script from 'next\/script'\n?/
+  content = content.replace(scriptImportRegex, '')
+}
+
 writeFileSync(layoutPath, content, 'utf-8')
-console.log('Analytics script')
+console.log('Analytics script and Script import removed from layout.tsx')
