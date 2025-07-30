@@ -9,7 +9,7 @@ on:
       - beta
 
 jobs:
-  Check:
+  check:
     runs-on: ubuntu-latest
     permissions:
       contents: read
