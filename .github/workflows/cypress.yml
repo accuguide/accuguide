@@ -10,7 +10,7 @@ on:
 
 jobs:
   e2e:
-    name: E2E
+    name: e2e
     runs-on: ubuntu-24.04
     permissions:
       contents: read
@@ -28,7 +28,7 @@ jobs:
         with:
           start: npm run dev
   component:
-    name: Components
+    name: component
     runs-on: ubuntu-24.04
     permissions:
       contents: read
