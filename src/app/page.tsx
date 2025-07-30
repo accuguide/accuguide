@@ -1,26 +1,26 @@
 import dynamic from 'next/dynamic'
 import LandingTitle from '@/components/landing/landing-title'
 
-// Use dynamic imports for components that can be lazy loaded
-const Hero = dynamic(() => import('@/components/landing/hero'), {
-  loading: () => <div className="h-32 animate-pulse rounded bg-gray-200"></div>,
-})
-
-const Stats = dynamic(() => import('@/components/landing/stats'), {
-  loading: () => <div className="h-24 animate-pulse rounded bg-gray-200"></div>,
-})
-
-const Search = dynamic(() => import('@/components/search/search'), {
-  loading: () => <div className="h-16 animate-pulse rounded bg-gray-200"></div>,
-})
+import Hero from '@/components/landing/hero'
+import Stats from '@/components/landing/stats'
+import Search from '@/components/search/search'
 
 export default async function Page() {
   return (
-    <div className="flex flex-col items-center">
-      <div>
+    <div className="flex flex-col items-center space-y-16">
+      <div className="w-full max-w-6xl px-4">
         <LandingTitle />
+      </div>
+      
+      <div className="w-full max-w-4xl px-4">
         <Search size="full" />
+      </div>
+      
+      <div className="w-full max-w-6xl px-4">
         <Stats />
+      </div>
+      
+      <div className="w-full max-w-6xl px-4">
         <Hero />
       </div>
     </div>
