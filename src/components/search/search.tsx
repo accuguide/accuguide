@@ -73,9 +73,9 @@ export default function Search({ size }: SearchProps) {
                 className="m-3 flex-1 border-0 bg-transparent py-4 text-lg font-medium placeholder:text-slate-500 focus:ring-0 focus:outline-none dark:text-slate-100 dark:placeholder:text-slate-400"
                 aria-label="Search for accessible places"
               />
-              <Button 
-                type="submit" 
-                variant="secondary" 
+              <Button
+                type="submit"
+                variant="secondary"
                 className="my-3 mr-3 px-8 py-3 text-base font-semibold transition-all duration-300 hover:scale-105"
               >
                 Search

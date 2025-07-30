@@ -6,7 +6,7 @@ export default async function Stats() {
   const places = 12847
   const indicators = 45
   const reviews = 3291
-  
+
   const stats = [
     {
       value: places,
@@ -39,10 +39,11 @@ export default async function Stats() {
             Making a Real Impact
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Join thousands of users who are building a more accessible world together
+            Join thousands of users who are building a more accessible world
+            together
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
           {stats.map((stat) => {
             const IconComponent = stat.icon
@@ -57,9 +58,11 @@ export default async function Stats() {
                   >
                     <IconComponent className="h-8 w-8" />
                   </div>
-                  
+
                   <div className="space-y-2">
-                    <p className={`text-4xl md:text-5xl font-bold ${stat.color}`}>
+                    <p
+                      className={`text-4xl md:text-5xl font-bold ${stat.color}`}
+                    >
                       <CountUpNumber value={stat.value} />
                     </p>
                     <p className="text-lg font-semibold text-slate-700 dark:text-slate-300">

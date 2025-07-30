@@ -140,7 +140,7 @@
   .input-div {
     @apply bg-slate-50 dark:bg-slate-950;
   }
-  
+
   @keyframes gradient {
     0% {
       background-position: 0% 50%;
@@ -152,7 +152,7 @@
       background-position: 0% 50%;
     }
   }
-  
+
   .animate-gradient {
     animation: gradient 6s ease infinite;
   }

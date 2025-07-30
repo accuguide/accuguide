@@ -11,15 +11,15 @@ export default async function Page() {
       <div className="w-full max-w-6xl px-4">
         <LandingTitle />
       </div>
-      
+
       <div className="w-full max-w-4xl px-4">
         <Search size="full" />
       </div>
-      
+
       <div className="w-full max-w-6xl px-4">
         <Stats />
       </div>
-      
+
       <div className="w-full max-w-6xl px-4">
         <Hero />
       </div>

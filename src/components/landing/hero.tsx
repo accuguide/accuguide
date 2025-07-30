@@ -50,7 +50,14 @@ export default function Hero() {
 
         <div className="grid gap-8 md:grid-cols-3 lg:gap-12">
           {cardData.map(
-            ({ icon: Icon, title, description, gradient, bgGradient, iconBg }) => (
+            ({
+              icon: Icon,
+              title,
+              description,
+              gradient,
+              bgGradient,
+              iconBg,
+            }) => (
               <Card
                 key={title}
                 className="group relative transform overflow-hidden border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-xl transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:border-slate-300 dark:hover:border-slate-600"
