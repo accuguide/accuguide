@@ -1,3 +1,4 @@
+import { eq } from 'drizzle-orm'
 import { db } from '@/lib/db'
 import {
   ReviewIndicator,
@@ -31,5 +32,19 @@ export async function POST(request: Request) {
       indicators: res.indicators,
       reviewText: res.reviewText,
     },
+  })
+}
+
+export async function PUT(request: Request) {
+  const res = await request.json()
+  const reviewId = res.reviewId
+  const comment = res.comment
+  const data = await db
+    .update(reviewTable)
+    .set({ comment })
+    .where(eq(reviewTable.id, reviewId))
+  return Response.json({
+    message: 'Review updated successfully',
+    data,
   })
 }

@@ -27,3 +27,19 @@ export type SearchDisplayProps = {
   address: string
   type: string
 }
+
+export interface Review {
+  id: string
+  userId: string
+  entityId: string
+  rating: number
+  comment: string
+  createdAt: Date | string
+}
+
+export interface Indicator {
+  id: string
+  reviewId: string
+  indicator: string
+  exists: boolean | null
+}
