@@ -1,0 +1,1 @@
+ALTER TABLE "category" ADD PRIMARY KEY ("category");

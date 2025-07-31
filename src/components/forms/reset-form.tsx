@@ -1,10 +1,14 @@
-"use client";
+'use client'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { Suspense, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import FormContainer from '@/components/forms/form-container'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -12,48 +16,43 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useState, Suspense } from "react";
-import { authClient } from "@/lib/auth-client";
-import { useSearchParams } from "next/navigation";
-import FormContainer from "@/components/forms/form-container";
-import Link from "next/link";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { authClient } from '@/lib/auth-client'
 
 const formSchema = z.object({
-  password: z.string().min(8, "Password must be at least 8 characters"),
-});
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+})
 
 function ResetFormContent() {
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: { password: "" },
-  });
-  const searchParams = useSearchParams();
-  const token = searchParams.get("token") || "";
+    defaultValues: { password: '' },
+  })
+  const searchParams = useSearchParams()
+  const token = searchParams.get('token') || ''
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setError(null);
+    setError(null)
     try {
       await authClient.resetPassword({
         newPassword: values.password,
         token,
-      });
-      setSubmitted(true);
+      })
+      setSubmitted(true)
     } catch (e: unknown) {
-      let message = "Something went wrong. Please try again.";
+      let message = 'Something went wrong. Please try again.'
       if (
-        typeof e === "object" &&
+        typeof e === 'object' &&
         e &&
-        "message" in e &&
-        typeof (e as { message?: unknown }).message === "string"
+        'message' in e &&
+        typeof (e as { message?: unknown }).message === 'string'
       ) {
-        message = (e as { message: string }).message;
+        message = (e as { message: string }).message
       }
-      setError(message);
+      setError(message)
     }
   }
 
@@ -66,10 +65,10 @@ function ResetFormContent() {
         <CardContent>
           {submitted ? (
             <div className="text-center text-green-600 dark:text-green-400">
-              Your password has been reset. You can now{" "}
+              Your password has been reset. You can now{' '}
               <Link href="/sign-in/" className="underline">
                 sign in
-              </Link>{" "}
+              </Link>{' '}
               with your new password.
             </div>
           ) : (
@@ -99,7 +98,7 @@ function ResetFormContent() {
                   />
                 </div>
                 {error && (
-                  <div className="text-red-600 dark:text-red-400 text-sm text-center">
+                  <div className="text-center text-sm text-red-600 dark:text-red-400">
                     {error}
                   </div>
                 )}
@@ -109,7 +108,7 @@ function ResetFormContent() {
               </form>
             </Form>
           )}
-          <div className="text-center text-sm text-neutral-600 dark:text-neutral-400 mt-4">
+          <div className="mt-4 text-center text-sm text-neutral-600 dark:text-neutral-400">
             <Link href="/sign-in/" className="underline">
               Back to sign in
             </Link>
@@ -117,7 +116,7 @@ function ResetFormContent() {
         </CardContent>
       </Card>
     </FormContainer>
-  );
+  )
 }
 
 export default function ResetForm() {
@@ -138,5 +137,5 @@ export default function ResetForm() {
     >
       <ResetFormContent />
     </Suspense>
-  );
+  )
 }

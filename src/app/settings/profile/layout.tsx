@@ -1,18 +1,18 @@
-import LayoutDisplay from "@/components/layout/layout-display";
-import type { Metadata } from "next";
+import type { Metadata } from 'next'
+import LayoutDisplay from '@/components/layout/layout-display'
 
 export const metadata: Metadata = {
-  title: "Profile",
-  description: "User profile settings in Accuguide",
+  title: 'Profile',
+  description: 'User profile settings in Accuguide',
   alternates: {
-    canonical: "/profile/",
+    canonical: '/profile/',
   },
-};
+}
 
 export default function ProfileLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
-  return <LayoutDisplay>{children}</LayoutDisplay>;
+  return <LayoutDisplay>{children}</LayoutDisplay>
 }

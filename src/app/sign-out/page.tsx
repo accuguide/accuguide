@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import { useEffect } from "react";
-import { authClient } from "@/lib/auth-client";
+import { useEffect } from 'react'
+import { authClient } from '@/lib/auth-client'
 export default function Page() {
   //better auth client sign out
   useEffect(() => {
@@ -9,12 +9,12 @@ export default function Page() {
       .signOut()
       .then(() => {
         // Redirect to home page after sign out
-        window.location.href = "/";
+        window.location.href = '/'
       })
       .catch((error) => {
-        console.error("Sign out failed:", error);
-      });
-  }, []);
+        console.error('Sign out failed:', error)
+      })
+  }, [])
 
-  return <p>Signing Out</p>;
+  return <p>Signing Out</p>
 }

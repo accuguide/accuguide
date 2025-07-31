@@ -1,9 +1,13 @@
-"use client";
+'use client'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import FormContainer from '@/components/forms/form-container'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -11,42 +15,38 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useState } from "react";
-import { requestPassWordReset } from "@/lib/auth-client";
-import FormContainer from "@/components/forms/form-container";
-import Link from "next/link";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { requestPassWordReset } from '@/lib/auth-client'
 
 const formSchema = z.object({
   email: z.string().email(),
-});
+})
 
 export default function ForgotForm() {
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: { email: "" },
-  });
+    defaultValues: { email: '' },
+  })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setError(null);
+    setError(null)
     try {
-      await requestPassWordReset(values.email);
-      setSubmitted(true);
+      await requestPassWordReset(values.email)
+      setSubmitted(true)
     } catch (e: unknown) {
-      let message = "Something went wrong. Please try again.";
+      let message = 'Something went wrong. Please try again.'
       if (
-        typeof e === "object" &&
+        typeof e === 'object' &&
         e &&
-        "message" in e &&
-        typeof (e as { message?: unknown }).message === "string"
+        'message' in e &&
+        typeof (e as { message?: unknown }).message === 'string'
       ) {
-        message = (e as { message: string }).message;
+        message = (e as { message: string }).message
       }
-      setError(message);
+      setError(message)
     }
   }
 
@@ -89,7 +89,7 @@ export default function ForgotForm() {
                   />
                 </div>
                 {error && (
-                  <div className="text-red-600 dark:text-red-400 text-sm text-center">
+                  <div className="text-center text-sm text-red-600 dark:text-red-400">
                     {error}
                   </div>
                 )}
@@ -99,7 +99,7 @@ export default function ForgotForm() {
               </form>
             </Form>
           )}
-          <div className="text-center text-sm text-neutral-600 dark:text-neutral-400 mt-4">
+          <div className="mt-4 text-center text-sm text-neutral-600 dark:text-neutral-400">
             <Link href="/sign-in/" className="underline">
               Back to sign in
             </Link>
@@ -107,5 +107,5 @@ export default function ForgotForm() {
         </CardContent>
       </Card>
     </FormContainer>
-  );
+  )
 }

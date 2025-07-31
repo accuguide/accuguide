@@ -1,19 +1,19 @@
-import LayoutDisplay from "@/components/layout/layout-display";
-import type { Metadata } from "next";
+import type { Metadata } from 'next'
+import LayoutDisplay from '@/components/layout/layout-display'
 
 export const metadata: Metadata = {
-  title: "Resources",
+  title: 'Resources',
   description:
-    "A list of various accessibility and disability resources compiled by Accuguide",
+    'A list of various accessibility and disability resources compiled by Accuguide',
   alternates: {
-    canonical: "/help/resources/",
+    canonical: '/help/resources/',
   },
-};
+}
 
 export default function SearchLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
-  return <LayoutDisplay title="Resources">{children}</LayoutDisplay>;
+  return <LayoutDisplay title="Resources">{children}</LayoutDisplay>
 }

@@ -1,23 +1,23 @@
-import { db } from "@/lib/db";
-import ReviewDisplay from "@/components/reviews/review-display";
+import { eq } from 'drizzle-orm'
+import ReviewDisplay from '@/components/reviews/review-display'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { reviewTable } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
-import { getServerUser } from "@/lib/session";
+} from '@/components/ui/card'
+import { db } from '@/lib/db'
+import { reviewTable } from '@/lib/db/schema'
+import { getServerUser } from '@/lib/session'
 
 export default async function ProfileReview() {
-  const user = await getServerUser();
-  const userId = user?.id || "";
+  const user = await getServerUser()
+  const userId = user?.id || ''
   const reviews = await db
     .select()
     .from(reviewTable)
-    .where(eq(reviewTable.userId, userId));
+    .where(eq(reviewTable.userId, userId))
   return (
     <Card>
       <CardHeader className="text-center">
@@ -34,5 +34,5 @@ export default async function ProfileReview() {
         />
       </CardContent>
     </Card>
-  );
+  )
 }

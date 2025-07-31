@@ -1,31 +1,29 @@
-import type { Metadata } from "next";
-import { ThemeProvider } from "next-themes";
-import { GeistSans } from "geist/font/sans";
-import "@/app/globals.css";
-import { ModeToggle } from "@/components/theme/mode-toggle";
-import Header from "@/components/header/header";
-import Footer from "@/components/footer/footer";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import Script from "next/script";
+import '@/app/globals.css'
+import { GeistSans } from 'geist/font/sans'
+import type { Metadata } from 'next'
+import { ThemeProvider } from 'next-themes'
+import Footer from '@/components/footer/footer'
+import Header from '@/components/header/header'
+import { ModeToggle } from '@/components/theme/mode-toggle'
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Accuguide - Discover accessibility",
-    default: "Accuguide - Discover accessible places and services",
+    template: '%s | Accuguide - Discover accessibility',
+    default: 'Accuguide - Discover accessible places and services',
   },
-  authors: [{ name: "Accuguide Team" }],
-  metadataBase: new URL("https://accuguide.org/"),
+  authors: [{ name: 'Accuguide Team' }],
+  metadataBase: new URL('https://accuguide.org/'),
   alternates: {
-    canonical: ".",
+    canonical: '.',
   },
   description:
-    "Accuguide helps you discover accessible places and services near you. Find detailed accessibility information, reviews, and resources to make your daily life easier.",
-};
+    'Accuguide helps you discover accessible places and services near you. Find detailed accessibility information, reviews, and resources to make your daily life easier.',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -37,13 +35,15 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <div className="min-h-[80vh] my-8 mx-4 md:mx-12">{children}</div>
+          <div className="mx-4 my-4 min-h-[80vh] md:mx-12 md:my-8">
+            {children}
+          </div>
           <Footer />
-          <div className="fixed bottom-4 right-4">
+          <div className="fixed right-4 bottom-4">
             <ModeToggle />
           </div>
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

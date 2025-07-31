@@ -1,7 +1,7 @@
 export default function Title({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
-  return <h1>{children}</h1>;
+  return <h1>{children}</h1>
 }

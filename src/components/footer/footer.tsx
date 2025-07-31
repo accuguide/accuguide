@@ -1,10 +1,10 @@
-import Link from "next/link";
-import Image from "next/image";
-import FooterLink from "./footer-link";
+import Image from 'next/image'
+import Link from 'next/link'
+import FooterLink from './footer-link'
 
 export default function Footer() {
   return (
-    <footer className="border-t-2 px-8 py-4 lg:px-24">
+    <footer className="border-t-2 px-4 py-4 lg:px-12">
       <div className="flex justify-between">
         <div className="flex">
           <Image
@@ -12,20 +12,20 @@ export default function Footer() {
             alt="Disability pride logo"
             width={64}
             height={64}
-            className="w-[54px] h-[54px] md:w-[64px] md:h-[64px] rounded-lg mr-2 md:mr-4 mt-2"
+            className="mt-2 mr-2 hidden h-[54px] w-[54px] rounded-lg md:mr-4 md:block md:h-[64px] md:w-[64px]"
           />
           <FooterLink href="/">
             <div>
               <p className="footer-heading text-base md:text-lg">Accuguide</p>
-              <p className="font-semibold text-sm md:text-base">Discover</p>
-              <p className="font-semibold text-sm md:text-base">
+              <p className="text-sm font-semibold md:text-base">Discover</p>
+              <p className="text-sm font-semibold md:text-base">
                 Accessibility
               </p>
             </div>
           </FooterLink>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:text-base md:gap-12 lg:gap-32">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:gap-12 md:text-base lg:gap-32">
           <div>
             <p className="footer-heading">Info</p>
 
@@ -71,14 +71,17 @@ export default function Footer() {
         </div>
       </div>
 
-      <p className="text-xs text-left sm:text-center pt-4">
+      <p className="mt-[-50px] pt-4 text-left text-[10px] sm:mt-0 sm:text-center sm:text-xs">
         Copyright 2025 Accuguide
         <br />
-        This site is powered by{" "}
-        <Link href="https://netlify.com" className="text-xs">
+        This site is powered by{' '}
+        <Link
+          href="https://netlify.com"
+          className="text-[10px] hover:underline hover:opacity-75 sm:text-xs"
+        >
           Netlify
         </Link>
       </p>
     </footer>
-  );
+  )
 }

@@ -2,12 +2,12 @@
  * Update this with the domain of your site
  */
 const Config = {
-  domain: "https://accuguide.org",
-};
+  domain: 'https://accuguide.org',
+}
 
 export interface Page {
-  slug: string;
-  lastmod: string;
+  slug: string
+  lastmod: string
 }
 
 export const createSitemapUrlSet = (pages: Page[]): string => {
@@ -19,9 +19,9 @@ export const createSitemapUrlSet = (pages: Page[]): string => {
         <lastmod>${page.lastmod}</lastmod>
       </url>`,
     )
-    .join("");
+    .join('')
 
   return `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       ${urlSet}
-    </urlset>`;
-};
+    </urlset>`
+}

@@ -1,19 +1,19 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Check, X } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Check, X } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { cn } from '@/lib/utils'
 
 interface Indicator {
-  id: string;
-  reviewId: string;
-  indicator: string;
-  exists: boolean | null;
+  id: string
+  reviewId: string
+  indicator: string
+  exists: boolean | null
 }
 
 interface IndicatorDisplayProps {
-  indicators: Indicator[];
-  reviewId?: string;
-  className?: string;
+  indicators: Indicator[]
+  reviewId?: string
+  className?: string
 }
 
 export default function IndicatorDisplay({
@@ -26,25 +26,25 @@ export default function IndicatorDisplay({
         (indicator) =>
           indicator.reviewId === reviewId && indicator.exists !== null,
       )
-    : indicators.filter((indicator) => indicator.exists !== null);
+    : indicators.filter((indicator) => indicator.exists !== null)
 
   if (filteredIndicators.length === 0) {
-    return null;
+    return null
   }
 
   return (
     <div
       className={cn(
-        "grid grid-cols-2 md:grid-cols-4 gap-1 rounded-lg overflow-hidden mb-2",
+        'mb-2 grid grid-cols-2 gap-1 overflow-hidden rounded-lg md:grid-cols-4',
         className,
       )}
     >
       {filteredIndicators.map((indicator) => (
         <div key={indicator.id}>
-          <Card className="px-2 py-1.5 h-full">
-            <div className="flex items-center justify-between h-full">
-              <div className="text-xs leading-tight flex-1">
-                {indicator.indicator}{" "}
+          <Card className="h-full px-2 py-1.5">
+            <div className="flex h-full items-center justify-between">
+              <div className="flex-1 text-xs leading-tight">
+                {indicator.indicator}{' '}
               </div>
               <div className="flex gap-1">
                 {indicator.exists && (
@@ -52,7 +52,7 @@ export default function IndicatorDisplay({
                     type="button"
                     size="sm"
                     title="No"
-                    className="h-5 w-5 p-0 bg-green-500 dark:bg-green-800"
+                    className="h-5 w-5 bg-green-500 p-0 dark:bg-green-800"
                   >
                     <Check className="h-2.5 w-2.5 text-black" />
                   </Button>
@@ -62,7 +62,7 @@ export default function IndicatorDisplay({
                     type="button"
                     size="sm"
                     title="No"
-                    className="h-5 w-5 p-0 bg-red-500 dark:bg-red-800"
+                    className="h-5 w-5 bg-red-500 p-0 dark:bg-red-800"
                   >
                     <X className="h-2.5 w-2.5 text-black" />
                   </Button>
@@ -73,5 +73,5 @@ export default function IndicatorDisplay({
         </div>
       ))}
     </div>
-  );
+  )
 }

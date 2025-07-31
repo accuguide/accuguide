@@ -1,9 +1,17 @@
-"use client";
+'use client'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -11,65 +19,57 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { useEffect, useState } from "react";
-import FormContainer from "./form-container";
-import { changeEmail, changePassword } from "@/lib/auth-client";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { changeEmail, changePassword } from '@/lib/auth-client'
+import FormContainer from './form-container'
 
 const formSchema = z.object({
-  email: z.string().email("Please enter a valid email address").optional(),
+  email: z.string().email('Please enter a valid email address').optional(),
   currentPassword: z
     .string()
-    .min(6, "Current password must be at least 6 characters")
+    .min(6, 'Current password must be at least 6 characters')
     .optional(),
   newPassword: z
     .string()
-    .min(6, "New password must be at least 6 characters")
+    .min(6, 'New password must be at least 6 characters')
     .optional(),
-});
+})
 
 export default function Account() {
-  const [disableSubmit, setDisableSubmit] = useState(false);
-  const [currentEmail, setCurrentEmail] = useState("");
+  const [disableSubmit, setDisableSubmit] = useState(false)
+  const [currentEmail, setCurrentEmail] = useState('')
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      currentPassword: "",
-      newPassword: "",
+      email: '',
+      currentPassword: '',
+      newPassword: '',
     },
-  });
+  })
 
   useEffect(() => {
-    fetch("/api/user", {
-      method: "GET",
+    fetch('/api/user', {
+      method: 'GET',
     })
       .then((response) => response.json())
       .then((data) => {
-        setCurrentEmail(data.user?.email ?? "");
+        setCurrentEmail(data.user?.email ?? '')
         form.reset({
-          email: data.user?.email ?? "",
-        });
-      });
-  }, []);
+          email: data.user?.email ?? '',
+        })
+      })
+  }, [])
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setDisableSubmit(true);
+    setDisableSubmit(true)
     if (values.email && values.email !== currentEmail) {
-      await changeEmail(values.email);
+      await changeEmail(values.email)
     }
     if (values.currentPassword && values.newPassword) {
-      await changePassword(values.currentPassword, values.newPassword);
+      await changePassword(values.currentPassword, values.newPassword)
     }
-    window.location.reload();
+    window.location.reload()
   }
 
   return (
@@ -148,5 +148,5 @@ export default function Account() {
         </CardContent>
       </Card>
     </FormContainer>
-  );
+  )
 }

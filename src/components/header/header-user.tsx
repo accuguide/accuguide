@@ -1,5 +1,6 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Link from "next/link";
+import Link from 'next/link'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,27 +8,26 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { getSignedUrlForKey } from "@/lib/s3/functions";
-import { getServerUser } from "@/lib/session";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/dropdown-menu'
+import { getSignedUrlForKey } from '@/lib/s3/functions'
+import { getServerUser } from '@/lib/session'
 
 export default async function HeaderUser() {
-  const user = await getServerUser();
+  const user = await getServerUser()
   if (!user) {
     return (
       <Link href="/sign-in/">
         <Button>Sign In</Button>
       </Link>
-    );
+    )
   }
   const imageUrl = user?.image
     ? await getSignedUrlForKey(user.image)
-    : undefined;
+    : undefined
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-1">
+        <button className="cursor-pointer rounded-lg hover:opacity-80 focus:ring-2 focus:ring-slate-500 focus:ring-offset-1 focus:outline-none">
           <Avatar>
             <AvatarImage src={imageUrl} alt="your profile image" />
             <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
@@ -52,8 +52,8 @@ export default async function HeaderUser() {
         </Link>
         <Link href="/sign-out/" className="text-slate-900 dark:text-slate-100">
           <DropdownMenuItem>Sign Out</DropdownMenuItem>
-        </Link>{" "}
+        </Link>{' '}
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }

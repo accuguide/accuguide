@@ -1,11 +1,10 @@
-import * as React from "react";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import Link from "next/link";
+import Link from 'next/link'
+import { Card, CardContent, CardTitle } from '@/components/ui/card'
 
 interface ResourceCardProps {
-  title: string;
-  description: string;
-  link: string;
+  title: string
+  description: string
+  link: string
 }
 
 export default function ResourceCard({
@@ -15,7 +14,7 @@ export default function ResourceCard({
 }: ResourceCardProps) {
   return (
     <Card className="mt-4 md:max-w-[50%]">
-      <CardTitle className="px-6 my-0">{title}</CardTitle>
+      <CardTitle className="my-0 px-6">{title}</CardTitle>
       <CardContent>
         <p className="mt-[-8px] mb-2">{description}</p>
         <p>
@@ -30,5 +29,5 @@ export default function ResourceCard({
         </p>
       </CardContent>
     </Card>
-  );
+  )
 }

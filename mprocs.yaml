@@ -1,0 +1,14 @@
+scrollback: 10000
+procs:
+  next:
+    shell: npm run dev
+  postgres:
+    shell: npm run db:start
+    stop:
+      send-keys: ["<C-c>"]
+  drizzle studio:
+    shell: npm run db:studio
+  shell:
+    shell: zsh
+    stop:
+      send-keys: ["<C-d>"]

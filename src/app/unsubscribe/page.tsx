@@ -1,5 +1,5 @@
-import UnsubscribeForm from "@/components/forms/unsubscribe";
-import { Toaster } from "@/components/ui/sonner";
+import UnsubscribeForm from '@/components/forms/unsubscribe'
+import { Toaster } from '@/components/ui/sonner'
 
 export default function Page() {
   return (
@@ -7,5 +7,5 @@ export default function Page() {
       <Toaster position="top-center" richColors />
       <UnsubscribeForm />
     </>
-  );
+  )
 }

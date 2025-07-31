@@ -1,12 +1,10 @@
 # Accuguide
 
-[![Cypress](https://github.com/accuguide/accuguide/actions/workflows/cypress.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/cypress.yml)
-[![CodeQL](https://github.com/accuguide/accuguide/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/github-code-scanning/codeql)
-[![Next](https://github.com/accuguide/accuguide/actions/workflows/next.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/next.yml)
-[![ESLint](https://github.com/accuguide/accuguide/actions/workflows/eslint.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/eslint.yml)
-[![Prettier](https://github.com/accuguide/accuguide/actions/workflows/prettier.yml/badge.svg)](https://github.com/accuguide/accuguide/actions/workflows/prettier.yml)
-<br />
-[![Netlify Status](https://api.netlify.com/api/v1/badges/378e5089-548b-429f-b1ad-507f6bae73e4/deploy-status)](https://app.netlify.com/projects/accuguide/deploys)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/biome.yml?logo=github&label=Biome)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/cypress.yml?logo=github&label=Cypress)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/codeql.yml?logo=github&label=CodeQL)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/build.yml?logo=github&label=Build)
+![Netlify](https://img.shields.io/netlify/378e5089-548b-429f-b1ad-507f6bae73e4?logo=netlify&label=Netlify)
 
 ## About
 
@@ -21,12 +19,12 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 - Better Auth
 - Tailwind CSS
 - AWS S3
+- Cypress Tests
 
 ### Code Quality
 
-- Cypress
-- Prettier
-- ESLint
+- CodeQL
+- Biome
 
 ### Features
 

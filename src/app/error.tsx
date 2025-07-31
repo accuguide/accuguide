@@ -1,17 +1,17 @@
-"use client";
+'use client'
 
-import { useEffect } from "react";
-import ErrorCard from "@/components/card/error-card";
-import Title from "@/components/layout/title";
+import { useEffect } from 'react'
+import ErrorCard from '@/components/card/error-card'
+import Title from '@/components/layout/title'
 
 export default function Error({
   error,
 }: {
-  error: Error & { digest?: string };
+  error: Error & { digest?: string }
 }) {
   useEffect(() => {
-    console.error(error);
-  }, [error]);
+    console.error(error)
+  }, [error])
 
   return (
     <div className="mt-8 max-w-xl">
@@ -19,8 +19,8 @@ export default function Error({
       <ErrorCard
         title="Something went wrong"
         description="Please try again, and contact us if this issue persists."
-        link={{ href: "/contact", label: "Contact Support" }}
+        link={{ href: '/contact', label: 'Contact Support' }}
       />
     </div>
-  );
+  )
 }
