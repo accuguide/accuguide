@@ -4,7 +4,7 @@ export default function LandingTitle() {
       <h1 className="text-4xl font-bold leading-tight text-slate-900 dark:text-slate-100 sm:text-5xl md:text-6xl lg:text-7xl">
         Discover accessibility with{' '}
         <span
-          className="bg-clip-text text-transparent"
+          className="bg-clip-text text-transparent animate-gradient"
           style={{
             backgroundImage:
               'linear-gradient(135deg, #ef4444, #f97316, #eab308, #22c55e, #3b82f6, #8b5cf6)',

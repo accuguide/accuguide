@@ -48,7 +48,7 @@ export default function Hero() {
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-3 lg:gap-12">
           {cardData.map(
             ({ icon: Icon, title, description, bgGradient, iconBg }, index) => (
               <Card
