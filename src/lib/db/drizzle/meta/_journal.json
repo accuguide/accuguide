@@ -57,6 +57,13 @@
       "when": 1753639426827,
       "tag": "0007_blushing_storm",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1753926655797,
+      "tag": "0008_massive_frog_thor",
+      "breakpoints": true
     }
   ]
 }

@@ -27,7 +27,7 @@ export const indicatorTable = pgTable('indicator', {
 })
 
 export const categoryTable = pgTable('category', {
-  category: text('category').primaryKey().default('').unique(),
+  category: text('category').primaryKey(),
 })
 
 export const typeIndicatorTable = pgTable('type_indicator', {
