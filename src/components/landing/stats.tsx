@@ -1,11 +1,12 @@
 import { MapPin, Shield, Star } from 'lucide-react'
+import { db } from '@/lib/db'
+import { entityTable, indicatorTable, reviewTable } from '@/lib/db/schema'
 import CountUpNumber from './count-up-number'
 
 export default async function Stats() {
-  // Using fake numbers for demo purposes
-  const places = 12847
-  const indicators = 45
-  const reviews = 3291
+  const places = await db.$count(entityTable)
+  const indicators = await db.$count(indicatorTable)
+  const reviews = await db.$count(reviewTable)
 
   const stats = [
     {
