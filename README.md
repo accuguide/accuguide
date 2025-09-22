@@ -48,12 +48,12 @@ We are always looking for open source contributions! Check out our contribution 
 ### Prerequisites
 
 - [Docker](https://docs.docker.com/desktop/)
-- [Node.js](https://nodejs.org/en/download) (It is recommended to use the LTS version)
+- [Bun](https://bun.sh/)
 
 ### Code Setup
 
 1. `git clone https://github.com/accuguide/accuguide.git`
-2. `npm install`
+2. `bun install`
 3. `cp .env.example .env`
 
 #### Optional (but recommended) steps
@@ -64,12 +64,13 @@ We are always looking for open source contributions! Check out our contribution 
 
 ### Running The Code
 
-1. `npm run db:start`
-2. `npm run db:push` (run this only on first setup or when database schema/seed changes are made)
-3. `npm run db:seed` (run this only on first setup or when you want to reset to the seed data)
-4. `npm run s3:push`
-5. `npm run dev`
-6. `npm run db:studio` (optional, only needed to visualize/directly edit database)
+1. `bun dev:all`
+2. `bun run s3:push`
+
+The following commands are only for initial database setup
+
+- `bun run db:push` (run this only on first setup or when database schema/seed changes are made)
+- `bun run db:seed` (run this only on first setup or when you want to reset to the seed data)
 
 ## Sponsors
 

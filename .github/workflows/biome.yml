@@ -16,33 +16,27 @@ jobs:
       pull-requests: read
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'npm'
+        uses: actions/checkout@v5
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
       - name: Install dependencies
-        run: npm install
+        run: bun install
       - name: Lint code
-        run: npm run lint
+        run: bun run lint
   format:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'npm'
+        uses: actions/checkout@v5
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
       - name: Install dependencies
-        run: npm install
+        run: bun install
       - name: Format code
-        run: npm run format
+        run: bun run format
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@b863ae1933cb653a53c021fe36dbb774e1fb9403
         with:
-          commit_message: Formatted code with Prettier [skip ci]
+          commit_message: Formatted code with Biome [skip ci]
           commit_author: Author <41898282+github-actions[bot]@users.noreply.github.com>
