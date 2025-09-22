@@ -9,7 +9,7 @@ on:
       - beta
 
 jobs:
-  container-job:
+  e2e:
     runs-on: ubuntu-latest
     container: node:22-alpine
     services:
@@ -24,8 +24,12 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v5
+
       - name: Install dependencies
         run: npm install
+
+      - name: Seed database
+        run: npm run db:seed
 
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
