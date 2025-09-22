@@ -11,6 +11,7 @@ describe('search page loads', () => {
     cy.get('input[id="search-full"]').type('Ramen Nagi')
     cy.get('button[type="submit"]').click()
     cy.contains('Ramen Nagi').click()
+    cy.wait(5000) // wait for page to load
     cy.get('h1').should('contain', 'Ramen Nagi')
   })
 })
