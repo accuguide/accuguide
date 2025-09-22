@@ -1,5 +1,9 @@
 name: Cypress
 
+permissions:
+  contents: read
+  pull_request: read
+
 on:
   push:
     branches:
