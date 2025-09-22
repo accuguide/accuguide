@@ -11,7 +11,6 @@
     "start": "next start",
     "lint": "biome lint .",
     "format": "biome format --write .",
-    "check": "biome format .",
     "assist": "biome check .",
     "assist:fix": "biome check --write .",
     "test:e2e": "cypress run",
