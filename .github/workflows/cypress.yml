@@ -18,6 +18,9 @@ jobs:
       POSTGRES_PORT: 5432
       GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
       GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      BASE_URL: http://localhost:3000
+      BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
+      BETTER_AUTH_URL: http://localhost:3000
     services:
       db:
         image: postgres:17.4
