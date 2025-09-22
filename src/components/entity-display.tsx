@@ -148,6 +148,7 @@ export default async function EntityDisplay({
         entity_type={data?.type}
         reviews={reviews}
         indicators={indicators}
+        profile={false}
       />
     </div>
   )

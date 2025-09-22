@@ -12,12 +12,14 @@ export default async function ReviewDisplay({
   reviews,
   indicators,
   write = true,
+  profile = true,
 }: {
   entity_id: string
   entity_type: string
   reviews: Review[]
   indicators: Indicator[]
   write?: boolean
+  profile?: boolean
 }) {
   const sortedReviews = [...reviews].sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
@@ -58,6 +60,7 @@ export default async function ReviewDisplay({
             indicators={indicators}
             userInfo={userInfoMap[review.userId] || {}}
             userImageUrl={userImageUrls[review.userId]}
+            profile={profile}
             isOwner={
               authenticated ? authenticated.user.id === review.userId : false
             }

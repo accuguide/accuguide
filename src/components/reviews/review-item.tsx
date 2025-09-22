@@ -18,6 +18,7 @@ interface ReviewItemProps {
   userImageUrl?: string
   isOwner: boolean
   showUserInfo: boolean
+  profile: boolean
 }
 
 export default function ReviewItem({
@@ -27,6 +28,7 @@ export default function ReviewItem({
   userImageUrl,
   isOwner,
   showUserInfo,
+  profile,
 }: ReviewItemProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [editedComment, setEditedComment] = useState(review.comment)
@@ -116,7 +118,7 @@ export default function ReviewItem({
           <p className="text-sm font-semibold">{userInfo?.name || 'Unknown'}</p>
         </div>
       )}
-      <div>{entityName}</div>
+      {profile && <div>{entityName}</div>}
       <div className="text-sm">{stars(review.rating)}</div>
       <IndicatorDisplay indicators={indicators} reviewId={review.id} />
 
