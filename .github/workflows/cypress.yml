@@ -41,10 +41,7 @@ jobs:
       - name: Seed database
         run: npm run db:seed
 
-      - name: Start dev server
-        run: npm run dev &
-
       - name: Cypress tests
-        run: npm run test:e2e
-
-      
+        uses: cypress-io/github-action@be1bab96b388bbd9ce3887e397d373c8557e15af #v6.9.2
+        with:
+          start: npm run dev
