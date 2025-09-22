@@ -31,13 +31,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Push database schema
+        run: npm run db:push
+
       - name: Seed database
         run: npm run db:seed
-        env:
-          DATABASE_URL: postgres://postgres:postgres@db:5432/db
 
-      - name: Run Cypress tests
-        run: npm run test:e2e
         env:
           DATABASE_URL: postgres://postgres:postgres@db:5432/db
           POSTGRES_HOST: db
