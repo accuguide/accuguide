@@ -21,6 +21,8 @@ jobs:
       BASE_URL: http://localhost:3000
       BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
       BETTER_AUTH_URL: http://localhost:3000
+      CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     services:
       db:
         image: postgres:17.4
@@ -51,3 +53,4 @@ jobs:
         with:
           start: npm run dev
           browser: chrome
+          record: true
