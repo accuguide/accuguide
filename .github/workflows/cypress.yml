@@ -11,7 +11,6 @@ on:
 jobs:
   e2e:
     runs-on: ubuntu-latest
-    container: node:22
     env:
       DATABASE_URL: postgres://postgres:postgres@db:5432/db
       POSTGRES_HOST: db
@@ -31,6 +30,12 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v5
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm install
