@@ -54,7 +54,11 @@ export default async function EntityDisplay({
     parsedResponse = JSON.parse(overviewJson.message)
   } catch (error) {
     console.error('Failed to parse overviewJson.message:', error)
-    parsedResponse = { overview: '', indicators: [] } // Fallback value
+    parsedResponse = {
+      overview:
+        'There was an error with the AI response. Please try again later.',
+      indicators: [],
+    } // Fallback value
   }
   overview = parsedResponse.overview
   const entityIndicators = parsedResponse.indicators.map(

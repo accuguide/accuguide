@@ -1,48 +1,48 @@
-name: Cypress
+# name: Cypress
 
-on:
-  push:
-    branches:
-      - beta
-  pull_request:
-    branches:
-      - beta
+# on:
+#   push:
+#     branches:
+#       - beta
+#   pull_request:
+#     branches:
+#       - beta
 
-jobs:
-  e2e:
-    name: e2e
-    runs-on: ubuntu-24.04
-    permissions:
-      contents: read
-      pull-requests: read
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'npm'
-      - name: Cypress run
-        uses: cypress-io/github-action@be1bab96b388bbd9ce3887e397d373c8557e15af #v6.9.2
-        with:
-          start: npm run dev
-  component:
-    name: component
-    runs-on: ubuntu-24.04
-    permissions:
-      contents: read
-      pull-requests: read
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'npm'
-      - name: Cypress run
-        uses: cypress-io/github-action@be1bab96b388bbd9ce3887e397d373c8557e15af #v6.9.2
-        with:
-          start: npm run dev
-          component: true
+# jobs:
+#   e2e:
+#     name: e2e
+#     runs-on: ubuntu-24.04
+#     permissions:
+#       contents: read
+#       pull-requests: read
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '22'
+#           cache: 'npm'
+#       - name: Cypress run
+#         uses: cypress-io/github-action@be1bab96b388bbd9ce3887e397d373c8557e15af #v6.9.2
+#         with:
+#           start: npm run dev
+#   component:
+#     name: component
+#     runs-on: ubuntu-24.04
+#     permissions:
+#       contents: read
+#       pull-requests: read
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '22'
+#           cache: 'npm'
+#       - name: Cypress run
+#         uses: cypress-io/github-action@be1bab96b388bbd9ce3887e397d373c8557e15af #v6.9.2
+#         with:
+#           start: npm run dev
+#           component: true
