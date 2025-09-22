@@ -10,7 +10,7 @@ on:
 
 jobs:
   e2e:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container: node:22
     env:
       DATABASE_URL: postgres://postgres:postgres@db:5432/db
@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Install system dependencies
-        run: apt-get install -y libgtk2.0-0t64 libgtk-3-0t64 libgbm-dev libnotify-dev libnss3 libxss1 libasound2t64 libxtst6 xauth xvfb
+        run: apt-get update && apt-get install libgtk2.0-0t64 libgtk-3-0t64 libgbm-dev libnotify-dev libnss3 libxss1 libasound2t64 libxtst6 xauth xvfb
 
       - name: Install dependencies
         run: npm install
