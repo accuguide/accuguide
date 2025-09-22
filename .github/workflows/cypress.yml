@@ -28,12 +28,12 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+      cypress:
+        image: cypress/browsers:node-22.15.0-chrome-136.0.7103.92-1-ff-138.0.1-edge-136.0.3240.50-1
+
     steps:
       - name: Check out code
         uses: actions/checkout@v5
-
-      - name: Install system dependencies
-        run: apt-get update && apt-get -y install xvfb
 
       - name: Install dependencies
         run: npm install
@@ -44,7 +44,8 @@ jobs:
       - name: Seed database
         run: npm run db:seed
 
-      - name: Cypress tests
-        uses: cypress-io/github-action@be1bab96b388bbd9ce3887e397d373c8557e15af #v6.9.2
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
         with:
           start: npm run dev
+          browser: chrome
