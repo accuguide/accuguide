@@ -1,17 +1,13 @@
-describe('search page loads', () => {
+describe('Search E2E Testing', () => {
   beforeEach(() => {
-    cy.visit('/')
-    cy.title().should(
-      'include',
-      'Accuguide - Discover accessible places and services',
-    )
+    cy.openSite()
   })
 
-  it('successfully searches', () => {
+  it('Sucessfully searches for an entity', () => {
     cy.get('input[id="search-full"]').type('Ramen Nagi')
     cy.get('button[type="submit"]').click()
     cy.contains('Ramen Nagi').click()
-    cy.wait(5000) // wait for page to load
+    cy.wait(5000)
     cy.get('h1').should('contain', 'Ramen Nagi')
   })
 })
