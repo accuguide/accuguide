@@ -15,12 +15,15 @@ jobs:
     services:
       db:
         image: postgres:17.4
-        ports:
-          - 5432:5432
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Check out code
         uses: actions/checkout@v5
@@ -28,12 +31,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Start database
-        run: npm run db:start
-
       - name: Seed database
         run: npm run db:seed
-
         env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+          DATABASE_URL: postgres://postgres:postgres@db:5432/db
 
+      - name: Run Cypress tests
+        run: npm run test:e2e
+        env:
+          DATABASE_URL: postgres://postgres:postgres@db:5432/db
+          POSTGRES_HOST: db
+          POSTGRES_PORT: 5432
