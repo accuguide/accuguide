@@ -40,3 +40,11 @@ jobs:
 
       - name: Seed database
         run: npm run db:seed
+
+      - name: Start dev server
+        run: npm run dev
+
+      - name: Cypress tests
+        run: npm run test:e2e
+
+      
