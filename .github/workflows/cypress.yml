@@ -11,7 +11,7 @@ on:
 jobs:
   e2e:
     runs-on: ubuntu-24.04
-    container: node:22
+    container: cypress/browsers:node-22.15.0-chrome-136.0.7103.92-1-ff-138.0.1-edge-136.0.3240.50-1
     env:
       DATABASE_URL: postgres://postgres:postgres@db:5432/db
       POSTGRES_HOST: db
@@ -28,9 +28,6 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-      cypress:
-        image: cypress/browsers:node-22.15.0-chrome-136.0.7103.92-1-ff-138.0.1-edge-136.0.3240.50-1
-
     steps:
       - name: Check out code
         uses: actions/checkout@v5
