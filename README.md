@@ -77,5 +77,4 @@ The following commands are only for initial database setup
 Please considering sponsoring Accuguide to ensure continued development and ability to keep this project free and open source!
 
 ### Current Sponsors
-
-<img width="64" alt="logo-netlify-encapsulated-monochrome-darkmodealt" src="https://github.com/user-attachments/assets/6e57689c-3bf9-4378-a471-61d26910cc09" />
+No sponsors yet!
