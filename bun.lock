@@ -26,7 +26,7 @@
         "dotenv": "^17.2.1",
         "drizzle-orm": "^0.44.5",
         "geist": "^1.4.2",
-        "groq-sdk": "^0.30.0",
+        "groq-sdk": "^0.32.0",
         "js-cookie": "^3.0.5",
         "lucide-react": "^0.536.0",
         "next": "15.5.2",
@@ -875,7 +875,7 @@
 
     "graceful-fs": ["graceful-fs@4.2.11", "", {}, "sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ=="],
 
-    "groq-sdk": ["groq-sdk@0.30.0", "", { "dependencies": { "@types/node": "^18.11.18", "@types/node-fetch": "^2.6.4", "abort-controller": "^3.0.0", "agentkeepalive": "^4.2.1", "form-data-encoder": "1.7.2", "formdata-node": "^4.3.2", "node-fetch": "^2.6.7" } }, "sha512-9PowoybiGkq1GpvkC7ikvT+WIFu6zAkeXF8p4eqNEYgGnEcf70fBWuwWqU1KIPQgTMw5sfausvJWzzPbYdHfCQ=="],
+    "groq-sdk": ["groq-sdk@0.32.0", "", { "dependencies": { "@types/node": "^18.11.18", "@types/node-fetch": "^2.6.4", "abort-controller": "^3.0.0", "agentkeepalive": "^4.2.1", "form-data-encoder": "1.7.2", "formdata-node": "^4.3.2", "node-fetch": "^2.6.7" } }, "sha512-KQZOzSV8UmeIbv7YEvzpZinSR9CaI/8pIGzLrVBVher6RuamklljBom5HXnNTqpekk3/L/h9Txc3Jq3ti58jug=="],
 
     "has-flag": ["has-flag@4.0.0", "", {}, "sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ=="],
 
