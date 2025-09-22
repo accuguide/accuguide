@@ -16,6 +16,8 @@ jobs:
       DATABASE_URL: postgres://postgres:postgres@db:5432/db
       POSTGRES_HOST: db
       POSTGRES_PORT: 5432
+      GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
     services:
       db:
         image: postgres:17.4
