@@ -1,9 +1,5 @@
 name: Cypress
 
-permissions:
-  contents: read
-  pull_request: read
-
 on:
   push:
     branches:
@@ -13,6 +9,9 @@ on:
       - beta
 
 jobs:
+  permissions:
+    contents: read
+    pull-requests: read
   e2e:
     runs-on: ubuntu-24.04
     container: cypress/browsers:node-22.15.0-chrome-136.0.7103.92-1-ff-138.0.1-edge-136.0.3240.50-1
