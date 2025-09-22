@@ -12,6 +12,10 @@ jobs:
   e2e:
     runs-on: ubuntu-latest
     container: node:22-alpine
+    env:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/db
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
     services:
       db:
         image: postgres:17.4
@@ -36,8 +40,3 @@ jobs:
 
       - name: Seed database
         run: npm run db:seed
-
-        env:
-          DATABASE_URL: postgres://postgres:postgres@db:5432/db
-          POSTGRES_HOST: db
-          POSTGRES_PORT: 5432
