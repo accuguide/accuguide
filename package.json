@@ -75,7 +75,7 @@
     "@types/pg": "^8.15.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "cypress": "^14.5.3",
+    "cypress": "^15.3.0",
     "drizzle-kit": "^0.31.4",
     "mprocs": "^0.7.3",
     "tailwindcss": "^4",
