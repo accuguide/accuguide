@@ -76,7 +76,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "cypress": "^14.5.3",
-    "drizzle-kit": "^0.31.4",
+    "drizzle-kit": "^0.31.5",
     "mprocs": "^0.7.3",
     "tailwindcss": "^4",
     "tsx": "^4.20.3",
