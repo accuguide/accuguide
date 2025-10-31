@@ -1,5 +1,7 @@
 import { S3Client } from '@aws-sdk/client-s3'
-import 'dotenv/config'
+import { config } from 'dotenv'
+
+config()
 
 // Configure the AWS SDK to use LocalStack
 export const s3Client = new S3Client({

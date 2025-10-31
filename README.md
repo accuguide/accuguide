@@ -64,12 +64,10 @@ We are always looking for open source contributions! Check out our contribution 
 
 ### Running The Code
 
-1. `bun dev:all`
-2. `bun run s3:push`
+1. `docker compose up`
 
 The following commands are only for initial database setup
 
-- `bun run db:push` (run this only on first setup or when database schema/seed changes are made)
 - `bun run db:seed` (run this only on first setup or when you want to reset to the seed data)
 
 ## Sponsors
