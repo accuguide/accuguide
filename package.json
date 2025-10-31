@@ -3,8 +3,7 @@
   "version": "2.3.2",
   "private": true,
   "scripts": {
-    "dev": "docker compose up",
-    "dev:only": "next dev --turbopack",
+    "dev": "next dev --turbopack",
     "build:prod": "tsx scripts/analytics.ts && next build",
     "build:beta": "cp src/app/beta.robots.ts src/app/robots.ts && next build",
     "build": "next build",
