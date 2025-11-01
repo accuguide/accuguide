@@ -1,7 +1,6 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { User } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -27,7 +26,7 @@ const accountSchema = z.object({
 export default function Settings() {
   const [disableSubmit, setDisableSubmit] = useState(false)
   const [currentEmail, setCurrentEmail] = useState('')
-  const [currentImage, setCurrentImage] = useState<string | null>(null)
+  const [_currentImage, setCurrentImage] = useState<string | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
 
   const profileForm = useForm<z.infer<typeof profileSchema>>({
@@ -148,18 +147,6 @@ export default function Settings() {
               Photo
             </label>
             <div className="mt-2 flex items-center gap-x-3">
-              {imagePreview || currentImage ? (
-                <img
-                  src={imagePreview || currentImage || undefined}
-                  alt="Profile"
-                  className="size-12 rounded-full object-cover"
-                />
-              ) : (
-                <User
-                  aria-hidden="true"
-                  className="size-12 text-slate-400 dark:text-slate-500"
-                />
-              )}
               <label
                 htmlFor="image"
                 className="cursor-pointer rounded-md border-2 border-slate-600 bg-slate-50 px-3 py-2 text-sm font-semibold shadow-sm hover:bg-slate-100 dark:border-slate-400 dark:bg-slate-950 dark:hover:bg-slate-900"

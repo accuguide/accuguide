@@ -117,10 +117,10 @@
     @apply border-slate-600 focus:ring focus:ring-slate-500 dark:border-slate-400;
   }
   body {
-    @apply bg-gradient-to-br from-slate-100 via-slate-100 to-slate-300 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800;
+    @apply bg-linear-to-br from-slate-100 via-slate-100 to-slate-300 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800;
   }
   h1 {
-    @apply mb-4 bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 bg-clip-text text-3xl leading-tight font-bold text-transparent dark:from-slate-100 dark:via-blue-200 dark:to-slate-100;
+    @apply mb-4 bg-linear-to-r from-slate-900 via-blue-900 to-slate-900 bg-clip-text text-3xl leading-tight font-bold text-transparent dark:from-slate-100 dark:via-blue-200 dark:to-slate-100;
   }
   h2 {
     @apply mt-4 text-xl font-bold;

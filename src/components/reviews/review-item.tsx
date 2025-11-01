@@ -127,7 +127,7 @@ export default function ReviewItem({
           <Textarea
             value={editedComment}
             onChange={(e) => setEditedComment(e.target.value)}
-            className="min-h-[80px]"
+            className="min-h-20"
             placeholder="Edit your review..."
           />
           <div className="flex items-center gap-2">
