@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 import LayoutDisplay from '@/components/layout/layout-display'
 
 export const metadata: Metadata = {
-  title: 'Account',
-  description: 'User account settings in Accuguide',
+  title: 'Settings',
+  description: 'Settings in Accuguide',
   alternates: {
-    canonical: '/settings/account/',
+    canonical: '/settings/',
   },
 }
 
-export default function AccountLayout({
+export default function ProfileLayout({
   children,
 }: Readonly<{
   children: React.ReactNode

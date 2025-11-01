@@ -96,20 +96,20 @@ services:
         condition: service_healthy
     restart: unless-stopped
 
-  db-studio:
-    build:
-      context: .
-      dockerfile: Dockerfile.studio
-    ports:
-      - "4983:4983"
-    environment:
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
-    volumes:
-      - .:/app
-    depends_on:
-      db:
-        condition: service_healthy
-    restart: unless-stopped
+  # db-studio:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.studio
+  #   ports:
+  #     - "4983:4983"
+  #   environment:
+  #     - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
+  #   volumes:
+  #     - .:/app
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  #   restart: unless-stopped
 
 volumes:
   data:

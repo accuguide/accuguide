@@ -123,7 +123,7 @@ export default function ReviewItem({
       <IndicatorDisplay indicators={indicators} reviewId={review.id} />
 
       {isEditing ? (
-        <div className="space-y-2">
+        <div className="space-y-4">
           <Textarea
             value={editedComment}
             onChange={(e) => setEditedComment(e.target.value)}
@@ -143,7 +143,7 @@ export default function ReviewItem({
         <>
           <p className="text-sm">{review.comment}</p>
           {isOwner && (
-            <div className="flex items-center gap-1 mt-1">
+            <div className="flex items-center gap-1 mt-4">
               <Button size="sm" onClick={() => setIsEditing(true)}>
                 Edit
               </Button>
@@ -155,7 +155,7 @@ export default function ReviewItem({
         </>
       )}
 
-      <p className="mt-2 text-xs">
+      <p className="mt-4 text-xs mb-2">
         {new Date(review.createdAt).toLocaleDateString()}
       </p>
     </div>

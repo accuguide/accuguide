@@ -1,10 +1,12 @@
 import '@/app/globals.css'
-import { GeistSans } from 'geist/font/sans'
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
 import Footer from '@/components/footer/footer'
 import Header from '@/components/header/header'
 import { ModeToggle } from '@/components/theme/mode-toggle'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
@@ -27,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={GeistSans.className}>
+      <body className={inter.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
