@@ -1,10 +1,5 @@
 import Link from 'next/link'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent, CardTitle } from '@/components/ui/card'
 
 interface ResourceCardProps {
   title: string
@@ -21,8 +16,6 @@ export default function ResourceCard({
   description,
   link,
   state,
-  country,
-  category,
   updatedAt,
 }: ResourceCardProps) {
   return (

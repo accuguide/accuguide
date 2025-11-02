@@ -15,6 +15,7 @@ export default async function Page() {
           link={resource.url}
           state={resource.state}
           country={resource.country}
+          category={resource.category}
           updatedAt={resource.updatedAt.toDateString()}
         />
       ))}
