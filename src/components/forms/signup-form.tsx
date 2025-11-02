@@ -126,7 +126,7 @@ export default function SignupForm() {
                     <div className="w-full border-t" />
                   </div>
                   <div className="relative flex justify-center text-sm">
-                    <span className="bg-card px-2">Or continue with</span>
+                    <span className="bg-slate-50 dark:bg-slate-950 px-2">Or continue with</span>
                   </div>
                 </div>
 

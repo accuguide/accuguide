@@ -140,6 +140,22 @@ export const emailTable = pgTable('email', {
     .defaultNow(),
 })
 
+export const resourceTable = pgTable('resource', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  title: text('title').notNull(),
+  description: text('description').notNull(),
+  url: text('url').notNull(),
+  category: text('category').notNull(),
+  state: text('state').notNull(),
+  country: text('country').notNull(),
+  updatedAt: timestamp('updated_at', {
+    withTimezone: true,
+    mode: 'date',
+  })
+    .notNull()
+    .defaultNow(),
+})
+
 export type Type = InferSelectModel<typeof typeTable>
 export type Indicator = InferSelectModel<typeof indicatorTable>
 export type Category = InferSelectModel<typeof categoryTable>
@@ -148,3 +164,4 @@ export type TypeIndicator = InferSelectModel<typeof typeIndicatorTable>
 export type Entity = InferSelectModel<typeof entityTable>
 export type Review = InferSelectModel<typeof reviewTable>
 export type ReviewIndicator = InferSelectModel<typeof reviewIndicatorTable>
+export type Resource = InferSelectModel<typeof resourceTable>

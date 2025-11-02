@@ -6,6 +6,7 @@ import {
   emailTable,
   entityTable,
   indicatorTable,
+  resourceTable,
   reviewIndicatorTable,
   reviewTable,
   typeIndicatorTable,
@@ -28,6 +29,7 @@ const main = async () => {
     await db.delete(typeTable)
     await db.delete(indicatorTable)
     await db.delete(categoryTable)
+    await db.delete(resourceTable)
     await db.delete(emailTable)
     await db.delete(user)
     console.log('Database cleared.')
@@ -148,6 +150,28 @@ const main = async () => {
         updatedAt: new Date('2025-07-24 19:40:20.696Z'),
       },
     ]
+    const resources = [
+      {
+        title: 'Americans with Disabilities Act (ADA) Complaint Center',
+        description:
+          'The Americans with Disabilities Act provides an important tool to fight discrimination: configure filing a complaint with an appropriate federal agency. This link outlines the steps to get you started.',
+        url: 'https://www.ada.gov/file-a-complaint/',
+        category: 'Legal Resources',
+        state: 'National',
+        country: 'USA',
+        updatedAt: new Date(),
+      },
+      {
+        title: 'Disability Rights - American Civil Liberties Union (ACLU)',
+        description:
+          'People with disabilities face widespread discrimination, segregation, and exclusion. But federal disability rights laws can provide protection.',
+        url: 'https://www.aclu.org/know-your-rights/disability-rights',
+        category: 'Legal Resources',
+        state: 'National',
+        country: 'USA',
+        updatedAt: new Date(),
+      },
+    ]
 
     await db.insert(user).values(users)
     await db.insert(emailTable).values(emails)
@@ -159,6 +183,7 @@ const main = async () => {
     await db.insert(entityTable).values(entities)
     await db.insert(reviewTable).values(reviews)
     await db.insert(reviewIndicatorTable).values(reviewIndicators)
+    await db.insert(resourceTable).values(resources)
     await db.insert(account).values(accounts)
     console.log('Database seeded successfully.')
     exit(0)

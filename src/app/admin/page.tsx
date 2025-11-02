@@ -3,6 +3,7 @@ import { db } from '@/lib/db'
 import {
   categoryTable,
   indicatorTable,
+  resourceTable,
   typeIndicatorTable,
   typeMappingTable,
   typeTable,
@@ -16,6 +17,7 @@ export default async function Page() {
   const categories = await db.select().from(categoryTable)
   const typeMappings = await db.select().from(typeMappingTable)
   const typeIndicators = await db.select().from(typeIndicatorTable)
+  const resources = await db.select().from(resourceTable)
   const links = [
     {
       label: 'Analytics',
@@ -52,6 +54,26 @@ export default async function Page() {
     revalidatePath('/admin')
   }
 
+  async function resourceSubmit(formData: FormData) {
+    'use server'
+    const title = formData.get('title') as string
+    const description = formData.get('description') as string
+    const url = formData.get('url') as string
+    const category = formData.get('category') as string
+    const state = formData.get('state') as string
+    const country = formData.get('country') as string
+
+    await db.insert(resourceTable).values({
+      title,
+      description,
+      url,
+      category,
+      state,
+      country,
+    })
+    revalidatePath('/admin')
+  }
+
   return (
     <div>
       <AdminInfo
@@ -61,8 +83,10 @@ export default async function Page() {
         categories={categories}
         typeMappings={typeMappings}
         typeIndicators={typeIndicators}
+        resources={resources}
         typeSubmit={typeSubmit}
         indicatorSubmit={indicatorSubmit}
+        resourceSubmit={resourceSubmit}
       />
     </div>
   )
