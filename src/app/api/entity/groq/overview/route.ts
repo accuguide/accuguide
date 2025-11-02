@@ -18,11 +18,11 @@ export async function POST(request: Request) {
           {
             role: 'user',
 
-            content: `Generate a concise overview (up to 5 sentences) of the business entity based on the provided information and reviews: ${JSON.stringify(body)}. Focus on accessibility features and other key details from the data. After the overview, provide a JSON list of accessibility indicators with their presence status. The response should be in the following format: { "overview": "The overview of the business entity", "indicators": [{"indicator": "indicator1", "exists": true}, {"indicator": "indicator2", "exists": false}] }. Ensure the list includes only indicators explicitly mentioned in the data. Just provide the JSON response without any additional text.`,
+            content: `Generate a concise, accessibility-focused overview (up to 4 sentences) of the business entity based on the provided information and reviews: ${JSON.stringify(body)}. Focus on accessibility features and other key details from the data. After the overview, provide a JSON list of accessibility indicators with their presence status. The response should be in the following format: { "overview": "The overview of the business entity", "indicators": [{"indicator": "indicator1", "exists": true}, {"indicator": "indicator2", "exists": false}] }. Ensure the list includes only indicators explicitly mentioned in the data. For each indicator, "exists" should be true if that indicator is present at the location, and false if the indicator is not present. Only include documented indicators. Only include indicators relevant to accessibility. Indicator names should be kept short and have proper formatting, where each word is capitalized and separated by a space, rather than by an underscore. Utilize your web search built in tool to find accessibility information about the entity based on the name and location of the entity. In your response, do not provide the hours or the full address of the entity. Just provide the JSON response without any additional text. `,
           },
         ],
 
-        model: 'llama-3.3-70b-versatile',
+        model: 'groq/compound',
       })
     }
     const chatCompletion = await getGroqChatCompletion()
