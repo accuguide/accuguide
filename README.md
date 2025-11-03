@@ -32,7 +32,7 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 - [ ] Accessibility summary caching
 - [ ] Account deletion
 - [ ] Public profile page
-- [ ] Business claiming
+- [ ] Business claiming placeholder
 - [ ] Search algorithm improvements
 - [ ] Search result paging
 - [ ] Accessibility score in search results
