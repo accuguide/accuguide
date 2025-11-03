@@ -7,6 +7,7 @@ export async function GET() {
     '/',
     '/help/faq/',
     '/help/resources/',
+    '/help/feedback/',
     '/info/about/',
     '/info/donate/',
     '/legal/disclaimers/',

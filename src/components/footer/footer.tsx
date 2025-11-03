@@ -11,10 +11,10 @@ const navigation = {
   help: [
     { name: 'FAQ', href: '/help/faq/' },
     { name: 'Resources', href: '/help/resources/' },
-    { name: 'Feedback', href: 'https://tally.so/r/me1d0E' },
+    { name: 'Feedback', href: '/help/feedback/' },
   ],
   contact: [
-    { name: 'Email', href: 'mailto:support@accuguide.org' },
+    { name: 'Get in Touch', href: '/contact/email/' },
     { name: 'Instagram', href: 'https://instagram.com/accuguideorg' },
     { name: 'Bluesky', href: 'https://bsky.app/profile/accuguide.org' },
   ],
@@ -119,7 +119,7 @@ export default function Footer() {
           <p className="text-sm/6 text-gray-600 dark:text-gray-400">
             &copy; 2025 Accuguide. All rights reserved.
             <br />
-            This site is Powered by{' '}
+            This site is powered by{' '}
             <Link
               href="https://netlify.com"
               className="hover:underline hover:opacity-75"
