@@ -51,6 +51,9 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 - [ ] Search filters
 - [ ] Fix geolocation issues for location-based search
 - [ ] Migrate email subscription management to Mailgun
+- [ ] Migrate FAQ items to database
+- [ ] Revise legal documents
+- [ ] Set up email verification
 
 ### Beta Access
 
