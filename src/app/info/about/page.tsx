@@ -3,7 +3,7 @@
 const team = [
   {
     name: 'Naya Singhania',
-    role: 'Founder & CEO',
+    role: 'Founder',
     imageUrl: '/images/people/nayasinghania.jpg',
   },
 ]

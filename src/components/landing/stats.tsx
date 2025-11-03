@@ -37,7 +37,7 @@ export default async function Stats() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:max-w-none">
           <div className="text-center">
-            <h2 className="text-4xl font-semibold tracking-tight text-balance text-slate-900 sm:text-5xl dark:text-slate-100">
+            <h2 className="text-2xl md:text-4xl font-semibold tracking-tight text-balance text-slate-900 sm:text-5xl dark:text-slate-100">
               Making Accessibility Data Available
             </h2>
             <p className="mt-4 text-lg/8 text-slate-600 dark:text-slate-300">
