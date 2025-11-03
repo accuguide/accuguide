@@ -101,7 +101,7 @@ export default function Search({ size }: SearchProps) {
               <Button
                 type="submit"
                 disabled={!query.trim() || isPending}
-                className="mr-1 bg-gradient-to-r from-blue-500 to-purple-600 px-4 md:px-8 py-3 text-white transition-all duration-200 hover:from-blue-600 hover:to-purple-700 hover:shadow-lg disabled:opacity-50 ml-3"
+                className="mr-1 bg-linear-to-r from-blue-500 to-purple-600 px-4 md:px-8 py-3 text-white transition-all duration-200 hover:from-blue-600 hover:to-purple-700 hover:shadow-lg disabled:opacity-50 ml-3"
               >
                 {isPending ? (
                   <>
@@ -125,8 +125,13 @@ export default function Search({ size }: SearchProps) {
                 <button
                   key={term}
                   type="button"
-                  onClick={() => setQuery(term)}
-                  className="rounded-full bg-slate-100 px-3 py-1 text-slate-600 transition-colors hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600"
+                  onClick={() => {
+                    const encodedQuery = encodeURIComponent(term)
+                    startTransition(() => {
+                      router.push(`/search?query=${encodedQuery}`)
+                    })
+                  }}
+                  className="rounded-lg bg-slate-100 px-3 py-1 text-slate-600 transition-colors hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600"
                 >
                   {term}
                 </button>

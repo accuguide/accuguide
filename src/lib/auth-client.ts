@@ -16,7 +16,7 @@ export async function changePassword(
 export async function changeEmail(email: string) {
   await authClient.changeEmail({
     newEmail: email,
-    callbackURL: '/settings/account/',
+    callbackURL: '/settings/',
   })
 }
 
@@ -32,7 +32,7 @@ export async function signInWithEmail(email: string, password: string) {
     {
       email,
       password,
-      callbackURL: '/settings/profile/',
+      callbackURL: '/settings/',
       rememberMe: false,
     },
     {},
@@ -43,7 +43,7 @@ export async function signInWithEmail(email: string, password: string) {
 export async function signInWithGoogle() {
   const { data, error } = await authClient.signIn.social({
     provider: 'google',
-    callbackURL: '/settings/profile/',
+    callbackURL: '/settings/',
   })
   return { data, error }
 }
@@ -60,7 +60,7 @@ export async function signUpWithEmail(
       password, // user password -> min 8 characters by default
       name, // user display name
       image, // User image URL (optional)
-      callbackURL: '/settings/profile/', // A URL to redirect to after the user verifies their email (optional)
+      callbackURL: '/settings/', // A URL to redirect to after the user verifies their email (optional)
     },
     {
       onRequest: () => {
@@ -69,7 +69,7 @@ export async function signUpWithEmail(
       },
       onSuccess: () => {
         //redirect to the dashboard or sign in page
-        window.location.href = '/settings/profile/'
+        window.location.href = '/settings/'
       },
       onError: (ctx) => {
         // display the error message

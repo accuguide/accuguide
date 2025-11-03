@@ -16,7 +16,7 @@ export default function SearchLayout({
   children: React.ReactNode
 }>) {
   return (
-    <LayoutDisplay title="Terms of Service" className="md:max-w-[50%]">
+    <LayoutDisplay title="Terms of Service" className="md:max-w-[75%]">
       {children}
     </LayoutDisplay>
   )

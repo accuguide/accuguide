@@ -14,9 +14,5 @@ export default function SearchLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return (
-    <LayoutDisplay title="About Us" halfWidth>
-      {children}
-    </LayoutDisplay>
-  )
+  return <LayoutDisplay>{children}</LayoutDisplay>
 }

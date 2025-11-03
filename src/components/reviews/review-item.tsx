@@ -108,56 +108,67 @@ export default function ReviewItem({
   }
 
   return (
-    <div className="border-b-2 border-slate-600 py-2 dark:border-slate-400">
+    <div className="flex space-x-4 text-sm">
       {showUserInfo && (
-        <div className="flex items-center gap-2">
-          <Avatar>
+        <div className="flex-none py-6">
+          <Avatar className="h-10 w-10">
             <AvatarImage src={userImageUrl} alt="user profile image" />
             <AvatarFallback>{userInfo?.name?.charAt(0) || '?'}</AvatarFallback>
           </Avatar>
-          <p className="text-sm font-semibold">{userInfo?.name || 'Unknown'}</p>
         </div>
       )}
-      {profile && <div>{entityName}</div>}
-      <div className="text-sm">{stars(review.rating)}</div>
-      <IndicatorDisplay indicators={indicators} reviewId={review.id} />
+      <div className="flex-1 py-6 border-border">
+        {showUserInfo && (
+          <h3 className="font-medium text-foreground">
+            {userInfo?.name || 'Unknown'}
+          </h3>
+        )}
+        {profile && <div className="text-sm font-bold">{entityName}</div>}
+        <p className="text-sm text-muted-foreground">
+          <time dateTime={new Date(review.createdAt).toISOString()}>
+            {new Date(review.createdAt).toLocaleDateString()}
+          </time>
+        </p>
 
-      {isEditing ? (
-        <div className="space-y-4">
-          <Textarea
-            value={editedComment}
-            onChange={(e) => setEditedComment(e.target.value)}
-            className="min-h-20"
-            placeholder="Edit your review..."
-          />
-          <div className="flex items-center gap-2">
-            <Button size="sm" onClick={handleSave}>
-              Save
-            </Button>
-            <Button size="sm" variant="outline" onClick={handleCancel}>
-              Cancel
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <>
-          <p className="text-sm">{review.comment}</p>
-          {isOwner && (
-            <div className="flex items-center gap-1 mt-4">
-              <Button size="sm" onClick={() => setIsEditing(true)}>
-                Edit
+        <div className="my-4">{stars(review.rating)}</div>
+
+        <IndicatorDisplay indicators={indicators} reviewId={review.id} />
+
+        {isEditing ? (
+          <div className="mt-4 space-y-4">
+            <Textarea
+              value={editedComment}
+              onChange={(e) => setEditedComment(e.target.value)}
+              className="min-h-20"
+              placeholder="Edit your review..."
+            />
+            <div className="flex items-center gap-2">
+              <Button size="sm" onClick={handleSave}>
+                Save
               </Button>
-              <Button size="sm" variant="destructive" onClick={handleDelete}>
-                Delete
+              <Button size="sm" variant="outline" onClick={handleCancel}>
+                Cancel
               </Button>
             </div>
-          )}
-        </>
-      )}
-
-      <p className="mt-4 text-xs mb-2">
-        {new Date(review.createdAt).toLocaleDateString()}
-      </p>
+          </div>
+        ) : (
+          <>
+            <p className="mt-4 text-sm leading-6 text-muted-foreground">
+              {review.comment}
+            </p>
+            {isOwner && (
+              <div className="flex items-center gap-1 mt-4">
+                <Button size="sm" onClick={() => setIsEditing(true)}>
+                  Edit
+                </Button>
+                <Button size="sm" variant="destructive" onClick={handleDelete}>
+                  Delete
+                </Button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   )
 }

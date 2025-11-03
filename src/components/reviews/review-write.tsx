@@ -69,7 +69,7 @@ export default function ReviewWrite({
 
   function stars(rating: number) {
     return (
-      <div className="mb-1 flex w-24">
+      <div className="mt-4 mb-2 flex w-24">
         {[1, 2, 3, 4, 5].map((star) => (
           <StarIcon
             key={star}
@@ -103,7 +103,7 @@ export default function ReviewWrite({
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
       {!auth && (
-        <p>
+        <p className="text-sm">
           Please{' '}
           <Link className="underline" href="/sign-in/">
             sign in
@@ -113,7 +113,7 @@ export default function ReviewWrite({
       )}
       {auth && (
         <>
-          <p className="mt-4 mb-1">
+          <p className="mt-4">
             Your rating: {rating !== 0 ? rating : '-'} stars
           </p>
           {stars(rating)}
@@ -135,11 +135,11 @@ export default function ReviewWrite({
               ),
             ).map(([category, categoryIndicators]) => (
               <AccordionItem key={category} value={category}>
-                <AccordionTrigger className="my-1 p-1 text-sm font-semibold text-gray-700 hover:bg-slate-400 focus:ring-0 dark:text-gray-300 dark:hover:bg-slate-500">
+                <AccordionTrigger className="my-2 px-1 py-2 text-sm font-semibold text-gray-700 hover:bg-slate-400 focus:ring-0 dark:text-gray-300 dark:hover:bg-slate-500">
                   {category}
                 </AccordionTrigger>
                 <AccordionContent>
-                  <div className="mb-0 grid grid-cols-2 gap-1 overflow-hidden rounded-lg border-0 md:grid-cols-3">
+                  <div className="mt-1 mb-2 grid grid-cols-2 gap-1 overflow-hidden rounded-lg border-0 md:grid-cols-3">
                     {categoryIndicators.map((indicator) => (
                       <Card
                         key={indicator.id}
@@ -221,7 +221,7 @@ export default function ReviewWrite({
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}
             disabled={rating === 0}
-            className="mt-1 mb-2 border-slate-800 dark:border-slate-200"
+            className="mt-1 mb-4 border-slate-800 dark:border-slate-200"
             placeholder="Write your review here..."
           ></Textarea>
           <Button disabled={rating === 0}>Submit</Button>

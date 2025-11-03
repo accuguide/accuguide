@@ -16,7 +16,7 @@ export default function SearchLayout({
   children: React.ReactNode
 }>) {
   return (
-    <LayoutDisplay title="Privacy Policy" className="md:max-w-[50%]">
+    <LayoutDisplay title="Privacy Policy" className="md:max-w-[75%]">
       {children}
     </LayoutDisplay>
   )
