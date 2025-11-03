@@ -43,7 +43,7 @@ export default function SearchDisplay({
     <div className="group relative rounded-lg border-r border-b border-l border-t border-2 p-4 sm:p-6 hover:opacity-75 transition-opacity m-2">
       <div className="pt-6 pb-4 text-center">
         <h3 className="text-sm font-medium text-foreground">
-          {aiScore && aiScore != 0 && (
+          {aiScore != null && aiScore != 0 && (
             <p
               className={cn(
                 'mb-2 font-semibold',
