@@ -13,13 +13,13 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 ### Tech Stack
 
 - Next.js
-- Postgres
-- GCP Maps API
-- Llama 3.3 70b Versatile LLM
+- Postgre SQL
+- Google Cloud Platform (Auth, Maps API)
+- Groq (groq/compound)
 - Better Auth
 - Tailwind CSS
-- AWS S3
-- Cypress Tests
+- AWS (Image Storage)
+- Cypress (Tests)
 
 ### Code Quality
 
