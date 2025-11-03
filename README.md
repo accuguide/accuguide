@@ -56,6 +56,7 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 - [ ] Set up email verification
 - [ ] Random username generation for OAuth account creation
 - [ ] Handling of non-physical locations
+- [ ] Add additional donation options (Github Sponsors, etc)
 
 ### Beta Access
 
