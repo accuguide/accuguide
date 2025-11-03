@@ -40,13 +40,13 @@ export default function Hero() {
             for accessible spaces everywhere.
           </p>
         </div>
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-16 lg:mt-16 lg:max-w-none">
+        <div className="mx-auto mt-12 md:mt-16 max-w-2xl sm:mt-16 lg:mt-16 lg:max-w-none">
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
             {features.map((feature) => (
               <div key={feature.name} className="flex flex-col">
                 <dt className="text-base/7 font-semibold text-gray-900 dark:text-white">
                   <div
-                    className={`mb-6 flex size-10 items-center justify-center rounded-lg ${feature.iconBg}`}
+                    className={`mb-2 md:mb-6 flex size-10 items-center justify-center rounded-lg ${feature.iconBg}`}
                   >
                     <feature.icon
                       aria-hidden="true"

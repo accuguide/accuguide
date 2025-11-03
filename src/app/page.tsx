@@ -26,7 +26,7 @@ export default async function Page() {
       <div className="container mx-auto px-0 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <section className="flex flex-col items-center text-center">
-          <div className="w-full max-w-6xl space-y-8 my-24 md:my-32">
+          <div className="w-full max-w-6xl space-y-8 my-16 md:my-32">
             <LandingTitle />
 
             {/* Search Section */}
@@ -42,7 +42,7 @@ export default async function Page() {
         </section>
 
         {/* Stats Section */}
-        <div className="my-24 md:my-32">
+        <div className="my-16 md:my-32">
           <Stats />
         </div>
       </div>
