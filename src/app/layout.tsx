@@ -43,10 +43,7 @@ export default function RootLayout({
             {children}
           </div>
           <Footer />
-          <div
-            className="fixed right-4"
-            style={{ bottom: 'max(1rem, env(safe-area-inset-bottom))' }}
-          >
+          <div className="fixed right-4 bottom-4">
             <ModeToggle />
           </div>
         </ThemeProvider>
