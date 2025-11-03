@@ -5,6 +5,7 @@ import { ThemeProvider } from 'next-themes'
 import Footer from '@/components/footer/footer'
 import Header from '@/components/header/header'
 import { ModeToggle } from '@/components/theme/mode-toggle'
+import { Toaster } from '@/components/ui/sonner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -36,12 +37,16 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Toaster position="top-center" richColors />
           <Header />
           <div className="mx-4 my-4 min-h-[80vh] md:mx-12 md:my-8">
             {children}
           </div>
           <Footer />
-          <div className="fixed right-4 bottom-4">
+          <div
+            className="fixed right-4"
+            style={{ bottom: 'max(1rem, env(safe-area-inset-bottom))' }}
+          >
             <ModeToggle />
           </div>
         </ThemeProvider>

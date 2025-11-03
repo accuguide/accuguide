@@ -41,7 +41,7 @@ export default function SignupForm() {
 
   return (
     <FormContainer>
-      <Card>
+      <Card className="border-none -mx-4 md:mx-0">
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Create your account</CardTitle>
         </CardHeader>

@@ -26,10 +26,10 @@ export default function AboutPage() {
         {/* Hero section */}
         <div className="relative isolate">
           <div className="overflow-hidden">
-            <div className="mx-auto max-w-7xl px-6 pt-16 pb-24 sm:pt-20 lg:px-8">
+            <div className="mx-auto max-w-7xl px-6 my-16 md:my-32 lg:px-8">
               <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
                 <div className="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl">
-                  <h1 className="text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-7xl dark:text-white">
+                  <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-pretty text-gray-900  dark:text-white">
                     Making the world more accessible
                   </h1>
                   <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:max-w-md sm:text-xl/8 lg:max-w-none dark:text-gray-400">
@@ -40,7 +40,7 @@ export default function AboutPage() {
                     accessibility information and real community experiences.
                   </p>
                 </div>
-                <div className="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
+                <div className="mt-14 justify-end gap-6 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0 hidden md:flex">
                   <div className="ml-auto w-40 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-0 xl:pt-80">
                     <div className="relative">
                       <img
@@ -94,9 +94,9 @@ export default function AboutPage() {
         </div>
 
         {/* Mission section */}
-        <div className="mx-auto mt-16 max-w-7xl px-6 sm:mt-20 lg:px-8">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-            <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
+            <h2 className="text-2xl md:text-4xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white">
               Our mission
             </h2>
             <div className="mt-6 flex flex-col gap-x-8 gap-y-20 lg:flex-row">
@@ -128,9 +128,9 @@ export default function AboutPage() {
         </div>
 
         {/* Team section */}
-        <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
+        <div className="mx-auto my-16 md:my-32 max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0">
-            <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
+            <h2 className="text-2xl md:text-4xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white">
               Our team
             </h2>
             <p className="mt-6 text-lg/8 text-gray-600 dark:text-gray-400">
@@ -160,9 +160,9 @@ export default function AboutPage() {
         </div>
 
         {/* Sponsors section */}
-        <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0">
-            <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
+            <h2 className="text-2xl md:text-4xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white">
               Our sponsors
             </h2>
             <p className="mt-6 text-lg/8 text-gray-600 dark:text-gray-400">
@@ -187,9 +187,9 @@ export default function AboutPage() {
         </div>
 
         {/* Contact section */}
-        <div className="mx-auto mt-32 max-w-7xl px-6 pb-24 sm:mt-40 sm:pb-32 lg:px-8">
+        <div className="mx-auto my-16 md:my-32 max-w-7xl px-6 pb-24 sm:pb-32 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0">
-            <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
+            <h2 className="text-2xl md:text-4xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white">
               Get in touch
             </h2>
             <p className="mt-6 text-lg/8 text-gray-600 dark:text-gray-400">

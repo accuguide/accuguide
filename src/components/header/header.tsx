@@ -9,16 +9,15 @@ export default async function Header() {
       <Link href="/" className="hidden font-bold sm:block text-lg">
         Accuguide
       </Link>
-      <div className="flex gap-6 md:gap-4">
-        <div className="hover:opacity-50">
-          {' '}
+      <div className="flex gap-4">
+        <div className="hover:opacity-50 shrink-0">
           <Link href="/" className="font-bold md:hidden">
             <Image
               src="/images/logo.png"
               alt="Accuguide Logo"
-              width={40}
-              height={40}
-              className="block rounded-lg sm:hidden"
+              width={38}
+              height={38}
+              className="rounded-lg sm:hidden"
             />
           </Link>
         </div>

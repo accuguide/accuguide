@@ -46,7 +46,7 @@ export default function SigninForm() {
 
   return (
     <FormContainer>
-      <Card>
+      <Card className="border-none -mx-4 md:mx-0">
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Sign in to your account</CardTitle>
         </CardHeader>

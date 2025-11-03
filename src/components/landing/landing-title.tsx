@@ -1,7 +1,7 @@
 export default function LandingTitle() {
   return (
     <div className="mx-auto max-w-3xl text-center">
-      <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-balance text-slate-900 dark:text-slate-100 sm:text-7xl">
+      <h1 className="text-3xl md:text-7xl font-semibold tracking-tight text-balance text-slate-900 dark:text-slate-100">
         Discover accessibility with{' '}
         <span
           className="bg-clip-text text-transparent animate-gradient"
