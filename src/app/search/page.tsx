@@ -66,6 +66,7 @@ function SearchResults() {
                 name={place.name}
                 type={place.type}
                 address={place.address}
+                aiScore={place.aiScore || 0}
               />
             ))}
           </div>
@@ -79,6 +80,7 @@ function SearchResults() {
                 name={place.name}
                 type={place.type}
                 address={place.address}
+                aiScore={0}
               />
             ))}
           </div>

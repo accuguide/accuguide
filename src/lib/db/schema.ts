@@ -2,6 +2,8 @@ import type { InferSelectModel } from 'drizzle-orm'
 import {
   boolean,
   integer,
+  json,
+  jsonb,
   numeric,
   pgTable,
   text,
@@ -82,6 +84,14 @@ export const entityTable = pgTable('entity', {
   city: text('city').notNull(),
   address1: text('address1').notNull(),
   address2: text('address2').notNull(),
+  aiSummary: text('ai_summary'),
+  aiScore: numeric('ai_score'),
+  aiIndicators:
+    jsonb('ai_indicators').$type<{ indicator: string; exists: boolean }[]>(),
+  aiUpdatedAt: timestamp('ai_updated_at', {
+    withTimezone: true,
+    mode: 'date',
+  }),
   createdAt: timestamp('created_at', {
     withTimezone: true,
     mode: 'date',

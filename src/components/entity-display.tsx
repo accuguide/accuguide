@@ -16,8 +16,7 @@ export default async function EntityDisplay({
   )
   const rawData = await res.json()
   const data: Entity = rawData[0]
-  const given = data.description || ''
-  // Fetch reviews and indicators for this entity
+
   const reviews = await db
     .select()
     .from(reviewTable)
@@ -40,7 +39,6 @@ export default async function EntityDisplay({
       </div>
       <div className="mt-6">
         <dl className="grid grid-cols-1 sm:grid-cols-2">
-          {/* AI Overview - Full Width Row */}
           <div className="border-t border-slate-600 px-4 py-6 sm:col-span-2 sm:px-0 dark:border-slate-400">
             <dt className="text-sm/6 font-bold text-slate-900 dark:text-white">
               Overview
@@ -50,7 +48,6 @@ export default async function EntityDisplay({
                 entity={data}
                 reviews={reviews}
                 indicators={indicators}
-                given={given}
               />
             </dd>
           </div>
@@ -79,7 +76,12 @@ export default async function EntityDisplay({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Button variant="secondary">Get Directions</Button>
+                    <Button
+                      variant="secondary"
+                      className="hover:cursor-pointer hover:opacity-60"
+                    >
+                      Get Directions
+                    </Button>
                   </a>
                 </div>
               )}
@@ -95,7 +97,7 @@ export default async function EntityDisplay({
               {data?.url ? (
                 <Link
                   href={data.url}
-                  className="text-slate-600 underline dark:text-slate-300"
+                  className="text-slate-600 underline dark:text-slate-300 hover:opacity-80"
                 >
                   {data.url}
                 </Link>

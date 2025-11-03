@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
 import type { SearchDisplayProps } from '@/lib/types'
+import { cn } from '@/lib/utils'
 
 export default function SearchDisplay({
   displayType,
@@ -9,6 +10,7 @@ export default function SearchDisplay({
   name,
   address,
   type,
+  aiScore,
 }: SearchDisplayProps) {
   // Handle address formatting more robustly
   const formatAddress = (address: string) => {
@@ -41,6 +43,24 @@ export default function SearchDisplay({
     <div className="group relative rounded-lg border-r border-b border-l border-t border-2 p-4 sm:p-6 hover:opacity-75 transition-opacity m-2">
       <div className="pt-6 pb-4 text-center">
         <h3 className="text-sm font-medium text-foreground">
+          {aiScore && (
+            <p
+              className={cn(
+                'mb-2 font-semibold',
+                aiScore <= 45 && 'text-red-600 dark:text-red-500',
+                aiScore > 45 &&
+                  aiScore <= 80 &&
+                  'text-yellow-700 dark:text-yellow-600',
+                aiScore > 80 && 'text-green-700 dark:text-green-600',
+              )}
+            >
+              {aiScore <= 45
+                ? 'Low Accessibility'
+                : aiScore <= 80
+                  ? 'Medium Accessibility'
+                  : 'High Accessibility'}
+            </p>
+          )}
           <Link href={href}>
             <span aria-hidden="true" className="absolute inset-0" />
             {name}

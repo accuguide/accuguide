@@ -65,6 +65,7 @@ export async function GET(request: NextRequest) {
         name: place.name,
         address: `${place.address1} ${place.address2 || ''}, ${place.city}, ${place.state}, ${place.zip}`,
         type: place.displayType,
+        aiScore: place.aiScore || 0,
       }))
     }
 

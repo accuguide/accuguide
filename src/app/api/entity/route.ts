@@ -83,6 +83,10 @@ export async function GET(request: NextRequest) {
       address1: googleResponse.postalAddress?.addressLines?.[0] || '',
       address2: googleResponse.postalAddress?.addressLines?.[1] || '',
       createdAt: new Date(),
+      aiScore: null,
+      aiSummary: null,
+      aiIndicators: null,
+      aiUpdatedAt: null,
     }
 
     await db.insert(entityTable).values(formattedResponse).onConflictDoNothing()

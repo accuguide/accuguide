@@ -26,6 +26,7 @@ export type SearchDisplayProps = {
   name: string
   address: string
   type: string
+  aiScore?: number
 }
 
 export interface Review {

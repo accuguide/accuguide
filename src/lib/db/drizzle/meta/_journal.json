@@ -71,6 +71,13 @@
       "when": 1762125372576,
       "tag": "0009_broad_supernaut",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1762209100759,
+      "tag": "0010_lethal_the_captain",
+      "breakpoints": true
     }
   ]
 }
