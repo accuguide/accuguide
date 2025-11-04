@@ -25,13 +25,17 @@ export default async function Page() {
     <main>
       <div className="container mx-auto px-0 sm:px-6 lg:px-8">
         {/* Hero Section */}
-        <section className="flex flex-col items-center text-center">
-          <div className="w-full max-w-6xl space-y-8 my-16 md:my-32">
-            <LandingTitle />
+        <section className="my-12 md:my-20">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mx-auto max-w-2xl lg:max-w-none">
+              <div className="rounded-2xl bg-slate-400/5 p-8 md:p-16 lg:py-32 dark:bg-white/5">
+                <LandingTitle />
 
-            {/* Search Section */}
-            <div className="mx-auto max-w-4xl">
-              <Search size="full" />
+                {/* Search Section */}
+                <div className="mt-8 md:mt-12">
+                  <Search size="full" />
+                </div>
+              </div>
             </div>
           </div>
         </section>

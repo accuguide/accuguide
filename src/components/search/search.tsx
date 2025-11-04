@@ -68,77 +68,36 @@ export default function Search({ size }: SearchProps) {
   // Full and page size styling
   return (
     <div className="flex w-full justify-center">
-      <form onSubmit={handleSubmit} className="relative w-full md:max-w-3xl">
-        <div className="group relative">
-          {/* Animated background gradient */}
+      <form onSubmit={handleSubmit} className="flex w-full gap-2 md:max-w-3xl">
+        {/* Search input */}
+        <label htmlFor="search-full" className="sr-only">
+          Search places
+        </label>
+        <Input
+          id="search-full"
+          placeholder="Search for restaurants, shops, parks, services, and more..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="flex-1 py-5 md:py-6 text-lg"
+          aria-label="Search for accessible places and services"
+          disabled={isPending}
+        />
 
-          {/* Main search container */}
-          <div className="relative overflow-hidden rounded-lg border border-slate-200 bg-white/95 shadow-2xl backdrop-blur-sm transition-all duration-300 group-hover:shadow-3xl dark:border-slate-700 dark:bg-slate-800/95">
-            <div className="flex items-center p-1 md:p-2">
-              {/* Search icon */}
-              <div className="hidden md:flex items-center justify-center px-4">
-                <SearchIcon
-                  className="h-6 w-6 text-slate-400 transition-colors group-focus-within:text-blue-500 dark:text-slate-500"
-                  aria-hidden="true"
-                />
-              </div>
-
-              {/* Search input */}
-              <label htmlFor="search-full" className="sr-only">
-                Search places
-              </label>
-              <Input
-                id="search-full"
-                placeholder="Search for places, services, or accessibility features..."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                className="flex-1 border-0 bg-transparent py-4 text-lg placeholder:text-slate-500 focus:ring-0 focus-visible:ring-0 dark:text-slate-100 dark:placeholder:text-slate-400"
-                aria-label="Search for accessible places and services"
-                disabled={isPending}
-              />
-
-              {/* Search button */}
-              <Button
-                type="submit"
-                disabled={!query.trim() || isPending}
-                className="mr-1 bg-linear-to-r from-blue-500 to-purple-600 px-4 md:px-8 py-3 text-white transition-all duration-200 hover:from-blue-600 hover:to-purple-700 hover:shadow-lg disabled:opacity-50 ml-3"
-              >
-                {isPending ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Searching...
-                  </>
-                ) : (
-                  'Search'
-                )}
-              </Button>
-            </div>
-          </div>
-
-          {/* Search suggestions or popular searches */}
-          <div className="hidden md:flex mt-4 flex-wrap justify-center gap-2 text-sm">
-            <span className="text-slate-500 dark:text-slate-400 mt-1">
-              Popular searches:
-            </span>
-            {['Restaurants', 'Hotels', 'Museums', 'Parks', 'Shopping'].map(
-              (term) => (
-                <button
-                  key={term}
-                  type="button"
-                  onClick={() => {
-                    const encodedQuery = encodeURIComponent(term)
-                    startTransition(() => {
-                      router.push(`/search?query=${encodedQuery}`)
-                    })
-                  }}
-                  className="rounded-lg bg-slate-100 px-3 py-1 text-slate-600 transition-colors hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600"
-                >
-                  {term}
-                </button>
-              ),
-            )}
-          </div>
-        </div>
+        {/* Search button */}
+        <Button
+          type="submit"
+          disabled={!query.trim() || isPending}
+          className="bg-linear-to-r from-blue-500 to-purple-600 px-4 md:px-8 py-5 md:py-6 text-white transition-all duration-200 hover:from-blue-600 hover:to-purple-700 hover:shadow-lg disabled:opacity-50 border-2 dark:border-slate-400"
+        >
+          {isPending ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Searching...
+            </>
+          ) : (
+            'Search'
+          )}
+        </Button>
       </form>
     </div>
   )

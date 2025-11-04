@@ -44,7 +44,7 @@ export default async function Stats() {
               Join thousands of users building a more accessible world
             </p>
           </div>
-          <dl className="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-3">
+          <dl className="mt-8 md:mt-12 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-3">
             {stats.map((stat) => {
               const IconComponent = stat.icon
               return (

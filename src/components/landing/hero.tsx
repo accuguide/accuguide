@@ -40,7 +40,7 @@ export default function Hero() {
             for accessible spaces everywhere.
           </p>
         </div>
-        <div className="mx-auto mt-12 md:mt-16 max-w-2xl sm:mt-16 lg:mt-16 lg:max-w-none">
+        <div className="mx-auto mt-8 md:mt-12 max-w-2xl sm:mt-12 lg:mt-12 lg:max-w-none">
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
             {features.map((feature) => (
               <div key={feature.name} className="flex flex-col">
