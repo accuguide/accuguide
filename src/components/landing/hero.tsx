@@ -30,12 +30,12 @@ const features = [
 export default function Hero() {
   return (
     <div>
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <h2 className="text-2xl md:text-4xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-pretty">
             How Accuguide Works
           </h2>
-          <p className="mt-6 text-lg/8 text-gray-600 dark:text-gray-300">
+          <p className="mt-6 text-lg font-bold">
             Join our community-driven platform to discover, rate, and advocate
             for accessible spaces everywhere.
           </p>
@@ -44,9 +44,9 @@ export default function Hero() {
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
             {features.map((feature) => (
               <div key={feature.name} className="flex flex-col">
-                <dt className="text-base/7 font-semibold text-gray-900 dark:text-white">
+                <dt className="text-lg font-bold">
                   <div
-                    className={`mb-2 md:mb-6 flex size-10 items-center justify-center rounded-lg ${feature.iconBg}`}
+                    className={`mb-2 md:mb-6 flex size-10 items-center justify-center rounded-lg font-bold ${feature.iconBg}`}
                   >
                     <feature.icon
                       aria-hidden="true"
@@ -55,8 +55,10 @@ export default function Hero() {
                   </div>
                   {feature.name}
                 </dt>
-                <dd className="mt-1 flex flex-auto flex-col text-base/7 text-gray-600 dark:text-gray-400">
-                  <p className="flex-auto">{feature.description}</p>
+                <dd className="mt-1 flex flex-auto flex-col text-base">
+                  <p className="flex-auto font-semibold">
+                    {feature.description}
+                  </p>
                   {/* <p className="mt-6">
                     <a
                       href={feature.href}

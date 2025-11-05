@@ -78,7 +78,7 @@ export default function Search({ size }: SearchProps) {
           placeholder="Search for restaurants, shops, parks, services, and more..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 py-5 md:py-6 text-lg"
+          className="flex-1 py-5 md:py-[22px] text-lg"
           aria-label="Search for accessible places and services"
           disabled={isPending}
         />
@@ -87,7 +87,7 @@ export default function Search({ size }: SearchProps) {
         <Button
           type="submit"
           disabled={!query.trim() || isPending}
-          className="bg-linear-to-r from-blue-500 to-purple-600 px-4 md:px-8 py-5 md:py-6 text-white transition-all duration-200 hover:from-blue-600 hover:to-purple-700 hover:shadow-lg disabled:opacity-50 border-2 dark:border-slate-400"
+          className="bg-linear-to-r from-blue-500 to-purple-600 px-4 md:px-8 py-5 md:py-6 text-white transition-all duration-200 hover:from-blue-600 hover:to-purple-700 hover:shadow-lg disabled:opacity-50"
         >
           {isPending ? (
             <>

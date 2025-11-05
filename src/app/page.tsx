@@ -23,12 +23,12 @@ const Search = dynamic(() => import('@/components/search/search'), {
 export default async function Page() {
   return (
     <main>
-      <div className="container mx-auto px-0 sm:px-6 lg:px-8">
+      <div className="container mx-auto">
         {/* Hero Section */}
-        <section className="my-12 md:my-20">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <section className="my-12 md:my-24">
+          <div className="mx-auto max-w-7xl lg:px-8">
             <div className="mx-auto max-w-2xl lg:max-w-none">
-              <div className="rounded-2xl bg-slate-400/5 p-8 md:p-16 lg:py-32 dark:bg-white/5">
+              <div className="rounded-2xl bg-slate-400/5 dark:bg-slate-800 py-8 px-4 md:p-16 lg:py-32">
                 <LandingTitle />
 
                 {/* Search Section */}
@@ -46,7 +46,7 @@ export default async function Page() {
         </section>
 
         {/* Stats Section */}
-        <div className="my-16 md:my-32">
+        <div className="my-12 md:my-24">
           <Stats />
         </div>
       </div>
