@@ -34,13 +34,13 @@ export default async function Stats() {
 
   return (
     <div>
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl lg:px-8">
         <div className="mx-auto max-w-2xl lg:max-w-none">
           <div className="text-center">
-            <h2 className="text-2xl md:text-4xl font-semibold tracking-tight text-balance text-slate-900 dark:text-slate-100">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-pretty">
               Making Accessibility Data Available
             </h2>
-            <p className="mt-4 text-lg/8 text-slate-600 dark:text-slate-300">
+            <p className="mt-6 text-lg font-bold">
               Join thousands of users building a more accessible world
             </p>
           </div>
@@ -50,9 +50,9 @@ export default async function Stats() {
               return (
                 <div
                   key={stat.id}
-                  className="flex flex-col bg-slate-400/5 p-8 dark:bg-white/5"
+                  className="flex flex-col bg-slate-400/5 p-8 dark:bg-slate-800"
                 >
-                  <dt className="text-sm/6 font-semibold text-slate-600 dark:text-slate-300">
+                  <dt className="text-sm/6 font-semibold">
                     <IconComponent
                       className={`mx-auto mb-4 h-10 w-10 ${stat.color}`}
                     />
@@ -61,7 +61,7 @@ export default async function Stats() {
                     className={`text-3xl font-semibold tracking-tight ${stat.color}`}
                   >
                     <CountUpNumber value={stat.value} />
-                    <p className="mt-4">{stat.name}</p>
+                    <p className="mt-4 font-bold text-lg">{stat.name}</p>
                   </dd>
                 </div>
               )

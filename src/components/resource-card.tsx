@@ -19,7 +19,7 @@ export default function ResourceCard({
   updatedAt,
 }: ResourceCardProps) {
   return (
-    <Card className="mt-4 md:max-w-[75%]">
+    <Card className="mb-8 md:max-w-[75%]">
       <CardTitle className="my-0 px-6">{title}</CardTitle>
       <p className="px-6 text-xs -mt-2">{state} Resource</p>
 

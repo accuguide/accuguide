@@ -115,7 +115,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-12 border-t border-gray-900/10 pt-8 dark:border-white/10">
+        <div className="mt-12 border-t pt-8 ">
           <p className="text-sm/6 text-gray-600 dark:text-gray-400">
             &copy; 2025 Accuguide. All rights reserved.
             <br />
