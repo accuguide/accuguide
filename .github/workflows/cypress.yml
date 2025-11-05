@@ -42,20 +42,20 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v5
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Setup Node
+        uses: actions/setup-node@v6
       - name: Install dependencies
-        run: bun install
+        run: npm install
 
       - name: Push database schema
-        run: bun db:push
+        run: npm run db:push
 
       - name: Seed database
-        run: bun db:seed
+        run: npm run db:seed
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          start: bun dev
+          start: npm run dev
           browser: chrome
           record: true
