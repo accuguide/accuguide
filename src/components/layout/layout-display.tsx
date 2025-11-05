@@ -17,7 +17,9 @@ export default function LayoutDisplay({
   return (
     <div className={cn(className)}>
       {title && <Title>{title}</Title>}
-      {subtitle && <p className="mb-4 md:max-w-[75%]">{subtitle}</p>}
+      {subtitle && <p className="md:max-w-[75%]">{subtitle}</p>}
+      {title && subtitle && <div className="h-12"></div>}
+      {title && !subtitle && <div className="h-8"></div>}
       <div className={cn(halfWidth ? 'md:max-w-[75%]' : '')}>{children}</div>
     </div>
   )

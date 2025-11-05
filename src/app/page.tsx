@@ -28,7 +28,7 @@ export default async function Page() {
         <section className="my-12 md:my-24">
           <div className="mx-auto max-w-7xl lg:px-8">
             <div className="mx-auto max-w-2xl lg:max-w-none">
-              <div className="rounded-2xl bg-slate-400/5 dark:bg-slate-800 py-8 px-4 md:p-16 lg:py-32">
+              <div className="rounded-2xl bg-[linear-gradient(135deg,#ef4444,#f97316,#eab308,#22c55e,#3b82f6,#8b5cf6)] py-8 px-4 md:p-16 lg:py-32">
                 <LandingTitle />
 
                 {/* Search Section */}

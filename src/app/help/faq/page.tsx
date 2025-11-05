@@ -24,11 +24,11 @@ export default function FAQPage() {
   return (
     <div>
       <div className="max-w-7xl">
-        <dl className="mt-20 divide-y divide-gray-900/10 dark:divide-white/10">
+        <dl className="divide-y divide-gray-900/10 dark:divide-white/10">
           {faqs.map((faq) => (
             <div
               key={faq.id}
-              className="py-8 first:pt-0 last:pb-0 lg:grid lg:grid-cols-12 lg:gap-8"
+              className="py-4 first:pt-0 last:pb-0 lg:grid lg:grid-cols-12 lg:gap-8"
             >
               <dt className="text-base/7 font-semibold text-gray-900 lg:col-span-5 dark:text-white">
                 {faq.question}
