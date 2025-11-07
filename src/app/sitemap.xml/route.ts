@@ -5,11 +5,13 @@ export const dynamic = 'force-dynamic'
 export async function GET() {
   const urls = [
     '/',
+    '/contact/',
     '/help/faq/',
     '/help/resources/',
     '/help/feedback/',
     '/info/about/',
     '/info/donate/',
+    '/info/volunteer/',
     '/legal/disclaimers/',
     '/legal/privacy/',
     '/legal/terms/',

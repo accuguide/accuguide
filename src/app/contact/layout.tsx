@@ -2,11 +2,10 @@ import type { Metadata } from 'next'
 import LayoutDisplay from '@/components/layout/layout-display'
 
 export const metadata: Metadata = {
-  title: 'Terms',
-  description:
-    "Accuguide's Terms of Service explain the rules and guidelines for using Accuguide",
+  title: 'Email',
+  description: 'Contact Accuguide via email',
   alternates: {
-    canonical: '/legal/terms/',
+    canonical: '/contact/email/',
   },
 }
 
@@ -17,8 +16,8 @@ export default function SearchLayout({
 }>) {
   return (
     <LayoutDisplay
-      title="Terms of Service"
-      subtitle="These Terms of Service govern your use of our website and services"
+      title="Get In Touch"
+      subtitle="Have questions, found a bug, or need assistance? We're here to help. Reach out to us through email or phone, or send us a message using the form below."
     >
       {children}
     </LayoutDisplay>

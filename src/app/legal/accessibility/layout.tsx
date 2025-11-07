@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 import LayoutDisplay from '@/components/layout/layout-display'
 
 export const metadata: Metadata = {
-  title: 'Email',
-  description: 'Contact Accuguide via email',
+  title: 'Accessibility',
+  description: "Accuguide's Accessibility Statement",
   alternates: {
-    canonical: '/contact/email/',
+    canonical: '/legal/accessibility/',
   },
 }
 
@@ -16,8 +16,8 @@ export default function SearchLayout({
 }>) {
   return (
     <LayoutDisplay
-      title="Get In Touch"
-      subtitle="Have questions or need assistance? We're here to help. Reach out to us through any of the following channels or use the form to send us a message."
+      title="Accessibility Statement"
+      subtitle="This accessibility statement describes Accuguide's commitment to accessibility"
     >
       {children}
     </LayoutDisplay>

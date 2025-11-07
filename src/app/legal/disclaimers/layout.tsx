@@ -19,7 +19,6 @@ export default function SearchLayout({
     <LayoutDisplay
       title="Disclaimers"
       subtitle="This disclaimer outlines the limitations and responsibilities of Accuguide"
-      className="md:max-w-[75%]"
     >
       {children}
     </LayoutDisplay>

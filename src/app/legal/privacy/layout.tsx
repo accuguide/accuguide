@@ -21,7 +21,6 @@ export default function SearchLayout({
       subtitle="            This privacy notice describes how and why we collect, use, and store
             your information when you use our services available through our
             website"
-      className="md:max-w-[75%]"
     >
       {children}
     </LayoutDisplay>

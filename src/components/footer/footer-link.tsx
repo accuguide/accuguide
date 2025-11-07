@@ -13,7 +13,7 @@ export default function FooterLink({
     <Link
       href={href}
       target={target}
-      className="text-sm text-slate-600 transition-opacity duration-50 hover:underline hover:opacity-75 dark:text-slate-300 py-2"
+      className="text-sm font-semibold text-slate-500 dark:text-slate-400 transition-opacity duration-50 hover:underline hover:opacity-75 py-2"
     >
       {children}
     </Link>
