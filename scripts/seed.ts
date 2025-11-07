@@ -5,7 +5,9 @@ import {
   categoryTable,
   emailTable,
   entityTable,
+  FaqTable,
   indicatorTable,
+  jobTable,
   resourceTable,
   reviewIndicatorTable,
   reviewTable,
@@ -30,6 +32,8 @@ const main = async () => {
     await db.delete(indicatorTable)
     await db.delete(categoryTable)
     await db.delete(resourceTable)
+    await db.delete(jobTable)
+    await db.delete(FaqTable)
     await db.delete(emailTable)
     await db.delete(user)
     console.log('Database cleared.')
@@ -173,6 +177,73 @@ const main = async () => {
         updatedAt: new Date(),
       },
     ]
+    const jobs = [
+      {
+        title: 'Blogger',
+        description:
+          "Write and publish blog posts on topics related to accessibility, disability rights, and inclusive design on our platform's blog. No experience required, but knowledge of topics and strong writing skills are a plus!",
+        responsibilities: [
+          'Research accessibility-related topics',
+          'Provide guidance on WCAG 2.1 AA compliance',
+          'Collaborate with design and development teams',
+          'Create and maintain accessibility documentation',
+        ],
+        link: null,
+      },
+      {
+        title: 'Reviewer',
+        description:
+          'Document accessibility of public places in your area by writing accessibility-reviews on our platform. No experience required, just a passion for accessibility and attention to detail!',
+        responsibilities: [
+          'Conduct user research with diverse participants',
+          'Analyze accessibility barriers in current designs',
+          'Present findings to stakeholders',
+          'Develop inclusive design guidelines',
+        ],
+        link: null,
+      },
+      {
+        title: 'Social Media Manager',
+        description:
+          'Manage our social media presence to spread awareness about accessibility and disability rights. Create engaging content and build our online community.',
+        responsibilities: [
+          'Create and schedule social media content across platforms',
+          'Engage with followers and respond to comments',
+          'Track analytics and report on social media performance',
+          'Collaborate with content team on campaigns',
+        ],
+        link: null,
+      },
+      {
+        title: 'Software Engineer Volunteer',
+        description:
+          'Work on feature improvements and bug fixes for our platform. Check us out on Github to get started with contributing!',
+        responsibilities: [
+          'Write clean, maintainable code following best practices',
+          'Participate in code reviews and provide constructive feedback',
+          'Collaborate with cross-functional teams to define and implement new features',
+        ],
+        link: 'https://github.com/accuguide/accuguide',
+      },
+    ]
+    const faqs = [
+      {
+        question: 'Is my data safe?',
+        answer:
+          'We take your privacy and security very seriously. We only save the personal data that is necessary for you to maintain an account with us, should you choose to login. Your data stays on our servers and is never sold or given to third parties. See our privacy policy for more information.',
+      },
+      {
+        question: 'How do I delete my account?',
+        answer:
+          'For now, please send us an email with the email address associated with your Accuguide account and we can remove all your data from our servers.',
+      },
+      {
+        question:
+          "I'm a developer and I want to contribute to Accuguide. How can I help?",
+        answer:
+          'Check out our Github repository at github.com/accuguide/accuguide to get started!',
+      },
+    ]
 
     await db.insert(user).values(users)
     await db.insert(emailTable).values(emails)
@@ -185,6 +256,8 @@ const main = async () => {
     await db.insert(reviewTable).values(reviews)
     await db.insert(reviewIndicatorTable).values(reviewIndicators)
     await db.insert(resourceTable).values(resources)
+    await db.insert(jobTable).values(jobs)
+    await db.insert(FaqTable).values(faqs)
     await db.insert(account).values(accounts)
     console.log('Database seeded successfully.')
     exit(0)

@@ -166,6 +166,26 @@ export const resourceTable = pgTable('resource', {
     .defaultNow(),
 })
 
+export const jobTable = pgTable('job', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  title: text('title').notNull(),
+  description: text('description').notNull(),
+  responsibilities: json('responsibilities').$type<string[]>(),
+  link: text('link'),
+  createdAt: timestamp('created_at', {
+    withTimezone: true,
+    mode: 'date',
+  })
+    .notNull()
+    .defaultNow(),
+})
+
+export const FaqTable = pgTable('faq', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  question: text('question').notNull(),
+  answer: text('answer').notNull(),
+})
+
 export type Type = InferSelectModel<typeof typeTable>
 export type Indicator = InferSelectModel<typeof indicatorTable>
 export type Category = InferSelectModel<typeof categoryTable>
@@ -175,3 +195,5 @@ export type Entity = InferSelectModel<typeof entityTable>
 export type Review = InferSelectModel<typeof reviewTable>
 export type ReviewIndicator = InferSelectModel<typeof reviewIndicatorTable>
 export type Resource = InferSelectModel<typeof resourceTable>
+export type Job = InferSelectModel<typeof jobTable>
+export type Faq = InferSelectModel<typeof FaqTable>

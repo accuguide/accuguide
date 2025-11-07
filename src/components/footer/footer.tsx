@@ -7,6 +7,7 @@ const navigation = {
     { name: 'About', href: '/info/about/' },
     { name: 'Donate', href: '/info/donate/' },
     { name: 'Blog', href: 'https://blog.accuguide.org' },
+    { name: 'Volunteer', href: '/info/volunteer/' },
   ],
   help: [
     { name: 'FAQ', href: '/help/faq/' },

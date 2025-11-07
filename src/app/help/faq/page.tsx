@@ -1,26 +1,8 @@
-const faqs = [
-  {
-    id: 1,
-    question: 'Is my data safe?',
-    answer:
-      'We take your privacy and security very seriously. We only save the personal data that is necessary for you to maintain an account with us, should you choose to login. Your data stays on our servers and is never sold or given to third parties. See our privacy policy for more information.',
-  },
-  {
-    id: 2,
-    question: 'How do I delete my account?',
-    answer:
-      'For now, please send us an email with the email address associated with your Accuguide account and we can remove all your data from our servers.',
-  },
-  {
-    id: 3,
-    question:
-      "I'm a developer and I want to contribute to Accuguide. How can I help?",
-    answer:
-      'Check out our Github repository at github.com/accuguide/accuguide to get started!',
-  },
-]
+import { db } from '@/lib/db'
+import { FaqTable } from '@/lib/db/schema'
 
-export default function FAQPage() {
+export default async function FAQPage() {
+  const faqs = await db.select().from(FaqTable)
   return (
     <div>
       <div className="max-w-7xl">

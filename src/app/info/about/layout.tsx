@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'About',
   description: 'Learn more about Accuguide and its mission',
   alternates: {
-    canonical: '/about/',
+    canonical: '/info/about/',
   },
 }
 
