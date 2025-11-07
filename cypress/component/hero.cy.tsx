@@ -1,7 +1,7 @@
-import Hero from '@/components/landing/hero'
+import Header from '@/components/header/header'
 
 describe('Hero Component Testing', () => {
   it('Renders the Hero component', () => {
-    cy.mount(<Hero />)
+    cy.mount(<Header />)
   })
 })
