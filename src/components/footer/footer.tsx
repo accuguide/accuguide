@@ -52,16 +52,26 @@ const navigation = {
 interface FooterLinkListProps {
   title: string
   items: Array<{ name: string; href: string }>
+  openInNewTab?: boolean
 }
 
-function FooterLinkList({ title, items }: FooterLinkListProps) {
+function FooterLinkList({ title, items, openInNewTab }: FooterLinkListProps) {
   return (
     <div>
       <h3 className="footer-heading text-sm/6 font-semibold">{title}</h3>
       <ul className="mt-6 space-y-4">
         {items.map((item) => (
           <li key={item.name}>
-            <FooterLink href={item.href}>{item.name}</FooterLink>
+            <FooterLink
+              href={item.href}
+              target={
+                openInNewTab && item.name !== 'Get in Touch'
+                  ? '_blank'
+                  : undefined
+              }
+            >
+              {item.name}
+            </FooterLink>
           </li>
         ))}
       </ul>
@@ -71,8 +81,10 @@ function FooterLinkList({ title, items }: FooterLinkListProps) {
 
 export default function Footer() {
   return (
-    <footer className="border-t-2">
-      <div className="mx-auto max-w-7xl px-6 pt-12 pb-8 lg:px-8">
+    <footer className="w-full">
+      <hr className="-mx-4 md:-mx-12 border" />
+
+      <div className="container mx-auto max-w-7xl pt-12 pb-8">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-6">
             <Link href="/" className="flex items-center gap-4">
@@ -84,7 +96,7 @@ export default function Footer() {
                 className="h-12 w-12 rounded-lg"
               />
             </Link>
-            <p className="text-sm/6 text-balance text-gray-600 dark:text-gray-400">
+            <p className="text-sm secondary-text">
               Discover accessibility with Accuguide
             </p>
             <div className="flex gap-x-6">
@@ -92,6 +104,7 @@ export default function Footer() {
                 <a
                   key={item.name}
                   href={item.href}
+                  target="blank"
                   className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
                 >
                   <span className="sr-only font-bold">{item.name}</span>
@@ -108,7 +121,11 @@ export default function Footer() {
               </div>
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
-              <FooterLinkList title="Contact" items={navigation.contact} />
+              <FooterLinkList
+                title="Contact"
+                items={navigation.contact}
+                openInNewTab
+              />
               <div className="mt-10 md:mt-0">
                 <FooterLinkList title="Legal" items={navigation.legal} />
               </div>
@@ -116,7 +133,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-12 border-t pt-8 ">
-          <p className="text-sm/6 text-gray-600 dark:text-gray-400">
+          <p className="text-xs secondary-text">
             &copy; 2025 Accuguide. All rights reserved.
             <br />
             This site is powered by{' '}

@@ -38,11 +38,15 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Toaster position="top-center" richColors />
-          <Header />
+          <div className="mx-4 md:mx-12">
+            <Header />
+          </div>
           <div className="mx-4 my-4 min-h-[80vh] md:mx-12 md:my-8">
             {children}
           </div>
-          <Footer />
+          <div className="mx-4 md:mx-12">
+            <Footer />
+          </div>
           <div className="fixed right-4 bottom-4">
             <ModeToggle />
           </div>

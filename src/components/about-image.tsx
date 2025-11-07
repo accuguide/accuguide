@@ -5,7 +5,7 @@ interface AboutImageProps {
 
 export default function AboutImage({ src, alt }: AboutImageProps) {
   return (
-    <div className="relative">
+    <div className="relative w-40">
       <img
         alt={alt}
         src={src}

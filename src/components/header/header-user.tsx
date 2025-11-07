@@ -30,20 +30,29 @@ export default async function HeaderUser() {
         <button className="cursor-pointer rounded-lg hover:opacity-80 focus:ring-2 focus:ring-slate-500 focus:ring-offset-1 focus:outline-none">
           <Avatar>
             <AvatarImage src={imageUrl} alt="your profile image" />
-            <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
+            <AvatarFallback className="font-bold">
+              {user?.name?.charAt(0)}
+            </AvatarFallback>
           </Avatar>
         </button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="mt-2 mr-8 border-2">
-        <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
+      <DropdownMenuContent className="mt-1 mr-12 border-2 font-semibold">
+        <DropdownMenuLabel className="font-bold">
+          {user?.name}
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href="/settings/" className="text-slate-900 dark:text-slate-100">
+        <Link href="/settings/" className="text-slate-600 dark:text-slate-300">
           <DropdownMenuItem>Settings</DropdownMenuItem>
         </Link>
-        <Link href="/sign-out/" className="text-slate-900 dark:text-slate-100">
+        {user?.role === 'admin' && (
+          <Link href="/admin/" className="text-slate-600 dark:text-slate-300">
+            <DropdownMenuItem>Admin</DropdownMenuItem>
+          </Link>
+        )}
+        <Link href="/sign-out/" className="text-slate-600 dark:text-slate-300">
           <DropdownMenuItem>Sign Out</DropdownMenuItem>
-        </Link>{' '}
+        </Link>
       </DropdownMenuContent>
     </DropdownMenu>
   )

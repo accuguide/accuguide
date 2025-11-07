@@ -104,12 +104,10 @@ export default function Settings() {
   return (
     <div className="space-y-12">
       {/* Profile Section */}
-      <div className="grid grid-cols-1 gap-x-8 gap-y-10 border-b-2 border-slate-600 pb-12 md:grid-cols-3 dark:border-slate-400">
+      <div className="grid grid-cols-1 gap-x-8 gap-y-10 border-b-2 border-slate-600 pb-8 md:grid-cols-3 dark:border-slate-400">
         <div>
           <h2 className="text-xl font-bold">Profile</h2>
-          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-            Update your profile information and customize your account.
-          </p>
+          <p>Update your profile information and customize your account.</p>
         </div>
 
         <form
@@ -183,9 +181,7 @@ export default function Settings() {
       <div className="grid grid-cols-1 gap-x-8 gap-y-10 border-b-2 border-slate-600 pb-12 md:grid-cols-3 dark:border-slate-400">
         <div>
           <h2 className="text-xl font-bold">Account</h2>
-          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-            Update your account credentials and security settings.
-          </p>
+          <p>Update your account credentials and security settings.</p>
         </div>
 
         <form

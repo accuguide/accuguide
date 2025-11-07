@@ -9,7 +9,7 @@ export default function Page() {
         <Card className="my-4 p-0 md:p-4">
           <script async src="https://js.stripe.com/v3/buy-button.js"></script>
           {/* @ts-ignore */}
-          <div className="scale-100 md:scale-125 origin-center">
+          <div className="scale-100 md:scale-125 origin-center border-2 rounded-lg">
             <stripe-buy-button
               buy-button-id={process.env.NEXT_PUBLIC_STRIPE_BUY_BUTTON_ID}
               publishable-key={process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}

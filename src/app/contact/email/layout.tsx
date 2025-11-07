@@ -14,5 +14,12 @@ export default function SearchLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <LayoutDisplay>{children}</LayoutDisplay>
+  return (
+    <LayoutDisplay
+      title="Get In Touch"
+      subtitle="Have questions or need assistance? We're here to help. Reach out to us through any of the following channels or use the form to send us a message."
+    >
+      {children}
+    </LayoutDisplay>
+  )
 }

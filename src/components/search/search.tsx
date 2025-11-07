@@ -67,7 +67,7 @@ export default function Search({ size }: SearchProps) {
 
   // Full and page size styling
   return (
-    <div className="flex w-full justify-center">
+    <div className="flex w-full justify-center mt-8 md:mt-12">
       <form onSubmit={handleSubmit} className="flex w-full gap-2 md:max-w-3xl">
         {/* Search input */}
         <label htmlFor="search-full" className="sr-only">

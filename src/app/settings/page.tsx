@@ -22,9 +22,7 @@ export default async function Page() {
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 pb-12 md:grid-cols-3">
           <div>
             <h2 className="text-xl font-bold">Reviews</h2>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-              View and manage your reviews.
-            </p>
+            <p>View and manage your reviews.</p>
           </div>
 
           <div className="max-w-2xl md:col-span-2">

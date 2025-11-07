@@ -2,15 +2,10 @@ import { CheckCircle } from 'lucide-react'
 
 export default function TermsOfService() {
   return (
-    <div className="py-12">
-      <div className="max-w-4xl text-base/7 text-gray-700 dark:text-gray-300">
-        <p className="text-sm">Last Updated on May 2, 2025</p>
-        <div className=" mt-4">
-          <p className="text-gray-600 dark:text-gray-400">
-            These Terms of Service govern your use of our website and services.
-          </p>
-
-          <p className="mt-8 text-gray-600 dark:text-gray-400">
+    <div className="">
+      <div className="max-w-4xl text-base/7">
+        <div className="">
+          <p>
             You agree that by accessing the Site, you have read, understood, and
             agree to be bound by all of these Terms and Conditions. If you do
             not agree with all of these Terms and Conditions, then you are
@@ -18,16 +13,14 @@ export default function TermsOfService() {
             use immediately.
           </p>
 
-          <p className="mt-8 text-gray-600 dark:text-gray-400">
+          <p className="mt-6">
             The Site is intended for users who are at least 18 years old.
             Persons under the age of 18 are not permitted to register for the
             Site.
           </p>
 
-          <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white">
-            User Registration
-          </h2>
-          <div className="mt-6 space-y-4 text-gray-600 dark:text-gray-400">
+          <h2 className="mt-12 text-3xl">User Registration</h2>
+          <div className="mt-6 space-y-4">
             <p>
               You may be required to register with the Site. You agree to be be
               responsible for all use of your account.
@@ -39,20 +32,18 @@ export default function TermsOfService() {
             </p>
           </div>
 
-          <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white">
-            Prohibited Activities
-          </h2>
-          <p className="mt-6 text-gray-600 dark:text-gray-400">
+          <h2 className="mt-12 text-3xl">Prohibited Activities</h2>
+          <p className="mt-6">
             You may not access or use Accuguide for any purpose other than that
             for which we make the Site available. As a user of Accuguide, you
             agree not to:
           </p>
 
-          <ul className="mt-8 space-y-6 text-gray-600 dark:text-gray-400">
+          <ul className="mt-8 space-y-8">
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Systematically retrieve data or other content from Accuguide to
@@ -64,7 +55,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Make any unauthorized use of Accuguide, including collecting
@@ -76,7 +67,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Use the Site to advertise or offer to sell goods and services.
@@ -85,7 +76,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Circumvent, disable, or interfere with security-related features
@@ -97,7 +88,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Engage in unauthorized framing of or linking to Accuguide.
@@ -106,14 +97,14 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>Trick, defraud, or mislead us and other users</span>
             </li>
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Use Accuguide as part of any effort to compete with us or
@@ -125,7 +116,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Harass, annoy, intimidate, or threaten any of our employees or
@@ -135,7 +126,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Engage in any automated use of the system, such as using scripts
@@ -146,7 +137,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Interfere with, disrupt, or create an undue burden on Accuguide
@@ -156,7 +147,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Attempt to impersonate another user or person or use the
@@ -166,7 +157,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Use any information obtained from Accuguide in order to harass,
@@ -178,7 +169,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Upload or transmit (or attempt to upload or to transmit)
@@ -193,7 +184,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Disparage, tarnish, or otherwise harm, in our opinion, us and/or
@@ -203,7 +194,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Use Accuguide in a manner inconsistent with any applicable laws
@@ -212,10 +203,8 @@ export default function TermsOfService() {
             </li>
           </ul>
 
-          <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white">
-            User Generated Contributions
-          </h2>
-          <p className="mt-6 text-gray-600 dark:text-gray-400">
+          <h2 className="mt-12 text-3xl">User Generated Contributions</h2>
+          <p className="mt-6">
             The Site may invite you to chat, contribute to, or participate in
             blogs, message boards, online forums, and other functionality, and
             may provide you with the opportunity to create, submit, post,
@@ -228,16 +217,16 @@ export default function TermsOfService() {
             any Contributions you transmit may be treated in accordance with the
             Site's Privacy Policy.
           </p>
-          <p className="mt-6 text-gray-600 dark:text-gray-400">
+          <p className="mt-6">
             When you create or make available any Contributions, you thereby
             represent and warrant that:
           </p>
 
-          <ul className="mt-8 space-y-6 text-gray-600 dark:text-gray-400">
+          <ul className="mt-8 space-y-8">
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 The creation, distribution, transmission, public display, or
@@ -250,7 +239,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 You are the creator and owner of or have the necessary licenses,
@@ -263,7 +252,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 You have the written consent, release, and/or permission of each
@@ -277,7 +266,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Your Contributions are not false, inaccurate, or misleading.
@@ -286,7 +275,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Your Contributions are not unsolicited or unauthorized
@@ -297,7 +286,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Your Contributions are not obscene, lewd, lascivious, filthy,
@@ -308,7 +297,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Your Contributions do not ridicule, mock, disparage, intimidate,
@@ -318,7 +307,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Your Contributions are not used to harass or threaten (in the
@@ -328,7 +317,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Your Contributions do not violate any applicable law,
@@ -338,7 +327,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Your Contributions do not violate the privacy or publicity
@@ -348,7 +337,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Your Contributions do not violate any applicable law concerning
@@ -358,7 +347,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Your Contributions do not otherwise violate, or link to material
@@ -369,7 +358,7 @@ export default function TermsOfService() {
             <li className="flex gap-x-3">
               <CheckCircle
                 aria-hidden="true"
-                className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                className="mt-1 size-5 flex-none"
               />
               <span>
                 Any use of the Site in violation of the foregoing violates these
@@ -380,10 +369,8 @@ export default function TermsOfService() {
             </li>
           </ul>
 
-          <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white">
-            Questions
-          </h2>
-          <div className="mt-6 space-y-4 text-gray-600 dark:text-gray-400">
+          <h2 className="mt-12 text-3xl">Questions</h2>
+          <div className="mt-6 space-y-4">
             <p>
               If you have any questions about this privacy notice or our
               practices regarding your personal information, please contact us.
@@ -393,6 +380,8 @@ export default function TermsOfService() {
               privacy notice.
             </p>
           </div>
+
+          <p className="mt-12 text-sm">Last Updated: November 5, 2025</p>
         </div>
       </div>
     </div>

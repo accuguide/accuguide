@@ -32,18 +32,11 @@ export default async function EntityDisplay({
     : []
   return (
     <div>
-      <div className="px-4 sm:px-0">
-        <p className="mt-1 max-w-2xl text-sm/6 text-slate-500 dark:text-slate-400">
-          {data?.displayType}
-        </p>
-      </div>
-      <div className="mt-6">
+      <div>
         <dl className="grid grid-cols-1 sm:grid-cols-2">
-          <div className="border-t border-slate-600 px-4 py-6 sm:col-span-2 sm:px-0 dark:border-slate-400">
-            <dt className="text-sm/6 font-bold text-slate-900 dark:text-white">
-              Overview
-            </dt>
-            <dd className="mt-1 text-sm/6 text-slate-600 sm:mt-2 dark:text-slate-300">
+          <div className="px-4 pb-6 sm:col-span-2 sm:px-0">
+            <h2 className="text-2xl mb-4">Overview</h2>
+            <dd className="text-sm/6 text-slate-600 sm:mt-2 dark:text-slate-300">
               <AIOverview
                 entity={data}
                 reviews={reviews}
@@ -54,9 +47,7 @@ export default async function EntityDisplay({
 
           {/* Address - Left Side */}
           <div className="border-t border-slate-600 px-4 py-6 sm:col-span-1 sm:px-0 dark:border-slate-400">
-            <dt className="text-sm/6 font-bold text-slate-900 dark:text-white">
-              Address
-            </dt>
+            <h2 className="text-2xl mb-4">Address</h2>
             <dd className="mt-1 text-sm/6 text-slate-600 sm:mt-2 dark:text-slate-300">
               {data?.address1}
               <br />
@@ -90,10 +81,8 @@ export default async function EntityDisplay({
 
           {/* Website - Right Side */}
           <div className="border-t border-slate-600 px-4 py-6 sm:col-span-1 sm:px-0 dark:border-slate-400">
-            <dt className="text-sm/6 font-bold text-slate-900 dark:text-white">
-              Website
-            </dt>
-            <dd className="mt-1 text-sm/6 text-slate-600 sm:mt-2 dark:text-slate-300">
+            <h2 className="text-2xl mb-4">Website</h2>
+            <dd className="text-sm/6 text-slate-600 sm:mt-2 dark:text-slate-300">
               {data?.url ? (
                 <Link
                   href={data.url}
@@ -112,10 +101,8 @@ export default async function EntityDisplay({
           {/* Hours - Full Width Row */}
           {data?.hours.length > 0 && (
             <div className="border-y border-slate-600 px-4 py-6 sm:col-span-2 sm:px-0 dark:border-slate-400">
-              <dt className="text-sm/6 font-bold text-slate-900 dark:text-white">
-                Hours
-              </dt>
-              <dd className="mt-1 text-sm/6 text-slate-600 sm:mt-2 dark:text-slate-300">
+              <h2 className="text-2xl mb-4">Hours</h2>
+              <dd className="text-sm/6 text-slate-600 sm:mt-2 dark:text-slate-300">
                 <ul>
                   {data?.hours?.map((hour: string, index: number) => (
                     <li key={index} className="flex">

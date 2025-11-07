@@ -20,8 +20,8 @@ export default function ResourceCard({
 }: ResourceCardProps) {
   return (
     <Card className="mb-8 md:max-w-[75%]">
-      <CardTitle className="my-0 px-6">{title}</CardTitle>
-      <p className="px-6 text-xs -mt-2">{state} Resource</p>
+      <CardTitle className="px-6 font-bold">{title}</CardTitle>
+      <p className="px-6 text-xs -mt-2 secondary-text">{state} Resource</p>
 
       <CardContent>
         <p className="-mt-2 mb-2">{description}</p>
@@ -35,7 +35,9 @@ export default function ResourceCard({
             {link}
           </Link>
         </p>
-        <p className="mt-2 text-xs">{'Last updated on ' + updatedAt}</p>
+        <p className="text-xs secondary-text">
+          {'Last updated on ' + updatedAt}
+        </p>
       </CardContent>
     </Card>
   )

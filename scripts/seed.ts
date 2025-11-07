@@ -40,6 +40,7 @@ const main = async () => {
         name: 'John Doe',
         email: 'name@example.com',
         emailVerified: true,
+        role: 'admin',
       },
     ]
     const emails = [{ email: 'name@example.com', subscribed: true }]
