@@ -161,9 +161,9 @@ const main = async () => {
         description:
           'The Americans with Disabilities Act provides an important tool to fight discrimination: configure filing a complaint with an appropriate federal agency. This link outlines the steps to get you started.',
         url: 'https://www.ada.gov/file-a-complaint/',
-        category: 'Legal Resources',
-        state: 'National',
-        country: 'USA',
+        category: 'Career Resources',
+        state: 'California',
+        country: 'Canada',
         updatedAt: new Date(),
       },
       {
