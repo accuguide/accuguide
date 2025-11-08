@@ -4,14 +4,14 @@ export default function SearchSkeleton() {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="mb-4 mt-8">Catalogued Results</h2>
+        <h2 className="mt-8 mb-4">Catalogued Results</h2>
         <div className="-mx-px grid grid-cols-2 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
           {Array.from({ length: 8 }).map((_, index) => (
             <div
               key={index}
-              className="rounded-lg border-r border-b border-l border-t border-2 p-4 sm:p-6 m-2"
+              className="m-2 rounded-lg border-2 border-t border-r border-b border-l p-4 sm:p-6"
             >
-              <div className="pt-6 pb-4 flex flex-col items-center space-y-3">
+              <div className="flex flex-col items-center space-y-3 pt-6 pb-4">
                 <Skeleton className="h-4 w-3/4" />
                 <Skeleton className="h-5 w-20" />
                 <Skeleton className="h-3 w-full" />
@@ -22,14 +22,14 @@ export default function SearchSkeleton() {
         </div>
       </div>
       <div>
-        <h2 className="mb-4 mt-8">All Results</h2>
+        <h2 className="mt-8 mb-4">All Results</h2>
         <div className="-mx-px grid grid-cols-2 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
           {Array.from({ length: 8 }).map((_, index) => (
             <div
               key={index}
-              className="rounded-lg border-r border-b border-l border-t border-2 p-4 sm:p-6 m-2"
+              className="m-2 rounded-lg border-2 border-t border-r border-b border-l p-4 sm:p-6"
             >
-              <div className="pt-6 pb-4 flex flex-col items-center space-y-3">
+              <div className="flex flex-col items-center space-y-3 pt-6 pb-4">
                 <Skeleton className="h-4 w-3/4" />
                 <Skeleton className="h-5 w-20" />
                 <Skeleton className="h-3 w-full" />

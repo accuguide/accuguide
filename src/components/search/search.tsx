@@ -45,7 +45,7 @@ export default function Search({ size }: SearchProps) {
         </label>
         <div className="relative">
           <SearchIcon
-            className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500"
+            className="-translate-y-1/2 absolute top-1/2 left-3 h-4 w-4 text-slate-400 dark:text-slate-500"
             aria-hidden="true"
           />
           <Input
@@ -53,12 +53,12 @@ export default function Search({ size }: SearchProps) {
             placeholder="Search places..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="flex-1 py-2 pl-10 pr-2 transition-all duration-200 focus:ring-2 focus:ring-blue-500"
+            className="flex-1 py-2 pr-2 pl-10 transition-all duration-200 focus:ring-2 focus:ring-blue-500"
             aria-label="Search for accessible places"
             disabled={isPending}
           />
           {isPending && (
-            <Loader2 className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin text-slate-400" />
+            <Loader2 className="-translate-y-1/2 absolute top-1/2 right-3 h-4 w-4 animate-spin text-slate-400" />
           )}
         </div>
       </form>
@@ -67,7 +67,7 @@ export default function Search({ size }: SearchProps) {
 
   // Full and page size styling
   return (
-    <div className="flex w-full justify-center mt-8 md:mt-12">
+    <div className="mt-8 flex w-full justify-center md:mt-12">
       <form onSubmit={handleSubmit} className="flex w-full gap-2 md:max-w-3xl">
         {/* Search input */}
         <label htmlFor="search-full" className="sr-only">
@@ -78,7 +78,7 @@ export default function Search({ size }: SearchProps) {
           placeholder="Search for restaurants, shops, parks, services, and more..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 py-5 md:py-6 text-lg border-0"
+          className="flex-1 border-0 py-5 text-lg md:py-6"
           aria-label="Search for accessible places and services"
           disabled={isPending}
         />
@@ -87,7 +87,7 @@ export default function Search({ size }: SearchProps) {
         <Button
           type="submit"
           disabled={!query.trim() || isPending}
-          className="md:px-8 py-5 md:py-6 transition-all duration-200 disabled:opacity-50"
+          className="py-5 transition-all duration-200 disabled:opacity-50 md:px-8 md:py-6"
         >
           {isPending ? (
             <>

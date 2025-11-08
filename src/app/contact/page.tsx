@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <div className="max-w-2xl">
       {/* Contact Options */}
-      <dl className="space-y-4 text-base mb-8">
+      <dl className="mb-8 space-y-4 text-base">
         <div className="flex gap-x-4">
           <dt className="flex-none">
             <span className="sr-only">Telephone</span>
@@ -32,7 +32,7 @@ export default function Page() {
       <form action="#" method="POST" className="space-y-6">
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div>
-            <label htmlFor="first-name" className="block text-sm font-semibold">
+            <label htmlFor="first-name" className="block font-semibold text-sm">
               First name
             </label>
             <div className="mt-2.5">
@@ -45,7 +45,7 @@ export default function Page() {
             </div>
           </div>
           <div>
-            <label htmlFor="last-name" className="block text-sm font-semibold">
+            <label htmlFor="last-name" className="block font-semibold text-sm">
               Last name
             </label>
             <div className="mt-2.5">
@@ -58,7 +58,7 @@ export default function Page() {
             </div>
           </div>
           <div className="sm:col-span-2">
-            <label htmlFor="email" className="block text-sm font-semibold">
+            <label htmlFor="email" className="block font-semibold text-sm">
               Email
             </label>
             <div className="mt-2.5">
@@ -73,7 +73,7 @@ export default function Page() {
           <div className="sm:col-span-2">
             <label
               htmlFor="phone-number"
-              className="block text-sm font-semibold"
+              className="block font-semibold text-sm"
             >
               Phone number
             </label>
@@ -87,7 +87,7 @@ export default function Page() {
             </div>
           </div>
           <div className="sm:col-span-2">
-            <label htmlFor="message" className="block text-sm font-semibold">
+            <label htmlFor="message" className="block font-semibold text-sm">
               Message
             </label>
             <div className="mt-2.5">

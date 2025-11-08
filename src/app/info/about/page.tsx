@@ -59,11 +59,11 @@ export default function AboutPage() {
   return (
     <main className="isolate">
       {/* Hero section */}
-      <div className="max-w-7xl mx-auto my-10 md:my-20">
-        <div className="lg:flex gap-x-12 items-center">
+      <div className="mx-auto my-10 max-w-7xl md:my-20">
+        <div className="items-center gap-x-12 lg:flex">
           <BigHeading title={bigHeading.title} subtitle={bigHeading.subtitle} />
-          <div className="hidden md:flex gap-6 mt-12 sm:-mt-44 lg:-mt-8">
-            <div className="space-y-8 pt-32 sm:pt-80 lg:pt-36 xl:pt-80 lg:order-last xl:order-0">
+          <div className="sm:-mt-44 lg:-mt-8 mt-12 hidden gap-6 md:flex">
+            <div className="space-y-8 pt-32 sm:pt-80 lg:order-last lg:pt-36 xl:order-0 xl:pt-80">
               <AboutImage src={aboutImages[0].src} alt={aboutImages[0].alt} />
             </div>
             <div className="space-y-8 sm:pt-52 lg:pt-36">

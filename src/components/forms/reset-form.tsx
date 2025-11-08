@@ -98,7 +98,7 @@ function ResetFormContent() {
                   />
                 </div>
                 {error && (
-                  <div className="text-center text-sm text-red-600 dark:text-red-400">
+                  <div className="text-center text-red-600 text-sm dark:text-red-400">
                     {error}
                   </div>
                 )}
@@ -108,7 +108,7 @@ function ResetFormContent() {
               </form>
             </Form>
           )}
-          <div className="mt-4 text-center text-sm text-neutral-600 dark:text-neutral-400">
+          <div className="mt-4 text-center text-neutral-600 text-sm dark:text-neutral-400">
             <Link href="/sign-in/" className="underline">
               Back to sign in
             </Link>

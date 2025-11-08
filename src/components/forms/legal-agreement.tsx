@@ -1,6 +1,6 @@
 export default function LegalAgreement() {
   return (
-    <div className="secondary-text text-center mt-0">
+    <div className="secondary-text mt-0 text-center">
       By clicking continue, you agree to our
       <br />
       <a href="/legal/terms/">Terms of Service</a> and{' '}

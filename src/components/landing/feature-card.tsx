@@ -15,15 +15,15 @@ export default function FeatureCard({
 }: FeatureCardProps) {
   return (
     <div className="flex flex-col">
-      <dt className="text-lg font-bold">
+      <dt className="font-bold text-lg">
         <div
-          className={`mb-2 md:mb-6 flex size-10 items-center justify-center rounded-lg ${iconBg}`}
+          className={`mb-2 flex size-10 items-center justify-center rounded-lg md:mb-6 ${iconBg}`}
         >
           <Icon aria-hidden="true" className="size-6 text-slate-100" />
         </div>
         {name}
       </dt>
-      <dd className="mt-2 font-semibold text-base secondary-text">
+      <dd className="secondary-text mt-2 font-semibold text-base">
         {description}
       </dd>
     </div>

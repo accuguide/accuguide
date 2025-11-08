@@ -16,8 +16,8 @@ export default function TeamMember({ name, role, imageUrl }: TeamMemberProps) {
         height={96}
         className="mx-auto h-24 w-24 rounded-lg object-cover"
       />
-      <h3 className="mt-6 text-base tracking-tight wrap-break-word">{name}</h3>
-      <p className="text-sm wrap-break-word">{role}</p>
+      <h3 className="wrap-break-word mt-6 text-base tracking-tight">{name}</h3>
+      <p className="wrap-break-word text-sm">{role}</p>
     </li>
   )
 }

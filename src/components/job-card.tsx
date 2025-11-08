@@ -16,7 +16,7 @@ export default function JobCard({
       <CardContent>
         <p className="-mt-2 mb-2">{description}</p>
         {responsibilities && responsibilities.length > 0 && (
-          <ul className="list-disc list-inside">
+          <ul className="list-inside list-disc">
             {responsibilities.map((responsibility, index) => (
               <li key={index}>{responsibility}</li>
             ))}

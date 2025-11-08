@@ -54,7 +54,7 @@ function SearchResults() {
         <SearchSkeleton />
       ) : (
         <>
-          <h2 className="mb-4 mt-8">Catalogued Results</h2>
+          <h2 className="mt-8 mb-4">Catalogued Results</h2>
 
           <div className="-mx-px grid grid-cols-2 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
             {dbResponse.map((place) => (
@@ -70,7 +70,7 @@ function SearchResults() {
               />
             ))}
           </div>
-          <h2 className="mb-4 mt-8">All Results</h2>
+          <h2 className="mt-8 mb-4">All Results</h2>
           <div className="-mx-px grid grid-cols-2 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
             {googleResponse.map((place) => (
               <SearchDisplay

@@ -105,7 +105,7 @@ export default function Page() {
                   <RadioGroup
                     onValueChange={field.onChange}
                     value={field.value}
-                    className="space-y-3 mt-2"
+                    className="mt-2 space-y-3"
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="social_media" id="social_media" />
@@ -148,7 +148,7 @@ export default function Page() {
                   <RadioGroup
                     onValueChange={field.onChange}
                     value={field.value}
-                    className="flex space-x-4 mt-2"
+                    className="mt-2 flex space-x-4"
                   >
                     {ratingOptions.map((option) => (
                       <div
@@ -184,7 +184,7 @@ export default function Page() {
                   <RadioGroup
                     onValueChange={field.onChange}
                     value={field.value}
-                    className="flex space-x-4 mt-2"
+                    className="mt-2 flex space-x-4"
                   >
                     {ratingOptions.map((option) => (
                       <div
@@ -220,7 +220,7 @@ export default function Page() {
                   <RadioGroup
                     onValueChange={field.onChange}
                     value={field.value}
-                    className="flex space-x-4 mt-2"
+                    className="mt-2 flex space-x-4"
                   >
                     {ratingOptions.map((option) => (
                       <div

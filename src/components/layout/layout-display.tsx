@@ -15,7 +15,7 @@ export default function LayoutDisplay({
   subtitle?: string
 }>) {
   return (
-    <div className={cn(className) + ' mx-auto max-w-7xl'}>
+    <div className={cn(className) + 'mx-auto max-w-7xl'}>
       {title && <Title>{title}</Title>}
       {subtitle && <p className="md:max-w-[75%]">{subtitle}</p>}
       {title && subtitle && <div className="h-12"></div>}

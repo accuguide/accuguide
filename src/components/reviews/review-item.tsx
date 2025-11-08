@@ -123,14 +123,14 @@ export default function ReviewItem({
           </Link>
         </div>
       )}
-      <div className="flex-1 py-6 border-border">
+      <div className="flex-1 border-border py-6">
         {showUserInfo && (
-          <h3 className="font-medium text-foreground text-base">
+          <h3 className="font-medium text-base text-foreground">
             {userInfo?.name || 'Unknown'}
           </h3>
         )}
-        {profile && <div className="text-sm font-bold">{entityName}</div>}
-        <p className="text-xs secondary-text mt-0">
+        {profile && <div className="font-bold text-sm">{entityName}</div>}
+        <p className="secondary-text mt-0 text-xs">
           <time dateTime={new Date(review.createdAt).toISOString()}>
             {new Date(review.createdAt).toLocaleDateString()}
           </time>
@@ -159,11 +159,11 @@ export default function ReviewItem({
           </div>
         ) : (
           <>
-            <p className="mt-4 text-sm leading-6 secondary-text font-semibold">
+            <p className="secondary-text mt-4 font-semibold text-sm leading-6">
               {review.comment}
             </p>
             {isOwner && (
-              <div className="flex items-center gap-1 mt-4">
+              <div className="mt-4 flex items-center gap-1">
                 <Button size="sm" onClick={() => setIsEditing(true)}>
                   Edit
                 </Button>

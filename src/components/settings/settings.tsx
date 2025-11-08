@@ -104,9 +104,9 @@ export default function Settings() {
   return (
     <div className="space-y-12">
       {/* Profile Section */}
-      <div className="grid grid-cols-1 gap-x-8 gap-y-10 border-b-2 border-slate-600 pb-8 md:grid-cols-3 dark:border-slate-400">
+      <div className="grid grid-cols-1 gap-x-8 gap-y-10 border-slate-600 border-b-2 pb-8 md:grid-cols-3 dark:border-slate-400">
         <div>
-          <h2 className="text-xl font-bold">Profile</h2>
+          <h2 className="font-bold text-xl">Profile</h2>
           <p>Update your profile information and customize your account.</p>
         </div>
 
@@ -117,7 +117,7 @@ export default function Settings() {
           <div className="sm:col-span-4">
             <label
               htmlFor="username"
-              className="block text-sm font-medium leading-6"
+              className="block font-medium text-sm leading-6"
             >
               Username
             </label>
@@ -127,11 +127,11 @@ export default function Settings() {
                 type="text"
                 placeholder="Username"
                 {...profileForm.register('username')}
-                className="block w-full rounded-md border-2 border-slate-600 bg-slate-50 px-3 py-1.5 text-sm placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-[3px] focus:ring-slate-500/50 dark:border-slate-400 dark:bg-slate-950 dark:placeholder:text-slate-500 dark:focus:border-slate-100"
+                className="block w-full rounded-md border-2 border-slate-600 bg-slate-50 px-3 py-1.5 text-sm placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-[3px] focus:ring-slate-500/50 dark:border-slate-400 dark:bg-slate-950 dark:focus:border-slate-100 dark:placeholder:text-slate-500"
               />
             </div>
             {profileForm.formState.errors.username && (
-              <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+              <p className="mt-1 text-red-600 text-sm dark:text-red-400">
                 {profileForm.formState.errors.username.message}
               </p>
             )}
@@ -140,14 +140,14 @@ export default function Settings() {
           <div className="col-span-full">
             <label
               htmlFor="photo"
-              className="block text-sm font-medium leading-6"
+              className="block font-medium text-sm leading-6"
             >
               Photo
             </label>
             <div className="mt-2 flex items-center gap-x-3">
               <label
                 htmlFor="image"
-                className="cursor-pointer rounded-md border-2 border-slate-600 bg-slate-50 px-3 py-2 text-sm font-semibold shadow-sm hover:bg-slate-100 dark:border-slate-400 dark:bg-slate-950 dark:hover:bg-slate-900"
+                className="cursor-pointer rounded-md border-2 border-slate-600 bg-slate-50 px-3 py-2 font-semibold text-sm shadow-sm hover:bg-slate-100 dark:border-slate-400 dark:bg-slate-950 dark:hover:bg-slate-900"
               >
                 Change
                 <input
@@ -160,7 +160,7 @@ export default function Settings() {
               </label>
             </div>
             {imagePreview && (
-              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              <p className="mt-2 text-slate-600 text-sm dark:text-slate-400">
                 New photo selected - click "Save Profile" to upload
               </p>
             )}
@@ -169,7 +169,7 @@ export default function Settings() {
           <div className="col-span-full flex items-center justify-end gap-x-6">
             <button
               type="submit"
-              className="rounded-md bg-slate-800 px-3 py-2 text-sm font-semibold text-slate-100 shadow-sm hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800 dark:bg-slate-200 dark:text-slate-900 dark:hover:bg-slate-300 dark:focus-visible:outline-slate-200"
+              className="rounded-md bg-slate-800 px-3 py-2 font-semibold text-slate-100 text-sm shadow-sm hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-slate-800 focus-visible:outline-offset-2 dark:bg-slate-200 dark:text-slate-900 dark:focus-visible:outline-slate-200 dark:hover:bg-slate-300"
             >
               Save Profile
             </button>
@@ -178,9 +178,9 @@ export default function Settings() {
       </div>
 
       {/* Account Section */}
-      <div className="grid grid-cols-1 gap-x-8 gap-y-10 border-b-2 border-slate-600 pb-12 md:grid-cols-3 dark:border-slate-400">
+      <div className="grid grid-cols-1 gap-x-8 gap-y-10 border-slate-600 border-b-2 pb-12 md:grid-cols-3 dark:border-slate-400">
         <div>
-          <h2 className="text-xl font-bold">Account</h2>
+          <h2 className="font-bold text-xl">Account</h2>
           <p>Update your account credentials and security settings.</p>
         </div>
 
@@ -191,7 +191,7 @@ export default function Settings() {
           <div className="sm:col-span-4">
             <label
               htmlFor="email"
-              className="block text-sm font-medium leading-6"
+              className="block font-medium text-sm leading-6"
             >
               Email address
             </label>
@@ -202,11 +202,11 @@ export default function Settings() {
                 placeholder="Email"
                 autoComplete="email"
                 {...accountForm.register('email')}
-                className="block w-full rounded-md border-2 border-slate-600 bg-slate-50 px-3 py-1.5 text-sm placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-[3px] focus:ring-slate-500/50 dark:border-slate-400 dark:bg-slate-950 dark:placeholder:text-slate-500 dark:focus:border-slate-100"
+                className="block w-full rounded-md border-2 border-slate-600 bg-slate-50 px-3 py-1.5 text-sm placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-[3px] focus:ring-slate-500/50 dark:border-slate-400 dark:bg-slate-950 dark:focus:border-slate-100 dark:placeholder:text-slate-500"
               />
             </div>
             {accountForm.formState.errors.email && (
-              <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+              <p className="mt-1 text-red-600 text-sm dark:text-red-400">
                 {accountForm.formState.errors.email.message}
               </p>
             )}
@@ -215,7 +215,7 @@ export default function Settings() {
           <div className="sm:col-span-3">
             <label
               htmlFor="current-password"
-              className="block text-sm font-medium leading-6"
+              className="block font-medium text-sm leading-6"
             >
               Current Password
             </label>
@@ -226,11 +226,11 @@ export default function Settings() {
                 placeholder="Current Password"
                 autoComplete="current-password"
                 {...accountForm.register('currentPassword')}
-                className="block w-full rounded-md border-2 border-slate-600 bg-slate-50 px-3 py-1.5 text-sm placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-[3px] focus:ring-slate-500/50 dark:border-slate-400 dark:bg-slate-950 dark:placeholder:text-slate-500 dark:focus:border-slate-100"
+                className="block w-full rounded-md border-2 border-slate-600 bg-slate-50 px-3 py-1.5 text-sm placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-[3px] focus:ring-slate-500/50 dark:border-slate-400 dark:bg-slate-950 dark:focus:border-slate-100 dark:placeholder:text-slate-500"
               />
             </div>
             {accountForm.formState.errors.currentPassword && (
-              <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+              <p className="mt-1 text-red-600 text-sm dark:text-red-400">
                 {accountForm.formState.errors.currentPassword.message}
               </p>
             )}
@@ -239,7 +239,7 @@ export default function Settings() {
           <div className="sm:col-span-3">
             <label
               htmlFor="new-password"
-              className="block text-sm font-medium leading-6"
+              className="block font-medium text-sm leading-6"
             >
               New Password
             </label>
@@ -250,11 +250,11 @@ export default function Settings() {
                 placeholder="New Password"
                 autoComplete="new-password"
                 {...accountForm.register('newPassword')}
-                className="block w-full rounded-md border-2 border-slate-600 bg-slate-50 px-3 py-1.5 text-sm placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-[3px] focus:ring-slate-500/50 dark:border-slate-400 dark:bg-slate-950 dark:placeholder:text-slate-500 dark:focus:border-slate-100"
+                className="block w-full rounded-md border-2 border-slate-600 bg-slate-50 px-3 py-1.5 text-sm placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-[3px] focus:ring-slate-500/50 dark:border-slate-400 dark:bg-slate-950 dark:focus:border-slate-100 dark:placeholder:text-slate-500"
               />
             </div>
             {accountForm.formState.errors.newPassword && (
-              <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+              <p className="mt-1 text-red-600 text-sm dark:text-red-400">
                 {accountForm.formState.errors.newPassword.message}
               </p>
             )}
@@ -264,7 +264,7 @@ export default function Settings() {
             <button
               type="submit"
               disabled={disableSubmit}
-              className="rounded-md bg-slate-800 px-3 py-2 text-sm font-semibold text-slate-100 shadow-sm hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-200 dark:text-slate-900 dark:hover:bg-slate-300 dark:focus-visible:outline-slate-200"
+              className="rounded-md bg-slate-800 px-3 py-2 font-semibold text-slate-100 text-sm shadow-sm hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-slate-800 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-200 dark:text-slate-900 dark:focus-visible:outline-slate-200 dark:hover:bg-slate-300"
             >
               Save Account
             </button>

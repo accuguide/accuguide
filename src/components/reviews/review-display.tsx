@@ -44,7 +44,7 @@ export default async function ReviewDisplay({
 
   return (
     <div>
-      {write && <h2 className="text-2xl mb-4 mt-6">Reviews</h2>}
+      {write && <h2 className="mt-6 mb-4 text-2xl">Reviews</h2>}
       {write && (
         <ReviewWrite
           entity_id={entity_id}

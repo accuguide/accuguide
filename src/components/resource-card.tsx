@@ -21,7 +21,7 @@ export default function ResourceCard({
   return (
     <Card className="mb-8 md:max-w-[75%]">
       <CardTitle className="px-6 font-bold">{title}</CardTitle>
-      <p className="px-6 text-xs -mt-2 secondary-text">{state} Resource</p>
+      <p className="-mt-2 secondary-text px-6 text-xs">{state} Resource</p>
 
       <CardContent>
         <p className="-mt-2 mb-2">{description}</p>
@@ -35,7 +35,7 @@ export default function ResourceCard({
             {link}
           </Link>
         </p>
-        <p className="text-xs secondary-text">
+        <p className="secondary-text text-xs">
           {'Last updated on ' + updatedAt}
         </p>
       </CardContent>

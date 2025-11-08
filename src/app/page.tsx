@@ -65,12 +65,12 @@ export default async function Page() {
     <main className="container mx-auto">
       {/* Hero Section */}
       <section className="section-spacing-index mx-auto max-w-7xl">
-        <div className="rounded-lg pride-bg py-8 px-2 md:p-16 lg:py-32">
+        <div className="pride-bg rounded-lg px-2 py-8 md:p-16 lg:py-32">
           <div className="mx-auto max-w-3xl text-center">
-            <h1 className="text-[42px] md:text-6xl lg:text-7xl text-slate-900">
+            <h1 className="text-[42px] text-slate-900 md:text-6xl lg:text-7xl">
               Discover Accessibility
             </h1>
-            <p className="mt-4 md:mt-8 text-base md:text-2xl text-slate-900 font-bold">
+            <p className="mt-4 font-bold text-base text-slate-900 md:mt-8 md:text-2xl">
               Accuguide makes it easy to find accessible places, review
               accessibility features, and share your experiences with the
               community. Get started by searching for a location to explore

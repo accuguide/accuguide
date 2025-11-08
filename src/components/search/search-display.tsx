@@ -40,9 +40,9 @@ export default function SearchDisplay({
     displayType === 'google' ? `/entity/${googleId}` : `/entity/${id}`
 
   return (
-    <div className="group relative rounded-lg border-r border-b border-l border-t border-2 p-4 sm:p-6 hover:opacity-75 transition-opacity m-2">
+    <div className="group relative m-2 rounded-lg border-2 border-t border-r border-b border-l p-4 transition-opacity hover:opacity-75 sm:p-6">
       <div className="pt-6 pb-4 text-center">
-        <h3 className="text-sm font-medium text-foreground">
+        <h3 className="font-medium text-foreground text-sm">
           {aiScore != null && aiScore != 0 && (
             <p
               className={cn(
@@ -77,7 +77,7 @@ export default function SearchDisplay({
 
           {/* Address */}
           {address && address != '' && (
-            <div className="text-xs text-muted-foreground">
+            <div className="text-muted-foreground text-xs">
               {firstLine && (
                 <div className="font-medium text-foreground">{firstLine}</div>
               )}

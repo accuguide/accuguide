@@ -70,7 +70,7 @@ function AdminSection({
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-base font-semibold">{title}</h1>
+          <h1 className="font-semibold text-base">{title}</h1>
           <p className="mt-2 text-sm">{description}</p>
         </div>
         {actionArea && (
@@ -78,7 +78,7 @@ function AdminSection({
         )}
       </div>
       <div className="mt-4 flow-root">
-        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8 overflow-x-auto">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
             {children}
           </div>
@@ -104,7 +104,7 @@ function DataTable({ headers, children }: DataTableProps) {
                 key={header}
                 scope="col"
                 className={cn(
-                  'py-3.5 text-left text-sm font-semibold',
+                  'py-3.5 text-left font-semibold text-sm',
                   index === 0 ? 'pr-3 pl-4 sm:pl-0' : 'px-3',
                 )}
               >
@@ -202,10 +202,10 @@ export default function AdminInfo({
         <DataTable headers={['Item', 'URL']}>
           {links.map((link) => (
             <tr key={link.label}>
-              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap sm:pl-0">
+              <td className="whitespace-nowrap py-4 pr-3 pl-4 font-medium text-sm sm:pl-0">
                 {link.label}
               </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap">
+              <td className="whitespace-nowrap px-3 py-4 text-sm">
                 <a
                   href={link.href}
                   target="_blank"
@@ -237,7 +237,7 @@ export default function AdminInfo({
         <DataTable>
           {types.map((type) => (
             <tr key={type.type}>
-              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap sm:pl-0">
+              <td className="whitespace-nowrap py-4 pr-3 pl-4 font-medium text-sm sm:pl-0">
                 {type.type}
               </td>
             </tr>
@@ -253,7 +253,7 @@ export default function AdminInfo({
         <DataTable>
           {categories.map((category) => (
             <tr key={category.category}>
-              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap sm:pl-0">
+              <td className="whitespace-nowrap py-4 pr-3 pl-4 font-medium text-sm sm:pl-0">
                 {category.category ? category.category : 'None'}
               </td>
             </tr>
@@ -336,10 +336,10 @@ export default function AdminInfo({
         <DataTable headers={['Indicator', 'Category', 'Description']}>
           {indicators.map((indicator) => (
             <tr key={indicator.indicator}>
-              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap sm:pl-0">
+              <td className="whitespace-nowrap py-4 pr-3 pl-4 font-medium text-sm sm:pl-0">
                 {indicator.indicator}
               </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap">
+              <td className="whitespace-nowrap px-3 py-4 text-sm">
                 {indicator.category}
               </td>
               <td className="px-3 py-4 text-sm">
@@ -358,10 +358,10 @@ export default function AdminInfo({
         <DataTable headers={['Type', 'Pattern']}>
           {typeMappings.map((mapping) => (
             <tr key={mapping.id}>
-              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap sm:pl-0">
+              <td className="whitespace-nowrap py-4 pr-3 pl-4 font-medium text-sm sm:pl-0">
                 {mapping.type}
               </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap">
+              <td className="whitespace-nowrap px-3 py-4 text-sm">
                 {mapping.pattern}
               </td>
             </tr>
@@ -377,10 +377,10 @@ export default function AdminInfo({
         <DataTable headers={['Type', 'Indicator']}>
           {typeIndicators.map((indicator) => (
             <tr key={indicator.id}>
-              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap sm:pl-0">
+              <td className="whitespace-nowrap py-4 pr-3 pl-4 font-medium text-sm sm:pl-0">
                 {indicator.type}
               </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap">
+              <td className="whitespace-nowrap px-3 py-4 text-sm">
                 {indicator.indicator}
               </td>
             </tr>
@@ -395,7 +395,7 @@ export default function AdminInfo({
         actionArea={
           <Button
             onClick={() => setResourceModalOpen(true)}
-            className="bg-indigo-600 hover:bg-indigo-500 text-white"
+            className="bg-indigo-600 text-white hover:bg-indigo-500"
           >
             Add Resource
           </Button>
@@ -404,19 +404,19 @@ export default function AdminInfo({
         <DataTable headers={['Title', 'Category', 'State', 'Country', 'URL']}>
           {resources.map((resource) => (
             <tr key={resource.id}>
-              <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap sm:pl-0">
+              <td className="whitespace-nowrap py-4 pr-3 pl-4 font-medium text-sm sm:pl-0">
                 {resource.title}
               </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap">
+              <td className="whitespace-nowrap px-3 py-4 text-sm">
                 {resource.category}
               </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap">
+              <td className="whitespace-nowrap px-3 py-4 text-sm">
                 {resource.state}
               </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap">
+              <td className="whitespace-nowrap px-3 py-4 text-sm">
                 {resource.country}
               </td>
-              <td className="px-3 py-4 text-sm whitespace-nowrap">
+              <td className="whitespace-nowrap px-3 py-4 text-sm">
                 <a
                   href={resource.url}
                   target="_blank"
@@ -538,7 +538,7 @@ export default function AdminInfo({
               </Button>
               <Button
                 type="submit"
-                className="bg-indigo-600 hover:bg-indigo-500 text-white"
+                className="bg-indigo-600 text-white hover:bg-indigo-500"
               >
                 Add Resource
               </Button>

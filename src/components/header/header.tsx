@@ -6,15 +6,15 @@ import HeaderUser from './header-user'
 export default async function Header() {
   return (
     <header className="sticky top-0 z-50 w-full bg-slate-100 dark:bg-slate-900">
-      <div className="mx-auto max-w-7xl py-4 flex items-center justify-center text-center sm:justify-between">
+      <div className="mx-auto flex max-w-7xl items-center justify-center py-4 text-center sm:justify-between">
         <Link
           href="/"
-          className="hidden font-bold sm:block text-lg text-slate-600 dark:text-slate-300"
+          className="hidden font-bold text-lg text-slate-600 sm:block dark:text-slate-300"
         >
           Accuguide
         </Link>
         <div className="flex gap-4">
-          <div className="hover:opacity-50 shrink-0">
+          <div className="shrink-0 hover:opacity-50">
             <Link href="/" className="font-bold md:hidden">
               <Image
                 src="/images/logo.png"

@@ -62,7 +62,7 @@ interface FooterLinkListProps {
 function FooterLinkList({ title, items, openInNewTab }: FooterLinkListProps) {
   return (
     <div>
-      <h3 className="footer-heading text-sm font-bold">{title}</h3>
+      <h3 className="footer-heading font-bold text-sm">{title}</h3>
       <ul className="mt-6 space-y-4">
         {items.map((item) => (
           <li key={item.name}>
@@ -100,7 +100,7 @@ export default function Footer() {
                 className="h-12 w-12 rounded-lg"
               />
             </Link>
-            <p className="text-sm font-bold">
+            <p className="font-bold text-sm">
               Discover accessibility with Accuguide
             </p>
             <div className="flex gap-x-6">
@@ -137,7 +137,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-12 border-t-2 pt-8">
-          <p className="text-xs secondary-text font-semibold">
+          <p className="secondary-text font-semibold text-xs">
             &copy; 2025 Accuguide. All rights reserved.
             <br />
             This site is powered by{' '}

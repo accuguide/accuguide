@@ -135,7 +135,7 @@ export default function ReviewWrite({
               ),
             ).map(([category, categoryIndicators]) => (
               <AccordionItem key={category} value={category}>
-                <AccordionTrigger className="my-2 px-1 py-2 text-sm font-semibold text-gray-700 hover:bg-slate-400 focus:ring-0 dark:text-gray-300 dark:hover:bg-slate-500">
+                <AccordionTrigger className="my-2 px-1 py-2 font-semibold text-gray-700 text-sm hover:bg-slate-400 focus:ring-0 dark:text-gray-300 dark:hover:bg-slate-500">
                   {category}
                 </AccordionTrigger>
                 <AccordionContent>

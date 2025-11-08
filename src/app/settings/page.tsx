@@ -21,7 +21,7 @@ export default async function Page() {
         {/* Profile Review Section */}
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 pb-12 md:grid-cols-3">
           <div>
-            <h2 className="text-xl font-bold">Reviews</h2>
+            <h2 className="font-bold text-xl">Reviews</h2>
             <p>View and manage your reviews.</p>
           </div>
 
