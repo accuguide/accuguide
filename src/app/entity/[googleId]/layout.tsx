@@ -47,11 +47,7 @@ export default async function SearchLayout({
   const entity = await response.json()
 
   return (
-    <LayoutDisplay
-      title={entity[0].name}
-      subtitle={entity[0].displayType}
-      className="md:max-w-[75%]"
-    >
+    <LayoutDisplay title={entity[0].name} subtitle={entity[0].displayType}>
       {children}
     </LayoutDisplay>
   )

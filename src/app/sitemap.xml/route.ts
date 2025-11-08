@@ -1,4 +1,5 @@
 import { db } from '@/lib/db'
+import { user } from '@/lib/db/auth-schema'
 import { entityTable } from '@/lib/db/schema'
 import { createSitemapUrlSet } from '@/lib/sitemap'
 export const dynamic = 'force-dynamic'
@@ -29,10 +30,24 @@ export async function GET() {
     })
     .from(entityTable)
 
+  const profiles = await db
+    .select({
+      id: user.id,
+      createdAt: user.createdAt,
+    })
+    .from(user)
+
   const entityUrls = entities.map((entity) => {
     return {
       slug: `/entity/${entity.id}/`,
       lastmod: entity.createdAt.toISOString(),
+    }
+  })
+
+  const profileUrls = profiles.map((profile) => {
+    return {
+      slug: `/profile/${profile.id}/`,
+      lastmod: profile.createdAt.toISOString(),
     }
   })
 
@@ -43,7 +58,7 @@ export async function GET() {
     }
   })
 
-  const allUrls = [...staticUrls, ...entityUrls]
+  const allUrls = [...staticUrls, ...entityUrls, ...profileUrls]
   const sitemap = createSitemapUrlSet(allUrls)
 
   return new Response(sitemap, {

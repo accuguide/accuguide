@@ -76,7 +76,7 @@ export default function Page() {
   return (
     <div className="max-w-2xl">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" data-netlify="true">
           <FormField
             control={form.control}
             name="email"

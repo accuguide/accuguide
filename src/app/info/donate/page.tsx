@@ -17,6 +17,21 @@ export default function Page() {
           </div>
         </Card>
       </div>
+      <div className="mt-12">
+        <p className="mb-8 max-w-3xl">
+          Looking for a different way to support us? Currently, our only other
+          option is sponsoring us on Github, but we will have more options soon!
+        </p>
+        <div className="flex justify-center">
+          <iframe
+            src="https://github.com/sponsors/accuguide/card"
+            title="Sponsor accuguide"
+            height="225"
+            width="600"
+            className="rounded-lg border-2"
+          ></iframe>
+        </div>
+      </div>
     </div>
   )
 }

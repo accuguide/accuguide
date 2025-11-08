@@ -26,38 +26,6 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 - CodeQL
 - Biome
 
-### v3.0 Roadmap (estimated completion in early 2026)
-
-- [x] UI redesign
-- [ ] Accessibility summary caching
-- [ ] Account deletion
-- [ ] Public profile page
-- [ ] Business claiming placeholder
-- [ ] Search algorithm improvements
-- [ ] Search result paging
-- [ ] Accessibility score in search results
-- [ ] Filters for resources
-- [ ] Completion of Admin dashboard
-- [ ] Basic review moderation
-- [ ] Error handling for all comomon issues
-- [ ] Loading states for slow actions
-- [ ] Volunteer position page
-- [ ] Switch to IPv6
-- [ ] Switch to native feedback form
-- [ ] Ability to add images to reviews
-- [ ] Map view
-- [ ] Stripe donate form embed
-- [ ] Apple OAuth
-- [ ] Search filters
-- [ ] Fix geolocation issues for location-based search
-- [ ] Migrate email subscription management to Mailgun
-- [ ] Migrate FAQ items to database
-- [ ] Revise legal documents
-- [ ] Set up email verification
-- [ ] Random username generation for OAuth account creation
-- [ ] Handling of non-physical locations
-- [ ] Add additional donation options (Github Sponsors, etc)
-
 ### Beta Access
 
 - You can access the open beta at https://beta.accuguide.org (if you already have an account on the production site, use that same account to log in to the beta site)

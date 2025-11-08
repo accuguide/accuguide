@@ -1,6 +1,7 @@
 'use client'
 
 import { StarIcon } from 'lucide-react'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Indicator, Review } from '@/lib/types'
@@ -14,6 +15,7 @@ interface ReviewItemProps {
   userInfo: {
     name?: string
     image?: string | null
+    id: string
   }
   userImageUrl?: string
   isOwner: boolean
@@ -111,20 +113,24 @@ export default function ReviewItem({
     <div className="flex space-x-4 text-sm">
       {showUserInfo && (
         <div className="flex-none py-6">
-          <Avatar className="h-10 w-10">
-            <AvatarImage src={userImageUrl} alt="user profile image" />
-            <AvatarFallback>{userInfo?.name?.charAt(0) || '?'}</AvatarFallback>
-          </Avatar>
+          <Link href={`/profile/${userInfo.id}`}>
+            <Avatar className="h-10 w-10">
+              <AvatarImage src={userImageUrl} alt="user profile image" />
+              <AvatarFallback>
+                {userInfo?.name?.charAt(0) || '?'}
+              </AvatarFallback>
+            </Avatar>
+          </Link>
         </div>
       )}
       <div className="flex-1 py-6 border-border">
         {showUserInfo && (
-          <h3 className="font-medium text-foreground">
+          <h3 className="font-medium text-foreground text-base">
             {userInfo?.name || 'Unknown'}
           </h3>
         )}
         {profile && <div className="text-sm font-bold">{entityName}</div>}
-        <p className="text-sm text-muted-foreground">
+        <p className="text-xs secondary-text mt-0">
           <time dateTime={new Date(review.createdAt).toISOString()}>
             {new Date(review.createdAt).toLocaleDateString()}
           </time>
@@ -153,7 +159,7 @@ export default function ReviewItem({
           </div>
         ) : (
           <>
-            <p className="mt-4 text-sm leading-6 text-muted-foreground">
+            <p className="mt-4 text-sm leading-6 secondary-text font-semibold">
               {review.comment}
             </p>
             {isOwner && (
