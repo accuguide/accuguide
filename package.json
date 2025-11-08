@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build:prod": "tsx scripts/analytics.ts && next build",
+    "build:prod": "next build",
     "build:beta": "cp src/app/beta.robots.ts src/app/robots.ts && next build",
     "build": "next build",
     "start": "next start",

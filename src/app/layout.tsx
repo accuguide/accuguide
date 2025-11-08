@@ -6,6 +6,7 @@ import Footer from '@/components/footer/footer'
 import Header from '@/components/header/header'
 import { ModeToggle } from '@/components/theme/mode-toggle'
 import { Toaster } from '@/components/ui/sonner'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,6 +32,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
+        {process.env.NEXT_PUBLIC_ANALYTICS_ID && (
+          <Script
+            defer
+            src="https://cloud.umami.is/script.js"
+            data-website-id={process.env.NEXT_PUBLIC_ANALYTICS_ID}
+          />
+        )}
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
