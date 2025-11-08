@@ -6,8 +6,8 @@ let content = readFileSync(layoutPath, 'utf-8')
 
 const analyticsScript = `        <Script
           defer
-          src="https://analytics.accuguide.org/script.js"
-          data-website-id="587ba00d-bdd9-45cf-aab6-bc204b2356af"
+          src="https://cloud.umami.is/script.js"
+          data-website-id="3d4da14d-06a4-4445-9e91-0597b2259584"
         ></Script>
 
 `
