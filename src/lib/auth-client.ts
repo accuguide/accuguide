@@ -54,7 +54,7 @@ export async function signUpWithEmail(
   name: string,
   image?: string,
 ) {
-  await authClient.signUp.email(
+  const { data, error } = await authClient.signUp.email(
     {
       email, // user email address
       password, // user password -> min 8 characters by default
@@ -72,11 +72,11 @@ export async function signUpWithEmail(
         window.location.href = '/settings/'
       },
       onError: (ctx) => {
-        // display the error message
-        alert(ctx.error.message)
+        // error will be handled by the caller
       },
     },
   )
+  return { data, error }
 }
 
 export async function changeName(name: string) {

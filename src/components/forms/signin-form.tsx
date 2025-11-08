@@ -19,6 +19,8 @@ import { Input } from '@/components/ui/input'
 import { signInWithEmail, signInWithGoogle } from '@/lib/auth-client'
 import FormContainer from './form-container'
 import GoogleSignInButton from './google-signin-button'
+import Loading from '../loading'
+import { useState } from 'react'
 
 const formSchema = z.object({
   email: z.string().email('Please enter a valid email'),
@@ -26,6 +28,8 @@ const formSchema = z.object({
 })
 
 export default function SigninForm() {
+  const [loading, setLoading] = useState(false)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,9 +39,12 @@ export default function SigninForm() {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true)
+
     const { error } = await signInWithEmail(values.email, values.password)
 
     if (error != null) {
+      setLoading(false)
       toast.error('There was an error logging you in', {
         description: `${error.message}`,
       })
@@ -109,6 +116,7 @@ export default function SigninForm() {
 
               <Button type="submit" className="w-full">
                 Sign in
+                {loading && <Loading />}
               </Button>
 
               <GoogleSignInButton onClick={signInWithGoogle} />

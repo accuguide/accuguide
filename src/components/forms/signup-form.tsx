@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 import LegalAgreement from '@/components/forms/legal-agreement'
 import { Button } from '@/components/ui/button'
@@ -18,6 +19,8 @@ import { Input } from '@/components/ui/input'
 import { signInWithGoogle, signUpWithEmail } from '@/lib/auth-client'
 import FormContainer from './form-container'
 import GoogleSignInButton from './google-signin-button'
+import Loading from '../loading'
+import { useState } from 'react'
 
 const formSchema = z.object({
   email: z.string(),
@@ -26,6 +29,8 @@ const formSchema = z.object({
 })
 
 export default function SignupForm() {
+  const [loading, setLoading] = useState(false)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,8 +40,21 @@ export default function SignupForm() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    signUpWithEmail(values.email, values.password, values.username)
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true)
+
+    const { error } = await signUpWithEmail(
+      values.email,
+      values.password,
+      values.username,
+    )
+
+    if (error != null) {
+      setLoading(false)
+      toast.error('There was an error creating your account', {
+        description: `${error.message}`,
+      })
+    }
   }
 
   return (
@@ -118,6 +136,7 @@ export default function SignupForm() {
 
               <Button type="submit" className="w-full">
                 Sign up
+                {loading && <Loading />}
               </Button>
 
               <GoogleSignInButton onClick={signInWithGoogle} />
