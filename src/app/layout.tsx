@@ -1,12 +1,12 @@
 import '@/app/globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import { ThemeProvider } from 'next-themes'
 import Footer from '@/components/footer/footer'
 import Header from '@/components/header/header'
 import { ModeToggle } from '@/components/theme/mode-toggle'
 import { Toaster } from '@/components/ui/sonner'
-import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 

@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -17,10 +18,9 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { signInWithEmail, signInWithGoogle } from '@/lib/auth-client'
+import Loading from '../loading'
 import FormContainer from './form-container'
 import GoogleSignInButton from './google-signin-button'
-import Loading from '../loading'
-import { useState } from 'react'
 
 const formSchema = z.object({
   email: z.string().email('Please enter a valid email'),

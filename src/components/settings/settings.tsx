@@ -1,10 +1,26 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { changeEmail, changeName, changePassword } from '@/lib/auth-client'
+import {
+  changeEmail,
+  changeName,
+  changePassword,
+  deleteUser,
+} from '@/lib/auth-client'
+import { Button } from '../ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '../ui/dialog'
+import { Input } from '../ui/input'
 
 const profileSchema = z.object({
   username: z.string().optional(),
@@ -28,6 +44,7 @@ export default function Settings() {
   const [currentEmail, setCurrentEmail] = useState('')
   const [_currentImage, setCurrentImage] = useState<string | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const deletePasswordRef = useRef<HTMLInputElement>(null)
 
   const profileForm = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
@@ -99,6 +116,25 @@ export default function Settings() {
       await changePassword(values.currentPassword, values.newPassword)
     }
     window.location.reload()
+  }
+
+  function handleDeleteAccount() {
+    const password = deletePasswordRef.current?.value
+    if (!password) {
+      console.log('Password is required')
+      return
+    }
+    deleteUser(password)
+      .then(() => {
+        window.location.href = '/'
+      })
+      .catch((error) => {
+        console.error('Error deleting account:', error)
+      })
+    // Clear the password from the input after use
+    if (deletePasswordRef.current) {
+      deletePasswordRef.current.value = ''
+    }
   }
 
   return (
@@ -270,6 +306,44 @@ export default function Settings() {
             </button>
           </div>
         </form>
+
+        <div className="md:col-span-2 md:col-start-2">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="destructive">Delete Account</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>
+                  Are you absolutely sure you want to delete your account?
+                </DialogTitle>
+                <DialogDescription>
+                  This action cannot be undone. This will permanently delete
+                  your account, profile, reviews and remove your data from our
+                  servers. Please enter your password to confirm you would like
+                  to proceed.
+                </DialogDescription>
+                <Input
+                  ref={deletePasswordRef}
+                  type="password"
+                  placeholder="Password"
+                />
+              </DialogHeader>
+              <DialogFooter>
+                <Button asChild>
+                  <DialogTrigger>Cancel</DialogTrigger>
+                </Button>
+                <Button
+                  variant="destructive"
+                  onClick={handleDeleteAccount}
+                  asChild
+                >
+                  <DialogTrigger>Delete Account</DialogTrigger>
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
     </div>
   )

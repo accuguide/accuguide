@@ -1,0 +1,5 @@
+export { default as AdminInfo } from './admin-info'
+export { AdminSection } from './admin-section'
+export { DataTable } from './data-table'
+export { default as Information } from './information'
+export { default as TypesCategoriesIndicators } from './types-categories-indicators'

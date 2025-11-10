@@ -84,3 +84,9 @@ export async function changeName(name: string) {
     name,
   })
 }
+
+export async function deleteUser(password: string) {
+  await authClient.deleteUser({
+    password,
+  })
+}
