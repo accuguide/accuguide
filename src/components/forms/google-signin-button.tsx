@@ -11,8 +11,8 @@ export default function GoogleSignInButton({
       <FormDivider text="Or continue with" />
       <div className="mt-6">
         <Button
-          variant="outline"
-          className="w-full"
+          variant="ghost"
+          className="w-full border-2 bg-slate-50 hover:bg-slate-950 hover:text-slate-50 dark:bg-slate-950 hover:dark:bg-slate-50 hover:dark:text-slate-950"
           onClick={onClick}
           type="button"
         >

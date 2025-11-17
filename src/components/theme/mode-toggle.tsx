@@ -33,33 +33,35 @@ export function ModeToggle() {
   }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size="icon"
-          className="transition duration-300 hover:bg-slate-400 dark:hover:bg-slate-500"
-        >
-          {theme !== 'dark' && (
-            <Sun className="absolute h-[1.2rem] w-[1.2rem] text-slate-900" />
-          )}
-          {theme !== 'light' && (
-            <Moon className="absolute h-[1.2rem] w-[1.2rem] text-slate-100" />
-          )}{' '}
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="fixed right-4 bottom-4">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="outline"
+            size="icon"
+            className="transition duration-300 hover:bg-slate-400 dark:hover:bg-slate-500"
+          >
+            {theme !== 'dark' && (
+              <Sun className="absolute h-[1.2rem] w-[1.2rem] text-slate-900" />
+            )}
+            {theme !== 'light' && (
+              <Moon className="absolute h-[1.2rem] w-[1.2rem] text-slate-100" />
+            )}{' '}
+            <span className="sr-only">Toggle theme</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem onClick={() => setTheme('light')}>
+            Light
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setTheme('dark')}>
+            Dark
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setTheme('system')}>
+            System
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   )
 }

@@ -5,6 +5,7 @@ import Script from 'next/script'
 import { ThemeProvider } from 'next-themes'
 import Footer from '@/components/footer/footer'
 import Header from '@/components/header/header'
+import Splitter from '@/components/splitter'
 import { ModeToggle } from '@/components/theme/mode-toggle'
 import { Toaster } from '@/components/ui/sonner'
 
@@ -46,18 +47,14 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Toaster position="top-center" richColors />
-          <div className="mx-4 md:mx-12">
-            <Header />
-          </div>
+          <Header />
+          <Splitter />
           <div className="mx-4 my-4 min-h-[80vh] md:mx-12 md:my-8">
             {children}
           </div>
-          <div className="mx-4 md:mx-12">
-            <Footer />
-          </div>
-          <div className="fixed right-4 bottom-4">
-            <ModeToggle />
-          </div>
+          <Splitter />
+          <Footer />
+          <ModeToggle />
         </ThemeProvider>
       </body>
     </html>

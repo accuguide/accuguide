@@ -1,6 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Eye, EyeOff } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -29,6 +30,7 @@ const formSchema = z.object({
 
 export default function SigninForm() {
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -99,14 +101,27 @@ export default function SigninForm() {
                         </Link>
                       </div>
                       <FormControl>
-                        <Input
-                          id="password"
-                          type="password"
-                          required
-                          autoComplete="current-password"
-                          placeholder="Password"
-                          {...field}
-                        />
+                        <div className="flex items-center gap-2">
+                          <Input
+                            id="password"
+                            type={showPassword ? 'text' : 'password'}
+                            required
+                            autoComplete="current-password"
+                            placeholder="Password"
+                            {...field}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"
+                          >
+                            {showPassword ? (
+                              <EyeOff className="h-6 w-6" />
+                            ) : (
+                              <Eye className="h-6 w-6" />
+                            )}
+                          </button>
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -121,7 +136,7 @@ export default function SigninForm() {
 
               <GoogleSignInButton onClick={signInWithGoogle} />
 
-              <div className="secondary-text text-center">
+              <div className="secondary-text text-center text-sm">
                 Don&apos;t have an account?{' '}
                 <Link href="/sign-up/">Sign up</Link>
               </div>
@@ -129,7 +144,7 @@ export default function SigninForm() {
           </Form>
         </div>
       </div>
-      <LegalAgreement />
+      <LegalAgreement signup={false} />
     </FormContainer>
   )
 }

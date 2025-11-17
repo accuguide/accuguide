@@ -85,71 +85,74 @@ function FooterLinkList({ title, items, openInNewTab }: FooterLinkListProps) {
 
 export default function Footer() {
   return (
-    <footer className="w-full">
-      <hr className="-mx-4 md:-mx-12 border" />
-
-      <div className="container mx-auto max-w-7xl pt-12 pb-8">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          <div className="space-y-6">
-            <Link href="/" className="flex items-center gap-4">
-              <Image
-                src="/images/logo.png"
-                alt="Disability pride logo"
-                width={64}
-                height={64}
-                className="h-12 w-12 rounded-lg"
-              />
-            </Link>
-            <p className="font-bold text-sm">
-              Discover accessibility with Accuguide
-            </p>
-            <div className="flex gap-x-6">
-              {navigation.social.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  target="blank"
-                  className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
+    <div className="mx-4 md:mx-12">
+      <div className="mx-auto max-w-7xl">
+        {' '}
+        <footer className="w-full">
+          <div className="container mx-auto max-w-7xl pt-12 pb-8">
+            <div className="xl:grid xl:grid-cols-3 xl:gap-8">
+              <div className="space-y-6">
+                <Link href="/" className="flex items-center gap-4">
+                  <Image
+                    src="/images/logo.png"
+                    alt="Disability pride logo"
+                    width={64}
+                    height={64}
+                    className="h-12 w-12 rounded-lg"
+                  />
+                </Link>
+                <p className="font-bold text-sm">
+                  Discover accessibility with Accuguide
+                </p>
+                <div className="flex gap-x-6">
+                  {navigation.social.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      target="blank"
+                      className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
+                    >
+                      <span className="sr-only font-bold">{item.name}</span>
+                      <item.icon aria-hidden="true" className="size-6" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
+                <div className="md:grid md:grid-cols-2 md:gap-8">
+                  <FooterLinkList title="Info" items={navigation.info} />
+                  <div className="mt-10 md:mt-0">
+                    <FooterLinkList title="Help" items={navigation.help} />
+                  </div>
+                </div>
+                <div className="md:grid md:grid-cols-2 md:gap-8">
+                  <FooterLinkList
+                    title="Contact"
+                    items={navigation.contact}
+                    openInNewTab
+                  />
+                  <div className="mt-10 md:mt-0">
+                    <FooterLinkList title="Legal" items={navigation.legal} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-12 border-t pt-8">
+              <p className="secondary-text font-semibold text-xs">
+                &copy; 2025 Accuguide. All rights reserved.
+                <br />
+                This site is powered by{' '}
+                <Link
+                  href="https://netlify.com"
+                  className="hover:underline hover:opacity-75"
                 >
-                  <span className="sr-only font-bold">{item.name}</span>
-                  <item.icon aria-hidden="true" className="size-6" />
-                </a>
-              ))}
+                  Netlify
+                </Link>
+              </p>
             </div>
           </div>
-          <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <FooterLinkList title="Info" items={navigation.info} />
-              <div className="mt-10 md:mt-0">
-                <FooterLinkList title="Help" items={navigation.help} />
-              </div>
-            </div>
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <FooterLinkList
-                title="Contact"
-                items={navigation.contact}
-                openInNewTab
-              />
-              <div className="mt-10 md:mt-0">
-                <FooterLinkList title="Legal" items={navigation.legal} />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="mt-12 border-t-2 pt-8">
-          <p className="secondary-text font-semibold text-xs">
-            &copy; 2025 Accuguide. All rights reserved.
-            <br />
-            This site is powered by{' '}
-            <Link
-              href="https://netlify.com"
-              className="hover:underline hover:opacity-75"
-            >
-              Netlify
-            </Link>
-          </p>
-        </div>
+        </footer>
       </div>
-    </footer>
+    </div>
   )
 }

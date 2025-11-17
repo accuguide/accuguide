@@ -39,7 +39,10 @@ export default function Search({ size }: SearchProps) {
   // Header/Half size styling
   if (size === 'half') {
     return (
-      <form onSubmit={handleSubmit} className="relative max-w-full md:max-w-md">
+      <form
+        onSubmit={handleSubmit}
+        className="relative ml-4 max-w-full md:ml-0 md:min-w-sm"
+      >
         <label htmlFor="search-half" className="sr-only">
           Search places
         </label>
@@ -50,7 +53,7 @@ export default function Search({ size }: SearchProps) {
           />
           <Input
             id="search-half"
-            placeholder="Search places..."
+            placeholder="Search for places..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className="flex-1 py-2 pr-2 pl-10 transition-all duration-200 focus:ring-2 focus:ring-blue-500"
