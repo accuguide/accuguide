@@ -1,11 +1,11 @@
 'use client'
 
-import Cookies from 'js-cookie'
 import { useSearchParams } from 'next/navigation'
 import { Suspense, useEffect, useState } from 'react'
 import Location from '@/components/search/location'
 import SearchDisplay from '@/components/search/search-display'
 import SearchSkeleton from '@/components/skeletons/search-skeleton'
+import { useLocation } from '@/contexts/location-context'
 import { SearchDisplayProps } from '@/lib/types'
 
 function SearchResults() {
@@ -14,41 +14,43 @@ function SearchResults() {
   const [isLoading, setIsLoading] = useState(false)
   const searchParams = useSearchParams()
   const query = searchParams.get('query')
+  const { latitude, longitude, isLocationChecked } = useLocation()
 
   useEffect(() => {
-    if (query) {
-      setIsLoading(true)
-      // Get latitude and longitude from cookies
-      const latitude = Cookies.get('latitude')
-      const longitude = Cookies.get('longitude')
-
-      // Build query parameters
-      const params = new URLSearchParams({ query })
-      if (latitude) params.append('latitude', latitude)
-      if (longitude) params.append('longitude', longitude)
-
-      fetch(`/api/search/?${params.toString()}`)
-        .then((response) => {
-          return response.json()
-        })
-        .then((data) => {
-          setGoogleResponse(data[1].data)
-          setDbResponse(data[0].data)
-        })
-        .catch(() => {
-          console.error('There was a problem with the fetch operation')
-        })
-        .finally(() => {
-          setIsLoading(false)
-        })
+    if (!query || !isLocationChecked) {
+      return
     }
-  }, [query])
+
+    setIsLoading(true)
+
+    const params = new URLSearchParams({ query })
+    if (latitude !== null && longitude !== null) {
+      params.append('latitude', latitude.toString())
+      params.append('longitude', longitude.toString())
+    }
+
+    fetch(`/api/search/?${params.toString()}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        return response.json()
+      })
+      .then((data) => {
+        setGoogleResponse(data[1].data)
+        setDbResponse(data[0].data)
+      })
+      .catch((error) => {
+        console.error('There was a problem with the fetch operation:', error)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
+  }, [query, latitude, longitude, isLocationChecked])
 
   return (
     <div>
-      <p className="-mt-4 mb-4 text-xs sm:text-sm">
-        Location access may be granted to show more relevant results
-      </p>
+      <Location />
 
       {isLoading ? (
         <SearchSkeleton />
@@ -94,7 +96,6 @@ export default function Page() {
   return (
     <Suspense>
       <SearchResults />
-      <Location />
     </Suspense>
   )
 }
