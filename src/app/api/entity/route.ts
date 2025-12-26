@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
   }
   const fields =
     'id,postalAddress,location,timeZone,googleMapsUri,websiteUri,regularOpeningHours,utcOffsetMinutes,displayName,primaryTypeDisplayName,editorialSummary'
-  const url = `https://places.googleapis.com/v1/places/${googleId}?fields=${fields}&key=${apiKey}`
+  const url = `https://places.googleapis.com/v1/places/${encodeURIComponent(googleId)}?fields=${encodeURIComponent(fields)}&key=${encodeURIComponent(apiKey)}`
   try {
     const response = await fetch(url)
     if (!response.ok) {
