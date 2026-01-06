@@ -35,8 +35,10 @@ export default function ReviewItem({
   const [isEditing, setIsEditing] = useState(false)
   const [editedComment, setEditedComment] = useState(review.comment)
   const [entityName, setEntityName] = useState<string>('')
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    setIsClient(true)
     const fetchEntityName = async () => {
       try {
         const response = await fetch(`/api/entity/${review.entityId}`)
@@ -132,7 +134,7 @@ export default function ReviewItem({
         {profile && <div className="font-bold text-sm">{entityName}</div>}
         <p className="secondary-text mt-0 text-xs">
           <time dateTime={new Date(review.createdAt).toISOString()}>
-            {new Date(review.createdAt).toLocaleDateString()}
+            {isClient ? new Date(review.createdAt).toLocaleDateString() : ''}
           </time>
         </p>
 
