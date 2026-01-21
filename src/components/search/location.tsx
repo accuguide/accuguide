@@ -1,43 +1,59 @@
 'use client'
 
-import Cookies from 'js-cookie'
-import { useEffect } from 'react'
+import { useLocation } from '@/contexts/location-context'
 
 export default function Location() {
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const latitude = position.coords.latitude
-          const longitude = position.coords.longitude
+  const { status, requestLocation } = useLocation()
 
-          Cookies.set('latitude', latitude.toString(), {
-            expires: 30,
-            secure: true,
-          })
-          Cookies.set('longitude', longitude.toString(), {
-            expires: 30,
-            secure: true,
-          })
-          window.location.reload()
-        },
-        (error) => {
-          console.error('Error getting location: ', error)
-          // Even if location fails, we still resolve to allow the search to continue
-        },
-      )
-    } else {
-    }
+  if (status === 'idle') {
+    return null
   }
 
-  useEffect(() => {
-    // Only request location if we don't already have it stored
-    const hasLatitude = Cookies.get('latitude')
-    const hasLongitude = Cookies.get('longitude')
+  if (status === 'requesting') {
+    return (
+      <p className="-mt-4 mb-4 text-xs sm:text-sm">
+        Requesting location for better results...
+      </p>
+    )
+  }
 
-    if (!hasLatitude || !hasLongitude) {
-      getLocation()
-    }
-  }, [])
-  return <div></div>
+  if (status === 'granted') {
+    return (
+      <p className="-mt-4 mb-4 text-green-600 text-xs sm:text-sm">
+        Showing results near you
+      </p>
+    )
+  }
+
+  if (status === 'denied') {
+    return (
+      <p className="-mt-4 mb-4 text-amber-600 text-xs sm:text-sm">
+        Location access denied. Showing general results.
+      </p>
+    )
+  }
+
+  if (status === 'unavailable') {
+    return (
+      <p className="-mt-4 mb-4 text-amber-600 text-xs sm:text-sm">
+        Location unavailable. Showing general results.
+      </p>
+    )
+  }
+
+  if (status === 'timeout') {
+    return (
+      <p className="-mt-4 mb-4 text-amber-600 text-xs sm:text-sm">
+        Location request timed out.{' '}
+        <button
+          onClick={requestLocation}
+          className="underline hover:no-underline"
+        >
+          Try again
+        </button>
+      </p>
+    )
+  }
+
+  return null
 }

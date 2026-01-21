@@ -8,6 +8,7 @@ import Header from '@/components/header/header'
 import Splitter from '@/components/splitter'
 import { ModeToggle } from '@/components/theme/mode-toggle'
 import { Toaster } from '@/components/ui/sonner'
+import { LocationProvider } from '@/contexts/location-context'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -46,15 +47,17 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Toaster position="top-center" richColors />
-          <Header />
-          <Splitter />
-          <div className="mx-4 my-4 min-h-[80vh] md:mx-12 md:my-8">
-            {children}
-          </div>
-          <Splitter />
-          <Footer />
-          <ModeToggle />
+          <LocationProvider>
+            <Toaster position="top-center" richColors />
+            <Header />
+            <Splitter />
+            <div className="mx-4 my-4 min-h-[80vh] md:mx-12 md:my-8">
+              {children}
+            </div>
+            <Splitter />
+            <Footer />
+            <ModeToggle />
+          </LocationProvider>
         </ThemeProvider>
       </body>
     </html>

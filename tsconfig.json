@@ -13,6 +13,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["estree-jsx", "hast", "js-cookie", "mdx", "node", "pg", "unist"],
     "plugins": [
       {
         "name": "next"
