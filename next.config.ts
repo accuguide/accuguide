@@ -3,7 +3,7 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   pageExtensions: ['mdx', 'ts', 'tsx'],
-  trailingSlash: true,
+  trailingSlash: false,
   experimental: {
     optimizeCss: true,
   },

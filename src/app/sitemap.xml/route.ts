@@ -6,21 +6,21 @@ export const dynamic = 'force-dynamic'
 export async function GET() {
   const urls = [
     '/',
-    '/contact/',
-    '/help/faq/',
-    '/help/resources/',
-    '/help/feedback/',
-    '/info/about/',
-    '/info/donate/',
-    '/info/volunteer/',
-    '/legal/disclaimers/',
-    '/legal/privacy/',
-    '/legal/terms/',
-    '/search/',
-    '/sign-in/',
-    '/sign-in/password/forgot/',
-    '/sign-up/',
-    '/unsubscribe/',
+    '/contact',
+    '/help/faq',
+    '/help/resources',
+    '/help/feedback',
+    '/info/about',
+    '/info/donate',
+    '/info/volunteer',
+    '/legal/disclaimers',
+    '/legal/privacy',
+    '/legal/terms',
+    '/search',
+    '/sign-in',
+    '/sign-in/password/forgot',
+    '/sign-up',
+    '/unsubscribe',
   ]
 
   const entities = await db
@@ -39,14 +39,14 @@ export async function GET() {
 
   const entityUrls = entities.map((entity) => {
     return {
-      slug: `/entity/${entity.id}/`,
+      slug: `/entity/${entity.id}`,
       lastmod: entity.createdAt.toISOString(),
     }
   })
 
   const profileUrls = profiles.map((profile) => {
     return {
-      slug: `/profile/${profile.id}/`,
+      slug: `/profile/${profile.id}`,
       lastmod: profile.createdAt.toISOString(),
     }
   })
