@@ -1,9 +1,21 @@
 'use client'
 
 import Cookies from 'js-cookie'
-import { createContext, useContext, useEffect, useState, useCallback } from 'react'
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from 'react'
 
-type LocationStatus = 'idle' | 'requesting' | 'granted' | 'denied' | 'unavailable' | 'timeout'
+type LocationStatus =
+  | 'idle'
+  | 'requesting'
+  | 'granted'
+  | 'denied'
+  | 'unavailable'
+  | 'timeout'
 
 interface LocationContextValue {
   latitude: number | null
@@ -13,7 +25,9 @@ interface LocationContextValue {
   requestLocation: () => void
 }
 
-const LocationContext = createContext<LocationContextValue | undefined>(undefined)
+const LocationContext = createContext<LocationContextValue | undefined>(
+  undefined,
+)
 
 const LOCATION_TIMEOUT_MS = 5000
 const COOKIE_EXPIRY_DAYS = 30
@@ -38,7 +52,7 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
 
     const handleSuccess = (position: GeolocationPosition) => {
       if (timeoutId) clearTimeout(timeoutId)
-      
+
       const lat = position.coords.latitude
       const lng = position.coords.longitude
 
@@ -123,7 +137,11 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
     requestLocation,
   }
 
-  return <LocationContext.Provider value={value}>{children}</LocationContext.Provider>
+  return (
+    <LocationContext.Provider value={value}>
+      {children}
+    </LocationContext.Provider>
+  )
 }
 
 export function useLocation() {
