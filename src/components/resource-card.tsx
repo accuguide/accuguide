@@ -21,7 +21,7 @@ export default function ResourceCard({
   return (
     <Card className="mb-8 md:max-w-[75%]">
       <CardTitle className="px-6 font-bold">{title}</CardTitle>
-      <p className="-mt-2 secondary-text px-6 text-xs">{state} Resource</p>
+      <p className="secondary-text -mt-2 px-6 text-xs">{state} Resource</p>
 
       <CardContent>
         <p className="-mt-2 mb-2">{description}</p>

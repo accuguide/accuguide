@@ -48,7 +48,7 @@ export default function Search({ size }: SearchProps) {
         </label>
         <div className="relative">
           <SearchIcon
-            className="-translate-y-1/2 absolute top-1/2 left-3 h-4 w-4 text-slate-400 dark:text-slate-500"
+            className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500"
             aria-hidden="true"
           />
           <Input
@@ -61,7 +61,7 @@ export default function Search({ size }: SearchProps) {
             disabled={isPending}
           />
           {isPending && (
-            <Loader2 className="-translate-y-1/2 absolute top-1/2 right-3 h-4 w-4 animate-spin text-slate-400" />
+            <Loader2 className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 animate-spin text-slate-400" />
           )}
         </div>
       </form>

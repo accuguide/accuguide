@@ -62,7 +62,7 @@ export default function AboutPage() {
       <div className="mx-auto my-10 max-w-7xl md:my-20">
         <div className="items-center gap-x-12 lg:flex">
           <BigHeading title={bigHeading.title} subtitle={bigHeading.subtitle} />
-          <div className="sm:-mt-44 lg:-mt-8 mt-12 hidden gap-6 md:flex">
+          <div className="mt-12 hidden gap-6 sm:-mt-44 md:flex lg:-mt-8">
             <div className="space-y-8 pt-32 sm:pt-80 lg:order-last lg:pt-36 xl:order-0 xl:pt-80">
               <AboutImage src={aboutImages[0].src} alt={aboutImages[0].alt} />
             </div>
