@@ -8,7 +8,7 @@ import { LocationProvider } from '@/contexts/location-context'
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <APIProvider
-      apiKey={'AIzaSyDdm_onqTt2Ud_6-MLeiHEp2J8nq1eNNoU'}
+      apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}
       onLoad={() => console.log('Maps API has loaded.')}
     >
       <ThemeProvider

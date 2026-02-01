@@ -1,48 +1,46 @@
-"use client";
+'use client'
 
-import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
-import MapComponent from "@/components/map";
-import Location from "@/components/search/location";
-import SearchDisplay from "@/components/search/search-display";
-import SearchSkeleton from "@/components/skeletons/search-skeleton";
-import { useLocation } from "@/contexts/location-context";
-import type { PointOfInterest, SearchDisplayProps } from "@/lib/types";
+import { useSearchParams } from 'next/navigation'
+import { Suspense, useEffect, useState } from 'react'
+import MapComponent from '@/components/map'
+import Location from '@/components/search/location'
+import SearchDisplay from '@/components/search/search-display'
+import SearchSkeleton from '@/components/skeletons/search-skeleton'
+import { useLocation } from '@/contexts/location-context'
+import type { PointOfInterest, SearchDisplayProps } from '@/lib/types'
 
 function SearchResults() {
-  const [googleResponse, setGoogleResponse] = useState<SearchDisplayProps[]>(
-    [],
-  );
-  const [dbResponse, setDbResponse] = useState<SearchDisplayProps[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const searchParams = useSearchParams();
-  const query = searchParams.get("query");
-  const { latitude, longitude, isLocationChecked } = useLocation();
-  const [locations, setLocations] = useState<PointOfInterest[]>([]);
+  const [googleResponse, setGoogleResponse] = useState<SearchDisplayProps[]>([])
+  const [dbResponse, setDbResponse] = useState<SearchDisplayProps[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const searchParams = useSearchParams()
+  const query = searchParams.get('query')
+  const { latitude, longitude, isLocationChecked } = useLocation()
+  const [locations, setLocations] = useState<PointOfInterest[]>([])
 
   useEffect(() => {
     if (!query || !isLocationChecked) {
-      return;
+      return
     }
 
-    setIsLoading(true);
+    setIsLoading(true)
 
-    const params = new URLSearchParams({ query });
+    const params = new URLSearchParams({ query })
     if (latitude !== null && longitude !== null) {
-      params.append("latitude", latitude.toString());
-      params.append("longitude", longitude.toString());
+      params.append('latitude', latitude.toString())
+      params.append('longitude', longitude.toString())
     }
 
     fetch(`/api/search/?${params.toString()}`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`HTTP error! status: ${response.status}`)
         }
-        return response.json();
+        return response.json()
       })
       .then((data) => {
-        setGoogleResponse(data[1].data);
-        setDbResponse(data[0].data);
+        setGoogleResponse(data[1].data)
+        setDbResponse(data[0].data)
 
         const tempLocations: PointOfInterest[] = [
           ...data[1].data.map(
@@ -51,16 +49,16 @@ function SearchResults() {
               location: { lat: place.lat, lng: place.lng },
             }),
           ),
-        ];
-        setLocations(tempLocations);
+        ]
+        setLocations(tempLocations)
       })
       .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
+        console.error('There was a problem with the fetch operation:', error)
       })
       .finally(() => {
-        setIsLoading(false);
-      });
-  }, [query, latitude, longitude, isLocationChecked]);
+        setIsLoading(false)
+      })
+  }, [query, latitude, longitude, isLocationChecked])
 
   return (
     <div>
@@ -108,7 +106,7 @@ function SearchResults() {
         </div>
       )}
     </div>
-  );
+  )
 }
 
 export default function Page() {
@@ -116,5 +114,5 @@ export default function Page() {
     <Suspense>
       <SearchResults />
     </Suspense>
-  );
+  )
 }

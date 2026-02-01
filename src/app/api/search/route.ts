@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
   const query = searchParams.get('query') || ''
   const latitude = searchParams.get('latitude')
   const longitude = searchParams.get('longitude')
-  const apiKey = process.env.GOOGLE_MAPS_API_KEY
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
   if (!apiKey) {
     return NextResponse.json({ error: 'API key not found' }, { status: 500 })
   }
