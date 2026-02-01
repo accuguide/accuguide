@@ -59,10 +59,12 @@ We are always looking for open source contributions! Check out our contribution 
 
 1. `docker compose up`
 
-The following commands are only for initial database setup.
+2. The following commands are only for initial database setup / resetting the database
 
-- `bun run db:seed` (run this only on first setup or when you want to reset to the seed data)
+- `bun db:push` (applies schema changes)
+- `bun db:seed` (resets to seed data)
 
+3. `bun dev`
 
 ## Sponsors
 
