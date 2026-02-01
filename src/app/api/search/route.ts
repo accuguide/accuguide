@@ -38,6 +38,8 @@ export async function GET(request: NextRequest) {
         name: place.name,
         address: place.formatted_address,
         type: place.types[0],
+        lat: place.geometry.location.lat,
+        lng: place.geometry.location.lng,
       }))
 
     const formattedQuery = query.replace(/\s+/g, ' & ') + ':*'
@@ -65,6 +67,8 @@ export async function GET(request: NextRequest) {
         name: place.name,
         address: `${place.address1} ${place.address2 || ''}, ${place.city}, ${place.state}, ${place.zip}`,
         type: place.displayType,
+        lat: place.lat,
+        lng: place.lon,
         aiScore: place.aiScore || 0,
       }))
     }
