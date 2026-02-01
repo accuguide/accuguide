@@ -20,7 +20,6 @@ export async function GET() {
     '/sign-in',
     '/sign-in/password/forgot',
     '/sign-up',
-    '/unsubscribe',
   ]
 
   const entities = await db
