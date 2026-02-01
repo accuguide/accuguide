@@ -1,15 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/lib/db'
-import { emailTable } from '@/lib/db/schema'
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
   const email = searchParams.get('email') || ''
-  await db.insert(emailTable).values({
-    email,
-  })
+  const response = await fetch(
+    'https://api.mailgun.net/v3/lists/news@mailgun.accuguide.org/members',
+    {
+      method: 'POST',
+      headers: {
+        Authorization: 'Basic ' + btoa(`api:${process.env.EMAIL_API_KEY}`),
+      },
+      body: new URLSearchParams({
+        subscribed: 'True',
+        address: email,
+        name: 'Accuguide User',
+        description: 'Accuguide User',
+        vars: JSON.stringify({ age: 26 }),
+      }),
+    },
+  )
+
+  const data = await response.json()
+
   return NextResponse.json(
-    { message: 'Email added successfully' },
+    { message: `${data} Email added successfully` },
     { status: 200 },
   )
 }
