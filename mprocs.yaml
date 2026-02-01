@@ -1,9 +1,13 @@
 procs:
   docker:
     cmd: ["docker", "compose", "up"]
-    stop: "SIGKILL"
+    stop:
+      send-keys: ["<C-c>"]
   next.js:
     cmd: ["bun", "dev:cy"]
+    stop:
+      send-keys: ["<C-c>"]
   shell:
-    shell: "bash"
-    stop: "SIGKILL"
+    shell: zsh
+    stop:
+      send-keys: ["<C-d>"]
