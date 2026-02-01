@@ -3,10 +3,9 @@ import ReviewDisplay from '@/components/reviews/review-display'
 import { db } from '@/lib/db'
 import { reviewTable } from '@/lib/db/schema'
 
-export default async function ({
+export default async function Page({
   params,
 }: Readonly<{
-  children: React.ReactNode
   params: Promise<{ id: string }>
 }>) {
   const { id } = await params
