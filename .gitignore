@@ -45,3 +45,5 @@ next-env.d.ts
 .claude
 .vscodecypress/screenshots/
 package-lock.json
+
+mprocs.log

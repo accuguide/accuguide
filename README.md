@@ -57,14 +57,12 @@ We are always looking for open source contributions! Check out our contribution 
 
 ### Running The Code
 
-1. `docker compose up`
+1. `bun dev`
 
 2. The following commands are only for initial database setup / resetting the database
 
 - `bun db:push` (applies schema changes)
 - `bun db:seed` (resets to seed data)
-
-3. `bun dev`
 
 ## Sponsors
 

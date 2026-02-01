@@ -1,0 +1,9 @@
+procs:
+  docker:
+    cmd: ["docker", "compose", "up"]
+    stop: "SIGKILL"
+  next.js:
+    cmd: ["bun", "dev:cy"]
+  shell:
+    shell: "bash"
+    stop: "SIGKILL"
