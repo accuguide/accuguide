@@ -14,15 +14,15 @@
     "jsx": "react-jsx",
     "incremental": true,
     "typeRoots": ["./node_modules/@types"],
-    "types": ["estree-jsx", "hast", "js-cookie", "mdx", "node", "pg", "unist"],
+    "types": ["estree-jsx", "hast", "js-cookie", "node", "pg", "unist"],
     "plugins": [
       {
-        "name": "next"
-      }
+        "name": "next",
+      },
     ],
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": ["./src/*"],
+    },
   },
   "include": [
     "next-env.d.ts",
@@ -30,7 +30,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    "**/*.mts",
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }
