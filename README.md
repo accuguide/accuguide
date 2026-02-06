@@ -64,6 +64,8 @@ We are always looking for open source contributions! Check out our contribution 
 - `bun db:push` (applies schema changes)
 - `bun db:seed` (resets to seed data)
 
+If Docker is having issues regarding the volume location as a result of the upgrade from postgres:17 to postgres:18, running `docker compose down -v`, stopping all services, then doing the dev command again should fix it.
+
 ## Sponsors
 
 Please considering sponsoring Accuguide to ensure continued development and ability to keep this project free and open source!
