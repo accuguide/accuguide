@@ -130,6 +130,16 @@ export default async function EntityDisplay({
         </dl>
       </div>
 
+      {/* Claim Business Placeholder */}
+      <div className="mt-10 rounded-2xl border border-slate-600 px-4 py-6 sm:px-0 dark:border-slate-400">
+        <h2 className="mb-2 text-2xl">Claim this business</h2>
+
+        <p className="text-slate-600 text-sm dark:text-slate-300">
+          This feature is coming soon. Businesses will be able to claim their
+          listing and manage their profile.
+        </p>
+      </div>
+
       {/* Reviews Section - After all rows */}
       <div>
         <ReviewDisplay
