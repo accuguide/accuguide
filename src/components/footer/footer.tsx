@@ -144,6 +144,7 @@ export default function Footer() {
                 This site is powered by{' '}
                 <Link
                   href="https://netlify.com"
+                  target="_blank"
                   className="hover:underline hover:opacity-75"
                 >
                   Netlify
