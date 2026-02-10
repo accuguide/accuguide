@@ -139,7 +139,7 @@ export default function Footer() {
             </div>
             <div className="mt-12 border-t pt-8">
               <p className="secondary-text font-semibold text-xs">
-                &copy; 2025 Accuguide. All rights reserved.
+                &copy; 2026 Accuguide. All rights reserved.
                 <br />
                 This site is powered by{' '}
                 <Link
