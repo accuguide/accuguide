@@ -265,7 +265,7 @@ export default function ReviewWrite({
                   <button
                     type="button"
                     onClick={() => removeImage(idx)}
-                    className="absolute right-1 top-1 rounded-full bg-black/70 p-0.5 text-white hover:bg-black"
+                    className="absolute top-1 right-1 rounded-full bg-black/70 p-0.5 text-white hover:bg-black"
                     aria-label="Remove image"
                     title="Remove image"
                   >
