@@ -36,6 +36,7 @@ export default function ReviewItem({
   const [editedComment, setEditedComment] = useState(review.comment)
   const [entityName, setEntityName] = useState<string>('')
   const [isClient, setIsClient] = useState(false)
+  const [reviewImageUrls, setReviewImageUrls] = useState<string[]>([])
 
   useEffect(() => {
     setIsClient(true)
@@ -54,8 +55,29 @@ export default function ReviewItem({
       }
     }
 
+    const fetchReviewImages = async () => {
+      if (review.images && review.images.length > 0) {
+        try {
+          const urls = await Promise.all(
+            review.images.map(async (key) => {
+              const response = await fetch(`/api/review/image?key=${encodeURIComponent(key)}`)
+              if (response.ok) {
+                const data = await response.json()
+                return data.url
+              }
+              return null
+            })
+          )
+          setReviewImageUrls(urls.filter((url): url is string => url !== null))
+        } catch (error) {
+          console.error('Error fetching review images:', error)
+        }
+      }
+    }
+
     fetchEntityName()
-  }, [review.entityId])
+    fetchReviewImages()
+  }, [review.entityId, review.images])
 
   function stars(rating: number) {
     return (
@@ -164,6 +186,22 @@ export default function ReviewItem({
             <p className="secondary-text mt-4 font-semibold text-sm leading-6">
               {review.comment}
             </p>
+            
+            {/* Display review images */}
+            {reviewImageUrls.length > 0 && (
+              <div className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
+                {reviewImageUrls.map((url, index) => (
+                  <div key={index} className="relative">
+                    <img
+                      src={url}
+                      alt={`Review ${index + 1}`}
+                      className="h-32 w-full rounded-md object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+            
             {isOwner && (
               <div className="mt-4 flex items-center gap-1">
                 <Button size="sm" onClick={() => setIsEditing(true)}>

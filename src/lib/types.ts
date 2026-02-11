@@ -35,6 +35,7 @@ export interface Review {
   entityId: string
   rating: number
   comment: string
+  images?: string[]
   createdAt: Date | string
 }
 

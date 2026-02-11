@@ -113,6 +113,7 @@ export const reviewTable = pgTable('review', {
     }),
   rating: integer('rating').notNull(),
   comment: text('comment').notNull(),
+  images: json('images').$type<string[]>().default([]),
   createdAt: timestamp('created_at', {
     withTimezone: true,
     mode: 'date',

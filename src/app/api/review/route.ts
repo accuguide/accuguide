@@ -5,20 +5,43 @@ import {
   reviewIndicatorTable,
   reviewTable,
 } from '@/lib/db/schema'
+import { uploadReviewImage } from '@/lib/s3/functions'
 import { getServerUser } from '@/lib/session'
 
 export async function POST(request: Request) {
   const user = await getServerUser()
-  const res = await request.json()
-  const indicators: ReviewIndicator[] = res.indicators
+  const formData = await request.formData()
+  
+  const entity_id = formData.get('entity_id') as string
+  const review_id = formData.get('review_id') as string
+  const rating = parseInt(formData.get('rating') as string)
+  const indicators: ReviewIndicator[] = JSON.parse(formData.get('indicators') as string)
+  const reviewText = formData.get('reviewText') as string
+  
+  // Handle image uploads
+  const imageKeys: string[] = []
+  const imageFiles = formData.getAll('images') as File[]
+  
+  for (const file of imageFiles) {
+    if (file.size > 0) {
+      try {
+        const key = await uploadReviewImage(file)
+        imageKeys.push(key)
+      } catch (error) {
+        console.error('Error uploading image:', error)
+      }
+    }
+  }
+  
   await db
     .insert(reviewTable)
     .values({
       userId: user?.id || '',
-      entityId: res.entity_id,
-      id: res.review_id,
-      rating: res.rating,
-      comment: res.reviewText,
+      entityId: entity_id,
+      id: review_id,
+      rating: rating,
+      comment: reviewText,
+      images: imageKeys,
     })
     .then(() => {
       return db.insert(reviewIndicatorTable).values(indicators)
@@ -26,11 +49,12 @@ export async function POST(request: Request) {
   return Response.json({
     message: 'Review submitted successfully',
     data: {
-      entity_id: res.entity_id,
-      review_id: res.review_id,
-      rating: res.rating,
-      indicators: res.indicators,
-      reviewText: res.reviewText,
+      entity_id: entity_id,
+      review_id: review_id,
+      rating: rating,
+      indicators: indicators,
+      reviewText: reviewText,
+      images: imageKeys,
     },
   })
 }

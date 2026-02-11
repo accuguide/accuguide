@@ -1,6 +1,6 @@
 'use client'
 
-import { Check, Minus, StarIcon, X } from 'lucide-react'
+import { Check, ImageIcon, Minus, StarIcon, X } from 'lucide-react'
 import Link from 'next/link'
 import { FormEvent, useEffect, useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
@@ -34,21 +34,27 @@ export default function ReviewWrite({
   const review_id = useRef(uuidv4()).current
   const [indicators, setIndicators] = useState<ReviewIndicator[]>([])
   const [reviewText, setReviewText] = useState('')
+  const [selectedImages, setSelectedImages] = useState<File[]>([])
+  const [imagePreviews, setImagePreviews] = useState<string[]>([])
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    const formData = new FormData()
+    formData.append('entity_id', entity_id)
+    formData.append('review_id', review_id)
+    formData.append('rating', rating.toString())
+    formData.append('indicators', JSON.stringify(indicators))
+    formData.append('reviewText', reviewText)
+    
+    // Append images to formData
+    selectedImages.forEach((image) => {
+      formData.append('images', image)
+    })
+
     fetch('/api/review/', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        entity_id,
-        review_id,
-        rating,
-        indicators,
-        reviewText,
-      }),
+      body: formData,
     })
       .then((response) => response.json())
       .then(() => {
@@ -65,6 +71,28 @@ export default function ReviewWrite({
         indicator.id === ind.id ? { ...indicator, exists: newVal } : indicator,
       ),
     )
+  }
+
+  function handleImageSelect(e: React.ChangeEvent<HTMLInputElement>) {
+    const files = e.target.files
+    if (!files) return
+
+    const newImages = Array.from(files).slice(0, 5 - selectedImages.length) // Max 5 images
+    setSelectedImages((prev) => [...prev, ...newImages])
+
+    // Create preview URLs
+    newImages.forEach((file) => {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setImagePreviews((prev) => [...prev, reader.result as string])
+      }
+      reader.readAsDataURL(file)
+    })
+  }
+
+  function removeImage(index: number) {
+    setSelectedImages((prev) => prev.filter((_, i) => i !== index))
+    setImagePreviews((prev) => prev.filter((_, i) => i !== index))
   }
 
   function stars(rating: number) {
@@ -224,6 +252,52 @@ export default function ReviewWrite({
             className="mt-1 mb-4 border-slate-800 dark:border-slate-200"
             placeholder="Write your review here..."
           ></Textarea>
+          
+          {/* Image upload section */}
+          <div className="mb-4">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleImageSelect}
+              className="hidden"
+              disabled={rating === 0}
+            />
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={rating === 0 || selectedImages.length >= 5}
+              className="mb-2"
+            >
+              <ImageIcon className="mr-2 h-4 w-4" />
+              Add Images ({selectedImages.length}/5)
+            </Button>
+            
+            {/* Image previews */}
+            {imagePreviews.length > 0 && (
+              <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-5">
+                {imagePreviews.map((preview, index) => (
+                  <div key={index} className="relative">
+                    <img
+                      src={preview}
+                      alt={`Preview ${index + 1}`}
+                      className="h-24 w-full rounded-md object-cover"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeImage(index)}
+                      className="absolute top-1 right-1 rounded-full bg-red-500 p-1 text-white hover:bg-red-600"
+                    >
+                      <X className="h-3 w-3" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          
           <Button disabled={rating === 0}>Submit</Button>
         </>
       )}
