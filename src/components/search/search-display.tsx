@@ -55,6 +55,7 @@ export default function SearchDisplay({
           className="absolute top-2 right-2 z-10"
           onClick={(e) => {
             e.preventDefault()
+            e.stopPropagation()
             toggleFavorite()
           }}
           disabled={loading}

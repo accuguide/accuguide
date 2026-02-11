@@ -12,8 +12,10 @@ export function useFavorites(entityId?: string) {
     if (!entityId) return
     
     // Check if entity is favorited
-    // Note: This fetches all favorites to check one entity. For users with many favorites,
-    // consider adding a dedicated /api/favorites/check?entityId=${entityId} endpoint
+    // Current implementation: Fetches all favorites to check one entity.
+    // Trade-off: Simple implementation vs. optimization for users with many favorites.
+    // Future optimization: Add dedicated /api/favorites/check?entityId=${entityId} endpoint
+    // that returns only a boolean, reducing data transfer and processing.
     fetch('/api/favorites')
       .then((res) => res.json())
       .then((data) => {
