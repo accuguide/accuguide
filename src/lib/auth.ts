@@ -1,8 +1,7 @@
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { nextCookies } from 'better-auth/next-js'
-import FormData from 'form-data'
-import Mailgun from 'mailgun.js'
+import { emailResetPassword, emailVerifyEmail } from '@/lib/email'
 import { db } from '@/lib/db' // your drizzle instance
 import * as schema from '@/lib/db/auth-schema' // Import your schema object
 
@@ -31,54 +30,10 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,
-    sendResetPassword: async ({ user, url }) => {
-      const mailgun = new Mailgun(FormData)
-      const mg = mailgun.client({
-        username: 'api',
-        key: process.env.EMAIL_API_KEY || '',
-      })
-
-      try {
-        await mg.messages.create('mailgun.accuguide.org', {
-          from: 'support@accuguide.org',
-          to: [user.email],
-          subject: 'Accuguide - Password Reset',
-          template: 'accuguide password recover',
-          'h:X-Mailgun-Variables': JSON.stringify({
-            reset_url: url,
-            user_email: user.email,
-          }),
-        })
-      } catch (error) {
-        console.error('Failed to send password reset email:', error)
-        throw error
-      }
-    },
+    sendResetPassword: emailResetPassword,
   },
   emailVerification: {
-    sendVerificationEmail: async ({ user, url }) => {
-      const mailgun = new Mailgun(FormData)
-      const mg = mailgun.client({
-        username: 'api',
-        key: process.env.EMAIL_API_KEY || '',
-      })
-
-      try {
-        await mg.messages.create('mailgun.accuguide.org', {
-          from: 'support@accuguide.org',
-          to: [user.email],
-          subject: 'Accuguide - Email Verification',
-          template: 'accuguide email verify',
-          'h:X-Mailgun-Variables': JSON.stringify({
-            verify_url: url,
-            user_email: user.email,
-          }),
-        })
-      } catch (error) {
-        console.error('Failed to send email verification email:', error)
-        throw error
-      }
-    },
+    sendVerificationEmail: emailVerifyEmail,
     sendOnSignIn: true,
     sendOnSignUp: true,
   },
