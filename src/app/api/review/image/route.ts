@@ -13,6 +13,9 @@ export async function GET(request: Request) {
     return Response.json({ url })
   } catch (error) {
     console.error('Error generating signed URL:', error)
-    return Response.json({ error: 'Failed to generate signed URL' }, { status: 500 })
+    return Response.json(
+      { error: 'Failed to generate signed URL' },
+      { status: 500 },
+    )
   }
 }

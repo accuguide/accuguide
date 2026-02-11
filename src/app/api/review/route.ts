@@ -11,17 +11,19 @@ import { getServerUser } from '@/lib/session'
 export async function POST(request: Request) {
   const user = await getServerUser()
   const formData = await request.formData()
-  
+
   const entity_id = formData.get('entity_id') as string
   const review_id = formData.get('review_id') as string
   const rating = parseInt(formData.get('rating') as string)
-  const indicators: ReviewIndicator[] = JSON.parse(formData.get('indicators') as string)
+  const indicators: ReviewIndicator[] = JSON.parse(
+    formData.get('indicators') as string,
+  )
   const reviewText = formData.get('reviewText') as string
-  
+
   // Handle image uploads
   const imageKeys: string[] = []
   const imageFiles = formData.getAll('images') as File[]
-  
+
   for (const file of imageFiles) {
     if (file.size > 0) {
       try {
@@ -32,7 +34,7 @@ export async function POST(request: Request) {
       }
     }
   }
-  
+
   await db
     .insert(reviewTable)
     .values({

@@ -86,7 +86,10 @@ export async function getSignedUrlForReviewImage(
     })
     return url
   } catch (error) {
-    console.error('[getSignedUrlForReviewImage] Error generating signed URL:', error)
+    console.error(
+      '[getSignedUrlForReviewImage] Error generating signed URL:',
+      error,
+    )
     throw error
   }
 }

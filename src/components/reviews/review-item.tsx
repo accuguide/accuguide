@@ -60,13 +60,15 @@ export default function ReviewItem({
         try {
           const urls = await Promise.all(
             review.images.map(async (key) => {
-              const response = await fetch(`/api/review/image?key=${encodeURIComponent(key)}`)
+              const response = await fetch(
+                `/api/review/image?key=${encodeURIComponent(key)}`,
+              )
               if (response.ok) {
                 const data = await response.json()
                 return data.url
               }
               return null
-            })
+            }),
           )
           setReviewImageUrls(urls.filter((url): url is string => url !== null))
         } catch (error) {
@@ -186,7 +188,7 @@ export default function ReviewItem({
             <p className="secondary-text mt-4 font-semibold text-sm leading-6">
               {review.comment}
             </p>
-            
+
             {/* Display review images */}
             {reviewImageUrls.length > 0 && (
               <div className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
@@ -201,7 +203,7 @@ export default function ReviewItem({
                 ))}
               </div>
             )}
-            
+
             {isOwner && (
               <div className="mt-4 flex items-center gap-1">
                 <Button size="sm" onClick={() => setIsEditing(true)}>

@@ -46,7 +46,7 @@ export default function ReviewWrite({
     formData.append('rating', rating.toString())
     formData.append('indicators', JSON.stringify(indicators))
     formData.append('reviewText', reviewText)
-    
+
     // Append images to formData
     selectedImages.forEach((image) => {
       formData.append('images', image)
@@ -252,7 +252,7 @@ export default function ReviewWrite({
             className="mt-1 mb-4 border-slate-800 dark:border-slate-200"
             placeholder="Write your review here..."
           ></Textarea>
-          
+
           {/* Image upload section */}
           <div className="mb-4">
             <input
@@ -274,7 +274,7 @@ export default function ReviewWrite({
               <ImageIcon className="mr-2 h-4 w-4" />
               Add Images ({selectedImages.length}/5)
             </Button>
-            
+
             {/* Image previews */}
             {imagePreviews.length > 0 && (
               <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-5">
@@ -297,7 +297,7 @@ export default function ReviewWrite({
               </div>
             )}
           </div>
-          
+
           <Button disabled={rating === 0}>Submit</Button>
         </>
       )}
