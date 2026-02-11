@@ -1,4 +1,4 @@
-import { Mail, Phone } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -7,16 +7,7 @@ export default function Page() {
   return (
     <div className="max-w-2xl">
       {/* Contact Options */}
-      <dl className="mb-8 space-y-4 text-base">
-        <div className="flex gap-x-4">
-          <dt className="flex-none">
-            <span className="sr-only">Telephone</span>
-            <Phone aria-hidden="true" className="h-7 w-6 text-gray-400" />
-          </dt>
-          <dd>
-            <a href="tel:[phone-number]">+1 (408) 658 6493</a>
-          </dd>
-        </div>
+      <dl className="mb-8 text-base">
         <div className="flex gap-x-4">
           <dt className="flex-none">
             <span className="sr-only">Email</span>
