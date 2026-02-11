@@ -42,6 +42,9 @@ export default async function HeaderUser() {
           {user?.name}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <Link href="/favorites/" className="text-slate-600 dark:text-slate-300">
+          <DropdownMenuItem>Favorites</DropdownMenuItem>
+        </Link>
         <Link href="/settings/" className="text-slate-600 dark:text-slate-300">
           <DropdownMenuItem>Settings</DropdownMenuItem>
         </Link>
