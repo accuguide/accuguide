@@ -6,7 +6,7 @@ import { getServerUser } from '@/lib/session'
 
 export default async function Page() {
   const user = await getServerUser()
-  
+
   if (!user) {
     return (
       <div className="mx-auto max-w-7xl">

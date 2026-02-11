@@ -5,7 +5,7 @@ import { getServerUser } from '@/lib/session'
 
 export async function GET(request: Request) {
   const user = await getServerUser()
-  
+
   if (!user) {
     return Response.json({ error: 'Unauthorized' }, { status: 401 })
   }
@@ -27,7 +27,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   const user = await getServerUser()
-  
+
   if (!user) {
     return Response.json({ error: 'Unauthorized' }, { status: 401 })
   }
@@ -67,7 +67,7 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
   const user = await getServerUser()
-  
+
   if (!user) {
     return Response.json({ error: 'Unauthorized' }, { status: 401 })
   }

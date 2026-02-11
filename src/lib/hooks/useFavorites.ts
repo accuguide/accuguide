@@ -10,7 +10,7 @@ export function useFavorites(entityId?: string) {
 
   useEffect(() => {
     if (!entityId) return
-    
+
     // Check if entity is favorited
     // Current implementation: Fetches all favorites to check one entity.
     // Trade-off: Simple implementation vs. optimization for users with many favorites.
