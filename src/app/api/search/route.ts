@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
   const query = searchParams.get('query') || ''
   const latitude = searchParams.get('latitude')
   const longitude = searchParams.get('longitude')
-  const apiKey = process.env.GOOGLE_MAPS_API_KEY
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
   if (!apiKey) {
     return NextResponse.json({ error: 'API key not found' }, { status: 500 })
   }
@@ -38,6 +38,8 @@ export async function GET(request: NextRequest) {
         name: place.name,
         address: place.formatted_address,
         type: place.types[0],
+        lat: place.geometry.location.lat,
+        lng: place.geometry.location.lng,
       }))
 
     const formattedQuery = query.replace(/\s+/g, ' & ') + ':*'
@@ -65,6 +67,8 @@ export async function GET(request: NextRequest) {
         name: place.name,
         address: `${place.address1} ${place.address2 || ''}, ${place.city}, ${place.state}, ${place.zip}`,
         type: place.displayType,
+        lat: Number(place.lat),
+        lng: Number(place.lon),
         aiScore: place.aiScore || 0,
       }))
     }
