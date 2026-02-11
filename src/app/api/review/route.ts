@@ -2,6 +2,7 @@ import { eq } from 'drizzle-orm'
 import { db } from '@/lib/db'
 import {
   ReviewIndicator,
+  reviewImagesTable,
   reviewIndicatorTable,
   reviewTable,
 } from '@/lib/db/schema'
@@ -51,8 +52,9 @@ export async function POST(request: Request) {
     .then(() => {
       return uploadReviewImages(images)
     })
-    .then((imageUrls) => {
-      console.log('Uploaded image URLs:', imageUrls)
+    .then((keys) => {
+      const keyList = keys.map((key) => ({ reviewId, image: key }))
+      return db.insert(reviewImagesTable).values(keyList)
     })
     .catch((error) => {
       console.error('Error submitting review:', error)
