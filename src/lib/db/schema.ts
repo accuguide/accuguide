@@ -186,6 +186,25 @@ export const FaqTable = pgTable('faq', {
   answer: text('answer').notNull(),
 })
 
+export const favoriteTable = pgTable('favorite', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: text('user_id')
+    .notNull()
+    .references(() => user.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
+  entityId: uuid('entity_id')
+    .notNull()
+    .references(() => entityTable.id, {
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    }),
+  createdAt: timestamp('created_at', {
+    withTimezone: true,
+    mode: 'date',
+  })
+    .notNull()
+    .defaultNow(),
+})
+
 export type Type = InferSelectModel<typeof typeTable>
 export type Indicator = InferSelectModel<typeof indicatorTable>
 export type Category = InferSelectModel<typeof categoryTable>
@@ -197,3 +216,4 @@ export type ReviewIndicator = InferSelectModel<typeof reviewIndicatorTable>
 export type Resource = InferSelectModel<typeof resourceTable>
 export type Job = InferSelectModel<typeof jobTable>
 export type Faq = InferSelectModel<typeof FaqTable>
+export type Favorite = InferSelectModel<typeof favoriteTable>

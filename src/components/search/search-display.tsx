@@ -1,5 +1,10 @@
+'use client'
+
 import Link from 'next/link'
+import { Heart } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { useFavorites } from '@/lib/hooks/useFavorites'
 import type { SearchDisplayProps } from '@/lib/types'
 import { cn } from '@/lib/utils'
 
@@ -12,6 +17,8 @@ export default function SearchDisplay({
   type,
   aiScore,
 }: SearchDisplayProps) {
+  const entityId = displayType === 'google' ? undefined : id
+  const { isFavorite, toggleFavorite, loading } = useFavorites(entityId)
   // Handle address formatting more robustly
   const formatAddress = (address: string) => {
     if (!address) return { firstLine: '', restLines: '' }
@@ -41,6 +48,27 @@ export default function SearchDisplay({
 
   return (
     <div className="group relative m-2 rounded-lg border-2 border-t border-r border-b border-l p-4 transition-opacity hover:opacity-75 sm:p-6">
+      {entityId && (
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute top-2 right-2 z-10"
+          onClick={(e) => {
+            e.preventDefault()
+            toggleFavorite()
+          }}
+          disabled={loading}
+        >
+          <Heart
+            className={cn(
+              'h-5 w-5',
+              isFavorite
+                ? 'fill-red-500 text-red-500'
+                : 'text-muted-foreground',
+            )}
+          />
+        </Button>
+      )}
       <div className="pt-6 pb-4 text-center">
         <h3 className="font-medium text-foreground text-sm">
           {aiScore != null && aiScore != 0 && (
