@@ -1,4 +1,4 @@
-import { and, eq } from 'drizzle-orm'
+import { and, desc, eq } from 'drizzle-orm'
 import { db } from '@/lib/db'
 import { entityTable, favoriteTable } from '@/lib/db/schema'
 import { getServerUser } from '@/lib/session'
@@ -20,7 +20,7 @@ export async function GET(request: Request) {
     .from(favoriteTable)
     .innerJoin(entityTable, eq(favoriteTable.entityId, entityTable.id))
     .where(eq(favoriteTable.userId, user.id))
-    .orderBy(favoriteTable.createdAt)
+    .orderBy(desc(favoriteTable.createdAt))
 
   return Response.json({ favorites })
 }

@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm'
+import { desc, eq } from 'drizzle-orm'
 import SearchDisplay from '@/components/search/search-display'
 import { db } from '@/lib/db'
 import { entityTable, favoriteTable } from '@/lib/db/schema'
@@ -32,7 +32,7 @@ export default async function Page() {
     .from(favoriteTable)
     .innerJoin(entityTable, eq(favoriteTable.entityId, entityTable.id))
     .where(eq(favoriteTable.userId, user.id))
-    .orderBy(favoriteTable.createdAt)
+    .orderBy(desc(favoriteTable.createdAt))
 
   return (
     <div className="mx-auto max-w-7xl">
