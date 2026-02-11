@@ -45,7 +45,7 @@ export default async function Page() {
         </div>
 
         {favorites.length === 0 ? (
-          <div className="text-center py-12">
+          <div className="py-12 text-center">
             <p className="text-muted-foreground">
               You haven't favorited any locations yet. Start exploring and add
               your favorite places!

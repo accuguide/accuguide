@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react'
 
+interface Favorite {
+  entityId: string
+}
+
 export function useFavorites(entityId?: string) {
   const [isFavorite, setIsFavorite] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -11,8 +15,8 @@ export function useFavorites(entityId?: string) {
     fetch('/api/favorites')
       .then((res) => res.json())
       .then((data) => {
-        const favorites = data.favorites || []
-        setIsFavorite(favorites.some((f: any) => f.entityId === entityId))
+        const favorites: Favorite[] = data.favorites || []
+        setIsFavorite(favorites.some((f) => f.entityId === entityId))
       })
       .catch(() => {
         // User not logged in or error - not favorited
