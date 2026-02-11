@@ -1,10 +1,12 @@
 'use client'
 
-import { AdvancedMarker, Map, Pin } from '@vis.gl/react-google-maps'
+import { AdvancedMarker, InfoWindow, Map, Pin } from '@vis.gl/react-google-maps'
+import { useCallback, useState } from 'react'
 import type { PointOfInterest } from '@/lib/types'
 
 interface MapComponentProps {
   locations: PointOfInterest[]
+  compact?: boolean
 }
 
 function calculateOptimalZoom(
@@ -48,7 +50,12 @@ function calculateOptimalZoom(
   return Math.max(1, Math.min(latZoom, lngZoom, ZOOM_MAX) - 1)
 }
 
-export default function MapComponent({ locations }: MapComponentProps) {
+export default function MapComponent({
+  locations,
+  compact = false,
+}: MapComponentProps) {
+  const [selectedPoi, setSelectedPoi] = useState<PointOfInterest | null>(null)
+
   const center = {
     lat:
       locations.reduce((sum, loc) => sum + loc.location.lat, 0) /
@@ -64,20 +71,71 @@ export default function MapComponent({ locations }: MapComponentProps) {
     typeof window !== 'undefined' ? window.innerHeight * 0.5 : 400
   const zoom = calculateOptimalZoom(locations, mapWidth, mapHeight)
 
+  const handleMarkerClick = useCallback((poi: PointOfInterest) => {
+    setSelectedPoi((prev) => (prev?.key === poi.key ? null : poi))
+  }, [])
+
   return (
     <Map
-      style={{ width: '40vw', height: '96vh' }}
+      style={{
+        width: compact ? '100%' : '40vw',
+        height: compact ? '250px' : '96vh',
+        borderRadius: '0.75rem',
+        overflow: 'hidden',
+      }}
       defaultCenter={{ lat: center.lat, lng: center.lng }}
       defaultZoom={zoom + 1}
       gestureHandling="greedy"
       disableDefaultUI
       mapId="b855f3d0f7e0d031ab47403b"
+      onClick={() => setSelectedPoi(null)}
     >
       {locations.map((poi) => (
-        <AdvancedMarker key={poi.key} position={poi.location}>
+        <AdvancedMarker
+          key={poi.key}
+          position={poi.location}
+          onClick={() => handleMarkerClick(poi)}
+        >
           <Pin />
         </AdvancedMarker>
       ))}
+
+      {selectedPoi && (
+        <InfoWindow
+          position={selectedPoi.location}
+          onCloseClick={() => setSelectedPoi(null)}
+          pixelOffset={[0, -40]}
+          headerDisabled
+        >
+          <div
+            style={{ maxWidth: 200, position: 'relative', paddingRight: 16 }}
+          >
+            <button
+              type="button"
+              onClick={() => setSelectedPoi(null)}
+              style={{
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 0,
+                fontSize: 18,
+                lineHeight: 1,
+                color: '#333',
+              }}
+              aria-label="Close"
+            >
+              &#x2715;
+            </button>
+            <strong style={{ color: '#000' }}>{selectedPoi.name}</strong>
+            <p style={{ margin: '4px 0 0', fontSize: 12, color: '#666' }}>
+              {selectedPoi.address}
+            </p>
+          </div>
+        </InfoWindow>
+      )}
     </Map>
   )
 }

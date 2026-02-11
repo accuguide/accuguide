@@ -67,8 +67,8 @@ export async function GET(request: NextRequest) {
         name: place.name,
         address: `${place.address1} ${place.address2 || ''}, ${place.city}, ${place.state}, ${place.zip}`,
         type: place.displayType,
-        lat: place.lat,
-        lng: place.lon,
+        lat: Number(place.lat),
+        lng: Number(place.lon),
         aiScore: place.aiScore || 0,
       }))
     }

@@ -43,9 +43,29 @@ function SearchResults() {
         setDbResponse(data[0].data)
 
         const tempLocations: PointOfInterest[] = [
-          ...data[1].data.map(
-            (place: { name: string; lat: number; lng: number }) => ({
+          ...data[0].data.map(
+            (place: {
+              name: string
+              address: string
+              lat: number
+              lng: number
+            }) => ({
               key: place.name,
+              name: place.name,
+              address: place.address,
+              location: { lat: place.lat, lng: place.lng },
+            }),
+          ),
+          ...data[1].data.map(
+            (place: {
+              name: string
+              address: string
+              lat: number
+              lng: number
+            }) => ({
+              key: place.name,
+              name: place.name,
+              address: place.address,
               location: { lat: place.lat, lng: place.lng },
             }),
           ),
@@ -67,41 +87,49 @@ function SearchResults() {
       {isLoading ? (
         <SearchSkeleton />
       ) : (
-        <div className="flex gap-6">
-          <div className="flex-1">
-            <h2 className="mt-8 mb-4">Catalogued Results</h2>
-            <div className="grid grid-cols-3 gap-4">
-              {dbResponse.map((place) => (
-                <SearchDisplay
-                  displayType="db"
-                  key={place.googleId}
-                  id={place.id}
-                  googleId={place.googleId}
-                  name={place.name}
-                  type={place.type}
-                  address={place.address}
-                  aiScore={place.aiScore || 0}
-                />
-              ))}
-            </div>
-            <h2 className="mt-8 mb-4">All Results</h2>
-            <div className="grid grid-cols-3 gap-4">
-              {googleResponse.map((place) => (
-                <SearchDisplay
-                  displayType="google"
-                  key={place.googleId}
-                  googleId={place.googleId}
-                  name={place.name}
-                  type={place.type}
-                  address={place.address}
-                  aiScore={0}
-                />
-              ))}
-            </div>
+        <div>
+          {/* Compact map for small screens, shown above results */}
+          <div className="mt-6 lg:hidden">
+            <MapComponent locations={locations} compact />
           </div>
 
-          <div className="sticky top-4 h-fit">
-            <MapComponent locations={locations} />
+          <div className="flex gap-6">
+            <div className="flex-1">
+              <h2 className="mt-8 mb-4">Catalogued Results</h2>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {dbResponse.map((place) => (
+                  <SearchDisplay
+                    displayType="db"
+                    key={place.googleId}
+                    id={place.id}
+                    googleId={place.googleId}
+                    name={place.name}
+                    type={place.type}
+                    address={place.address}
+                    aiScore={place.aiScore || 0}
+                  />
+                ))}
+              </div>
+              <h2 className="mt-8 mb-4">All Results</h2>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {googleResponse.map((place) => (
+                  <SearchDisplay
+                    displayType="google"
+                    key={place.googleId}
+                    googleId={place.googleId}
+                    name={place.name}
+                    type={place.type}
+                    address={place.address}
+                    aiScore={0}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Sidebar map for large screens */}
+            <div className="sticky top-4 hidden h-fit lg:block">
+              <MapComponent locations={locations} />
+            </div>
           </div>
         </div>
       )}

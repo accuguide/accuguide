@@ -53,6 +53,8 @@ export interface Indicator {
 
 export type PointOfInterest = {
   key: string
+  name: string
+  address: string
   location: {
     lat: number
     lng: number
