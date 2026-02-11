@@ -1,14 +1,14 @@
-import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { randomUUID } from "crypto";
-import { s3Client } from "@/lib/s3";
+import { PutObjectCommand } from '@aws-sdk/client-s3'
+import { randomUUID } from 'crypto'
+import { s3Client } from '@/lib/s3'
 
-const BUCKET = "profile-images";
+const BUCKET = 'profile-images'
 
 export async function uploadProfilePicture(file: File): Promise<string> {
   try {
-    const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-    const key = `${randomUUID()}-${file.name}`;
+    const arrayBuffer = await file.arrayBuffer()
+    const buffer = Buffer.from(arrayBuffer)
+    const key = `${randomUUID()}-${file.name}`
 
     await s3Client.send(
       new PutObjectCommand({
@@ -17,34 +17,34 @@ export async function uploadProfilePicture(file: File): Promise<string> {
         Body: buffer,
         ContentType: file.type,
       }),
-    );
-    return key;
+    )
+    return key
   } catch (error) {
-    throw error;
+    throw error
   }
 }
 
 export async function uploadReviewImages(files: File[]): Promise<string[]> {
   try {
-    const keys: string[] = [];
+    const keys: string[] = []
     for (const file of files) {
-      const arrayBuffer = await file.arrayBuffer();
-      const buffer = Buffer.from(arrayBuffer);
-      const key = `${randomUUID()}-${file.name}`;
+      const arrayBuffer = await file.arrayBuffer()
+      const buffer = Buffer.from(arrayBuffer)
+      const key = `${randomUUID()}-${file.name}`
 
       await s3Client.send(
         new PutObjectCommand({
-          Bucket: "review-images",
+          Bucket: 'review-images',
           Key: key,
           Body: buffer,
           ContentType: file.type,
         }),
-      );
-      keys.push(key);
+      )
+      keys.push(key)
     }
-    return keys;
+    return keys
   } catch (error) {
-    throw error;
+    throw error
   }
 }
 
@@ -53,20 +53,20 @@ export async function getSignedUrlForKey(
   expiresInSeconds = 3600,
 ): Promise<string> {
   try {
-    const { getSignedUrl } = await import("@aws-sdk/s3-request-presigner");
-    const { GetObjectCommand } = await import("@aws-sdk/client-s3");
+    const { getSignedUrl } = await import('@aws-sdk/s3-request-presigner')
+    const { GetObjectCommand } = await import('@aws-sdk/client-s3')
 
     const command = new GetObjectCommand({
       Bucket: BUCKET,
       Key: key,
-    });
+    })
 
     const url = await getSignedUrl(s3Client, command, {
       expiresIn: expiresInSeconds,
-    });
-    return url;
+    })
+    return url
   } catch (error) {
-    console.error("[getSignedUrlForKey] Error generating signed URL:", error);
-    throw error;
+    console.error('[getSignedUrlForKey] Error generating signed URL:', error)
+    throw error
   }
 }
