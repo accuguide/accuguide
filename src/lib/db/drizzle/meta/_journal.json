@@ -85,6 +85,13 @@
       "when": 1762479184907,
       "tag": "0011_regular_sauron",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1770849497513,
+      "tag": "0012_easy_red_wolf",
+      "breakpoints": true
     }
   ]
 }

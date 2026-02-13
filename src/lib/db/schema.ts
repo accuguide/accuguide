@@ -138,6 +138,17 @@ export const reviewIndicatorTable = pgTable('review_indicator', {
   exists: boolean('exists'),
 })
 
+export const reviewImagesTable = pgTable('review_images', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  reviewId: uuid('review_id')
+    .notNull()
+    .references(() => reviewTable.id, {
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    }),
+  image: text('image').notNull(),
+})
+
 export const emailTable = pgTable('email', {
   id: uuid('id').primaryKey().defaultRandom(),
   email: text('email').notNull().unique(),
