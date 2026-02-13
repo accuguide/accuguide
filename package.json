@@ -72,6 +72,7 @@
     "@types/hast": "^3.0.4",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^24",
+    "@types/nodemailer": "^7.0.9",
     "@types/pg": "^8.15.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
