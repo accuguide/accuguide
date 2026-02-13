@@ -1,8 +1,7 @@
-import { PutObjectCommand } from '@aws-sdk/client-s3'
+import { GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3'
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { randomUUID } from 'crypto'
 import { s3Client } from '@/lib/s3'
-
-const BUCKET = 'profile-images'
 
 export async function uploadProfilePicture(file: File): Promise<string> {
   try {
@@ -12,7 +11,7 @@ export async function uploadProfilePicture(file: File): Promise<string> {
 
     await s3Client.send(
       new PutObjectCommand({
-        Bucket: BUCKET,
+        Bucket: 'profile-images',
         Key: key,
         Body: buffer,
         ContentType: file.type,
@@ -48,21 +47,35 @@ export async function uploadReviewImages(files: File[]): Promise<string[]> {
   }
 }
 
-export async function getSignedUrlForKey(
-  key: string,
-  expiresInSeconds = 3600,
-): Promise<string> {
+export async function getReviewImages(keys: string[]): Promise<string[]> {
   try {
-    const { getSignedUrl } = await import('@aws-sdk/s3-request-presigner')
-    const { GetObjectCommand } = await import('@aws-sdk/client-s3')
+    const urls: string[] = []
+    for (const key of keys) {
+      const command = new GetObjectCommand({
+        Bucket: 'review-images',
+        Key: key,
+      })
+      const url = await getSignedUrl(s3Client, command, {
+        expiresIn: 3600,
+      })
+      urls.push(url)
+    }
+    return urls
+  } catch (error) {
+    console.error('[getReviewImages] Error fetching review images:', error)
+    throw error
+  }
+}
 
+export async function getSignedUrlForKey(key: string): Promise<string> {
+  try {
     const command = new GetObjectCommand({
-      Bucket: BUCKET,
+      Bucket: 'profile-images',
       Key: key,
     })
 
     const url = await getSignedUrl(s3Client, command, {
-      expiresIn: expiresInSeconds,
+      expiresIn: 3600,
     })
     return url
   } catch (error) {
