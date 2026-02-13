@@ -23,7 +23,7 @@ export async function uploadProfilePicture(file: File): Promise<string> {
     )
     return key
   } catch (error) {
-    throw error
+    throw new Error(`[uploadProfilePicture] error: ${error}`)
   }
 }
 
@@ -47,7 +47,7 @@ export async function uploadReviewImages(files: File[]): Promise<string[]> {
     }
     return keys
   } catch (error) {
-    throw error
+    throw new Error(`[uploadReviewImages] error: ${error}`)
   }
 }
 
@@ -58,13 +58,11 @@ export async function getProfileImage(key: string): Promise<string> {
       Key: key,
     })
 
-    const url = await getSignedUrl(s3Client, command, {
-      expiresIn: 3600,
-    })
+    const url = await getSignedUrl(s3Client, command)
+
     return url
   } catch (error) {
-    console.error('[getProfileImage] Error generating signed URL:', error)
-    throw error
+    throw new Error(`[getProfileImage] error: ${error}`)
   }
 }
 
@@ -76,14 +74,11 @@ export async function getReviewImages(keys: string[]): Promise<string[]> {
         Bucket: 'review-images',
         Key: key,
       })
-      const url = await getSignedUrl(s3Client, command, {
-        expiresIn: 3600,
-      })
+      const url = await getSignedUrl(s3Client, command)
       urls.push(url)
     }
     return urls
   } catch (error) {
-    console.error('[getReviewImages] Error fetching review images:', error)
-    throw error
+    throw new Error(`[getReviewImages] error: ${error}`)
   }
 }

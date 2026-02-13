@@ -17,7 +17,7 @@
     "test:open": "cypress open",
     "db:studio": "drizzle-kit studio",
     "db:push": "drizzle-kit push",
-    "db:seed": "tsx scripts/seed.ts",
+    "db:seed": "tsx src/lib/db/seed.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "s3:push": "tsx src/lib/s3/push.ts",

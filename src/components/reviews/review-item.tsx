@@ -90,8 +90,7 @@ export default function ReviewItem({
         throw new Error('Failed to update review')
       }
 
-      const result = await response.json()
-      console.log('Review updated successfully:', result)
+      const _result = await response.json()
       setIsEditing(false)
       window.location.reload() // Reload to reflect changes
     } catch (error) {
@@ -109,7 +108,6 @@ export default function ReviewItem({
     // TODO: Implement delete functionality
     // You'll need to create an API route to handle the deletion
     if (confirm('Are you sure you want to delete this review?')) {
-      console.log('Delete review:', review.id)
     }
   }
 

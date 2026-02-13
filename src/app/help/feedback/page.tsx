@@ -51,7 +51,6 @@ export default function Page() {
     setIsSubmitting(true)
     try {
       // Handle form submission here
-      console.log(data)
       toast.success('Feedback submitted', {
         description: 'Thank you for your feedback!',
       })

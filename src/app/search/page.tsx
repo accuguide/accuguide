@@ -50,7 +50,7 @@ function SearchResults() {
               lat: number
               lng: number
             }) => ({
-              key: place.name,
+              key: place.address,
               name: place.name,
               address: place.address,
               location: { lat: place.lat, lng: place.lng },
@@ -100,7 +100,7 @@ function SearchResults() {
                 {dbResponse.map((place) => (
                   <SearchDisplay
                     displayType="db"
-                    key={place.googleId}
+                    key={place.googleId + place.address}
                     id={place.id}
                     googleId={place.googleId}
                     name={place.name}
@@ -115,7 +115,7 @@ function SearchResults() {
                 {googleResponse.map((place) => (
                   <SearchDisplay
                     displayType="google"
-                    key={place.googleId}
+                    key={place.googleId + place.address}
                     googleId={place.googleId}
                     name={place.name}
                     type={place.type}

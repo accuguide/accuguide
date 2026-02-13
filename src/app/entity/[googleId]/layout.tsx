@@ -13,7 +13,9 @@ export async function generateMetadata({
     `${process.env.BASE_URL}/api/entity/?googleId=${googleId}`,
   )
   if (!response.ok) {
-    throw new Error('Failed to fetch entity data')
+    throw new Error(
+      `[generateMetadata] error: Failed to fetch entity data for googleId: ${googleId}`,
+    )
   }
   const entity = await response.json()
 
@@ -42,7 +44,9 @@ export default async function SearchLayout({
     `${process.env.BASE_URL}/api/entity/?googleId=${googleId}`,
   )
   if (!response.ok) {
-    throw new Error('Failed to fetch entity data')
+    throw new Error(
+      `[SearchLayout] error: Failed to fetch entity data for googleId: ${googleId}`,
+    )
   }
   const entity = await response.json()
 

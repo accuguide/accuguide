@@ -8,10 +8,10 @@ const createBucket = async () => {
     for (const bucket of buckets) {
       const command = new CreateBucketCommand({ Bucket: bucket })
       const data = await s3Client.send(command)
-      console.log('Bucket created successfully:', data.Location)
+      console.info(`[createBucket] ${bucket} created at ${data.Location}`)
     }
   } catch (err) {
-    console.error('Error creating bucket:', err)
+    throw new Error(`[createBucket] ${err}`)
   }
 }
 createBucket()

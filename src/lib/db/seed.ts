@@ -18,8 +18,6 @@ import {
 
 const main = async () => {
   try {
-    console.log('Seeding database...')
-
     await db.delete(account)
     await db.delete(session)
     await db.delete(verification)
@@ -36,7 +34,6 @@ const main = async () => {
     await db.delete(FaqTable)
     await db.delete(emailTable)
     await db.delete(user)
-    console.log('Database cleared.')
 
     const users = [
       {
@@ -259,10 +256,10 @@ const main = async () => {
     await db.insert(jobTable).values(jobs)
     await db.insert(FaqTable).values(faqs)
     await db.insert(account).values(accounts)
-    console.log('Database seeded successfully.')
+    console.info('[seed] Database seeded')
     exit(0)
   } catch (error) {
-    console.error('Error seeding database:', error)
+    throw new Error(`[seed] ${error}`)
   }
 }
 

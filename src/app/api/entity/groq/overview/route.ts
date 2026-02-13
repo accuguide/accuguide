@@ -16,8 +16,8 @@ export async function POST(request: Request) {
           {
             role: 'system',
             content: `You are an AI that generates overviews with accessibility information of business entities based on its info and reviews. This accessibility information includes an overview, accessibility indicators, and an accessibility score from 0 to 100. Respond using only this format:
-              { 
-                "overview": "The overview of the business entity", 
+              {
+                "overview": "The overview of the business entity",
                 "indicators": [
                   {
                     "indicator": "indicator1",
@@ -48,10 +48,6 @@ export async function POST(request: Request) {
       chatCompletion.choices &&
       chatCompletion.choices[0]?.message?.content
     ) {
-      console.log(
-        'Groq chat completion response:',
-        chatCompletion.choices[0].message.content,
-      )
       const newSummary = JSON.parse(chatCompletion.choices[0].message.content)
       await db
         .update(entityTable)
@@ -68,14 +64,13 @@ export async function POST(request: Request) {
       )
     } else {
       return NextResponse.json(
-        { error: 'No valid response from Groq API' },
+        { error: `[api/groq/overview POST] error` },
         { status: 500 },
       )
     }
   } catch (error) {
-    console.error('Error in Groq overview API:', error)
     return NextResponse.json(
-      { error: 'Failed to generate overview' },
+      { error: `[api/groq/overview POST] error: ${error}` },
       { status: 500 },
     )
   }
