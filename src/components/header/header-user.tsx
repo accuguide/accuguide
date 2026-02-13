@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { getSignedUrlForKey } from '@/lib/s3/functions'
+import { getProfileImage } from '@/lib/s3/functions'
 import { getServerUser } from '@/lib/session'
 
 export default async function HeaderUser() {
@@ -21,9 +21,7 @@ export default async function HeaderUser() {
       </Link>
     )
   }
-  const imageUrl = user?.image
-    ? await getSignedUrlForKey(user.image)
-    : undefined
+  const imageUrl = user?.image ? await getProfileImage(user.image) : undefined
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

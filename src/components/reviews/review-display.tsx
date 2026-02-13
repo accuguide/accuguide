@@ -1,4 +1,4 @@
-import { getReviewImages, getSignedUrlForKey } from '@/lib/s3/functions'
+import { getProfileImage, getReviewImages } from '@/lib/s3/functions'
 import { checkAuth } from '@/lib/session'
 import { Image, Indicator, Review } from '@/lib/types'
 import { getUserInfosByIds } from '@/lib/user-info'
@@ -39,7 +39,7 @@ export default async function ReviewDisplay({
     userIds.map(async (id) => {
       const imageKey = userInfoMap[id]?.image
       if (imageKey) {
-        userImageUrls[id] = await getSignedUrlForKey(imageKey)
+        userImageUrls[id] = await getProfileImage(imageKey)
       }
     }),
   )
