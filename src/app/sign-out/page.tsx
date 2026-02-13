@@ -12,7 +12,7 @@ export default function Page() {
         window.location.href = '/'
       })
       .catch((error) => {
-        console.error('Sign out failed:', error)
+        console.error(`[sign out] ${error}`)
       })
   }, [])
 

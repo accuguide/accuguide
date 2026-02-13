@@ -51,7 +51,7 @@ export default function ReviewItem({
           setEntityName('Unknown Entity')
         }
       } catch (error) {
-        console.error('Error fetching entity:', error)
+        console.error(`[review-item] ${error}`)
         setEntityName('Unknown Entity')
       }
     }
@@ -87,15 +87,13 @@ export default function ReviewItem({
       })
 
       if (!response.ok) {
-        throw new Error('Failed to update review')
+        console.error('[review-item] Failed to update review')
       }
 
-      const _result = await response.json()
       setIsEditing(false)
       window.location.reload() // Reload to reflect changes
     } catch (error) {
-      console.error('Error updating review:', error)
-      // Optionally, you could show an error message to the user here
+      console.error(`[review-item handleSave] ${error}`)
     }
   }
 

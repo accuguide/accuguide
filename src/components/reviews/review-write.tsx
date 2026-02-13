@@ -64,7 +64,7 @@ export default function ReviewWrite({
         window.location.reload()
       })
       .catch((error) => {
-        console.error('Error submitting review:', error)
+        console.error(`[review-write handleSubmit] ${error}`)
       })
   }
 

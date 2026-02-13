@@ -50,7 +50,7 @@ export const auth = betterAuth({
           }),
         })
       } catch (error) {
-        console.error('Failed to send password reset email:', error)
+        console.error(`[password-reset] ${error}`)
         throw error
       }
     },
@@ -75,7 +75,7 @@ export const auth = betterAuth({
           }),
         })
       } catch (error) {
-        console.error('Failed to send email verification email:', error)
+        console.error(`[verification-email] ${error}`)
         throw error
       }
     },

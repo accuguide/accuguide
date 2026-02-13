@@ -121,7 +121,7 @@ export default function Settings() {
   function handleDeleteAccount() {
     const password = deletePasswordRef.current?.value
     if (!password) {
-      console.log('Password is required')
+      console.error('[handleDeleteAccount] Password is required')
       return
     }
     deleteUser(password)
@@ -129,7 +129,7 @@ export default function Settings() {
         window.location.href = '/'
       })
       .catch((error) => {
-        console.error('Error deleting account:', error)
+        console.error(`[handleDeleteAccount] ${error}`)
       })
     // Clear the password from the input after use
     if (deletePasswordRef.current) {

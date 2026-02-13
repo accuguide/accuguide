@@ -34,7 +34,7 @@ function SearchResults() {
     fetch(`/api/search/?${params.toString()}`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
+          console.error(`[search] error calling /api/search`)
         }
         return response.json()
       })
@@ -73,7 +73,7 @@ function SearchResults() {
         setLocations(tempLocations)
       })
       .catch((error) => {
-        console.error('There was a problem with the fetch operation:', error)
+        console.error(`[search] error ${error}`)
       })
       .finally(() => {
         setIsLoading(false)

@@ -12,5 +12,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin', '/settings', '/sign-out'], // Specify the routes the middleware applies to
+  matcher: ['/admin', '/settings', '/sign-out'],
 }

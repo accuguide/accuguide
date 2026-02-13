@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import { set } from 'zod'
 import { Entity } from '@/lib/db/schema'
 import { Review } from '@/lib/types'
 import IndicatorDisplay from './reviews/indicator-display'
@@ -59,7 +58,7 @@ export default function AIOverview({
         })
 
         if (!overviewRes.ok) {
-          throw new Error('Failed to fetch overview')
+          console.error('[ai-overview] Failed to fetch overview')
         }
 
         const overviewJson = await overviewRes.json()
@@ -68,7 +67,7 @@ export default function AIOverview({
         try {
           parsedResponse = JSON.parse(overviewJson.message)
         } catch (parseError) {
-          console.error('Failed to parse overviewJson.message:', parseError)
+          console.error('[ai-overview]', parseError)
           parsedResponse = {
             overview:
               'There was an error with the AI response. Please try again later.',
