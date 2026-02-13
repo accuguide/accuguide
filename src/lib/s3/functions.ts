@@ -63,7 +63,7 @@ export async function getProfileImage(key: string): Promise<string> {
     })
     return url
   } catch (error) {
-    console.error('[getSignedUrlForKey] Error generating signed URL:', error)
+    console.error('[getProfileImage] Error generating signed URL:', error)
     throw error
   }
 }
