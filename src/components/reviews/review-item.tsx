@@ -18,6 +18,7 @@ interface ReviewItemProps {
     id: string
   }
   userImageUrl?: string
+  reviewImageUrls: string[]
   isOwner: boolean
   showUserInfo: boolean
   profile: boolean
@@ -28,6 +29,7 @@ export default function ReviewItem({
   indicators,
   userInfo,
   userImageUrl,
+  reviewImageUrls,
   isOwner,
   showUserInfo,
   profile,
@@ -141,6 +143,19 @@ export default function ReviewItem({
         <div className="my-4">{stars(review.rating)}</div>
 
         <IndicatorDisplay indicators={indicators} reviewId={review.id} />
+
+        {reviewImageUrls.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {reviewImageUrls.map((url, index) => (
+              <img
+                key={index}
+                src={url}
+                alt={`Review ${url} ${index + 1}`}
+                className="h-32 w-32 rounded-md object-cover"
+              />
+            ))}
+          </div>
+        )}
 
         {isEditing ? (
           <div className="mt-4 space-y-4">

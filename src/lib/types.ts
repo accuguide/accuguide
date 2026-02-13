@@ -51,6 +51,12 @@ export interface Indicator {
   exists: boolean | null
 }
 
+export interface Image {
+  id: string
+  reviewId: string
+  image: string
+}
+
 export type PointOfInterest = {
   key: string
   name: string

@@ -2,7 +2,12 @@ import { eq, inArray } from 'drizzle-orm'
 import Link from 'next/link'
 import ReviewDisplay from '@/components/reviews/review-display'
 import { db } from '@/lib/db'
-import { Entity, reviewIndicatorTable, reviewTable } from '@/lib/db/schema'
+import {
+  Entity,
+  reviewImagesTable,
+  reviewIndicatorTable,
+  reviewTable,
+} from '@/lib/db/schema'
 import AIOverview from './ai-overview'
 import { Button } from './ui/button'
 
@@ -29,6 +34,13 @@ export default async function EntityDisplay({
         .select()
         .from(reviewIndicatorTable)
         .where(inArray(reviewIndicatorTable.reviewId, reviewIds))
+    : []
+
+  const reviewImages = reviewIds.length
+    ? await db
+        .select()
+        .from(reviewImagesTable)
+        .where(inArray(reviewImagesTable.reviewId, reviewIds))
     : []
   return (
     <div>
@@ -137,6 +149,7 @@ export default async function EntityDisplay({
           entity_type={data?.type}
           reviews={reviews}
           indicators={indicators}
+          imageURLs={reviewImages}
           profile={false}
         />
       </div>
