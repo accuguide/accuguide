@@ -100,6 +100,19 @@ export const entityTable = pgTable('entity', {
     .defaultNow(),
 })
 
+export const entityUser = pgTable('entity_user', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  entityId: uuid('entity_id')
+    .notNull()
+    .references(() => entityTable.id, {
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    }),
+  userId: text('user_id')
+    .notNull()
+    .references(() => user.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
+})
+
 export const reviewTable = pgTable('review', {
   id: uuid('id').primaryKey(),
   userId: text('user_id')
