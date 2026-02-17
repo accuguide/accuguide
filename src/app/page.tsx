@@ -1,5 +1,6 @@
 import { Compass, MapPin, Megaphone, Shield, Star } from 'lucide-react'
 import dynamic from 'next/dynamic'
+import { toast } from 'sonner'
 import FeatureCard from '@/components/landing/feature-card'
 import StatCard from '@/components/landing/stat-card'
 import { db } from '@/lib/db'
@@ -36,9 +37,20 @@ const features = [
 ]
 
 export default async function Page() {
-  const places = await db.$count(entityTable)
-  const indicators = await db.$count(indicatorTable)
-  const reviews = await db.$count(reviewTable)
+  const results = await Promise.allSettled([
+    db.$count(entityTable),
+    db.$count(indicatorTable),
+    db.$count(reviewTable),
+  ])
+
+  const places = results[0].status === 'fulfilled' ? results[0].value || 0 : 0
+  const indicators =
+    results[1].status === 'fulfilled' ? results[1].value || 0 : 0
+  const reviews = results[2].status === 'fulfilled' ? results[2].value || 0 : 0
+
+  if (results.some((r) => r.status === 'rejected')) {
+    console.error('[page] One or more count queries failed', results)
+  }
 
   const stats = [
     {

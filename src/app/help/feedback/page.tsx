@@ -1,6 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Mail } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -35,7 +36,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>
 
 export default function Page() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [_isSubmitting, setIsSubmitting] = useState(false)
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -47,7 +48,7 @@ export default function Page() {
     },
   })
 
-  async function onSubmit(data: FormValues) {
+  async function _onSubmit(data: FormValues) {
     setIsSubmitting(true)
     try {
       // Handle form submission here
@@ -64,7 +65,7 @@ export default function Page() {
     }
   }
 
-  const ratingOptions = [
+  const _ratingOptions = [
     { value: 'worst', label: 'Worst' },
     { value: 'bad', label: 'Bad' },
     { value: 'average', label: 'Average' },
@@ -74,7 +75,18 @@ export default function Page() {
 
   return (
     <div className="max-w-2xl">
-      <Form {...form}>
+      <dl className="mb-8 text-base">
+        <div className="flex gap-x-4">
+          <dt className="flex-none">
+            <span className="sr-only">Email</span>
+            <Mail aria-hidden="true" className="h-7 w-6 text-gray-400" />
+          </dt>
+          <dd>
+            <a href="mailto:support@accuguide.org">support@accuguide.org</a>
+          </dd>
+        </div>
+      </dl>
+      {/*<Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-6"
@@ -305,7 +317,7 @@ export default function Page() {
             {isSubmitting ? 'Submitting...' : 'Submit'}
           </Button>
         </form>
-      </Form>
+      </Form>*/}
     </div>
   )
 }

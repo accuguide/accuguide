@@ -13,14 +13,15 @@ import { getProfileImage } from '@/lib/s3/functions'
 import { getServerUser } from '@/lib/session'
 
 export default async function HeaderUser() {
-  const user = await getServerUser()
-  if (!user) {
-    return (
-      <Link href="/sign-in/">
-        <Button>Sign In</Button>
-      </Link>
-    )
-  }
+  const user = await (async () => {
+    try {
+      return await getServerUser()
+    } catch (error) {
+      // This catch is defensive; getServerUser already catches and returns null.
+      console.error('[HeaderUser] Unexpected error in getServerUser', error)
+      return null
+    }
+  })()
   const imageUrl = user?.image ? await getProfileImage(user.image) : undefined
   return (
     <DropdownMenu>

@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 import {
   changeEmail,
@@ -110,12 +111,29 @@ export default function Settings() {
   async function onAccountSubmit(values: z.infer<typeof accountSchema>) {
     setDisableSubmit(true)
     if (values.email && values.email !== currentEmail) {
-      await changeEmail(values.email)
+      const { error } = await changeEmail(values.email)
+      if (error) {
+        toast.error('Error updating email', {
+          description: `${error.message}`,
+        })
+        console.error(`[onAccountSubmit] ${error}`)
+      } else {
+        setCurrentEmail(values.email)
+      }
     }
     if (values.currentPassword && values.newPassword) {
-      await changePassword(values.currentPassword, values.newPassword)
+      const { error } = await changePassword(
+        values.currentPassword,
+        values.newPassword,
+      )
+      if (error) {
+        toast.error('Error updating password', {
+          description: `${error.message}`,
+        })
+        console.error(`[onAccountSubmit] ${error.message}`)
+      }
     }
-    window.location.reload()
+    setDisableSubmit(false)
   }
 
   function handleDeleteAccount() {

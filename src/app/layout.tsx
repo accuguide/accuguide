@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 import Script from 'next/script'
 import Footer from '@/components/footer/footer'
 import Header from '@/components/header/header'
-import { Providers } from '@/components/providers'
+import { Providers } from '@/components/layout/providers'
 import Splitter from '@/components/splitter'
 import { ModeToggle } from '@/components/theme/mode-toggle'
 

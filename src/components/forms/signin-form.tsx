@@ -47,7 +47,7 @@ export default function SigninForm() {
 
     if (error != null) {
       setLoading(false)
-      toast.error('There was an error logging you in', {
+      toast.error('Log In Error', {
         description: `${error.message}`,
       })
     }

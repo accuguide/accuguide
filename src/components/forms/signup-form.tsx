@@ -53,7 +53,7 @@ export default function SignupForm() {
 
     if (error != null) {
       setLoading(false)
-      toast.error('There was an error creating your account', {
+      toast.error('Account Creation Error', {
         description: `${error.message}`,
       })
     }

@@ -6,18 +6,20 @@ export async function changePassword(
   currentPassword: string,
   newPassword: string,
 ) {
-  await authClient.changePassword({
+  const { error } = await authClient.changePassword({
     newPassword,
     currentPassword,
     revokeOtherSessions: true,
   })
+  return { error }
 }
 
 export async function changeEmail(email: string) {
-  await authClient.changeEmail({
+  const { error } = await authClient.changeEmail({
     newEmail: email,
     callbackURL: '/settings/',
   })
+  return { error }
 }
 
 export async function requestPassWordReset(email: string) {

@@ -1,4 +1,4 @@
-import ResourceListWithFilters from '@/components/resource-list-with-filters'
+import ResourceListWithFilters from '@/components/resources/resource-list-with-filters'
 import { db } from '@/lib/db'
 import { resourceTable } from '@/lib/db/schema'
 

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 import { v4 as uuidv4 } from 'uuid'
 import { Entity } from '@/lib/db/schema'
 import { Review } from '@/lib/types'
@@ -58,6 +59,7 @@ export default function AIOverview({
         })
 
         if (!overviewRes.ok) {
+          toast.error('Failed to fetch AI summary. Please try again later.')
           console.error('[ai-overview] Failed to fetch overview')
         }
 
