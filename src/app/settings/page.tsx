@@ -1,5 +1,5 @@
 import { eq } from 'drizzle-orm'
-import FavoriteDisplay from '@/components/favorite-display'
+import FavoriteDisplay from '@/components/favorite/favorite-display'
 import ReviewDisplay from '@/components/reviews/review-display'
 import Settings from '@/components/settings/settings'
 import { db } from '@/lib/db'
