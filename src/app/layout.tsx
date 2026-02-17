@@ -1,10 +1,14 @@
 import '@/app/globals.css'
-import { GeistSans } from 'geist/font/sans'
 import type { Metadata } from 'next'
-import { ThemeProvider } from 'next-themes'
+import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import Footer from '@/components/footer/footer'
 import Header from '@/components/header/header'
+import { Providers } from '@/components/layout/providers'
+import Splitter from '@/components/splitter'
 import { ModeToggle } from '@/components/theme/mode-toggle'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
@@ -27,22 +31,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={GeistSans.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+      <body className={inter.className}>
+        {process.env.NEXT_PUBLIC_ANALYTICS_ID && (
+          <Script
+            defer
+            src="https://cloud.umami.is/script.js"
+            data-website-id={process.env.NEXT_PUBLIC_ANALYTICS_ID}
+          />
+        )}
+        <Providers>
           <Header />
+          <Splitter />
           <div className="mx-4 my-4 min-h-[80vh] md:mx-12 md:my-8">
             {children}
           </div>
+          <Splitter />
           <Footer />
-          <div className="fixed right-4 bottom-4">
-            <ModeToggle />
-          </div>
-        </ThemeProvider>
+          <ModeToggle />
+        </Providers>
       </body>
     </html>
   )

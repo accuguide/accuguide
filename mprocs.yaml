@@ -1,14 +1,13 @@
-scrollback: 10000
 procs:
-  next:
-    shell: npm run dev
-  postgres:
-    shell: npm run db:start
+  docker:
+    cmd: ["docker", "compose", "up"]
     stop:
       send-keys: ["<C-c>"]
-  drizzle studio:
-    shell: npm run db:studio
+  next.js:
+    cmd: ["bun", "dev:cy"]
+    stop:
+      send-keys: ["<C-c>"]
   shell:
-    shell: zsh
+    shell: bash
     stop:
       send-keys: ["<C-d>"]

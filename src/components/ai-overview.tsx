@@ -1,0 +1,165 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
+import { v4 as uuidv4 } from 'uuid'
+import { Entity } from '@/lib/db/schema'
+import { Review } from '@/lib/types'
+import IndicatorDisplay from './reviews/indicator-display'
+
+interface AIOverviewProps {
+  entity: Entity
+  reviews: Review[]
+  indicators: Indicator[]
+}
+
+interface Indicator {
+  id: string
+  reviewId: string
+  indicator: string
+  exists: boolean | null
+}
+
+export default function AIOverview({
+  entity,
+  reviews,
+  indicators,
+}: AIOverviewProps) {
+  const [overview, setOverview] = useState<string>('')
+  const [entityIndicators, setEntityIndicators] = useState<Indicator[]>([])
+  const [aiScore, setAiScore] = useState<number>()
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+  const given = entity.description || ''
+
+  useEffect(() => {
+    setOverview(entity.aiSummary || entity.description || '')
+    setEntityIndicators(
+      (entity.aiIndicators || []).map(
+        (indicator: { indicator: string; exists: boolean }) => ({
+          id: uuidv4(),
+          reviewId: '',
+          indicator: indicator.indicator,
+          exists: indicator.exists,
+        }),
+      ),
+    )
+    setAiScore(entity.aiScore ? Number(entity.aiScore) : 0)
+    async function fetchOverview() {
+      try {
+        const overviewRes = await fetch('/api/entity/groq/overview/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            entity,
+            reviews,
+            indicators,
+            given,
+          }),
+        })
+
+        if (!overviewRes.ok) {
+          toast.error('Failed to fetch AI summary. Please try again later.')
+          console.error('[ai-overview] Failed to fetch overview')
+        }
+
+        const overviewJson = await overviewRes.json()
+        let parsedResponse
+
+        try {
+          parsedResponse = JSON.parse(overviewJson.message)
+        } catch (parseError) {
+          console.error('[ai-overview]', parseError)
+          parsedResponse = {
+            overview:
+              'There was an error with the AI response. Please try again later.',
+            indicators: [],
+          }
+        }
+
+        setOverview(parsedResponse.overview)
+        setAiScore(parsedResponse.score)
+
+        const aiIndicators = parsedResponse.indicators.map(
+          (indicator: { indicator: string; exists: boolean }) => ({
+            id: uuidv4(),
+            reviewId: '',
+            indicator: indicator.indicator,
+            exists: indicator.exists,
+          }),
+        )
+
+        aiIndicators.sort((a: { exists: boolean }, b: { exists: boolean }) => {
+          if (a.exists < b.exists) return 1
+          if (a.exists > b.exists) return -1
+          return 0
+        })
+
+        setEntityIndicators(aiIndicators)
+      } catch (err) {
+        console.error('Error fetching AI overview:', err)
+        setError(true)
+        setOverview(
+          'Unable to load AI overview at this time. Please try again later.',
+        )
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchOverview()
+  }, [entity, reviews, indicators, given])
+
+  if (loading) {
+    return (
+      <div>
+        {overview != '' ? (
+          <p className="mb-2">{overview}</p>
+        ) : (
+          <div className="mb-2 animate-pulse">
+            <div className="mb-2 h-4 rounded bg-gray-200 dark:bg-gray-700"></div>
+            <div className="mb-2 h-4 rounded bg-gray-200 dark:bg-gray-700"></div>
+            <div className="h-4 w-3/4 rounded bg-gray-200 dark:bg-gray-700"></div>
+          </div>
+        )}
+        {entityIndicators.length > 0 ? (
+          <IndicatorDisplay indicators={entityIndicators} />
+        ) : (
+          <div className="mb-2 grid grid-cols-2 gap-1 overflow-hidden rounded-lg md:grid-cols-4">
+            {[...Array(4)].map((_, i) => (
+              <div
+                key={i}
+                className="h-12 animate-pulse rounded-lg bg-gray-200 dark:bg-gray-700"
+              ></div>
+            ))}
+          </div>
+        )}
+        {aiScore && aiScore > 0 ? (
+          <p className="mt-1 text-xs">Accessibility Score: {aiScore}/100</p>
+        ) : (
+          <div className="mt-1 h-3 w-32 animate-pulse rounded bg-gray-200 dark:bg-gray-700"></div>
+        )}
+
+        <p className="mt-1 text-gray-500 text-xs">
+          {overview == '' || aiScore == 0 || entityIndicators.length === 0
+            ? 'Generating AI-generated overview...'
+            : 'Updating AI-generated overview...'}
+        </p>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <p className="mb-2">{overview}</p>
+      {!error && <IndicatorDisplay indicators={entityIndicators} />}
+      {aiScore && aiScore > 0 && (
+        <p className="mt-1 text-sm">Accessibility Score: {aiScore}/100</p>
+      )}
+
+      <p className="secondary-text mt-2 text-xs">
+        This overview was generated by AI and may be inaccurate
+      </p>
+    </div>
+  )
+}

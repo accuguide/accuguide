@@ -2,6 +2,8 @@ import type { InferSelectModel } from 'drizzle-orm'
 import {
   boolean,
   integer,
+  json,
+  jsonb,
   numeric,
   pgTable,
   text,
@@ -82,12 +84,33 @@ export const entityTable = pgTable('entity', {
   city: text('city').notNull(),
   address1: text('address1').notNull(),
   address2: text('address2').notNull(),
+  aiSummary: text('ai_summary'),
+  aiScore: numeric('ai_score'),
+  aiIndicators:
+    jsonb('ai_indicators').$type<{ indicator: string; exists: boolean }[]>(),
+  aiUpdatedAt: timestamp('ai_updated_at', {
+    withTimezone: true,
+    mode: 'date',
+  }),
   createdAt: timestamp('created_at', {
     withTimezone: true,
     mode: 'date',
   })
     .notNull()
     .defaultNow(),
+})
+
+export const entityUserTable = pgTable('entity_user', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  entityId: uuid('entity_id')
+    .notNull()
+    .references(() => entityTable.id, {
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    }),
+  userId: text('user_id')
+    .notNull()
+    .references(() => user.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
 })
 
 export const reviewTable = pgTable('review', {
@@ -128,6 +151,17 @@ export const reviewIndicatorTable = pgTable('review_indicator', {
   exists: boolean('exists'),
 })
 
+export const reviewImagesTable = pgTable('review_images', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  reviewId: uuid('review_id')
+    .notNull()
+    .references(() => reviewTable.id, {
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    }),
+  image: text('image').notNull(),
+})
+
 export const emailTable = pgTable('email', {
   id: uuid('id').primaryKey().defaultRandom(),
   email: text('email').notNull().unique(),
@@ -140,6 +174,42 @@ export const emailTable = pgTable('email', {
     .defaultNow(),
 })
 
+export const resourceTable = pgTable('resource', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  title: text('title').notNull(),
+  description: text('description').notNull(),
+  url: text('url').notNull(),
+  category: text('category').notNull(),
+  state: text('state').notNull(),
+  country: text('country').notNull(),
+  updatedAt: timestamp('updated_at', {
+    withTimezone: true,
+    mode: 'date',
+  })
+    .notNull()
+    .defaultNow(),
+})
+
+export const jobTable = pgTable('job', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  title: text('title').notNull(),
+  description: text('description').notNull(),
+  responsibilities: json('responsibilities').$type<string[]>(),
+  link: text('link'),
+  createdAt: timestamp('created_at', {
+    withTimezone: true,
+    mode: 'date',
+  })
+    .notNull()
+    .defaultNow(),
+})
+
+export const FaqTable = pgTable('faq', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  question: text('question').notNull(),
+  answer: text('answer').notNull(),
+})
+
 export type Type = InferSelectModel<typeof typeTable>
 export type Indicator = InferSelectModel<typeof indicatorTable>
 export type Category = InferSelectModel<typeof categoryTable>
@@ -148,3 +218,6 @@ export type TypeIndicator = InferSelectModel<typeof typeIndicatorTable>
 export type Entity = InferSelectModel<typeof entityTable>
 export type Review = InferSelectModel<typeof reviewTable>
 export type ReviewIndicator = InferSelectModel<typeof reviewIndicatorTable>
+export type Resource = InferSelectModel<typeof resourceTable>
+export type Job = InferSelectModel<typeof jobTable>
+export type Faq = InferSelectModel<typeof FaqTable>

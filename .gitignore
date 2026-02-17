@@ -42,3 +42,8 @@ next-env.d.ts
 
 #s3
 /volume
+.claude
+.vscodecypress/screenshots/
+package-lock.json
+
+mprocs.log

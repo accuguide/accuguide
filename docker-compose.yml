@@ -1,18 +1,24 @@
 services:
   db:
-    image: postgres:17.4
+    image: postgres:18.1
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: db
+      POSTGRES_DB: postgres
     ports:
       - "5432:5432"
     volumes:
-      - data:/var/lib/postgresql/data
+      - data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   localstack:
     container_name: "${LOCALSTACK_DOCKER_NAME:-localstack-main}"
-    image: localstack/localstack:s3-latest
+    image: localstack/localstack:4.13
     ports:
       - "127.0.0.1:4566:4566" # LocalStack Gateway
     environment:
@@ -20,5 +26,11 @@ services:
     volumes:
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
 volumes:
   data:

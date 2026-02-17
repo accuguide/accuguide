@@ -1,8 +1,7 @@
-import Hero from '@/components/landing/hero'
+import Header from '@/components/header/header'
 
-describe('<Hero />', () => {
-  it('renders', () => {
-    // see: https://on.cypress.io/mounting-react
-    cy.mount(<Hero />)
+describe('Hero Component Testing', () => {
+  it('Renders the Hero component', () => {
+    cy.mount(<Header />)
   })
 })

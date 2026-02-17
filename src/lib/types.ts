@@ -10,6 +10,12 @@ export type GoogleSearchResponse = {
   name: string
   formatted_address: string
   types: string[]
+  geometry: {
+    location: {
+      lat: number
+      lng: number
+    }
+  }
 }
 
 export type Claim = {
@@ -26,6 +32,7 @@ export type SearchDisplayProps = {
   name: string
   address: string
   type: string
+  aiScore?: number
 }
 
 export interface Review {
@@ -42,4 +49,20 @@ export interface Indicator {
   reviewId: string
   indicator: string
   exists: boolean | null
+}
+
+export interface Image {
+  id: string
+  reviewId: string
+  image: string
+}
+
+export type PointOfInterest = {
+  key: string
+  name: string
+  address: string
+  location: {
+    lat: number
+    lng: number
+  }
 }

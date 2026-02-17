@@ -5,28 +5,31 @@ import { entityTable } from '@/lib/db/schema'
 import { GoogleSearchResponse, SearchDisplayType } from '@/lib/types'
 
 export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams
-  const query = searchParams.get('query') || ''
-  const latitude = searchParams.get('latitude')
-  const longitude = searchParams.get('longitude')
-  const apiKey = process.env.GOOGLE_MAPS_API_KEY
-  if (!apiKey) {
-    return NextResponse.json({ error: 'API key not found' }, { status: 500 })
-  }
-
-  // Build URL with optional location parameters
-  let url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${apiKey}`
-
-  // Only add location and radius if both latitude and longitude are provided
-  if (latitude && longitude) {
-    url += `&location=${encodeURIComponent(latitude)},${encodeURIComponent(longitude)}&radius=5000`
-  }
-
   try {
+    const searchParams = request.nextUrl.searchParams
+    const query = searchParams.get('query') || ''
+    const latitude = searchParams.get('latitude')
+    const longitude = searchParams.get('longitude')
+    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+    if (!apiKey) {
+      return NextResponse.json({ error: 'API key not found' }, { status: 500 })
+    }
+
+    // Build URL with optional location parameters
+    let url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${apiKey}`
+
+    // Only add location and radius if both latitude and longitude are provided
+    if (latitude && longitude) {
+      url += `&location=${encodeURIComponent(latitude)},${encodeURIComponent(longitude)}&radius=5000`
+    }
+
     const response = await fetch(url)
     if (!response.ok) {
       return NextResponse.json(
-        { error: 'Failed to fetch data from Google Places API' },
+        {
+          error:
+            '[api/search GET] error: Failed to fetch data from Google Places API',
+        },
         { status: response.status },
       )
     }
@@ -38,6 +41,8 @@ export async function GET(request: NextRequest) {
         name: place.name,
         address: place.formatted_address,
         type: place.types[0],
+        lat: place.geometry.location.lat,
+        lng: place.geometry.location.lng,
       }))
 
     const formattedQuery = query.replace(/\s+/g, ' & ') + ':*'
@@ -65,6 +70,9 @@ export async function GET(request: NextRequest) {
         name: place.name,
         address: `${place.address1} ${place.address2 || ''}, ${place.city}, ${place.state}, ${place.zip}`,
         type: place.displayType,
+        lat: Number(place.lat),
+        lng: Number(place.lon),
+        aiScore: place.aiScore || 0,
       }))
     }
 
@@ -84,9 +92,6 @@ export async function GET(request: NextRequest) {
     ]
     return NextResponse.json(combinedResponse, { status: 200 })
   } catch (error) {
-    return NextResponse.json(
-      { error: 'An error occurred while fetching data', message: error },
-      { status: 500 },
-    )
+    return NextResponse.json({ error: `[api/search GET] error: ${error}` })
   }
 }

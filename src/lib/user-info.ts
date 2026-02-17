@@ -4,12 +4,17 @@ import { user } from '@/lib/db/auth-schema'
 
 export async function getUserInfosByIds(
   userIds: string[],
-): Promise<Record<string, { name: string; image?: string | null }>> {
+): Promise<
+  Record<string, { name: string; image?: string | null; id: string }>
+> {
   if (userIds.length === 0) return {}
   const users = await db.select().from(user).where(inArray(user.id, userIds))
-  const map: Record<string, { name: string; image?: string | null }> = {}
+  const map: Record<
+    string,
+    { name: string; image?: string | null; id: string }
+  > = {}
   for (const u of users) {
-    map[u.id] = { name: u.name, image: u.image }
+    map[u.id] = { name: u.name, image: u.image, id: u.id }
   }
   return map
 }

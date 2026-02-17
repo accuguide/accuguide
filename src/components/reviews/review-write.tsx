@@ -34,28 +34,37 @@ export default function ReviewWrite({
   const review_id = useRef(uuidv4()).current
   const [indicators, setIndicators] = useState<ReviewIndicator[]>([])
   const [reviewText, setReviewText] = useState('')
+  const [images, setImages] = useState<File[]>([])
+  const [previews, setPreviews] = useState<string[]>([])
+
+  useEffect(() => {
+    const urls = images.map((f) => URL.createObjectURL(f))
+    setPreviews(urls)
+    return () => {
+      urls.forEach((u) => URL.revokeObjectURL(u))
+    }
+  }, [images])
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    fetch('/api/review/', {
+    const fd = new FormData()
+    fd.append('entity_id', entity_id)
+    fd.append('review_id', review_id)
+    fd.append('rating', String(rating))
+    fd.append('reviewText', reviewText)
+    fd.append('indicators', JSON.stringify(indicators))
+    images.forEach((img) => fd.append('images', img))
+
+    fetch('/api/review', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        entity_id,
-        review_id,
-        rating,
-        indicators,
-        reviewText,
-      }),
+      body: fd,
     })
       .then((response) => response.json())
       .then(() => {
         window.location.reload()
       })
       .catch((error) => {
-        console.error('Error submitting review:', error)
+        console.error(`[review-write handleSubmit] ${error}`)
       })
   }
 
@@ -67,9 +76,13 @@ export default function ReviewWrite({
     )
   }
 
+  function removeImage(index: number) {
+    setImages((prev) => prev.filter((_, i) => i !== index))
+  }
+
   function stars(rating: number) {
     return (
-      <div className="mb-1 flex w-24">
+      <div className="mt-4 mb-2 flex w-24">
         {[1, 2, 3, 4, 5].map((star) => (
           <StarIcon
             key={star}
@@ -95,7 +108,6 @@ export default function ReviewWrite({
             exists: null,
           }),
         )
-        console.log('Fetched indicators:', newIndicators)
         setIndicators(newIndicators)
       })
   }, [])
@@ -103,7 +115,7 @@ export default function ReviewWrite({
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
       {!auth && (
-        <p>
+        <p className="text-sm">
           Please{' '}
           <Link className="underline" href="/sign-in/">
             sign in
@@ -113,7 +125,7 @@ export default function ReviewWrite({
       )}
       {auth && (
         <>
-          <p className="mt-4 mb-1">
+          <p className="mt-4">
             Your rating: {rating !== 0 ? rating : '-'} stars
           </p>
           {stars(rating)}
@@ -135,11 +147,11 @@ export default function ReviewWrite({
               ),
             ).map(([category, categoryIndicators]) => (
               <AccordionItem key={category} value={category}>
-                <AccordionTrigger className="my-1 p-1 text-sm font-semibold text-gray-700 hover:bg-slate-400 focus:ring-0 dark:text-gray-300 dark:hover:bg-slate-500">
+                <AccordionTrigger className="my-2 px-1 py-2 font-semibold text-gray-700 text-sm hover:bg-slate-400 focus:ring-0 dark:text-gray-300 dark:hover:bg-slate-500">
                   {category}
                 </AccordionTrigger>
                 <AccordionContent>
-                  <div className="mb-0 grid grid-cols-2 gap-1 overflow-hidden rounded-lg border-0 md:grid-cols-3">
+                  <div className="mt-1 mb-2 grid grid-cols-2 gap-1 overflow-hidden rounded-lg border-0 md:grid-cols-3">
                     {categoryIndicators.map((indicator) => (
                       <Card
                         key={indicator.id}
@@ -221,9 +233,48 @@ export default function ReviewWrite({
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}
             disabled={rating === 0}
-            className="mt-1 mb-2 border-slate-800 dark:border-slate-200"
+            className="mt-1 mb-4 border-slate-800 dark:border-slate-200"
             placeholder="Write your review here..."
           ></Textarea>
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            disabled={rating === 0}
+            className="mb-2"
+            onChange={(e) => {
+              const files = Array.from(e.target.files || [])
+              if (files.length) {
+                setImages((prev) => [...prev, ...files])
+              }
+              e.currentTarget.value = ''
+            }}
+          />
+          {previews.length > 0 && (
+            <div className="mb-3 flex max-w-sm gap-2">
+              {previews.map((src, idx) => (
+                <div
+                  key={idx}
+                  className="relative h-16 w-16 overflow-hidden rounded border"
+                >
+                  <img
+                    src={encodeURI(src)}
+                    alt={`preview-${idx}`}
+                    className="h-full w-full object-cover"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeImage(idx)}
+                    className="absolute top-1 right-1 rounded-full bg-black/70 p-0.5 text-white hover:bg-black"
+                    aria-label="Remove image"
+                    title="Remove image"
+                  >
+                    <X className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
           <Button disabled={rating === 0}>Submit</Button>
         </>
       )}

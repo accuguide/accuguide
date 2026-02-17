@@ -1,22 +1,26 @@
 import { db } from '@/lib/db'
+import { user } from '@/lib/db/auth-schema'
 import { entityTable } from '@/lib/db/schema'
 import { createSitemapUrlSet } from '@/lib/sitemap'
 export const dynamic = 'force-dynamic'
 export async function GET() {
   const urls = [
     '/',
-    '/help/faq/',
-    '/help/resources/',
-    '/info/about/',
-    '/info/donate/',
-    '/legal/disclaimers/',
-    '/legal/privacy/',
-    '/legal/terms/',
-    '/search/',
-    '/sign-in/',
-    '/sign-in/password/forgot/',
-    '/sign-up/',
-    '/unsubscribe/',
+    '/contact',
+    '/help/faq',
+    '/help/resources',
+    '/help/feedback',
+    '/info/about',
+    '/info/donate',
+    '/info/volunteer',
+    '/legal/accessibility',
+    '/legal/disclaimers',
+    '/legal/privacy',
+    '/legal/terms',
+    '/search',
+    '/sign-in',
+    '/sign-in/password/forgot',
+    '/sign-up',
   ]
 
   const entities = await db
@@ -26,10 +30,24 @@ export async function GET() {
     })
     .from(entityTable)
 
+  const profiles = await db
+    .select({
+      id: user.id,
+      createdAt: user.createdAt,
+    })
+    .from(user)
+
   const entityUrls = entities.map((entity) => {
     return {
-      slug: `/entity/${entity.id}/`,
+      slug: `/entity/${entity.id}`,
       lastmod: entity.createdAt.toISOString(),
+    }
+  })
+
+  const profileUrls = profiles.map((profile) => {
+    return {
+      slug: `/profile/${profile.id}`,
+      lastmod: profile.createdAt.toISOString(),
     }
   })
 
@@ -40,7 +58,7 @@ export async function GET() {
     }
   })
 
-  const allUrls = [...staticUrls, ...entityUrls]
+  const allUrls = [...staticUrls, ...entityUrls, ...profileUrls]
   const sitemap = createSitemapUrlSet(allUrls)
 
   return new Response(sitemap, {

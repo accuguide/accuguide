@@ -1,9 +1,10 @@
 import { eq } from 'drizzle-orm'
+import { NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { entityTable } from '@/lib/db/schema'
 
 export async function GET(
-  request: Request,
+  _request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
   try {
@@ -15,15 +16,20 @@ export async function GET(
       .limit(1)
 
     if (!entity || entity.length === 0) {
-      return Response.json({ error: 'Entity not found' }, { status: 404 })
+      return NextResponse.json(
+        { error: `[api/entity/[id] GET] error: ${entity} not found` },
+        { status: 404 },
+      )
     }
 
-    return Response.json({
+    return NextResponse.json({
       success: true,
       data: entity[0],
     })
   } catch (error) {
-    console.error('Error fetching entity:', error)
-    return Response.json({ error: 'Internal server error' }, { status: 500 })
+    return NextResponse.json(
+      { error: `[api/entity/[id] GET] error: ${error}` },
+      { status: 500 },
+    )
   }
 }

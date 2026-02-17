@@ -64,6 +64,41 @@
       "when": 1753926655797,
       "tag": "0008_massive_frog_thor",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1762125372576,
+      "tag": "0009_broad_supernaut",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1762209100759,
+      "tag": "0010_lethal_the_captain",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1762479184907,
+      "tag": "0011_regular_sauron",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1770849497513,
+      "tag": "0012_easy_red_wolf",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1771358193663,
+      "tag": "0013_common_satana",
+      "breakpoints": true
     }
   ]
 }

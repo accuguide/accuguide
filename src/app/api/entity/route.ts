@@ -41,18 +41,21 @@ export async function GET(request: NextRequest) {
   }
   // Check if the data already exists in the database
 
-  const apiKey = process.env.GOOGLE_MAPS_API_KEY
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
   if (!apiKey) {
-    return NextResponse.json({ error: 'API key not found' }, { status: 500 })
+    return NextResponse.json(
+      { error: '[api/entity GET] error: API key not provided' },
+      { status: 403 },
+    )
   }
   const fields =
     'id,postalAddress,location,timeZone,googleMapsUri,websiteUri,regularOpeningHours,utcOffsetMinutes,displayName,primaryTypeDisplayName,editorialSummary'
-  const url = `https://places.googleapis.com/v1/places/${googleId}?fields=${fields}&key=${apiKey}`
+  const url = `https://places.googleapis.com/v1/places/${encodeURIComponent(googleId)}?fields=${encodeURIComponent(fields)}&key=${encodeURIComponent(apiKey)}`
   try {
     const response = await fetch(url)
     if (!response.ok) {
       return NextResponse.json(
-        { error: 'Failed to fetch data from Google Places API' },
+        { error: `[api/entity GET] error: failed to fetch Google place data` },
         { status: response.status },
       )
     }
@@ -83,8 +86,11 @@ export async function GET(request: NextRequest) {
       address1: googleResponse.postalAddress?.addressLines?.[0] || '',
       address2: googleResponse.postalAddress?.addressLines?.[1] || '',
       createdAt: new Date(),
+      aiScore: null,
+      aiSummary: null,
+      aiIndicators: null,
+      aiUpdatedAt: null,
     }
-
     await db.insert(entityTable).values(formattedResponse).onConflictDoNothing()
     const data = await db
       .select()
@@ -93,9 +99,8 @@ export async function GET(request: NextRequest) {
       .execute()
     return NextResponse.json(data, { status: 200 })
   } catch (error) {
-    console.error('Error occurred while processing request:', error)
     return NextResponse.json(
-      { error: 'An unexpected error occurred', details: error },
+      { error: `[api/entity GET] error: ${error}` },
       { status: 500 },
     )
   }

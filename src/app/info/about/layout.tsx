@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'About',
   description: 'Learn more about Accuguide and its mission',
   alternates: {
-    canonical: '/about/',
+    canonical: '/info/about/',
   },
 }
 
@@ -14,9 +14,5 @@ export default function SearchLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return (
-    <LayoutDisplay title="About Us" halfWidth>
-      {children}
-    </LayoutDisplay>
-  )
+  return <LayoutDisplay>{children}</LayoutDisplay>
 }

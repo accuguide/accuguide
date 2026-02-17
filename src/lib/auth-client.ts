@@ -6,18 +6,20 @@ export async function changePassword(
   currentPassword: string,
   newPassword: string,
 ) {
-  await authClient.changePassword({
+  const { error } = await authClient.changePassword({
     newPassword,
     currentPassword,
     revokeOtherSessions: true,
   })
+  return { error }
 }
 
 export async function changeEmail(email: string) {
-  await authClient.changeEmail({
+  const { error } = await authClient.changeEmail({
     newEmail: email,
-    callbackURL: '/settings/account/',
+    callbackURL: '/settings/',
   })
+  return { error }
 }
 
 export async function requestPassWordReset(email: string) {
@@ -32,7 +34,7 @@ export async function signInWithEmail(email: string, password: string) {
     {
       email,
       password,
-      callbackURL: '/settings/profile/',
+      callbackURL: '/settings/',
       rememberMe: false,
     },
     {},
@@ -43,7 +45,7 @@ export async function signInWithEmail(email: string, password: string) {
 export async function signInWithGoogle() {
   const { data, error } = await authClient.signIn.social({
     provider: 'google',
-    callbackURL: '/settings/profile/',
+    callbackURL: '/settings/',
   })
   return { data, error }
 }
@@ -54,13 +56,13 @@ export async function signUpWithEmail(
   name: string,
   image?: string,
 ) {
-  await authClient.signUp.email(
+  const { data, error } = await authClient.signUp.email(
     {
       email, // user email address
       password, // user password -> min 8 characters by default
       name, // user display name
       image, // User image URL (optional)
-      callbackURL: '/settings/profile/', // A URL to redirect to after the user verifies their email (optional)
+      callbackURL: '/settings/', // A URL to redirect to after the user verifies their email (optional)
     },
     {
       onRequest: () => {
@@ -69,18 +71,24 @@ export async function signUpWithEmail(
       },
       onSuccess: () => {
         //redirect to the dashboard or sign in page
-        window.location.href = '/settings/profile/'
+        window.location.href = '/settings/'
       },
       onError: (ctx) => {
-        // display the error message
-        alert(ctx.error.message)
+        // error will be handled by the caller
       },
     },
   )
+  return { data, error }
 }
 
 export async function changeName(name: string) {
   await authClient.updateUser({
     name,
+  })
+}
+
+export async function deleteUser(password: string) {
+  await authClient.deleteUser({
+    password,
   })
 }

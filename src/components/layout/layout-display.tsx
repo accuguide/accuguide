@@ -15,10 +15,12 @@ export default function LayoutDisplay({
   subtitle?: string
 }>) {
   return (
-    <div className={cn(className)}>
+    <div className={cn(className) + 'mx-auto max-w-7xl'}>
       {title && <Title>{title}</Title>}
-      {subtitle && <p className="mb-4 md:max-w-[50%]">{subtitle}</p>}
-      <div className={cn(halfWidth ? 'md:max-w-[50%]' : '')}>{children}</div>
+      {subtitle && <p className="md:max-w-[75%]">{subtitle}</p>}
+      {title && subtitle && <div className="h-12"></div>}
+      {title && !subtitle && <div className="h-8"></div>}
+      <div className={cn(halfWidth ? 'md:max-w-[75%]' : '')}>{children}</div>
     </div>
   )
 }

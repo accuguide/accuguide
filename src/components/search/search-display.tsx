@@ -1,8 +1,7 @@
-import { ExternalLink, MapPin } from 'lucide-react'
 import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
-import { Card, CardContent } from '@/components/ui/card'
 import type { SearchDisplayProps } from '@/lib/types'
+import { cn } from '@/lib/utils'
 
 export default function SearchDisplay({
   displayType,
@@ -11,6 +10,7 @@ export default function SearchDisplay({
   name,
   address,
   type,
+  aiScore,
 }: SearchDisplayProps) {
   // Handle address formatting more robustly
   const formatAddress = (address: string) => {
@@ -40,40 +40,52 @@ export default function SearchDisplay({
     displayType === 'google' ? `/entity/${googleId}` : `/entity/${id}`
 
   return (
-    <Link href={href} className="block">
-      <div className="group cursor-pointer transition-all duration-200 hover:shadow-md border-0 hover:dark:bg-slate-600 rounded-lg px-2">
-        <div className="flex items-start justify-between py-3">
-          <div className="flex-1 min-w-0 max-w-xs md:max-w-sm">
-            {/* Name and external link indicator */}
-            <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors duration-200 truncate">
-              {name}
-            </h3>
+    <div className="group relative m-2 rounded-lg border-2 border-t border-r border-b border-l p-4 transition-opacity hover:opacity-75 sm:p-6">
+      <div className="pt-6 pb-4 text-center">
+        <h3 className="font-medium text-foreground text-sm">
+          {aiScore != null && aiScore != 0 && (
+            <p
+              className={cn(
+                'mb-2 font-semibold',
+                aiScore <= 45 && 'text-red-600 dark:text-red-500',
+                aiScore > 45 &&
+                  aiScore <= 80 &&
+                  'text-yellow-700 dark:text-yellow-600',
+                aiScore > 80 && 'text-green-700 dark:text-green-600',
+              )}
+            >
+              {aiScore <= 45
+                ? 'Low Accessibility'
+                : aiScore <= 80
+                  ? 'Medium Accessibility'
+                  : 'High Accessibility'}
+            </p>
+          )}
+          <Link href={href}>
+            <span aria-hidden="true" className="absolute inset-0" />
+            {name}
+          </Link>
+        </h3>
 
-            {/* Type badge */}
-            {capitalizedType && (
-              <Badge variant="default" className="mb-2 text-xs bg-slate-300">
-                {capitalizedType}
-              </Badge>
-            )}
+        <div className="mt-3 flex flex-col items-center">
+          {/* Type badge */}
+          {capitalizedType && (
+            <Badge variant="default" className="mb-2 text-xs">
+              {capitalizedType}
+            </Badge>
+          )}
 
-            {/* Address */}
-            {address && (
-              <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                <div className="min-w-0">
-                  {firstLine && (
-                    <div className="font-medium text-foreground">
-                      {firstLine}
-                    </div>
-                  )}
-                  {restLines && (
-                    <div className="text-muted-foreground">{restLines}</div>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
+          {/* Address */}
+          {address && address != '' && (
+            <div className="text-muted-foreground text-xs">
+              {firstLine && (
+                <div className="font-medium text-foreground">{firstLine}</div>
+              )}
+              {restLines && <div className="mt-1">{restLines}</div>}
+            </div>
+          )}
         </div>
       </div>
-    </Link>
+    </div>
   )
 }

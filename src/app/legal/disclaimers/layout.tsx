@@ -16,7 +16,10 @@ export default function SearchLayout({
   children: React.ReactNode
 }>) {
   return (
-    <LayoutDisplay title="Disclaimers" className="md:max-w-[50%]">
+    <LayoutDisplay
+      title="Disclaimers"
+      subtitle="This disclaimer outlines the limitations and responsibilities of Accuguide"
+    >
       {children}
     </LayoutDisplay>
   )
