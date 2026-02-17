@@ -2,7 +2,7 @@
 
 import { ChevronDown } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import ResourceCard from '@/components/resource-card'
+import ResourceCard from '@/components/resources/resource-card'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,

@@ -1,7 +1,7 @@
 'use client'
 
-import AboutContainer from '@/components/about-container'
-import AboutImage from '@/components/about-image'
+import AboutContainer from '@/components/about/about-container'
+import AboutImage from '@/components/about/about-image'
 import BigHeading from '@/components/layout/big-heading'
 import Spacer from '@/components/spacer'
 import Sponsor from '@/components/sponsor'

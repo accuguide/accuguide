@@ -13,6 +13,7 @@ export async function GET() {
     '/info/about',
     '/info/donate',
     '/info/volunteer',
+    '/legal/accessibility',
     '/legal/disclaimers',
     '/legal/privacy',
     '/legal/terms',

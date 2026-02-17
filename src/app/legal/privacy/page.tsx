@@ -9,13 +9,13 @@ export default function PrivacyPolicy() {
           <p className="mt-6">
             We collect personal information that is provided upon account
             creation, and when you create content on our platform, such as when
-            you submit a review or rating.
+            you submit a rating and/or review, and add places to your favorites.
+            We may also collect location data to provide location-sensitive
+            search results.
           </p>
 
           <h3 className="mt-12">Personal Information</h3>
-          <p className="mt-4">
-            We collect and save the following personal information:
-          </p>
+          <p className="mt-4">We collect the following personal information:</p>
 
           <ul className="mt-8 space-y-8">
             <li className="flex gap-x-3">
@@ -25,7 +25,8 @@ export default function PrivacyPolicy() {
               />
               <span>
                 <strong className="font-semibold">Email Address.</strong> Used
-                for account creation and login.
+                for account creation, login, and Accuguide updates. Non
+                essential emails from Accuguide can be stopped at any time.
               </span>
             </li>
             <li className="flex gap-x-3">
@@ -35,7 +36,8 @@ export default function PrivacyPolicy() {
               />
               <span>
                 <strong className="font-semibold">Account Name.</strong> Used to
-                identify you on our platform
+                publicly attribute your contributions to your account. This
+                should not be your real name to protect your privacy
               </span>
             </li>
             <li className="flex gap-x-3">
@@ -45,7 +47,7 @@ export default function PrivacyPolicy() {
               />
               <span>
                 <strong className="font-semibold">Profile Image.</strong> An
-                image used to personalize your account.
+                public image used to personalize your account.
               </span>
             </li>
           </ul>
@@ -60,8 +62,26 @@ export default function PrivacyPolicy() {
             <h4>User Reviews</h4>
             <p className="mt-2">
               Information about the reviews you submit, including the content of
-              the review, the location it is associated with, and the rating you
-              provide.
+              the review and/or the rating you provide.
+            </p>
+          </div>
+
+          <div className="mt-6">
+            <h4>Favorites</h4>
+            <p className="mt-2">
+              Information about the locations you add to your favorites. This
+              data is stored privately and is only visible to you.
+            </p>
+          </div>
+
+          <div className="mt-6">
+            <h4>Location</h4>
+            <p className="mt-2">
+              We may optionally collect your location data to provide
+              location-sensitive search results. This data is not stored and is
+              only used during your active session to improve search relevance.
+              You can choose to deny location access at any time through your
+              browser settings.
             </p>
           </div>
 
@@ -78,16 +98,23 @@ export default function PrivacyPolicy() {
             When and with whom do we share your personal information?
           </h2>
           <p className="mt-6">
-            We do not share your personal information with any third parties,
-            except as required by law or to protect our rights. Application data
-            you create is publicly available across our website and is only
-            linked to you via your account name.
+            If location access is permitted by the user, location data
+            (coordinates) will be passed to Google Cloud to provide
+            location-sensitive search results. This data is not attributed to
+            any other information you may provide to the platform. Location data
+            passed to Google Cloud is handled by them in accordance with their
+            privacy policy. We do not share any other personal information with
+            any third parties, except as required by law or to protect our
+            rights. Application data you create is publicly available across our
+            website and is only linked to you via your account name (username)
           </p>
 
           <h2 className="mt-12 text-3xl">Do we use cookies?</h2>
           <p className="mt-6">
             We only use cookies to store required information to keep you logged
-            in to your account. We do not use cookies for any other purpose.
+            in to your account and save location data (if location access
+            permitted) for the duration of the session. We do not use cookies
+            for any other purpose.
           </p>
 
           <h2 className="mt-12 text-3xl">
@@ -110,8 +137,8 @@ export default function PrivacyPolicy() {
               cannot guarantee its absolute security.
             </p>
             <p>
-              Authentication is done through Google and is subject to their
-              privacy policy.
+              Authentication done through Google and subject to their privacy
+              policy and data collection/usage practices.
             </p>
             <p>
               We store all our data on Supabase, which is a secure database
@@ -129,7 +156,9 @@ export default function PrivacyPolicy() {
               We do not knowingly solicit data from or market to children under
               18 years of age. By using the Services, you represent that you are
               at least 18 or that you are the parent or guardian of such a minor
-              and consent to such minor dependent's use of the Services.
+              and consent to such minor dependent's use of the Services assuming
+              that you do not use their personal information to use our
+              services.
             </p>
             <p>
               If we learn that personal information from users less than 18

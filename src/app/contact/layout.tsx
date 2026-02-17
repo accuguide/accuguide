@@ -17,7 +17,7 @@ export default function SearchLayout({
   return (
     <LayoutDisplay
       title="Get In Touch"
-      subtitle="Have questions, found a bug, or need assistance? We're here to help. Reach out to us through email or send us a message using the form below."
+      subtitle="Have questions, found a bug, or need assistance? We're here to help. Reach out to us through email and we will get back to you soon."
     >
       {children}
     </LayoutDisplay>

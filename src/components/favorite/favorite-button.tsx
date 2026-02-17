@@ -34,10 +34,12 @@ export default function FavoriteButton({ id }: { id: string }) {
       .then((data) => {
         if (data.error) throw new Error(data.error)
         setFavorited(!favorited)
-        console.log(`Successfully updated favorite status for ${id}`)
       })
       .catch((error) => {
         console.error(`Error updating favorite status for ${id}:`, error)
+        toast.error('Error updating favorite status', {
+          description: `${error.message}`,
+        })
       })
   }
   return (

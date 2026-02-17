@@ -9,7 +9,7 @@ import {
   reviewTable,
 } from '@/lib/db/schema'
 import AIOverview from './ai-overview'
-import FavoriteButton from './favorite-button'
+import FavoriteButton from './favorite/favorite-button'
 import { Button } from './ui/button'
 
 export default async function EntityDisplay({
