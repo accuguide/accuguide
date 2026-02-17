@@ -92,6 +92,13 @@
       "when": 1770849497513,
       "tag": "0012_easy_red_wolf",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1771358193663,
+      "tag": "0013_common_satana",
+      "breakpoints": true
     }
   ]
 }
