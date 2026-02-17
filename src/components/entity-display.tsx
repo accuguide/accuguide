@@ -9,6 +9,7 @@ import {
   reviewTable,
 } from '@/lib/db/schema'
 import AIOverview from './ai-overview'
+import FavoriteButton from './favorite-button'
 import { Button } from './ui/button'
 
 export default async function EntityDisplay({
@@ -44,6 +45,9 @@ export default async function EntityDisplay({
     : []
   return (
     <div>
+      <div className="-mt-8 mb-2">
+        <FavoriteButton id={data.id} />
+      </div>
       <div>
         <dl className="grid grid-cols-1 sm:grid-cols-2">
           <div className="px-4 pb-6 sm:col-span-2 sm:px-0">
