@@ -23,7 +23,6 @@ export default function FavoriteButton({ id }: { id: string }) {
   }, [id])
 
   function favorite() {
-    console.log(`/api/profile/favorites?entityId=${id}&favorited=${favorited}`)
     fetch(`/api/profile/favorites?entityId=${id}&favorited=${favorited}`, {
       method: 'POST',
     })

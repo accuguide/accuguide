@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
   }
   // Check if the data already exists in the database
 
-  const apiKey = process.env.GOOGLE_MAPS_API_KEY
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
   if (!apiKey) {
     return NextResponse.json(
       { error: '[api/entity GET] error: API key not provided' },
@@ -91,7 +91,6 @@ export async function GET(request: NextRequest) {
       aiIndicators: null,
       aiUpdatedAt: null,
     }
-
     await db.insert(entityTable).values(formattedResponse).onConflictDoNothing()
     const data = await db
       .select()
