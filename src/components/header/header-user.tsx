@@ -14,6 +14,13 @@ import { getServerUser } from '@/lib/session'
 
 export default async function HeaderUser() {
   const user = await getServerUser()
+  if (!user) {
+    return (
+      <Link href="/sign-in/">
+        <Button>Sign In</Button>
+      </Link>
+    )
+  }
   const imageUrl = user?.image ? await getProfileImage(user.image) : undefined
   return (
     <DropdownMenu>
