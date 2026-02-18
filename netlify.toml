@@ -1,3 +1,6 @@
+[build]
+  secretsScanOmitKeys = ["NEXT_PUBLIC_GOOGLE_MAPS_API_KEY"]
+
 [context.production]
   command = "npm run build:prod"
 
