@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
+import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,13 +8,20 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { getProfileImage } from '@/lib/s3/functions'
-import { getServerUser } from '@/lib/session'
+} from "@/components/ui/dropdown-menu";
+import { getProfileImage } from "@/lib/s3/functions";
+import { getServerUser } from "@/lib/session";
 
 export default async function HeaderUser() {
-  const user = await getServerUser()
-  const imageUrl = user?.image ? await getProfileImage(user.image) : undefined
+  const user = await getServerUser();
+  if (!user) {
+    return (
+      <Link href="/sign-in/">
+        <Button>Sign In</Button>
+      </Link>
+    );
+  }
+  const imageUrl = user?.image ? await getProfileImage(user.image) : undefined;
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -36,7 +43,7 @@ export default async function HeaderUser() {
         <Link href="/settings/" className="text-slate-600 dark:text-slate-300">
           <DropdownMenuItem>Settings</DropdownMenuItem>
         </Link>
-        {user?.role === 'admin' && (
+        {user?.role === "admin" && (
           <Link href="/admin/" className="text-slate-600 dark:text-slate-300">
             <DropdownMenuItem>Admin</DropdownMenuItem>
           </Link>
@@ -46,5 +53,5 @@ export default async function HeaderUser() {
         </Link>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
