@@ -113,9 +113,21 @@ export default async function Page() {
         <p className="section-subheading">
           Join thousands of users building a more accessible world
         </p>
-        <dl className="stats-grid">
+        <dl className="stats-grid grid gap-6 sm:grid-cols-3">
           {stats.map((stat) => (
-            <StatCard key={stat.name} {...stat} />
+            <div key={stat.name} className="flex flex-col items-center text-center">
+              <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                {stat.name}
+              </dt>
+              <dd className="mt-2">
+                <div className={`text-3xl font-bold ${stat.color}`}>
+                  {stat.value}
+                </div>
+              </dd>
+              <dd className="mt-1">
+                {stat.icon && <stat.icon className={`h-8 w-8 ${stat.color}`} />}
+              </dd>
+            </div>
           ))}
         </dl>
       </section>

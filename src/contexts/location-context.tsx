@@ -39,66 +39,41 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
   const [isLocationChecked, setIsLocationChecked] = useState(false)
 
   const requestLocation = useCallback(() => {
-    if (status === 'requesting') return
+  console.log('[LOCATION CONTEXT] requestLocation STARTED');
+  if (status === 'requesting') {
+    console.log('[LOCATION CONTEXT] Already requesting – skipping');
+    return;
+  }
 
-    if (!navigator.geolocation) {
-      setStatus('unavailable')
-      setIsLocationChecked(true)
-      return
-    }
+  if (!navigator.geolocation) {
+    console.log('[LOCATION CONTEXT] Geolocation unavailable');
+    setStatus('unavailable');
+    setIsLocationChecked(true);
+    return;
+  }
 
-    setStatus('requesting')
-    let timeoutId: NodeJS.Timeout | null = null
+  console.log('[LOCATION CONTEXT] Calling getCurrentPosition...');
+  setStatus('requesting');
 
-    const handleSuccess = (position: GeolocationPosition) => {
-      if (timeoutId) clearTimeout(timeoutId)
-
-      const lat = position.coords.latitude
-      const lng = position.coords.longitude
-
-      setLatitude(lat)
-      setLongitude(lng)
-      setStatus('granted')
-      setIsLocationChecked(true)
-
-      Cookies.set('latitude', lat.toString(), {
-        expires: COOKIE_EXPIRY_DAYS,
-        secure: true,
-        sameSite: 'Lax',
-      })
-      Cookies.set('longitude', lng.toString(), {
-        expires: COOKIE_EXPIRY_DAYS,
-        secure: true,
-        sameSite: 'Lax',
-      })
-    }
-
-    const handleError = (error: GeolocationPositionError) => {
-      if (timeoutId) clearTimeout(timeoutId)
-
-      if (error.code === error.PERMISSION_DENIED) {
-        setStatus('denied')
-      } else if (error.code === error.POSITION_UNAVAILABLE) {
-        setStatus('unavailable')
-      } else if (error.code === error.TIMEOUT) {
-        setStatus('timeout')
-      } else {
-        setStatus('denied')
-      }
-      setIsLocationChecked(true)
-    }
-
-    timeoutId = setTimeout(() => {
-      setStatus('timeout')
-      setIsLocationChecked(true)
-    }, LOCATION_TIMEOUT_MS)
-
-    navigator.geolocation.getCurrentPosition(handleSuccess, handleError, {
-      timeout: LOCATION_TIMEOUT_MS,
-      enableHighAccuracy: false,
-      maximumAge: 300000,
-    })
-  }, [status])
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      console.log('[LOCATION CONTEXT] SUCCESS – lat:', position.coords.latitude, 'lng:', position.coords.longitude);
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+      setStatus('granted');
+      setIsLocationChecked(true);
+      // cookies set...
+    },
+    (error) => {
+      console.log('[LOCATION CONTEXT] ERROR – code:', error.code, 'message:', error.message);
+      if (error.code === 1) setStatus('denied');
+      else if (error.code === 2) setStatus('unavailable');
+      else if (error.code === 3) setStatus('timeout');
+      setIsLocationChecked(true);
+    },
+    { enableHighAccuracy: false, timeout: 7000, maximumAge: 60000 }
+  );
+}, [status]);
 
   useEffect(() => {
     const storedLatitude = Cookies.get('latitude')
@@ -123,11 +98,12 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  useEffect(() => {
-    if (isLocationChecked && status === 'idle') {
-      requestLocation()
-    }
-  }, [isLocationChecked, status, requestLocation])
+  //the part that requests location on reload main issue fixed
+  // useEffect(() => {
+  //   if (isLocationChecked && status === 'idle') {
+  //     requestLocation()
+  //   }
+  // }, [isLocationChecked, status, requestLocation])
 
   const value: LocationContextValue = {
     latitude,

@@ -1,10 +1,15 @@
 'use client'
 
-import { Loader2, SearchIcon } from 'lucide-react'
+import { useState, useTransition, useEffect } from 'react'
+import { Loader2, Search as SearchIcon } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
-import { type FormEvent, useState, useTransition } from 'react'
+import { type FormEvent } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Switch } from '@/components/ui/switch'
+import { Label } from '@/components/ui/label'
+import { toast } from 'sonner'
+import { useLocation } from '@/contexts/location-context'
 
 export type SearchProps = {
   size: 'half' | 'full' | 'page'
@@ -13,21 +18,61 @@ export type SearchProps = {
 export default function Search({ size }: SearchProps) {
   const [query, setQuery] = useState('')
   const [isPending, startTransition] = useTransition()
+  const [locationActive, setLocationActive] = useState(false) // ← local toggle state
+  const { latitude, longitude, status, requestLocation } = useLocation()
   const pathname = usePathname()
   const router = useRouter()
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  const isLocating = status === 'requesting'
+  const hasLocation = latitude !== null && longitude !== null
+
+  // Restore user's previous preference (if they left it ON)
+  useEffect(() => {
+    const saved = localStorage.getItem('location-active')
+    if (saved === 'true' && status === 'granted') {
+      setLocationActive(true)
+    }
+  }, [status])
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!query.trim()) return
 
-    const encodedQuery = encodeURIComponent(query.trim())
+    let url = `/search?query=${encodeURIComponent(query.trim())}`
 
-    startTransition(() => {
-      router.push(`/search?query=${encodedQuery}`)
-    })
+    // Only include coords if user actively wants location
+    if (locationActive && hasLocation) {
+      url += `&lat=${latitude.toFixed(6)}&lng=${longitude.toFixed(6)}`
+    }
+
+    startTransition(() => router.push(url))
   }
 
-  // Special case for homepage half size
+  const handleToggleChange = (checked: boolean) => {
+    console.log('[SEARCH] Toggle changed to:', checked)
+
+    setLocationActive(checked)
+
+    if (checked) {
+      if (status !== 'granted') {
+        console.log('[SEARCH] Requesting permission')
+        requestLocation()
+      } else {
+        console.log('[SEARCH] Using existing location')
+        toast.info('Using your location')
+      }
+    } else {
+      console.log('[SEARCH] Location use disabled')
+      toast.info('Location turned off')
+    }
+  }
+
+  // Save toggle preference
+  useEffect(() => {
+    localStorage.setItem('location-active', locationActive.toString())
+  }, [locationActive])
+
+  // Homepage placeholder
   if (pathname === '/' && size === 'half') {
     return (
       <div className="w-[50vw]">
@@ -36,72 +81,90 @@ export default function Search({ size }: SearchProps) {
     )
   }
 
-  // Header/Half size styling
+  // Compact version (header / half)
   if (size === 'half') {
     return (
-      <form
-        onSubmit={handleSubmit}
-        className="relative ml-4 max-w-full md:ml-0 md:min-w-sm"
-      >
-        <label htmlFor="search-half" className="sr-only">
-          Search places
-        </label>
-        <div className="relative">
-          <SearchIcon
-            className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500"
-            aria-hidden="true"
+      <div className="relative ml-4 max-w-full md:ml-0 md:min-w-sm">
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="search-half" className="sr-only">Search places</label>
+          <div className="relative">
+            <SearchIcon
+              className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500"
+              aria-hidden="true"
+            />
+            <Input
+              id="search-half"
+              placeholder="Search for places..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="flex-1 py-2 pr-2 pl-10 transition-all duration-200 focus:ring-2 focus:ring-blue-500"
+              disabled={isPending || isLocating}
+            />
+            {isPending && (
+              <Loader2 className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 animate-spin text-slate-400" />
+            )}
+          </div>
+        </form>
+
+        <div className="mt-3 flex items-center justify-center gap-2">
+          <Switch
+            id="use-location"
+            checked={locationActive}
+            onCheckedChange={handleToggleChange}
+            disabled={isPending || isLocating}
           />
-          <Input
-            id="search-half"
-            placeholder="Search for places..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="flex-1 py-2 pr-2 pl-10 transition-all duration-200 focus:ring-2 focus:ring-blue-500"
-            aria-label="Search for accessible places"
-            disabled={isPending}
-          />
-          {isPending && (
-            <Loader2 className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 animate-spin text-slate-400" />
-          )}
+          <Label htmlFor="use-location" className="text-sm cursor-pointer flex items-center gap-2">
+            Use my location
+            {isLocating && <Loader2 className="h-4 w-4 animate-spin text-blue-600" />}
+            {locationActive && hasLocation && <span className="text-xs text-green-600">(active)</span>}
+          </Label>
         </div>
-      </form>
+      </div>
     )
   }
 
-  // Full and page size styling
+  // Full / page version
   return (
     <div className="mt-8 flex w-full justify-center md:mt-12">
-      <form onSubmit={handleSubmit} className="flex w-full gap-2 md:max-w-3xl">
-        {/* Search input */}
-        <label htmlFor="search-full" className="sr-only">
-          Search places
-        </label>
-        <Input
-          id="search-full"
-          placeholder="Search for restaurants, shops, parks, services, and more..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 border-0 py-5 text-lg md:py-6"
-          aria-label="Search for accessible places and services"
-          disabled={isPending}
-        />
+      <div className="w-full max-w-3xl">
+        <form onSubmit={handleSubmit} className="flex gap-2">
+          <Input
+            placeholder="Search for restaurants, shops, parks, services, and more..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="flex-1 border-0 py-5 text-lg md:py-6 focus-visible:ring-2 focus-visible:ring-blue-500"
+            disabled={isPending || isLocating}
+          />
+          <Button
+            type="submit"
+            disabled={!query.trim() || isPending || isLocating}
+            className="py-5 px-8"
+          >
+            {isPending ? (
+              <>
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                Searching...
+              </>
+            ) : (
+              'Search'
+            )}
+          </Button>
+        </form>
 
-        {/* Search button */}
-        <Button
-          type="submit"
-          disabled={!query.trim() || isPending}
-          className="py-5 transition-all duration-200 disabled:opacity-50 md:px-8 md:py-6"
-        >
-          {isPending ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Searching...
-            </>
-          ) : (
-            'Search'
-          )}
-        </Button>
-      </form>
+        <div className="mt-4 flex items-center justify-center gap-2">
+          <Switch
+            id="use-location-full"
+            checked={locationActive}
+            onCheckedChange={handleToggleChange}
+            disabled={isPending || isLocating}
+          />
+          <Label htmlFor="use-location-full" className="text-sm font-medium cursor-pointer flex items-center gap-2">
+            Search near my current location
+            {isLocating && <Loader2 className="h-4 w-4 animate-spin text-blue-600" />}
+            {locationActive && hasLocation && <span className="ml-1 text-xs text-green-600">(using your position)</span>}
+          </Label>
+        </div>
+      </div>
     </div>
   )
 }
