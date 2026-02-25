@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "mprocs",
     "dev:cy": "next dev",
-    "cypress:open": "cypress open", 
+    "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "build:prod": "next build",
     "build:beta": "cp src/app/beta.robots.ts src/app/robots.ts && next build",
