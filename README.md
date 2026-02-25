@@ -13,7 +13,7 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 ### Tech Stack
 
 - Next.js
-- Postgre SQL
+- PostgreSQL
 - Google Cloud Platform (Auth, Maps API)
 - Groq (groq/compound)
 - Better Auth
