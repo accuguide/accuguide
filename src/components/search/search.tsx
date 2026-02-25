@@ -6,7 +6,6 @@ import { usePathname, useRouter } from 'next/navigation'
 import { type FormEvent } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
 import { useLocation } from '@/contexts/location-context'
@@ -18,7 +17,7 @@ export type SearchProps = {
 export default function Search({ size }: SearchProps) {
   const [query, setQuery] = useState('')
   const [isPending, startTransition] = useTransition()
-  const [locationActive, setLocationActive] = useState(false) // ← local toggle state
+  const [locationActive, setLocationActive] = useState(false) // local toggle state
   const { latitude, longitude, status, requestLocation } = useLocation()
   const pathname = usePathname()
   const router = useRouter()
@@ -109,11 +108,13 @@ export default function Search({ size }: SearchProps) {
         </form>
 
         <div className="mt-3 flex items-center justify-center gap-2">
-          <Switch
+          <input
+            type="checkbox"
             id="use-location"
             checked={locationActive}
-            onCheckedChange={handleToggleChange}
+            onChange={(e) => handleToggleChange(e.target.checked)}
             disabled={isPending || isLocating}
+            className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
           />
           <Label
             htmlFor="use-location"
@@ -161,11 +162,13 @@ export default function Search({ size }: SearchProps) {
         </form>
 
         <div className="mt-4 flex items-center justify-center gap-2">
-          <Switch
+          <input
+            type="checkbox"
             id="use-location-full"
             checked={locationActive}
-            onCheckedChange={handleToggleChange}
+            onChange={(e) => handleToggleChange(e.target.checked)}
             disabled={isPending || isLocating}
+            className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
           />
           <Label
             htmlFor="use-location-full"
