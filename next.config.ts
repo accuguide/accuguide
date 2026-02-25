@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  swcMinify: true,
+  // swcMinify: true,
   experimental: {
     // Optional: enable if using SWC fully
     forceSwcTransforms: true,

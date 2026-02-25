@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "mprocs",
     "dev:cy": "next dev",
+    "cypress:open": "cypress open", 
+    "cypress:run": "cypress run",
     "build:prod": "next build",
     "build:beta": "cp src/app/beta.robots.ts src/app/robots.ts && next build",
     "build": "next build",
@@ -77,7 +79,7 @@
     "@types/react-dom": "^19",
     "@types/sinonjs__fake-timers": "^15.0.1",
     "@types/unist": "^3.0.3",
-    "cypress": "^15.9.0",
+    "cypress": "^15.10.0",
     "drizzle-kit": "^0.31.6",
     "mprocs": "^0.8.3",
     "tailwindcss": "^4",
