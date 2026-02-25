@@ -86,7 +86,9 @@ export default function Search({ size }: SearchProps) {
     return (
       <div className="relative ml-4 max-w-full md:ml-0 md:min-w-sm">
         <form onSubmit={handleSubmit}>
-          <label htmlFor="search-half" className="sr-only">Search places</label>
+          <label htmlFor="search-half" className="sr-only">
+            Search places
+          </label>
           <div className="relative">
             <SearchIcon
               className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500"
@@ -113,10 +115,17 @@ export default function Search({ size }: SearchProps) {
             onCheckedChange={handleToggleChange}
             disabled={isPending || isLocating}
           />
-          <Label htmlFor="use-location" className="text-sm cursor-pointer flex items-center gap-2">
+          <Label
+            htmlFor="use-location"
+            className="flex cursor-pointer items-center gap-2 text-sm"
+          >
             Use my location
-            {isLocating && <Loader2 className="h-4 w-4 animate-spin text-blue-600" />}
-            {locationActive && hasLocation && <span className="text-xs text-green-600">(active)</span>}
+            {isLocating && (
+              <Loader2 className="h-4 w-4 animate-spin text-blue-600" />
+            )}
+            {locationActive && hasLocation && (
+              <span className="text-green-600 text-xs">(active)</span>
+            )}
           </Label>
         </div>
       </div>
@@ -132,13 +141,13 @@ export default function Search({ size }: SearchProps) {
             placeholder="Search for restaurants, shops, parks, services, and more..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="flex-1 border-0 py-5 text-lg md:py-6 focus-visible:ring-2 focus-visible:ring-blue-500"
+            className="flex-1 border-0 py-5 text-lg focus-visible:ring-2 focus-visible:ring-blue-500 md:py-6"
             disabled={isPending || isLocating}
           />
           <Button
             type="submit"
             disabled={!query.trim() || isPending || isLocating}
-            className="py-5 px-8"
+            className="px-8 py-5"
           >
             {isPending ? (
               <>
@@ -158,10 +167,19 @@ export default function Search({ size }: SearchProps) {
             onCheckedChange={handleToggleChange}
             disabled={isPending || isLocating}
           />
-          <Label htmlFor="use-location-full" className="text-sm font-medium cursor-pointer flex items-center gap-2">
+          <Label
+            htmlFor="use-location-full"
+            className="flex cursor-pointer items-center gap-2 font-medium text-sm"
+          >
             Search near my current location
-            {isLocating && <Loader2 className="h-4 w-4 animate-spin text-blue-600" />}
-            {locationActive && hasLocation && <span className="ml-1 text-xs text-green-600">(using your position)</span>}
+            {isLocating && (
+              <Loader2 className="h-4 w-4 animate-spin text-blue-600" />
+            )}
+            {locationActive && hasLocation && (
+              <span className="ml-1 text-green-600 text-xs">
+                (using your position)
+              </span>
+            )}
           </Label>
         </div>
       </div>

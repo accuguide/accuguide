@@ -15,4 +15,4 @@ const nextConfig = {
   // "browserslist": [">0.25%", "not dead"]
 }
 
-module.exports = nextConfig
+export default nextConfig

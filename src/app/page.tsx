@@ -115,12 +115,15 @@ export default async function Page() {
         </p>
         <dl className="stats-grid grid gap-6 sm:grid-cols-3">
           {stats.map((stat) => (
-            <div key={stat.name} className="flex flex-col items-center text-center">
-              <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
+            <div
+              key={stat.name}
+              className="flex flex-col items-center text-center"
+            >
+              <dt className="font-medium text-gray-500 text-sm dark:text-gray-400">
                 {stat.name}
               </dt>
               <dd className="mt-2">
-                <div className={`text-3xl font-bold ${stat.color}`}>
+                <div className={`font-bold text-3xl ${stat.color}`}>
                   {stat.value}
                 </div>
               </dd>
