@@ -17,26 +17,30 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
+
       - name: Install dependencies
         run: bun install
+
       - name: Lint code
         run: bun lint
+
   format:
     runs-on: ubuntu-latest
-    permissions: write-all
+    permissions:
+      contents: read
+      pull-requests: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
+
       - name: Install dependencies
         run: bun install
-      - name: Format code
-        run: bun format
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@b863ae1933cb653a53c021fe36dbb774e1fb9403
-        with:
-          commit_message: Formatted code with Biome [skip ci]
-          commit_author: Author <41898282+github-actions[bot]@users.noreply.github.com>
+
+      - name: Check formatting
+        run: bun format --check
