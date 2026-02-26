@@ -138,7 +138,7 @@ export default function Footer() {
               </div>
             </div>
             <div className="mt-12 border-t pt-8">
-              <p className="text-slate-700 dark:text-slate-300 font-semibold text-xs">
+              <p className="font-semibold text-slate-700 text-xs dark:text-slate-300">
                 &copy; 2026 Accuguide. All rights reserved.
                 <br />
                 This site is powered by{' '}
