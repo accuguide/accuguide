@@ -138,14 +138,14 @@ export default function Footer() {
               </div>
             </div>
             <div className="mt-12 border-t pt-8">
-              <p className="secondary-text font-semibold text-xs">
+              <p className="text-slate-700 dark:text-slate-300 font-semibold text-xs">
                 &copy; 2026 Accuguide. All rights reserved.
                 <br />
                 This site is powered by{' '}
                 <Link
                   href="https://netlify.com"
                   target="_blank"
-                  className="hover:underline hover:opacity-75"
+                  className="underline hover:opacity-75"
                 >
                   Netlify
                 </Link>
