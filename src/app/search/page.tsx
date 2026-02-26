@@ -19,15 +19,15 @@ function SearchResults() {
     latitude,
     longitude,
     isLocationChecked,
-    status,                // ← Added this
-    requestLocation        // ← Added this
-  } = useLocation()        // ← Updated destructuring to include status & requestLocation
+    status, // ← Added this
+    requestLocation, // ← Added this
+  } = useLocation() // ← Updated destructuring to include status & requestLocation
 
   const [locations, setLocations] = useState<PointOfInterest[]>([])
 
   // NEW: Trigger location request ONLY here, after search query exists
   useEffect(() => {
-    if (!query?.trim()) return;  // No query → skip (not a real search)
+    if (!query?.trim()) return // No query → skip (not a real search)
 
     // Only request if:
     // - Location not yet checked/granted
@@ -37,11 +37,11 @@ function SearchResults() {
       isLocationChecked &&
       status !== 'granted' &&
       status !== 'requesting' &&
-      status !== 'denied'   // ← Optional: remove if you want to re-prompt on every search
+      status !== 'denied' // ← Optional: remove if you want to re-prompt on every search
     ) {
-      requestLocation();
+      requestLocation()
     }
-  }, [query, isLocationChecked, status, requestLocation]);
+  }, [query, isLocationChecked, status, requestLocation])
 
   useEffect(() => {
     if (!query || !isLocationChecked) {

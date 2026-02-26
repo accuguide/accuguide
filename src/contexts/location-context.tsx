@@ -39,7 +39,7 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
   const [isLocationChecked, setIsLocationChecked] = useState(false)
 
   const requestLocation = useCallback(() => {
-    if (status === 'requesting' || status === 'granted') return;
+    if (status === 'requesting' || status === 'granted') return
 
     if (!navigator.geolocation) {
       setStatus('unavailable')
