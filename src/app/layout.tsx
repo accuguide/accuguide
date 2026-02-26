@@ -43,7 +43,7 @@ export default function RootLayout({
           <Header />
           <Splitter />
           <div className="mx-4 my-4 min-h-[80vh] md:mx-12 md:my-8">
-            {children}
+            <main>{children}</main>
           </div>
           <Splitter />
           <Footer />

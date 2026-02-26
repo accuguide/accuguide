@@ -19,7 +19,7 @@ export default function Location() {
 
   if (status === 'granted') {
     return (
-      <p className="-mt-4 mb-4 text-green-600 text-xs sm:text-sm">
+      <p className="-mt-4 mb-4 text-green-700 text-xs sm:text-sm">
         Showing results near you
       </p>
     )
@@ -27,7 +27,7 @@ export default function Location() {
 
   if (status === 'denied') {
     return (
-      <p className="-mt-4 mb-4 text-amber-600 text-xs sm:text-sm">
+      <p className="-mt-4 mb-4 text-amber-700 text-xs sm:text-sm">
         Location access denied. Showing general results.
       </p>
     )
@@ -35,7 +35,7 @@ export default function Location() {
 
   if (status === 'unavailable') {
     return (
-      <p className="-mt-4 mb-4 text-amber-600 text-xs sm:text-sm">
+      <p className="-mt-4 mb-4 text-amber-700 text-xs sm:text-sm">
         Location unavailable. Showing general results.
       </p>
     )
@@ -43,7 +43,7 @@ export default function Location() {
 
   if (status === 'timeout') {
     return (
-      <p className="-mt-4 mb-4 text-amber-600 text-xs sm:text-sm">
+      <p className="-mt-4 mb-4 text-amber-700 text-xs sm:text-sm">
         Location request timed out.{' '}
         <button
           onClick={requestLocation}

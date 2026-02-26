@@ -8,7 +8,12 @@ interface StatCardProps {
   color: string
 }
 
-export default function StatCard({ name, value, icon: Icon, color }: StatCardProps) {
+export default function StatCard({
+  name,
+  value,
+  icon: Icon,
+  color,
+}: StatCardProps) {
   return (
     <div className="flex flex-col bg-slate-400/5 p-8 dark:bg-slate-800">
       <Icon className={`mx-auto mb-4 h-10 w-10 ${color}`} aria-hidden="true" />

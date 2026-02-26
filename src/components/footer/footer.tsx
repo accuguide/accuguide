@@ -62,7 +62,7 @@ interface FooterLinkListProps {
 function FooterLinkList({ title, items, openInNewTab }: FooterLinkListProps) {
   return (
     <div>
-      <h3 className="footer-heading font-bold text-sm">{title}</h3>
+      <h2 className="footer-heading font-bold text-sm">{title}</h2>
       <ul className="mt-6 space-y-4">
         {items.map((item) => (
           <li key={item.name}>

@@ -9,7 +9,11 @@ export default function Page() {
         <Card className="my-4 p-0 md:p-4">
           <script async src="https://js.stripe.com/v3/buy-button.js"></script>
           {/* @ts-ignore */}
-          <div className="origin-center scale-100 rounded-lg border-2 md:scale-125">
+          <div
+            className="origin-center scale-100 rounded-lg border-2 md:scale-125"
+            role="region"
+            aria-label="Donation payment form"
+          >
             <stripe-buy-button
               buy-button-id={process.env.NEXT_PUBLIC_STRIPE_BUY_BUTTON_ID}
               publishable-key={process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
