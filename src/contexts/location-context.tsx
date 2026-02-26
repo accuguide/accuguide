@@ -39,7 +39,7 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
   const [isLocationChecked, setIsLocationChecked] = useState(false)
 
   const requestLocation = useCallback(() => {
-    if (status === 'requesting') return
+    if (status === 'requesting' || status === 'granted') return;
 
     if (!navigator.geolocation) {
       setStatus('unavailable')
@@ -123,11 +123,12 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  useEffect(() => {
-    if (isLocationChecked && status === 'idle') {
-      requestLocation()
-    }
-  }, [isLocationChecked, status, requestLocation])
+  //code causing the auto request issue
+  // useEffect(() => {
+  //   if (isLocationChecked && status === 'idle') {
+  //     requestLocation()
+  //   }
+  // }, [isLocationChecked, status, requestLocation])
 
   const value: LocationContextValue = {
     latitude,
