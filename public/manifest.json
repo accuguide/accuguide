@@ -1,0 +1,18 @@
+{
+  "name": "Accuguide - Discover accessibility",
+  "short_name": "Accuguide",
+  "description": "Accuguide helps you discover accessible places and services near you.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
