@@ -8,6 +8,7 @@ import { Indicator, Review } from '@/lib/types'
 import { Button } from '../ui/button'
 import { Textarea } from '../ui/textarea'
 import IndicatorDisplay from './indicator-display'
+import Image from 'next/image'
 
 interface ReviewItemProps {
   review: Review
@@ -143,9 +144,11 @@ export default function ReviewItem({
         {reviewImageUrls.length > 0 && (
           <div className="mt-4 flex flex-wrap gap-2">
             {reviewImageUrls.map((url, index) => (
-              <img
+              <Image
                 key={index}
                 src={url}
+                width={512}
+                height={512}
                 alt={`Review ${url} ${index + 1}`}
                 className="h-32 w-32 rounded-md object-cover"
               />

@@ -62,7 +62,7 @@ interface FooterLinkListProps {
 function FooterLinkList({ title, items, openInNewTab }: FooterLinkListProps) {
   return (
     <div>
-      <h3 className="footer-heading font-bold text-sm">{title}</h3>
+      <h3 className="footer-heading font-bold text-base">{title}</h3>
       <ul className="mt-6 space-y-4">
         {items.map((item) => (
           <li key={item.name}>
@@ -92,7 +92,7 @@ export default function Footer() {
           <div className="container mx-auto max-w-7xl pt-12 pb-8">
             <div className="xl:grid xl:grid-cols-3 xl:gap-8">
               <div className="space-y-6">
-                <Link href="/" className="flex items-center gap-4">
+                <div className="flex items-center gap-4">
                   <Image
                     src="/images/logo.png"
                     alt="Disability pride logo"
@@ -100,7 +100,7 @@ export default function Footer() {
                     height={64}
                     className="h-12 w-12 rounded-lg"
                   />
-                </Link>
+                </div>
                 <p className="font-bold text-sm">
                   Discover accessibility with Accuguide
                 </p>

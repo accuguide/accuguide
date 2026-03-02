@@ -11,7 +11,7 @@ export default async function Header() {
           <div className="mx-auto flex max-w-7xl items-center justify-between py-4 text-center">
             <Link
               href="/"
-              className="hidden font-bold text-lg text-slate-600 sm:block dark:text-slate-300"
+              className="hidden font-bold text-lg text-slate-700 sm:block dark:text-slate-200"
             >
               Accuguide
             </Link>

@@ -102,11 +102,11 @@ export default async function Page() {
         <p className="section-subheading">
           Join thousands of users building a more accessible world
         </p>
-        <dl className="stats-grid">
+        <div className="stats-grid">
           {stats.map((stat) => (
             <StatCard key={stat.name} {...stat} />
           ))}
-        </dl>
+        </div>
       </section>
     </main>
   )

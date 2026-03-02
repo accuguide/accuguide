@@ -1,7 +1,6 @@
 # Accuguide
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/biome.yml?logo=github&label=Biome)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/cypress.yml?logo=github&label=Cypress)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/codeql.yml?logo=github&label=CodeQL)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/build.yml?logo=github&label=Build)
 ![Netlify](https://img.shields.io/netlify/378e5089-548b-429f-b1ad-507f6bae73e4?logo=netlify&label=Netlify)
@@ -19,7 +18,7 @@ The source code for Accuguide's website. Accuguide is a platform designed by and
 - Better Auth
 - Tailwind CSS
 - AWS (Image Storage)
-- Cypress (Tests)
+- Playwright (Tests)
 
 ### Code Quality
 
@@ -50,8 +49,8 @@ We are always looking for open source contributions! Check out our contribution 
 
 #### Optional (but recommended) steps
 
-- Register a free Google Maps API key in Google Cloud (create a project for the key if you don't have one yet). Please ensure to limit quotas to ensure you stay within free limits (e.g. 10 requests/minute, 100 requests/day). Put this key into the `.env` file created in the last step, in both variables with the name `GOOGLE_MAPS_API_KEY`. This step is only required if you need search to function when developing locally.
-  - In your Google Cloud project, setup the OAuth consent screen and client. For Authorized Javascript origins, put `http://localhost:3000`, and for Authorized redirect URIs put `http://localhost:3000/login/google/callback`. On the client page, you will find the Client ID and Client secret. Add both these values to your `.env` file. This step is only required if you need Google OAuth to work when developing locally.
+- Register a free Google Maps API key in Google Cloud. Please ensure to limit quotas to ensure you stay within free limits. Put this key into the `.env` file in both variables with the name `GOOGLE_MAPS_API_KEY`. This step is only required if you need search to function when developing locally.
+  - In Google Cloud, setup the OAuth consent screen and client. For Authorized Javascript origins, put `http://localhost:3000`, and for Authorized redirect URIs put `http://localhost:3000/login/google/callback`. On the client page, you will find the Client ID and Client secret. Add both these values to your `.env` file. This step is only required if you need Google OAuth to work when developing locally.
 - Register a free Groq AI API key and add it to the appropriate field in your `.env` file. This step is only required if you need place AI summaries to work when developing locally.
 - At this time, donation and email related features are unavailable for contributors to work on due to complex setup requirements
 

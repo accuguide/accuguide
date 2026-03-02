@@ -45,6 +45,7 @@ export default function FavoriteButton({ id }: { id: string }) {
   return (
     <div
       role="button"
+      aria-label="favorite this place"
       onClick={favorite}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
