@@ -112,6 +112,7 @@ export default function SigninForm() {
                           />
                           <button
                             type="button"
+                            aria-label="show password"
                             onClick={() => setShowPassword(!showPassword)}
                             className="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"
                           >

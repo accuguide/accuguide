@@ -52,7 +52,7 @@ export default async function EntityDisplay({
         <dl className="grid grid-cols-1 sm:grid-cols-2">
           <div className="px-4 pb-6 sm:col-span-2 sm:px-0">
             <h2 className="mb-4 text-2xl">Overview</h2>
-            <dd className="text-slate-600 text-sm/6 sm:mt-2 dark:text-slate-300">
+            <dd className="text-slate-700 sm:mt-2 dark:text-slate-200text-sm/6">
               <AIOverview
                 entity={data}
                 reviews={reviews}
@@ -64,7 +64,7 @@ export default async function EntityDisplay({
           {/* Address - Left Side */}
           <div className="border-slate-600 border-t px-4 py-6 sm:col-span-1 sm:px-0 dark:border-slate-400">
             <h2 className="mb-4 text-2xl">Address</h2>
-            <dd className="mt-1 text-slate-600 text-sm/6 sm:mt-2 dark:text-slate-300">
+            <dd className="mt-1 text-slate-700 dark:text-slate-200">
               {data?.address1}
               <br />
               {data?.address2 && (
@@ -98,11 +98,11 @@ export default async function EntityDisplay({
           {/* Website - Right Side */}
           <div className="border-slate-600 border-t px-4 py-6 sm:col-span-1 sm:px-0 dark:border-slate-400">
             <h2 className="mb-4 text-2xl">Website</h2>
-            <dd className="text-slate-600 text-sm/6 sm:mt-2 dark:text-slate-300">
+            <dd className="text-slate-700 text-sm/6 sm:mt-2 dark:text-slate-200">
               {data?.url ? (
                 <Link
                   href={data.url}
-                  className="text-slate-600 underline hover:opacity-80 dark:text-slate-300"
+                  className="text-slate-700 underline hover:opacity-80 dark:text-slate-200"
                 >
                   {data.url}
                 </Link>
@@ -118,7 +118,7 @@ export default async function EntityDisplay({
           {data?.hours.length > 0 && (
             <div className="border-slate-600 border-y px-4 py-6 sm:col-span-2 sm:px-0 dark:border-slate-400">
               <h2 className="mb-4 text-2xl">Hours</h2>
-              <dd className="text-slate-600 text-sm/6 sm:mt-2 dark:text-slate-300">
+              <dd className="text-slate-700 text-sm/6 sm:mt-2 dark:text-slate-300">
                 <ul>
                   {data?.hours?.map((hour: string, index: number) => (
                     <li key={index} className="flex">

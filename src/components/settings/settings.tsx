@@ -214,7 +214,7 @@ export default function Settings() {
               </label>
             </div>
             {imagePreview && (
-              <p className="mt-2 text-slate-600 text-sm dark:text-slate-400">
+              <p className="mt-2 text-slate-700 text-sm dark:text-slate-200">
                 New photo selected - click "Save Profile" to upload
               </p>
             )}

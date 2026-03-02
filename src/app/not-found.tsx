@@ -7,7 +7,7 @@ export default function NotFound() {
         <h1 className="mt-4 text-balance bg-linear-to-r from-slate-900 via-blue-900 to-slate-900 bg-clip-text font-semibold text-5xl text-transparent tracking-tight sm:text-7xl dark:from-slate-100 dark:via-blue-200 dark:to-slate-100">
           Page not found
         </h1>
-        <p className="mt-6 text-pretty font-medium text-lg text-slate-600 sm:text-xl/8 dark:text-slate-300">
+        <p className="mt-6 text-pretty font-medium text-lg text-slate-700 sm:text-xl/8 dark:text-slate-200">
           Sorry, we couldn't find the page you're looking for.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">

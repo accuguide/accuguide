@@ -20,7 +20,9 @@ export default function LayoutDisplay({
       {subtitle && <p className="md:max-w-[75%]">{subtitle}</p>}
       {title && subtitle && <div className="h-12"></div>}
       {title && !subtitle && <div className="h-8"></div>}
-      <div className={cn(halfWidth ? 'md:max-w-[75%]' : '')}>{children}</div>
+      <main>
+        <div className={cn(halfWidth ? 'md:max-w-[75%]' : '')}>{children}</div>
+      </main>
     </div>
   )
 }

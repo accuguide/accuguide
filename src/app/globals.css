@@ -114,7 +114,7 @@
 
 @layer base {
   * {
-    @apply border-slate-600 focus:ring focus:ring-slate-500 dark:border-slate-400;
+    @apply border-slate-700 focus:ring focus:ring-slate-500 dark:border-slate-200;
   }
   body {
     @apply bg-slate-100 dark:bg-slate-900;
@@ -132,10 +132,10 @@
     @apply font-bold text-xl;
   }
   p {
-    @apply text-base text-slate-600 dark:text-slate-300 text-pretty;
+    @apply text-base text-slate-700 dark:text-slate-200 text-pretty;
   }
   li {
-    @apply text-base text-slate-600 dark:text-slate-300;
+    @apply text-base text-slate-700 dark:text-slate-200;
   }
   a {
     @apply text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300;
@@ -144,13 +144,13 @@
     @apply mb-1 font-bold;
   }
   .input-div {
-    @apply bg-slate-50 dark:bg-slate-950;
+    @apply bg-white dark:bg-black;
   }
   .primary-text {
-    @apply text-slate-600 dark:text-slate-300;
+    @apply text-slate-700 dark:text-slate-200;
   }
   .secondary-text {
-    @apply text-slate-500 dark:text-slate-400 text-base mt-6 max-w-xl;
+    @apply text-slate-600 dark:text-slate-300 text-base mt-6 max-w-xl;
   }
   .big-title {
     @apply text-5xl md:text-6xl lg:text-7xl tracking-tight text-pretty;
@@ -193,10 +193,6 @@
 
   .form-link {
     @apply text-sm underline-offset-4 hover:underline text-slate-500 dark:text-slate-400;
-  }
-
-  .form-footer-text {
-    @apply text-center text-sm text-neutral-600 dark:text-neutral-400;
   }
 
   .feature-grid {

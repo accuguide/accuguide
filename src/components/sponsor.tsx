@@ -9,7 +9,7 @@ export default function Sponsor({ name, imageUrl }: SponsorProps) {
   return (
     <li>
       <Image
-        alt=""
+        alt={`${name} logo`}
         src={imageUrl}
         width={96}
         height={96}
