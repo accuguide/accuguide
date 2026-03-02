@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card'
 export default function Page() {
   return (
     <div>
-      <div className="flex justify-center">
+      <div className="flex justify-center h-80.25">
         <Card className="my-4 p-0 md:p-4">
           <script async src="https://js.stripe.com/v3/buy-button.js"></script>
           {/* @ts-ignore */}
