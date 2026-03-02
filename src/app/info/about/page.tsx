@@ -28,23 +28,23 @@ const sponsors = [
 
 const aboutImages = [
   {
-    src: '/images/about/guide.avif',
+    src: '/images/about/guide',
     alt: 'Accessibility feature example',
   },
   {
-    src: '/images/about/parking.jpg',
+    src: '/images/about/parking',
     alt: 'Community rating accessibility',
   },
   {
-    src: '/images/about/braille.jpg',
+    src: '/images/about/braille',
     alt: 'Accessible entrance',
   },
   {
-    src: '/images/about/sensory.jpg',
+    src: '/images/about/sensory',
     alt: 'Wheelchair accessibility',
   },
   {
-    src: '/images/about/flower.jpg',
+    src: '/images/about/flower',
     alt: 'Accessible facilities',
   },
 ]
