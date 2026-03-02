@@ -22,15 +22,6 @@ export const metadata: Metadata = {
   },
   description:
     'Accuguide helps you discover accessible places and services near you. Find detailed accessibility information, reviews, and resources to make your daily life easier.',
-  manifest: '/manifest.json',
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: 'default',
-    title: 'Accuguide',
-  },
-  formatDetection: {
-    telephone: false,
-  },
 }
 
 export default function RootLayout({
@@ -58,19 +49,6 @@ export default function RootLayout({
           <Footer />
           <ModeToggle />
         </Providers>
-        <Script
-          id="register-sw"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/sw.js');
-                });
-              }
-            `,
-          }}
-        />
       </body>
     </html>
   )
