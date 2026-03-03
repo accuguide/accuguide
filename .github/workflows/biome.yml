@@ -9,7 +9,7 @@ on:
       - beta
 
 jobs:
-  lint:
+  Lint:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -23,7 +23,7 @@ jobs:
         run: bun install
       - name: Lint code
         run: bun lint
-  format:
+  Format:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
