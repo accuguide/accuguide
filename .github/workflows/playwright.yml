@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
     services:
       db:
         image: postgres:18.1
@@ -31,8 +33,6 @@ jobs:
         run: bun install
       - name: Push database schema
         run: bun run db:push
-        env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
       - name: Install Playwright Browsers
         run: bunx playwright install --with-deps
       - name: Run Playwright tests
