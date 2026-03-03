@@ -10,6 +10,7 @@
     "lint": "biome lint .",
     "format": "biome format --write .",
     "assist": "biome check --write .",
+    "test": "playwright test",
     "db:studio": "drizzle-kit studio",
     "db:push": "drizzle-kit push",
     "db:seed": "tsx src/lib/db/seed.ts",
