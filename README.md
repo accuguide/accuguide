@@ -1,38 +1,39 @@
 # Accuguide
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/biome.yml?logo=github&label=Biome)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/playwright.yml?logo=github&label=Playwright)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/codeql.yml?logo=github&label=CodeQL)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/accuguide/accuguide/build.yml?logo=github&label=Build)
 ![Netlify](https://img.shields.io/netlify/378e5089-548b-429f-b1ad-507f6bae73e4?logo=netlify&label=Netlify)
 
-## About
+A platform designed by and for people with disabilities to find and rate accessible places and services.
 
-The source code for Accuguide's website. Accuguide is a platform designed by and for people with disabilities to be able to find and rate accessible places and services!
+## Table of Contents
 
-### Tech Stack
+- [Beta Access](#beta-access)
+- [Tech Stack](#tech-stack)
+- [Contributing](#contributing)
+- [Setup](#setup)
+- [Sponsors](#sponsors)
 
-- Next.js
-- PostgreSQL
-- Google Cloud Platform (Auth, Maps API)
-- Groq (groq/compound)
-- Better Auth
-- Tailwind CSS
-- AWS (Image Storage)
-- Playwright (Tests)
+## Beta Access
 
-### Code Quality
+The open beta is available at **https://beta.accuguide.org**. If you already have a production account, use those same credentials to log in. The beta includes features and improvements not yet released to production.
 
-- CodeQL
-- Biome
+## Tech Stack
 
-### Beta Access
-
-- You can access the open beta at https://beta.accuguide.org (if you already have an account on the production site, use that same account to log in to the beta site)
-- The beta includes features and improvements that have not yet been formally released to the production site
+| Category | Technologies |
+|---|---|
+| Frontend | Next.js, Tailwind CSS |
+| Backend | PostgreSQL, Better Auth |
+| Infrastructure | Google Cloud Platform (Auth, Maps API), AWS (Image Storage), Netlify |
+| AI | Groq (groq/compound) |
+| Testing | Cypress |
+| Code Quality | CodeQL, Biome |
 
 ## Contributing
 
-We are always looking for open source contributions! Check out our contribution guidelines [here](https://github.com/accuguide/.github/blob/main/CONTRIBUTING.md) for more information! Once you are familiar with our guidelines, you can check out our issues to see what needs to be added, fixed, or changed. If you are a new contributor on Github we recommend you try and tackle issues labeled "good first issue".
+We are always looking for open source contributions! Check out our [contribution guidelines](https://github.com/accuguide/.github/blob/main/CONTRIBUTING.md) for more information. Once you are familiar with our guidelines, check out our issues to see what needs to be added, fixed, or changed. If you are new to GitHub, we recommend tackling issues labeled **"good first issue"**.
 
 ## Setup
 
@@ -41,34 +42,40 @@ We are always looking for open source contributions! Check out our contribution 
 - [Docker](https://docs.docker.com/desktop/)
 - [Bun](https://bun.sh/)
 
-### Code Setup
+### Installation
 
 1. `git clone https://github.com/accuguide/accuguide.git`
 2. `bun install`
 3. `cp .env.example .env`
 
-#### Optional (but recommended) steps
+### Optional Configuration
 
-- Register a free Google Maps API key in Google Cloud. Please ensure to limit quotas to ensure you stay within free limits. Put this key into the `.env` file in both variables with the name `GOOGLE_MAPS_API_KEY`. This step is only required if you need search to function when developing locally.
-  - In Google Cloud, setup the OAuth consent screen and client. For Authorized Javascript origins, put `http://localhost:3000`, and for Authorized redirect URIs put `http://localhost:3000/login/google/callback`. On the client page, you will find the Client ID and Client secret. Add both these values to your `.env` file. This step is only required if you need Google OAuth to work when developing locally.
-- Register a free Groq AI API key and add it to the appropriate field in your `.env` file. This step is only required if you need place AI summaries to work when developing locally.
-- At this time, donation and email related features are unavailable for contributors to work on due to complex setup requirements
+These steps are only required if you need the corresponding features to work locally.
 
-### Running The Code
+| Feature | Steps |
+|---|---|
+| Search | Register a free [Google Maps API key](https://console.cloud.google.com/). Limit quotas (e.g. 10 req/min, 100 req/day). Add the key to both `GOOGLE_MAPS_API_KEY` fields in `.env`. |
+| Google OAuth | In your Google Cloud project, configure the OAuth consent screen. Set Authorized JS origin to `http://localhost:3000` and redirect URI to `http://localhost:3000/login/google/callback`. Add the Client ID and Secret to `.env`. |
+| AI Summaries | Register a free [Groq API key](https://console.groq.com/) and add it to the appropriate field in `.env`. |
+
+> **Note:** Donation and email features are currently unavailable for local development due to complex setup requirements.
+
+### Running the App
 
 1. `bun dev`
 2. `bun run s3:push`
 
-3. The following commands are only for initial database setup / resetting the database
+For initial database setup or to reset the database:
 
-- `bun db:push` (applies schema changes)
-- `bun db:seed` (resets to seed data)
+- `bun db:push` — applies schema changes
+- `bun db:seed` — resets to seed data
 
-If Docker is having issues regarding the volume location as a result of the upgrade from postgres:17 to postgres:18, running `docker compose down -v`, stopping all services, then doing the dev command again should fix it.
+> **Tip:** If Docker has volume issues after the postgres:17 → postgres:18 upgrade, run `docker compose down -v`, stop all services, then run `bun dev` again.
 
 ## Sponsors
 
-Please considering sponsoring Accuguide to ensure continued development and ability to keep this project free and open source!
+Please consider sponsoring Accuguide to ensure continued development and keep this project free and open source!
 
 ### Current Sponsors
+
 No sponsors yet!
