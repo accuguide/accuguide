@@ -30,3 +30,6 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/bun.lockb') }}-
       - name: Attempt build
         run: bun run build
+        env:
+          BETTER_AUTH_SECRET: 2Ws16mRlS0u5Oau8P6WFSBASY45w47zL
+          NEXT_TELEMETRY_DISABLED: 1
