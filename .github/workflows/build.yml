@@ -19,12 +19,14 @@ jobs:
         uses: actions/checkout@v5
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
+      - name: Cache bun dependencies
+        uses: actions/cache@v4
         with:
-          cache: true
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
       - name: Install dependencies
         run: bun install
       - name: Attempt build
-        env:
-          BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
-          NEXT_TELEMETRY_DISABLED: 1
         run: bun run build
