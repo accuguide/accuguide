@@ -2,7 +2,7 @@ name: "Pull Request Labeler and Actions"
 
 on:
   pull_request_target:
-    types: [opened]
+    types: opened
 
 jobs:
   labeler:

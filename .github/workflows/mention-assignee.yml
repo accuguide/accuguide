@@ -2,7 +2,7 @@ name: Mention Assignee On Issue Assignment
 
 on:
   issues:
-    types: [assigned]
+    types: assigned
 
 jobs:
   mention-assignee:
