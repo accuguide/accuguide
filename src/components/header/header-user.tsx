@@ -40,15 +40,15 @@ export default async function HeaderUser() {
           {user?.name}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href="/settings/" className="text-slate-600 dark:text-slate-300">
+        <Link href="/settings/" className="text-slate-700 dark:text-slate-200">
           <DropdownMenuItem>Settings</DropdownMenuItem>
         </Link>
         {user?.role === 'admin' && (
-          <Link href="/admin/" className="text-slate-600 dark:text-slate-300">
+          <Link href="/admin/" className="text-slate-700 dark:text-slate-200">
             <DropdownMenuItem>Admin</DropdownMenuItem>
           </Link>
         )}
-        <Link href="/sign-out/" className="text-slate-600 dark:text-slate-300">
+        <Link href="/sign-out/" className="text-slate-700 dark:text-slate-200">
           <DropdownMenuItem>Sign Out</DropdownMenuItem>
         </Link>
       </DropdownMenuContent>

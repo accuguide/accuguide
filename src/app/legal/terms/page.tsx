@@ -381,7 +381,7 @@ export default function TermsOfService() {
             </p>
           </div>
 
-          <p className="mt-12 text-sm">Last Updated: November 5, 2025</p>
+          <p className="mt-12 text-sm">Last Updated: February 17, 2026.</p>
         </div>
       </div>
     </div>

@@ -37,20 +37,9 @@ const features = [
 ]
 
 export default async function Page() {
-  const results = await Promise.allSettled([
-    db.$count(entityTable),
-    db.$count(indicatorTable),
-    db.$count(reviewTable),
-  ])
-
-  const places = results[0].status === 'fulfilled' ? results[0].value || 0 : 0
-  const indicators =
-    results[1].status === 'fulfilled' ? results[1].value || 0 : 0
-  const reviews = results[2].status === 'fulfilled' ? results[2].value || 0 : 0
-
-  if (results.some((r) => r.status === 'rejected')) {
-    console.error('[page] One or more count queries failed', results)
-  }
+  const places = await db.$count(entityTable)
+  const indicators = await db.$count(indicatorTable)
+  const reviews = await db.$count(reviewTable)
 
   const stats = [
     {
@@ -113,11 +102,11 @@ export default async function Page() {
         <p className="section-subheading">
           Join thousands of users building a more accessible world
         </p>
-        <dl className="stats-grid">
+        <div className="stats-grid">
           {stats.map((stat) => (
             <StatCard key={stat.name} {...stat} />
           ))}
-        </dl>
+        </div>
       </section>
     </main>
   )
