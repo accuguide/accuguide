@@ -1,9 +1,13 @@
 name: Playwright
+
 on:
   push:
-    branches: beta
+    branches:
+      - beta
   pull_request:
-    branches: beta
+    branches:
+      - beta
+
 jobs:
   Test:
     timeout-minutes: 5
@@ -27,12 +31,8 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@3d267786b128fe76c2f16a390aa2448b815359f3
-      - name: Install dependencies
-        run: bun install
+      - name: Setup
+        uses: ./.github
       - name: Push database schema
         run: bun run db:push
       - name: Cache Playwright Browsers
