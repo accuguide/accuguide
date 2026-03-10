@@ -4,7 +4,7 @@ procs:
     stop:
       send-keys: ["<C-c>"]
   next.js:
-    cmd: ["bun", "dev:cy"]
+    cmd: ["bunx", "next", "dev"]
     stop:
       send-keys: ["<C-c>"]
   shell:
