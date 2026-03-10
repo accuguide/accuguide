@@ -35,6 +35,13 @@ jobs:
         run: bun install
       - name: Push database schema
         run: bun run db:push
+      - name: Cache Playwright Browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
       - name: Install Playwright Browsers
         run: bunx playwright install --with-deps
       - name: Run Playwright tests
