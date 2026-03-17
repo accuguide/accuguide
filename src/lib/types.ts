@@ -1,8 +1,25 @@
 export type SearchDisplayType = {
+  id?: string
   googleId: string
   name: string
   address: string
   type: string
+  lat: number
+  lng: number
+  aiScore?: number
+}
+
+export type SearchApiResponse = {
+  page: number
+  pageSize: number
+  totalResults: number
+  totalPages: number
+  hasPreviousPage: boolean
+  hasNextPage: boolean
+  data: {
+    database: SearchDisplayType[]
+    google: SearchDisplayType[]
+  }
 }
 
 export type GoogleSearchResponse = {

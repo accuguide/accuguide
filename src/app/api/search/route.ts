@@ -1,16 +1,61 @@
-import { count, sql } from 'drizzle-orm'
+import { asc, count, sql } from 'drizzle-orm'
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { entityTable } from '@/lib/db/schema'
-import { GoogleSearchResponse, SearchDisplayType } from '@/lib/types'
+import {
+  GoogleSearchResponse,
+  SearchApiResponse,
+  SearchDisplayType,
+} from '@/lib/types'
+
+// A page always contains at most 18 total results across both data sources.
+const PAGE_SIZE = 18
+
+// Reuse one full-text condition for count, dedupe, and page fetches so
+// pagination stays stable and consistent across all related queries.
+function getSearchCondition(formattedQuery: string) {
+  return sql`(
+    setweight(to_tsvector('english', ${entityTable.name}), 'A') ||
+    setweight(to_tsvector('english', ${entityTable.city}), 'A') ||
+    setweight(to_tsvector('english', ${entityTable.state}), 'A') ||
+    setweight(to_tsvector('english', ${entityTable.displayType}), 'A') ||
+    setweight(to_tsvector('english', ${entityTable.type}), 'B') ||
+    setweight(to_tsvector('english', ${entityTable.description}), 'B')
+
+    @@ to_tsquery('english', ${formattedQuery})
+  )`
+}
 
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams
-    const query = searchParams.get('query') || ''
+    const query = searchParams.get('query')?.trim() || ''
+    const pageParam = Number.parseInt(searchParams.get('page') || '1', 10)
+    const requestedPage =
+      Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1
     const latitude = searchParams.get('latitude')
     const longitude = searchParams.get('longitude')
     const apiKey = process.env.BACKEND_GOOGLE_MAPS_API_KEY
+
+    // Avoid unnecessary API/DB work for empty searches and return a typed
+    // empty payload that matches the regular paginated response shape.
+    if (!query) {
+      const emptyResponse: SearchApiResponse = {
+        page: 1,
+        pageSize: PAGE_SIZE,
+        totalResults: 0,
+        totalPages: 0,
+        hasPreviousPage: false,
+        hasNextPage: false,
+        data: {
+          database: [],
+          google: [],
+        },
+      }
+
+      return NextResponse.json(emptyResponse, { status: 200 })
+    }
+
     if (!apiKey) {
       return NextResponse.json({ error: 'API key not found' }, { status: 500 })
     }
@@ -35,36 +80,80 @@ export async function GET(request: NextRequest) {
     }
 
     const googleResponse = await response.json()
-    const formattedGoogleResponse: SearchDisplayType[] =
-      googleResponse.results.map((place: GoogleSearchResponse) => ({
-        googleId: place.place_id,
-        name: place.name,
-        address: place.formatted_address,
-        type: place.types[0],
-        lat: place.geometry.location.lat,
-        lng: place.geometry.location.lng,
-      }))
+    // Normalize Google results to the same shape we use for DB rows so we can
+    // paginate and merge both sources with one consistent data contract.
+    const formattedGoogleResponse: SearchDisplayType[] = Array.isArray(
+      googleResponse.results,
+    )
+      ? googleResponse.results.map((place: GoogleSearchResponse) => ({
+          googleId: place.place_id,
+          name: place.name,
+          address: place.formatted_address,
+          type: place.types[0],
+          lat: place.geometry.location.lat,
+          lng: place.geometry.location.lng,
+        }))
+      : []
 
     const formattedQuery = query.replace(/\s+/g, ' & ') + ':*'
-    let formattedDbResponse: SearchDisplayType[] = []
-    const dbCount = await db.select({ count: count() }).from(entityTable)
-    if (dbCount[0].count !== 0) {
-      const searchDbQuery = sql`(
-        setweight(to_tsvector('english', ${entityTable.name}), 'A') ||
-        setweight(to_tsvector('english', ${entityTable.city}), 'A') ||
-        setweight(to_tsvector('english', ${entityTable.state || ''}), 'A') ||
-        setweight(to_tsvector('english', ${entityTable.displayType}), 'A') ||
-        setweight(to_tsvector('english', ${entityTable.type}), 'B') ||
-        setweight(to_tsvector('english', ${entityTable.description || ''}), 'B')
+    const searchCondition = getSearchCondition(formattedQuery)
+    // Count only matching DB rows. This number drives page boundaries for the
+    // combined stream and is also used to calculate offsets.
+    const [{ count: dbCount }] = await db
+      .select({ count: count() })
+      .from(entityTable)
+      .where(searchCondition)
 
-        @@ to_tsquery('english', ${formattedQuery})
-      )`
-      const dbResponse = await db
-        .select()
-        .from(entityTable)
-        .where(searchDbQuery)
+    // Pull Google IDs for matching DB rows so we can remove duplicates from
+    // Google's response before computing total combined results.
+    const matchingDbGoogleIds = await db
+      .select({ googleId: entityTable.googleId })
+      .from(entityTable)
+      .where(searchCondition)
 
-      formattedDbResponse = dbResponse.map((place) => ({
+    const dbIds = new Set(matchingDbGoogleIds.map((place) => place.googleId))
+    const filteredGoogleResponse = formattedGoogleResponse.filter(
+      (place) => !dbIds.has(place.googleId),
+    )
+
+    // Pagination is calculated over one combined list (DB + filtered Google),
+    // not separately per source.
+    const totalResults = dbCount + filteredGoogleResponse.length
+    const totalPages = Math.ceil(totalResults / PAGE_SIZE)
+    const currentPage =
+      totalPages === 0 ? 1 : Math.min(requestedPage, totalPages)
+    const pageOffset = (currentPage - 1) * PAGE_SIZE
+
+    // Fill the current page from DB first. If DB cannot fully fill 18 items,
+    // remaining slots are filled from Google using an adjusted Google offset.
+    const dbOffset = Math.min(pageOffset, dbCount)
+    const dbLimit = Math.max(0, Math.min(PAGE_SIZE, dbCount - dbOffset))
+
+    const paginatedDbResponse =
+      dbLimit > 0
+        ? await db
+            .select()
+            .from(entityTable)
+            .where(searchCondition)
+            .orderBy(asc(entityTable.name))
+            .offset(dbOffset)
+            .limit(dbLimit)
+        : []
+
+    const remainingSlots = PAGE_SIZE - paginatedDbResponse.length
+    const googleOffset = Math.max(0, pageOffset - dbCount)
+    const paginatedGoogleResponse =
+      remainingSlots > 0
+        ? filteredGoogleResponse.slice(
+            googleOffset,
+            googleOffset + remainingSlots,
+          )
+        : []
+
+    // Keep the source split for rendering sections in the UI while returning
+    // shared pagination metadata that applies to both sections together.
+    const formattedDbResponse: SearchDisplayType[] = paginatedDbResponse.map(
+      (place) => ({
         id: place.id,
         googleId: place.googleId,
         name: place.name,
@@ -72,26 +161,28 @@ export async function GET(request: NextRequest) {
         type: place.displayType,
         lat: Number(place.lat),
         lng: Number(place.lon),
-        aiScore: place.aiScore || 0,
-      }))
+        aiScore: place.aiScore ? Number(place.aiScore) : 0,
+      }),
+    )
+
+    const responseBody: SearchApiResponse = {
+      page: currentPage,
+      pageSize: PAGE_SIZE,
+      totalResults,
+      totalPages,
+      hasPreviousPage: currentPage > 1,
+      hasNextPage: currentPage < totalPages,
+      data: {
+        database: formattedDbResponse,
+        google: paginatedGoogleResponse,
+      },
     }
 
-    const dbIds = new Set(formattedDbResponse.map((place) => place.googleId))
-    const filteredGoogleResponse = formattedGoogleResponse.filter(
-      (place) => !dbIds.has(place.googleId),
-    )
-    const combinedResponse = [
-      {
-        loc: 'database',
-        data: formattedDbResponse,
-      },
-      {
-        loc: 'google',
-        data: filteredGoogleResponse,
-      },
-    ]
-    return NextResponse.json(combinedResponse, { status: 200 })
+    return NextResponse.json(responseBody, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ error: `[api/search GET] error: ${error}` })
+    return NextResponse.json(
+      { error: `[api/search GET] error: ${error}` },
+      { status: 500 },
+    )
   }
 }
