@@ -10,13 +10,19 @@ import { useLocation } from '@/contexts/location-context'
 import type { PointOfInterest, SearchDisplayProps } from '@/lib/types'
 
 function SearchResults() {
-  const [googleResponse, setGoogleResponse] = useState<SearchDisplayProps[]>([])
-  const [dbResponse, setDbResponse] = useState<SearchDisplayProps[]>([])
+  // Only use one state variable for results, due to pagination combining db and google responses
+  const [results, setResults] = useState<SearchDisplayProps[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const searchParams = useSearchParams()
   const query = searchParams.get('query')
   const { latitude, longitude, isLocationChecked } = useLocation()
   const [locations, setLocations] = useState<PointOfInterest[]>([])
+  // new state variables for pagination
+  const [currentPage, setCurrentPage] = useState(1) // consts to track current page of user
+  const [totalPages, setTotalPages] = useState(1) // consts to save total number of pages
+
+  // troubleshooting
+  const [totalResults, setTotalResults] = useState(1)
 
   useEffect(() => {
     if (!query || !isLocationChecked) {
@@ -39,37 +45,23 @@ function SearchResults() {
         return response.json()
       })
       .then((data) => {
-        setGoogleResponse(data[1].data)
-        setDbResponse(data[0].data)
+        setResults(data.data)
+        setTotalPages(data.totalPages)
+        setTotalResults(data.totalResults)
 
-        const tempLocations: PointOfInterest[] = [
-          ...data[0].data.map(
-            (place: {
-              name: string
-              address: string
-              lat: number
-              lng: number
-            }) => ({
-              key: place.address,
-              name: place.name,
-              address: place.address,
-              location: { lat: place.lat, lng: place.lng },
-            }),
-          ),
-          ...data[1].data.map(
-            (place: {
-              name: string
-              address: string
-              lat: number
-              lng: number
-            }) => ({
-              key: place.name,
-              name: place.name,
-              address: place.address,
-              location: { lat: place.lat, lng: place.lng },
-            }),
-          ),
-        ]
+        const tempLocations: PointOfInterest[] = data.data.map(
+          (place: {
+            name: string
+            address: string
+            lat: number
+            lng: number
+          }) => ({
+            key: place.address,
+            name: place.name,
+            address: place.address,
+            location: { lat: place.lat, lng: place.lng },
+          }),
+        )
         setLocations(tempLocations)
       })
       .catch((error) => {
@@ -78,7 +70,12 @@ function SearchResults() {
       .finally(() => {
         setIsLoading(false)
       })
-  }, [query, latitude, longitude, isLocationChecked])
+  }, [query, latitude, longitude, isLocationChecked, currentPage]) // add currentPage state variable to trigger re-render on state update
+
+  // Set current page back to default (1) when the query changes
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [query])
 
   return (
     <div>
@@ -95,37 +92,53 @@ function SearchResults() {
 
           <div className="flex gap-6">
             <div className="flex-1">
-              <h2 className="mt-8 mb-4">Catalogued Results</h2>
+              <h2 className="mt-8 mb-4">Results</h2>
+              <p>Results: {totalResults}</p>
+
+              {/* navigation elements for pagination */}
+              {/* only necessary when there is more than one page */}
+              {totalPages > 1 && (
+                <div className="mt-6 mb-4 flex items-center justify-center gap-2">
+                  <button
+                    onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                    disabled={currentPage === 1}
+                    className="cursor-pointer rounded border px-3 py-1 disabled:opacity-40"
+                  >
+                    Previous
+                  </button>
+
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (page) => (
+                      <button
+                        key={page}
+                        onClick={() => setCurrentPage(page)}
+                        className={`cursor-pointer rounded border px-3 py-1 ${
+                          page === currentPage ? 'bg-black text-white' : ''
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    ),
+                  )}
+
+                  <button
+                    onClick={() =>
+                      setCurrentPage((p) => Math.min(p + 1, totalPages))
+                    }
+                    disabled={currentPage === totalPages}
+                    className="cursor-pointer rounded border px-3 py-1 disabled:opacity-40"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {dbResponse.map((place) => (
-                  <SearchDisplay
-                    displayType="db"
-                    key={place.googleId + place.address}
-                    id={place.id}
-                    googleId={place.googleId}
-                    name={place.name}
-                    type={place.type}
-                    address={place.address}
-                    aiScore={place.aiScore || 0}
-                  />
-                ))}
-              </div>
-              <h2 className="mt-8 mb-4">All Results</h2>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {googleResponse.map((place) => (
-                  <SearchDisplay
-                    displayType="google"
-                    key={place.googleId + place.address}
-                    googleId={place.googleId}
-                    name={place.name}
-                    type={place.type}
-                    address={place.address}
-                    aiScore={0}
-                  />
+                {results.map((place) => (
+                  <SearchDisplay key={place.id ?? place.googleId} {...place} />
                 ))}
               </div>
             </div>
-
             {/* Sidebar map for large screens */}
             <div className="sticky top-4 hidden h-fit lg:block">
               <MapComponent locations={locations} />

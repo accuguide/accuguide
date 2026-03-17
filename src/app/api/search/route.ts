@@ -4,12 +4,16 @@ import { db } from '@/lib/db'
 import { entityTable } from '@/lib/db/schema'
 import { GoogleSearchResponse, SearchDisplayType } from '@/lib/types'
 
+// Maximum search result per page for pagination
+const ITEMS_PER_PAGE = 18
+
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams
     const query = searchParams.get('query') || ''
     const latitude = searchParams.get('latitude')
     const longitude = searchParams.get('longitude')
+    const curPage = parseInt(searchParams.get('page') || '1', 10)
     const apiKey = process.env.BACKEND_GOOGLE_MAPS_API_KEY
     if (!apiKey) {
       return NextResponse.json({ error: 'API key not found' }, { status: 500 })
@@ -80,17 +84,25 @@ export async function GET(request: NextRequest) {
     const filteredGoogleResponse = formattedGoogleResponse.filter(
       (place) => !dbIds.has(place.googleId),
     )
-    const combinedResponse = [
-      {
-        loc: 'database',
-        data: formattedDbResponse,
-      },
-      {
-        loc: 'google',
-        data: filteredGoogleResponse,
-      },
+    // combine search results to single list for pagination
+    const combined: SearchDisplayType[] = [
+      ...formattedDbResponse,
+      ...filteredGoogleResponse,
     ]
-    return NextResponse.json(combinedResponse, { status: 200 })
+    const totalResults = combined.length
+    const totalPages = Math.ceil(totalResults / ITEMS_PER_PAGE)
+    const offset = (curPage - 1) * ITEMS_PER_PAGE
+    const paginated = combined.slice(offset, offset + ITEMS_PER_PAGE)
+
+    return NextResponse.json(
+      {
+        data: paginated,
+        totalResults,
+        curPage,
+        totalPages,
+      },
+      { status: 200 },
+    )
   } catch (error) {
     return NextResponse.json({ error: `[api/search GET] error: ${error}` })
   }
