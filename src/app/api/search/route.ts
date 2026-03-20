@@ -26,6 +26,9 @@ function getSearchCondition(formattedQuery: string) {
   )`
 }
 
+// Maximum search result per page for pagination
+const ITEMS_PER_PAGE = 18
+
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams
@@ -35,6 +38,7 @@ export async function GET(request: NextRequest) {
       Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1
     const latitude = searchParams.get('latitude')
     const longitude = searchParams.get('longitude')
+    const curPage = parseInt(searchParams.get('page') || '1', 10)
     const apiKey = process.env.BACKEND_GOOGLE_MAPS_API_KEY
 
     // Avoid unnecessary API/DB work for empty searches and return a typed
@@ -164,6 +168,7 @@ export async function GET(request: NextRequest) {
         aiScore: place.aiScore ? Number(place.aiScore) : 0,
       }),
     )
+<<<<<<< issue-205
 
     const responseBody: SearchApiResponse = {
       page: currentPage,
@@ -179,6 +184,27 @@ export async function GET(request: NextRequest) {
     }
 
     return NextResponse.json(responseBody, { status: 200 })
+=======
+    // combine search results to single list for pagination
+    const combined: SearchDisplayType[] = [
+      ...formattedDbResponse,
+      ...filteredGoogleResponse,
+    ]
+    const totalResults = combined.length
+    const totalPages = Math.ceil(totalResults / ITEMS_PER_PAGE)
+    const offset = (curPage - 1) * ITEMS_PER_PAGE
+    const paginated = combined.slice(offset, offset + ITEMS_PER_PAGE)
+
+    return NextResponse.json(
+      {
+        data: paginated,
+        totalResults,
+        curPage,
+        totalPages,
+      },
+      { status: 200 },
+    )
+>>>>>>> beta
   } catch (error) {
     return NextResponse.json(
       { error: `[api/search GET] error: ${error}` },
