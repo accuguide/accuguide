@@ -56,7 +56,7 @@ function parseStateFromAddress(address?: string): string | null {
 
 function uniqueSorted(values: Array<string | null | undefined>) {
   return Array.from(
-      new Set(values.filter((v): v is string => Boolean(v && v.trim()))),
+    new Set(values.filter((v): v is string => Boolean(v && v.trim()))),
   ).sort((a, b) => a.localeCompare(b))
 }
 
@@ -77,7 +77,7 @@ function SearchResults() {
 
   // pagination
   const [currentPage, setCurrentPage] = useState(
-      Math.max(parseInt(searchParams.get('page') || '1', 10), 1),
+    Math.max(parseInt(searchParams.get('page') || '1', 10), 1),
   )
   const [totalPages, setTotalPages] = useState(1)
   const [totalResults, setTotalResults] = useState(0)
@@ -89,18 +89,27 @@ function SearchResults() {
 
   // Options derived from current results
   const typeOptions = useMemo(
-      () => uniqueSorted(results.map((r) => (r.type || '').toString().toLowerCase())),
-      [results],
+    () =>
+      uniqueSorted(results.map((r) => (r.type || '').toString().toLowerCase())),
+    [results],
   )
 
   const inferredCities = useMemo(
-      () => uniqueSorted(results.map((r) => (r as any).city || parseCityFromAddress(r.address))),
-      [results],
+    () =>
+      uniqueSorted(
+        results.map((r) => (r as any).city || parseCityFromAddress(r.address)),
+      ),
+    [results],
   )
 
   const inferredStates = useMemo(
-      () => uniqueSorted(results.map((r) => (r as any).state || parseStateFromAddress(r.address))),
-      [results],
+    () =>
+      uniqueSorted(
+        results.map(
+          (r) => (r as any).state || parseStateFromAddress(r.address),
+        ),
+      ),
+    [results],
   )
 
   // Keep URL in sync when filters or page change (no scroll jump)
@@ -172,33 +181,38 @@ function SearchResults() {
     }
 
     fetch(`/api/search/?${params.toString()}`)
-        .then((response) => {
-          if (!response.ok) {
-            console.error(`[search] error calling /api/search`)
-          }
-          return response.json()
-        })
-        .then((data) => {
-          setResults(data.data || [])
-          setTotalPages(data.totalPages || 1)
-          setTotalResults(data.totalResults || 0)
+      .then((response) => {
+        if (!response.ok) {
+          console.error(`[search] error calling /api/search`)
+        }
+        return response.json()
+      })
+      .then((data) => {
+        setResults(data.data || [])
+        setTotalPages(data.totalPages || 1)
+        setTotalResults(data.totalResults || 0)
 
-          const tempLocations: PointOfInterest[] = (data.data || []).map(
-              (place: { name: string; address: string; lat: number; lng: number }) => ({
-                key: place.address,
-                name: place.name,
-                address: place.address,
-                location: { lat: place.lat, lng: place.lng },
-              }),
-          )
-          setLocations(tempLocations)
-        })
-        .catch((error) => {
-          console.error(`[search] error ${error}`)
-        })
-        .finally(() => {
-          setIsLoading(false)
-        })
+        const tempLocations: PointOfInterest[] = (data.data || []).map(
+          (place: {
+            name: string
+            address: string
+            lat: number
+            lng: number
+          }) => ({
+            key: place.address,
+            name: place.name,
+            address: place.address,
+            location: { lat: place.lat, lng: place.lng },
+          }),
+        )
+        setLocations(tempLocations)
+      })
+      .catch((error) => {
+        console.error(`[search] error ${error}`)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }, [
     query,
     latitude,
@@ -243,160 +257,181 @@ function SearchResults() {
   }
 
   return (
-      <div>
-        <Location />
+    <div>
+      <Location />
 
-        {isLoading ? (
-            <SearchSkeleton />
-        ) : (
-            <div>
-              {/* Compact map for small screens, shown above results */}
-              <div className="mt-6 lg:hidden">
-                <MapComponent locations={locations} compact />
+      {isLoading ? (
+        <SearchSkeleton />
+      ) : (
+        <div>
+          {/* Compact map for small screens, shown above results */}
+          <div className="mt-6 lg:hidden">
+            <MapComponent locations={locations} compact />
+          </div>
+
+          <div className="flex gap-6">
+            <div className="flex-1">
+              <h2 className="mt-8 mb-2">Results</h2>
+              <p className="mb-4 text-sm text-muted-foreground">
+                Results: {totalResults}
+              </p>
+
+              {/* === Filters Row (Type, City, State) === */}
+              <div className="mb-6 flex flex-wrap items-center gap-3">
+                {/* Type Filter */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="min-w-[180px] justify-between"
+                    >
+                      Type: {selectedType}
+                      <ChevronDown className="ml-2 size-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start">
+                    <DropdownMenuItem onClick={() => onSelectType('All')}>
+                      All
+                    </DropdownMenuItem>
+                    {typeOptions.map((t) => (
+                      <DropdownMenuItem key={t} onClick={() => onSelectType(t)}>
+                        {t}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* City Filter */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="min-w-[180px] justify-between"
+                    >
+                      City: {selectedCity}
+                      <ChevronDown className="ml-2 size-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start">
+                    <DropdownMenuItem onClick={() => onSelectCity('All')}>
+                      All
+                    </DropdownMenuItem>
+                    {inferredCities.map((city) => (
+                      <DropdownMenuItem
+                        key={city}
+                        onClick={() => onSelectCity(city)}
+                      >
+                        {city}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* State Filter */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="min-w-[180px] justify-between"
+                    >
+                      State: {selectedState}
+                      <ChevronDown className="ml-2 size-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start">
+                    <DropdownMenuItem onClick={() => onSelectState('All')}>
+                      All
+                    </DropdownMenuItem>
+                    {inferredStates.map((st) => (
+                      <DropdownMenuItem
+                        key={st}
+                        onClick={() => onSelectState(st)}
+                      >
+                        {st}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* Clear */}
+                <Button
+                  variant="ghost"
+                  className="ml-auto"
+                  onClick={clearFilters}
+                >
+                  Clear filters
+                </Button>
               </div>
 
-              <div className="flex gap-6">
-                <div className="flex-1">
-                  <h2 className="mt-8 mb-2">Results</h2>
-                  <p className="mb-4 text-sm text-muted-foreground">
-                    Results: {totalResults}
-                  </p>
+              {/* Pagination controls */}
+              {totalPages > 1 && (
+                <div className="mt-4 mb-4 flex items-center justify-center gap-2">
+                  <button
+                    onClick={() => {
+                      const next = Math.max(currentPage - 1, 1)
+                      setCurrentPage(next)
+                      syncUrl({ page: next })
+                    }}
+                    disabled={currentPage === 1}
+                    className="cursor-pointer rounded border px-3 py-1 disabled:opacity-40"
+                  >
+                    Previous
+                  </button>
 
-                  {/* === Filters Row (Type, City, State) === */}
-                  <div className="mb-6 flex flex-wrap items-center gap-3">
-                    {/* Type Filter */}
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="min-w-[180px] justify-between">
-                          Type: {selectedType}
-                          <ChevronDown className="ml-2 size-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="start">
-                        <DropdownMenuItem onClick={() => onSelectType('All')}>
-                          All
-                        </DropdownMenuItem>
-                        {typeOptions.map((t) => (
-                            <DropdownMenuItem key={t} onClick={() => onSelectType(t)}>
-                              {t}
-                            </DropdownMenuItem>
-                        ))}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-
-                    {/* City Filter */}
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="min-w-[180px] justify-between">
-                          City: {selectedCity}
-                          <ChevronDown className="ml-2 size-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="start">
-                        <DropdownMenuItem onClick={() => onSelectCity('All')}>
-                          All
-                        </DropdownMenuItem>
-                        {inferredCities.map((city) => (
-                            <DropdownMenuItem key={city} onClick={() => onSelectCity(city)}>
-                              {city}
-                            </DropdownMenuItem>
-                        ))}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-
-                    {/* State Filter */}
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="min-w-[180px] justify-between">
-                          State: {selectedState}
-                          <ChevronDown className="ml-2 size-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="start">
-                        <DropdownMenuItem onClick={() => onSelectState('All')}>
-                          All
-                        </DropdownMenuItem>
-                        {inferredStates.map((st) => (
-                            <DropdownMenuItem key={st} onClick={() => onSelectState(st)}>
-                              {st}
-                            </DropdownMenuItem>
-                        ))}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-
-                    {/* Clear */}
-                    <Button variant="ghost" className="ml-auto" onClick={clearFilters}>
-                      Clear filters
-                    </Button>
-                  </div>
-
-                  {/* Pagination controls */}
-                  {totalPages > 1 && (
-                      <div className="mt-4 mb-4 flex items-center justify-center gap-2">
-                        <button
-                            onClick={() => {
-                              const next = Math.max(currentPage - 1, 1)
-                              setCurrentPage(next)
-                              syncUrl({ page: next })
-                            }}
-                            disabled={currentPage === 1}
-                            className="cursor-pointer rounded border px-3 py-1 disabled:opacity-40"
-                        >
-                          Previous
-                        </button>
-
-                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                            <button
-                                key={page}
-                                onClick={() => {
-                                  setCurrentPage(page)
-                                  syncUrl({ page })
-                                }}
-                                className={`cursor-pointer rounded border px-3 py-1 ${
-                                    page === currentPage ? 'bg-black text-white' : ''
-                                }`}
-                            >
-                              {page}
-                            </button>
-                        ))}
-
-                        <button
-                            onClick={() => {
-                              const next = Math.min(currentPage + 1, totalPages)
-                              setCurrentPage(next)
-                              syncUrl({ page: next })
-                            }}
-                            disabled={currentPage === totalPages}
-                            className="cursor-pointer rounded border px-3 py-1 disabled:opacity-40"
-                        >
-                          Next
-                        </button>
-                      </div>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (page) => (
+                      <button
+                        key={page}
+                        onClick={() => {
+                          setCurrentPage(page)
+                          syncUrl({ page })
+                        }}
+                        className={`cursor-pointer rounded border px-3 py-1 ${
+                          page === currentPage ? 'bg-black text-white' : ''
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    ),
                   )}
 
-                  {/* Results grid */}
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {results.map((place) => (
-                        <SearchDisplay key={place.id ?? place.googleId} {...place} />
-                    ))}
-                  </div>
+                  <button
+                    onClick={() => {
+                      const next = Math.min(currentPage + 1, totalPages)
+                      setCurrentPage(next)
+                      syncUrl({ page: next })
+                    }}
+                    disabled={currentPage === totalPages}
+                    className="cursor-pointer rounded border px-3 py-1 disabled:opacity-40"
+                  >
+                    Next
+                  </button>
                 </div>
+              )}
 
-                {/* Sidebar map for large screens */}
-                <div className="sticky top-4 hidden h-fit lg:block">
-                  <MapComponent locations={locations} />
-                </div>
+              {/* Results grid */}
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {results.map((place) => (
+                  <SearchDisplay key={place.id ?? place.googleId} {...place} />
+                ))}
               </div>
             </div>
-        )}
-      </div>
+
+            {/* Sidebar map for large screens */}
+            <div className="sticky top-4 hidden h-fit lg:block">
+              <MapComponent locations={locations} />
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
 
 export default function Page() {
   return (
-      <Suspense>
-        <SearchResults />
-      </Suspense>
+    <Suspense>
+      <SearchResults />
+    </Suspense>
   )
 }

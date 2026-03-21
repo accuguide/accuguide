@@ -17,10 +17,10 @@ export async function GET(request: NextRequest) {
 
     // --- Filters: type, city, state (support comma-separated lists) ---
     const parseList = (v: string | null) =>
-        (v || '')
-            .split(',')
-            .map((s) => s.trim().toLowerCase())
-            .filter(Boolean)
+      (v || '')
+        .split(',')
+        .map((s) => s.trim().toLowerCase())
+        .filter(Boolean)
 
     const typeFilters = parseList(searchParams.get('type'))
     const cityFilters = parseList(searchParams.get('city'))
@@ -34,44 +34,44 @@ export async function GET(request: NextRequest) {
     // Build URL with optional location parameters
     // We keep Google Text Search unmodified by filters for consistent behavior and apply filters after fetch.
     let url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(
-        query,
+      query,
     )}&key=${apiKey}`
 
     if (latitude && longitude) {
       url += `&location=${encodeURIComponent(latitude)},${encodeURIComponent(
-          longitude,
+        longitude,
       )}&radius=5000`
     }
 
     const response = await fetch(url)
     if (!response.ok) {
       return NextResponse.json(
-          {
-            error:
-                '[api/search GET] error: Failed to fetch data from Google Places API',
-          },
-          { status: response.status },
+        {
+          error:
+            '[api/search GET] error: Failed to fetch data from Google Places API',
+        },
+        { status: response.status },
       )
     }
 
     const googleResponse = await response.json()
-    console.log(googleResponse);
+    console.log(googleResponse)
     // Format Google results
-    let formattedGoogleResponse: SearchDisplayType[] = (googleResponse.results || []).map(
-        (place: GoogleSearchResponse) => ({
-          googleId: place.place_id,
-          name: place.name,
-          address: place.formatted_address,
-          type: (place.types && place.types[0]) || 'unknown',
-          lat: place.geometry.location.lat,
-          lng: place.geometry.location.lng,
-        }),
-    )
+    let formattedGoogleResponse: SearchDisplayType[] = (
+      googleResponse.results || []
+    ).map((place: GoogleSearchResponse) => ({
+      googleId: place.place_id,
+      name: place.name,
+      address: place.formatted_address,
+      type: (place.types && place.types[0]) || 'unknown',
+      lat: place.geometry.location.lat,
+      lng: place.geometry.location.lng,
+    }))
 
     // --- Apply filters to Google results (post-fetch) ---
     if (typeFilters.length > 0) {
       formattedGoogleResponse = formattedGoogleResponse.filter((p) =>
-          typeFilters.includes(String(p.type || '').toLowerCase()),
+        typeFilters.includes(String(p.type || '').toLowerCase()),
       )
     }
 
@@ -81,7 +81,7 @@ export async function GET(request: NextRequest) {
         return cityFilters.some((c) => lower.includes(c))
       }
       formattedGoogleResponse = formattedGoogleResponse.filter((p) =>
-          cityMatch(p.address || ''),
+        cityMatch(p.address || ''),
       )
     }
 
@@ -91,7 +91,7 @@ export async function GET(request: NextRequest) {
         return stateFilters.some((s) => lower.includes(s))
       }
       formattedGoogleResponse = formattedGoogleResponse.filter((p) =>
-          stateMatch(p.address || ''),
+        stateMatch(p.address || ''),
       )
     }
 
@@ -112,7 +112,10 @@ export async function GET(request: NextRequest) {
       @@ to_tsquery('english', ${formattedQuery})
       )`
 
-      const dbResponse = await db.select().from(entityTable).where(searchDbQuery)
+      const dbResponse = await db
+        .select()
+        .from(entityTable)
+        .where(searchDbQuery)
 
       formattedDbResponse = dbResponse.map((place) => ({
         id: place.id,
@@ -128,20 +131,28 @@ export async function GET(request: NextRequest) {
       // --- Apply filters to DB results (in-memory, case-insensitive) ---
       if (typeFilters.length > 0) {
         formattedDbResponse = formattedDbResponse.filter((p) =>
-            typeFilters.includes(String(p.type || '').toLowerCase()),
+          typeFilters.includes(String(p.type || '').toLowerCase()),
         )
       }
       if (cityFilters.length > 0) {
-        formattedDbResponse = formattedDbResponse.filter((p) =>
+        formattedDbResponse = formattedDbResponse.filter(
+          (p) =>
             cityFilters.includes(String((p as any).city || '').toLowerCase()) ||
             // Fallback: try address text contains city (covers formatting variations)
-            cityFilters.some((c) => (p.address || '').toLowerCase().includes(c)),
+            cityFilters.some((c) =>
+              (p.address || '').toLowerCase().includes(c),
+            ),
         )
       }
       if (stateFilters.length > 0) {
-        formattedDbResponse = formattedDbResponse.filter((p) =>
-            stateFilters.includes(String((p as any).state || '').toLowerCase()) ||
-            stateFilters.some((s) => (p.address || '').toLowerCase().includes(s)),
+        formattedDbResponse = formattedDbResponse.filter(
+          (p) =>
+            stateFilters.includes(
+              String((p as any).state || '').toLowerCase(),
+            ) ||
+            stateFilters.some((s) =>
+              (p.address || '').toLowerCase().includes(s),
+            ),
         )
       }
     }
@@ -149,7 +160,7 @@ export async function GET(request: NextRequest) {
     // De-duplicate: prefer DB entries over Google entries by googleId
     const dbIds = new Set(formattedDbResponse.map((place) => place.googleId))
     const filteredGoogleResponse = formattedGoogleResponse.filter(
-        (place) => !dbIds.has(place.googleId),
+      (place) => !dbIds.has(place.googleId),
     )
 
     // Combine for pagination
@@ -164,21 +175,21 @@ export async function GET(request: NextRequest) {
     const paginated = combined.slice(offset, offset + ITEMS_PER_PAGE)
 
     return NextResponse.json(
-        {
-          data: paginated,
-          totalResults,
-          curPage,
-          totalPages,
-          appliedFilters: {
-            type: typeFilters,
-            city: cityFilters,
-            state: stateFilters,
-          },
+      {
+        data: paginated,
+        totalResults,
+        curPage,
+        totalPages,
+        appliedFilters: {
+          type: typeFilters,
+          city: cityFilters,
+          state: stateFilters,
         },
-        { status: 200 },
+      },
+      { status: 200 },
     )
   } catch (error) {
     return NextResponse.json({ error: `[api/search GET] error: ${error}` })
   }
 }
-``
+;``
