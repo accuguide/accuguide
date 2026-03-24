@@ -97,7 +97,7 @@ function SearchResults() {
   const inferredCities = useMemo(
     () =>
       uniqueSorted(
-        results.map((r) => (r as any).city || parseCityFromAddress(r.address)),
+        results.map((r) => r.city || parseCityFromAddress(r.address)),
       ),
     [results],
   )
@@ -105,9 +105,7 @@ function SearchResults() {
   const inferredStates = useMemo(
     () =>
       uniqueSorted(
-        results.map(
-          (r) => (r as any).state || parseStateFromAddress(r.address),
-        ),
+        results.map((r) => r.state || parseStateFromAddress(r.address)),
       ),
     [results],
   )
@@ -272,7 +270,7 @@ function SearchResults() {
           <div className="flex gap-6">
             <div className="flex-1">
               <h2 className="mt-8 mb-2">Results</h2>
-              <p className="mb-4 text-sm text-muted-foreground">
+              <p className="mb-4 text-muted-foreground text-sm">
                 Results: {totalResults}
               </p>
 

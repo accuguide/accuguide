@@ -32,6 +32,8 @@ export type SearchDisplayProps = {
   name: string
   address: string
   type: string
+  city?: string
+  state?: string
   aiScore?: number
 }
 

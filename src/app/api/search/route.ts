@@ -7,6 +7,11 @@ import { GoogleSearchResponse, SearchDisplayType } from '@/lib/types'
 // Maximum search result per page for pagination
 const ITEMS_PER_PAGE = 18
 
+type DbSearchDisplayType = SearchDisplayType & {
+  city: string
+  state: string
+}
+
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams
@@ -97,7 +102,7 @@ export async function GET(request: NextRequest) {
 
     // Prepare DB results
     const formattedQuery = query.replace(/\s+/g, ' & ') + ':*'
-    let formattedDbResponse: SearchDisplayType[] = []
+    let formattedDbResponse: DbSearchDisplayType[] = []
 
     const dbCount = await db.select({ count: count() }).from(entityTable)
     if (dbCount[0].count !== 0) {
@@ -123,6 +128,8 @@ export async function GET(request: NextRequest) {
         name: place.name,
         address: `${place.address1} ${place.address2 || ''}, ${place.city}, ${place.state}, ${place.zip}`,
         type: place.displayType,
+        city: place.city,
+        state: place.state,
         lat: Number(place.lat),
         lng: Number(place.lon),
         aiScore: place.aiScore || 0,
@@ -137,7 +144,7 @@ export async function GET(request: NextRequest) {
       if (cityFilters.length > 0) {
         formattedDbResponse = formattedDbResponse.filter(
           (p) =>
-            cityFilters.includes(String((p as any).city || '').toLowerCase()) ||
+            cityFilters.includes(String(p.city || '').toLowerCase()) ||
             // Fallback: try address text contains city (covers formatting variations)
             cityFilters.some((c) =>
               (p.address || '').toLowerCase().includes(c),
@@ -147,9 +154,7 @@ export async function GET(request: NextRequest) {
       if (stateFilters.length > 0) {
         formattedDbResponse = formattedDbResponse.filter(
           (p) =>
-            stateFilters.includes(
-              String((p as any).state || '').toLowerCase(),
-            ) ||
+            stateFilters.includes(String(p.state || '').toLowerCase()) ||
             stateFilters.some((s) =>
               (p.address || '').toLowerCase().includes(s),
             ),
