@@ -64,7 +64,6 @@ export default function MapComponent({
       locations.reduce((sum, loc) => sum + loc.location.lng, 0) /
       locations.length,
   }
-
   // Approximate map dimensions based on viewport units
   const mapWidth = typeof window !== 'undefined' ? window.innerWidth * 0.5 : 800
   const mapHeight =

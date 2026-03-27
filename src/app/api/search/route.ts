@@ -10,6 +10,8 @@ export async function GET(request: NextRequest) {
     const query = searchParams.get('query') || ''
     const latitude = searchParams.get('latitude')
     const longitude = searchParams.get('longitude')
+    const latNum = latitude != null ? parseFloat(latitude) : null
+    const lngNum = longitude != null ? parseFloat(longitude) : null
     const apiKey = process.env.BACKEND_GOOGLE_MAPS_API_KEY
     if (!apiKey) {
       return NextResponse.json({ error: 'API key not found' }, { status: 500 })
@@ -19,7 +21,8 @@ export async function GET(request: NextRequest) {
     let url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${apiKey}`
 
     // Only add location and radius if both latitude and longitude are provided
-    if (latitude && longitude) {
+    // changed to null check - lat = 0 or lng = 0 evaluate to false
+    if (latitude != null && longitude != null) {
       url += `&location=${encodeURIComponent(latitude)},${encodeURIComponent(longitude)}&radius=5000`
     }
 
@@ -36,7 +39,7 @@ export async function GET(request: NextRequest) {
 
     const googleResponse = await response.json()
     const formattedGoogleResponse: SearchDisplayType[] =
-      googleResponse.results.map((place: GoogleSearchResponse) => ({
+    googleResponse.results.map((place: GoogleSearchResponse) => ({
         googleId: place.place_id,
         name: place.name,
         address: place.formatted_address,
@@ -59,10 +62,24 @@ export async function GET(request: NextRequest) {
 
         @@ to_tsquery('english', ${formattedQuery})
       )`
-      const dbResponse = await db
+      let dbResponse = await db
         .select()
         .from(entityTable)
         .where(searchDbQuery)
+
+      //  choose catalogued results in 1 deg lat & lng if (a) user location enabled and (b) there exist nearby results
+      let nearbyDbResponse: typeof dbResponse = []
+
+      if (latNum != null && lngNum != null) {
+        nearbyDbResponse = dbResponse.filter(
+          (place) =>
+            Math.abs(parseFloat(place.lat) - latNum) <= 1 &&
+            Math.abs(parseFloat(place.lon) - lngNum) <= 1,
+        )
+        if (nearbyDbResponse.length > 0) {
+          dbResponse = nearbyDbResponse
+        }
+      }
 
       formattedDbResponse = dbResponse.map((place) => ({
         id: place.id,
