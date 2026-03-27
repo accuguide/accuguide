@@ -1,0 +1,5 @@
+fastapi[standard]
+supabase
+python_dotenv
+
+black
