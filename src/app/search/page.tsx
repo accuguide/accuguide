@@ -27,8 +27,6 @@ function SearchResults() {
   const [currentSection, setCurrentSection] = useState<'database' | 'google'>(
     'database',
   )
-  const [dbTotalPages, setDbTotalPages] = useState(0)
-  const [googleTotalPages, setGoogleTotalPages] = useState(0)
   const searchParams = useSearchParams()
   const searchParamsString = searchParams.toString()
   const pathname = usePathname()
@@ -85,8 +83,6 @@ function SearchResults() {
         setDbResponse(data.data.database)
         setCurrentPage(data.page)
         setCurrentSection(data.currentSection)
-        setDbTotalPages(data.dbTotalPages)
-        setGoogleTotalPages(data.googleTotalPages)
         setTotalPages(data.totalPages)
         setTotalResults(data.totalResults)
         setHasPreviousPage(data.hasPreviousPage)
@@ -173,10 +169,6 @@ function SearchResults() {
 
   const sectionTitle =
     currentSection === 'database' ? 'Catalogued Results' : 'All Results'
-  const currentSectionTotalItems =
-    currentSection === 'database'
-      ? Math.min(18, dbResponse.length + googleResponse.length)
-      : Math.min(18, googleResponse.length)
 
   return (
     <div>
