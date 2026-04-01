@@ -132,7 +132,7 @@ export async function GET(request: NextRequest) {
         state: place.state,
         lat: Number(place.lat),
         lng: Number(place.lon),
-        aiScore: place.aiScore || 0,
+        aiScore: Number(place.aiScore || 0),
       }))
 
       // --- Apply filters to DB results (in-memory, case-insensitive) ---
