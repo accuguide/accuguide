@@ -18,13 +18,17 @@ function SearchResults() {
   const [googleResponse, setGoogleResponse] = useState<SearchDisplayType[]>([])
   const [dbResponse, setDbResponse] = useState<SearchDisplayType[]>([])
   const [isLoading, setIsLoading] = useState(false)
-  // These values come from the backend and describe pagination across the
-  // combined DB + Google result stream.
+  // Pagination across sections: DB pages first, then Google pages
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
   const [totalResults, setTotalResults] = useState(0)
   const [hasPreviousPage, setHasPreviousPage] = useState(false)
   const [hasNextPage, setHasNextPage] = useState(false)
+  const [currentSection, setCurrentSection] = useState<'database' | 'google'>(
+    'database',
+  )
+  const [dbTotalPages, setDbTotalPages] = useState(0)
+  const [googleTotalPages, setGoogleTotalPages] = useState(0)
   const searchParams = useSearchParams()
   const searchParamsString = searchParams.toString()
   const pathname = usePathname()
@@ -80,6 +84,9 @@ function SearchResults() {
         setGoogleResponse(data.data.google)
         setDbResponse(data.data.database)
         setCurrentPage(data.page)
+        setCurrentSection(data.currentSection)
+        setDbTotalPages(data.dbTotalPages)
+        setGoogleTotalPages(data.googleTotalPages)
         setTotalPages(data.totalPages)
         setTotalResults(data.totalResults)
         setHasPreviousPage(data.hasPreviousPage)
@@ -164,6 +171,13 @@ function SearchResults() {
     })),
   ]
 
+  const sectionTitle =
+    currentSection === 'database' ? 'Catalogued Results' : 'All Results'
+  const currentSectionTotalItems =
+    currentSection === 'database'
+      ? Math.min(18, dbResponse.length + googleResponse.length)
+      : Math.min(18, googleResponse.length)
+
   return (
     <div>
       <Location />
@@ -217,7 +231,7 @@ function SearchResults() {
 
               {totalResults > 0 && (
                 <>
-                  <h2 className="mb-4">Results</h2>
+                  <h2 className="mb-4">{sectionTitle}</h2>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {combinedResults.map((place) => (
                       <SearchDisplay

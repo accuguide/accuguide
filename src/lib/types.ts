@@ -14,6 +14,9 @@ export type SearchApiResponse = {
   pageSize: number
   totalResults: number
   totalPages: number
+  currentSection: 'database' | 'google'
+  dbTotalPages: number
+  googleTotalPages: number
   hasPreviousPage: boolean
   hasNextPage: boolean
   data: {
