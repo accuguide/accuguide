@@ -17,7 +17,8 @@
     "db:seed": "tsx src/lib/db/seed.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "s3:push": "tsx src/lib/s3/push.ts"
+    "s3:push": "tsx src/lib/s3/push.ts",
+    "prepare": "husky"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.890.0",
@@ -67,6 +68,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "drizzle-kit": "^0.31.6",
+    "husky": "^9.1.7",
     "mprocs": "^0.8.3",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
