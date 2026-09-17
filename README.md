@@ -10,15 +10,21 @@ A platform designed by and for people with disabilities to find and rate accessi
 
 ## Table of Contents
 
-- [Beta Access](#beta-access)
-- [Tech Stack](#tech-stack)
-- [Contributing](#contributing)
-- [Setup](#setup)
-- [Sponsors](#sponsors)
+## Table of Contents
+
+* [Known Bugs](#known-bugs)
+* [Beta Access](#beta-access)
+* [Tech Stack](#tech-stack)
+* [Contributing](#contributing)
+* [Setup](#setup)
+* [Sponsors](#sponsors)
+
+## Known Bugs
+- Email and password change submission form in user settings is unintuitive and does not always work.
 
 ## Beta Access
 
-The open beta is available at **https://beta.accuguide.org**. If you already have a production account, use those same credentials to log in. The beta includes features and improvements not yet released to production.
+The open beta is available at **https://beta.accuguide.org**. If you already have an account on our main website, use those credentials to log in. The beta includes features and improvements not yet released to production.
 
 ## Tech Stack
 
