@@ -10,38 +10,63 @@ export async function POST(request: Request) {
     const groq = new Groq({
       apiKey: process.env.GROQ_API_KEY,
     })
+    const modelInput = {
+      entity: {
+        name: body.entity.name,
+        type: body.entity.displayType,
+        description: body.entity.description,
+        location: [
+          body.entity.city,
+          body.entity.state,
+          body.entity.country,
+        ].filter(Boolean),
+      },
+      reviews: (body.reviews ?? []).map(
+        (review: { rating: number; comment: string }) => ({
+          rating: review.rating,
+          comment: review.comment,
+        }),
+      ),
+      indicators: (body.indicators ?? []).map(
+        (indicator: { indicator: string; exists: boolean | null }) => ({
+          indicator: indicator.indicator,
+          exists: indicator.exists,
+        }),
+      ),
+    }
+
     async function getGroqChatCompletion() {
       return groq.chat.completions.create({
         messages: [
           {
             role: 'system',
-            content: `You are an AI that generates overviews with accessibility information of business entities based on its info and reviews. This accessibility information includes an overview, accessibility indicators, and an accessibility score from 0 to 100. Respond using only this format:
-              {
-                "overview": "The overview of the business entity",
-                "indicators": [
-                  {
-                    "indicator": "indicator1",
-                    "exists": true
-                  },
-                  {
-                    "indicator": "indicator2",
-                    "exists": false
-                  }
-                ],
-                "score": # }
-              `,
+            content: `Create an accurate, public-facing accessibility summary for a business using the supplied data and web search results for the named entity and location.
+
+Return valid JSON only with this shape:
+{"overview":"string","indicators":[{"indicator":"string","exists":true}],"score":0}
+
+Rules:
+- Write an accessibility-focused overview of at most four concise sentences. Do not include hours or a full address.
+- Include only accessibility indicators explicitly supported by the supplied data or reliable search results, including documented barriers. Do not infer that an unmentioned feature is absent.
+- Use short, title-cased indicator names and set "exists" to false only when a source explicitly says the feature is unavailable.
+- Balance positive and negative evidence from reviews, indicators, and search results.
+- Score accessibility and disability inclusivity from 0 to 100: low 0-33, medium 34-66, high 67-100. Missing basic features and negative reports should lower the score.`,
           },
           {
             role: 'user',
-            content: `Generate a concise, accessibility-focused overview (up to 4 sentences) of the business entity based on the provided information and reviews: ${JSON.stringify(body)}. Focus on accessibility features and other key details from the data. After the overview, provide a JSON list of accessibility indicators with their presence status. After the indicators, provide a numerical accessibility score from 0 to 100. The response should be in the format provided in the system instruction: . Ensure perfect adherence to the JSON structure provided. Ensure the list includes only indicators explicitly mentioned in the data. For each indicator, "exists" should be true if that indicator is present at the location, and false if the indicator is not present. Only include documented indicators. Only include indicators relevant to accessibility. Indicator names should be kept short and have proper formatting, where each word is capitalized and separated by a space, rather than by an underscore. Utilize your web search built in tool to find accessibility information about the entity based on the name and location of the entity. When using your websearch, consider negative aspects of the accessibility of the place as well. In your response, do not provide the hours or the full address of the entity. Just provide the JSON response without any additional text. The decision of the score should be made based on the sentiments of reviews given to you as well as existent indicators and general accessibility information about the entity found online. Consider accessibility features that exist and do not exist in calculating scores. You do not need to be super convservative with the score - if there are sufficient positive indicators and reviews, the score can be high. If there are significant negative indicators or lack of accessibility features, the score should be lower. Balance the score based on both positive and negative aspects mentioned in the reviews and indicators. Also consider inclusivity of various types of disabilities when determining the score. If a place has a variety of accessibility features that cater to different disabilities, the score can be higher. Consider low accessibility, medium accessibility, and high accessibility levels when determining the score. If a place has very few or no accessibility features, the score should be low (0-33). If a place has some accessibility features but is missing key elements, the score should be medium (34-66). If a place has comprehensive accessibility features and positive reviews regarding accessibility, the score should be high (67-100). A lack of basic accessibility features should significantly lower the score. Negative reviews mentioning accessibility issues should also decrease the score accordingly. Focus on creating a balanced and fair score that accurately reflects the overall accessibility of the business entity based on the provided data. This will be public facing information, so ensure it is accurate and responsible.`,
+            content: JSON.stringify(modelInput),
           },
         ],
-
-        model: 'groq/compound',
+        model: 'groq/compound-mini',
+        compound_custom: {
+          tools: {
+            enabled_tools: ['web_search'],
+          },
+        },
       })
     }
     const chatCompletion = await getGroqChatCompletion()
-
+    console.log(JSON.stringify(body))
     // Only return response if successful
     if (
       chatCompletion &&
