@@ -14,19 +14,26 @@ export async function POST(request: Request) {
       entity: {
         name: body.entity.name,
         type: body.entity.displayType,
-        description: body.entity.description,
+        description:
+          typeof body.entity.description === 'string'
+            ? body.entity.description.trim().slice(0, 1_000)
+            : '',
         location: [
           body.entity.city,
           body.entity.state,
           body.entity.country,
         ].filter(Boolean),
       },
-      reviews: (body.reviews ?? []).map(
-        (review: { rating: number; comment: string }) => ({
+      reviews: (body.reviews ?? [])
+        .filter(
+          (review: { comment?: unknown }) =>
+            typeof review.comment === 'string' && review.comment.trim(),
+        )
+        .slice(0, 20)
+        .map((review: { rating: number; comment: string }) => ({
           rating: review.rating,
-          comment: review.comment,
-        }),
-      ),
+          comment: review.comment.trim().slice(0, 500),
+        })),
       indicators: (body.indicators ?? []).map(
         (indicator: { indicator: string; exists: boolean | null }) => ({
           indicator: indicator.indicator,
@@ -40,29 +47,33 @@ export async function POST(request: Request) {
         messages: [
           {
             role: 'system',
-            content: `Create an accurate, public-facing accessibility summary for a business using the supplied data and web search results for the named entity and location.
+            content: `Create an accurate, public-facing accessibility summary using the supplied business data and reliable web-search results for the named business and location.
 
-Return valid JSON only with this shape:
-{"overview":"string","indicators":[{"indicator":"string","exists":true}],"score":0}
+            Return valid JSON only:
+            {"overview":"string","indicators":[{"indicator":"string","exists"}],"score":0}
 
-Rules:
-- Write an accessibility-focused overview of at most four concise sentences. Do not include hours or a full address.
-- Include only accessibility indicators explicitly supported by the supplied data or reliable search results, including documented barriers. Do not infer that an unmentioned feature is absent.
-- Use short, title-cased indicator names and set "exists" to false only when a source explicitly says the feature is unavailable.
-- Balance positive and negative evidence from reviews, indicators, and search results.
-- Score accessibility and disability inclusivity from 0 to 100: low 0-33, medium 34-66, high 67-100. Missing basic features and negative reports should lower the score.`,
+            Rules:
+
+            Write an accessibility-focused overview in no more than four concise sentences. Do not include business hours or the full address.
+            Report only accessibility features or barriers explicitly supported by the supplied data or reliable sources. Never infer that an unmentioned feature is absent.
+            Use concise, Title Case indicator names. Set "exists": false only when a source explicitly states that a feature is unavailable.
+            Balance positive and negative evidence, including reviews and documented barriers.
+            Score accessibility and disability inclusivity from 0–100 using this general scale: 0–33 low, 34–66 medium, 67–100 high. Be reasonably liberal: 100 means all documented needs are met; around 80 means most are met; below 50 is appropriate when basic wheelchair accessibility is absent. Consider the score as a 0–10 rating converted to 0–100.`,
           },
           {
             role: 'user',
             content: JSON.stringify(modelInput),
           },
         ],
-        model: 'groq/compound-mini',
-        compound_custom: {
-          tools: {
-            enabled_tools: ['web_search'],
+        model: 'openai/gpt-oss-20b',
+        tool_choice: 'auto',
+        tools: [
+          {
+            type: 'browser_search',
           },
-        },
+        ],
+
+        reasoning_effort: 'medium',
       })
     }
     const chatCompletion = await getGroqChatCompletion()

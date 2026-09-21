@@ -10,40 +10,47 @@ export async function GET(request: NextRequest) {
     const query = searchParams.get('query') || ''
     const latitude = searchParams.get('latitude')
     const longitude = searchParams.get('longitude')
+    const dbOnly = searchParams.get('dbOnly') === 'true'
+    const page = Number(searchParams.get('page')) || 1
+    const PAGE_SIZE = 12
+    const offset = (page - 1) * PAGE_SIZE
+    let totalMatches = 0
     const apiKey = process.env.BACKEND_GOOGLE_MAPS_API_KEY
     if (!apiKey) {
       return NextResponse.json({ error: 'API key not found' }, { status: 500 })
     }
 
-    // Build URL with optional location parameters
-    let url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${apiKey}`
+    let formattedGoogleResponse: SearchDisplayType[] = []
 
-    // Only add location and radius if both latitude and longitude are provided
-    if (latitude && longitude) {
-      url += `&location=${encodeURIComponent(latitude)},${encodeURIComponent(longitude)}&radius=5000`
-    }
+    if (!dbOnly) {
+      let url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${apiKey}`
+      if (latitude && longitude) {
+        url += `&location=${encodeURIComponent(latitude)},${encodeURIComponent(longitude)}&radius=5000`
+      }
 
-    const response = await fetch(url)
-    if (!response.ok) {
-      return NextResponse.json(
-        {
-          error:
-            '[api/search GET] error: Failed to fetch data from Google Places API',
-        },
-        { status: response.status },
+      const response = await fetch(url)
+      if (!response.ok) {
+        return NextResponse.json(
+          {
+            error:
+              '[api/search GET] error: Failed to fetch data from Google Places API',
+          },
+          { status: response.status },
+        )
+      }
+      const googleResponse = await response.json()
+
+      formattedGoogleResponse = (googleResponse.results ?? []).map(
+        (place: GoogleSearchResponse) => ({
+          googleId: place.place_id,
+          name: place.name,
+          address: place.formatted_address,
+          type: place.types[0],
+          lat: place.geometry.location.lat,
+          lng: place.geometry.location.lng,
+        }),
       )
     }
-
-    const googleResponse = await response.json()
-    const formattedGoogleResponse: SearchDisplayType[] =
-      googleResponse.results.map((place: GoogleSearchResponse) => ({
-        googleId: place.place_id,
-        name: place.name,
-        address: place.formatted_address,
-        type: place.types[0],
-        lat: place.geometry.location.lat,
-        lng: place.geometry.location.lng,
-      }))
 
     const formattedQuery = query.replace(/\s+/g, ' & ') + ':*'
     let formattedDbResponse: SearchDisplayType[] = []
@@ -59,10 +66,19 @@ export async function GET(request: NextRequest) {
 
         @@ to_tsquery('english', ${formattedQuery})
       )`
+
       const dbResponse = await db
         .select()
         .from(entityTable)
         .where(searchDbQuery)
+        .limit(PAGE_SIZE)
+        .offset(offset)
+
+      const [{ count: matchCount }] = await db
+        .select({ count: count() })
+        .from(entityTable)
+        .where(searchDbQuery)
+      totalMatches = matchCount
 
       formattedDbResponse = dbResponse.map((place) => ({
         id: place.id,
@@ -84,6 +100,8 @@ export async function GET(request: NextRequest) {
       {
         loc: 'database',
         data: formattedDbResponse,
+        hasMore: offset + formattedDbResponse.length < totalMatches,
+        totalPages: Math.ceil(totalMatches / PAGE_SIZE),
       },
       {
         loc: 'google',
